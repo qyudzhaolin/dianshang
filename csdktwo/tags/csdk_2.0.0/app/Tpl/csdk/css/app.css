@@ -1,0 +1,10 @@
+.height70{height:70px;}
+.container{width:100%;height:750px;background: #f6f7f9;}
+.cisdaq_tit{margin:97px auto 86px;text-align:center;}
+.two-dimension{width:609px;overflow:hidden;margin:0 auto;}
+.two-dimension .left{width: 205px;float:left;text-align: center;margin-left: 40px;}
+.two-dimension .right{width: 266px;float:right;text-align: center;}
+.weixin_bg{width:170px;height:170px;margin:0 auto;text-align:center;background:url(../images/wenxin_bg.png) no-repeat center center;}
+.weixin_bg img{margin-top: 17px;}
+.top_36{margin-top:36px;}
+.top_20{margin-top:20px;}

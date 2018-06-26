@@ -1,0 +1,154 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<style>
+/* 效果CSS开始 */
+.selectbox{width:610px;height:220px;margin:5px 0;}
+.selectbox div{float:left;}
+.selectbox .select-bar{}
+.selectbox .select-bar select{width:235px;height:270px;border:1px #A0A0A4 solid;padding:4px;font-size:14px;font-family:"microsoft yahei";}
+.btn-bar{width:120px;text-align:center}
+.btn-bar p{margin-top:16px;}
+.btn-bar p .btn{width:50px;height:30px;cursor:pointer;font-family:simsun;font-size:14px;}
+/* 效果CSS结束 */
+</style>
+<div class="main">
+	<div class="main_title">短信群发</div>
+	<div class="blank5"></div>
+	<form name="edit" action="__APP__?m=SmsCl&a=sendSMS" method="post" id="smsForm">
+		<table class="form" cellpadding=0 cellspacing=0>
+			<tr>
+				<td colspan=2 class="topTd"></td>
+			</tr>
+			<tr>
+				<td class="item_title">短信内容:</td>
+				<td class="item_input"><textarea class="textarea" name="msg" id="msg" maxlength="530"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">选择用户:</td>
+				<td class="item_input">
+					<div>
+					</div>
+					<!--效果html开始-->
+				    <div class="selectbox">
+				        <div class="select-bar">
+				            <select multiple="multiple" id="select1">
+				            	<volist name="list" id="vo">
+				                	<option value="{$vo.mobile}">{$vo.mobile}（{$vo.user_name}）</option>
+				                </volist>
+				            </select>
+				        </div>
+				        <div class="btn-bar">
+				            <p><span id="add"><input type="button" class="btn" value=">" title="移动选择项到右侧"/></span></p>
+				            <p><span id="add_all"><input type="button" class="btn" value=">>" title="全部移到右侧"/></span></p>
+				            <p><span id="remove"><input type="button" class="btn" value="<" title="移动选择项到左侧"/></span></p>
+				            <p><span id="remove_all"><input type="button" class="btn" value="<<" title="全部移到左侧"/></span></p>
+				        	<p id="sendNums" style="font-size:12px"></p>
+				        </div>
+				        <div class="select-bar">
+				            <select multiple="multiple" id="select2"></select>
+				        </div>
+				    </div>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title"></td>
+				<td class="item_input">
+					<input type="hidden" name="mobiles" class="button" value="" id="mobiles"/>
+					<input type="hidden" name="{:conf("VAR_MODULE")}" value="SmsCl" />
+					<input type="hidden" name="{:conf("VAR_ACTION")}" value="sendSMS" />
+					<input type="button" class="button" value="发送" id="sendSMS"/>
+					<input type="reset" class="button" value="{%RESET}" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 class="bottomTd"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<include file="Public:footer" />
+<script type="text/javascript">
+	$(function() {
+		//移到右边
+		$('#add').click(function() {
+			//先判断是否有选中
+			if (!$("#select1 option").is(":selected")) {
+				alert("请选择需要移动的用户")
+			}
+			//获取选中的选项，删除并追加给对方
+			else {
+				$('#select1 option:selected').appendTo('#select2');
+			}
+			getLength();
+		});
+
+		//移到左边
+		$('#remove').click(function() {
+			//先判断是否有选中
+			if (!$("#select2 option").is(":selected")) {
+				alert("请选择需要移动的用户")
+			} else {
+				$('#select2 option:selected').appendTo('#select1');
+			}
+			getLength();
+		});
+
+		//全部移到右边
+		$('#add_all').click(function() {
+			//获取全部的选项,删除并追加给对方
+			$('#select1 option').appendTo('#select2');
+			getLength();
+		});
+
+		//全部移到左边
+		$('#remove_all').click(function() {
+			$('#select2 option').appendTo('#select1');
+			getLength();
+		});
+
+		//双击选项
+		$('#select1').dblclick(function() { //绑定双击事件
+			//获取全部的选项,删除并追加给对方
+			$("option:selected", this).appendTo('#select2'); //追加给对方
+			getLength();
+		});
+
+		//双击选项
+		$('#select2').dblclick(function() {
+			$("option:selected", this).appendTo('#select1');
+			getLength();
+		});
+		
+		function getLength(){
+			var length = $('#select2 option').length;
+			if(length == 0){
+				$("#sendNums").html("");
+			}else{
+				$("#sendNums").html("已选择："+length+"个");
+			}
+		}
+		
+		$('#sendSMS').click(function(){
+			var msg = $.trim($('#msg').val());
+			if(msg == ''){
+				alert('请输入短信内容');
+				return;
+			}
+			var options = $('#select2 option');
+			if(options.length == 0){
+				alert('请选择需要发送短信的用户');
+			}else{
+				var mobiles = '';
+				$.each(options,function(i,n){
+					mobiles += parseInt($('#select2 option').eq(i).val()) + ',';
+				})
+				mobiles = mobiles.substring(0,mobiles.length-1);
+				$('#mobiles').val(mobiles);
+				$('#smsForm').submit();
+			}
+		});
+
+	});
+</script>

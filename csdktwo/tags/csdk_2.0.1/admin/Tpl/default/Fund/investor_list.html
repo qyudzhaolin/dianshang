@@ -1,0 +1,45 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/fund.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">基金投资人列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+ 	<input type="button" class="button" value="添加投资人" onclick="investor_add({:trim($_REQUEST['fund_id'])});" />
+</div> 
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">
+		投资人姓名：<input type="text" maxlength="6"  class="textbox" name="name" value="{:trim($_REQUEST['name'])}" style="width:100px;" />
+		投资人手机：<input type="text" maxlength="11" class="textbox" name="mobile" value="{:trim($_REQUEST['mobile'])}" style="width:100px;" />
+		<input type="hidden" value="{:trim($_REQUEST['fund_id'])}" name="fund_id" />
+		<input type="hidden" value="Fund" name="m" />
+		<input type="hidden" value="investor_list" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fund_user" 
+	action="true" 
+	checkbox="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,user_name|msubstr:投资人
+		,mobile|msubstr:手机号码
+		,investor_amount|msubstr:购买份额（万）
+		,investor_rate|msubstr:购买占比（%）
+		,create_time|msubstr:购买日期
+		,remark|msubstr:备注|220px"
+	actionlist="investor_edit:编辑,investor_del:删除" 
+/> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

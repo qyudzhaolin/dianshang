@@ -1,0 +1,77 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/doCheck.js' />
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/js/fund_edit.js' />
+<load href='__TMPL__Common/js/fund_user.js' />
+
+<div class="main">
+<div class="main_title">{%ADD} <a href="{:u("Fund/relation_list",array('fund_id'=>$_REQUEST['fund_id']))}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data" onsubmit="return fund_invest_deal_check('add')">
+<table class="form" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+ 
+	<tr>
+		<td class="item_title">*选择项目:</td>
+		<td class="item_input" id="user_id_input">
+			<input type="text" class="textbox3 require" name="deal_name" id="linkDataProperty" />
+			<input type="hidden" name="fund_id" id="linkDatafund" value="{:trim($_REQUEST['fund_id'])}" />
+			<input type="button" class="button"  value="查找" id="btn_create_time_trade_event" onclick="getLinkFund('linkDataProperty','linkDatafund','find_deal','deal_id','deal_short_name')" />
+			<div id="popup" style="position: absolute;">
+                 <table width="100%" bgcolor="#fffafa">
+                     <tbody id="popupBody"></tbody>
+                 </table>
+            </div>
+            
+			<span id="deal_name_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*项目编号:</td>
+		<td class="item_input"><input type="text" class="textbox require" readonly="readonly" name="deal_id" id="deal_id" /><span id="deal_id_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*项目简称:</td>
+		<td class="item_input"><input type="text" class="textbox require" readonly="readonly" name="deal_short_name" id="deal_short_name" /><span id="deal_short_name_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*投资金额(¥):</td>
+		<td class="item_input"><input type="text" class="textbox require" maxlength="7"  name="investor_amount" id="investor_amount" /> 万元 <span id="investor_amount_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*投资日期:</td>
+		<td class="item_input"><input type="text" class="textbox require" readonly="readonly" name="investor_date" id="investor_date"/>
+		<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_trade_event' onclick="return csdk_cal(this);" /><span id="investor_date_msg" name="error_msg"></span></td>
+	</tr>
+   	<tr>
+		<td class="item_title">备注(200个字)</td>
+		<td class="item_input">
+			 <textarea type="text"  maxlength="200"  name="remark" id="remark" class="textarea require"></textarea><span id="remark_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title"></td>
+		<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Fund" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="relation_insert" />
+			<input type="hidden" name="fund_id" value="{$_REQUEST['fund_id']}" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%ADD}" />
+			<input type="reset" class="button" value="{%RESET}" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+</div>
+<include file="Public:footer" />

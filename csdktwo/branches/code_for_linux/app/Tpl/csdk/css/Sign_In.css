@@ -1,0 +1,142 @@
+.Sign_In_box{
+
+    width:903px;
+
+    height:540px;
+
+    position: relative;
+
+    left: 22px;
+
+    top: 18px;
+}
+.Sign_In_label_01{
+    position: relative;display: block;margin: 100px auto 0;width:242px;
+}
+.Sign_In_label_01 i{
+    position:absolute;top:0;left:0;height:36px;width:36px;background: url("../images/End-call.png") no-repeat 12px center;z-index: 10
+}
+.Sign_In_label_02 i{
+    position:absolute;top:0;left:0;height:36px;width:36px;background:url("../images/Lock-.png") no-repeat 12px center;
+}
+
+.Sign_In_label_02{
+    position: relative;display: block;margin: 18px auto 0;width:242px;
+}
+.Sign_In_bj_mask{
+    margin:120px auto 66px;
+    width:946px;
+    height:584px;
+    background: url("../images/Projection.png") no-repeat center;
+}
+.Sign_In_box>div:nth-of-type(1){
+    height:100%;
+    width:523px;
+    background: url("../images/bj_001.png") no-repeat;
+}
+.Sign_In_box>div:nth-of-type(2){
+    height:100%;
+    width:380px;
+    background: #fff;
+}
+.Sign_In_box>div:nth-of-type(2) h2{
+    padding:30px 0;
+    font-size:18px;
+    color:#dba774;
+    text-align: center;
+    border-bottom:1px solid #f4f4f4
+
+}
+.Sign_In_box>div:nth-of-type(2) input{
+    display:block;
+}
+.Sign_In_from .input1,.Sign_In_from .input2{
+    border:1px solid #e5e5e5;
+    height:36px;
+    width:187px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-size:12px;
+    padding:0 12px 0 36px;
+
+}
+
+
+
+.Sign_In_from .btn{
+    height:36px;
+    width:238px;
+    background: #dba774;
+    color:#fff;
+    letter-spacing: 2px;
+    font-size: 16px;
+    font-family: '微软雅黑';
+    display:block;
+    margin:30px auto 0;
+    cursor:pointer;
+    border-radius: 4px;
+
+}
+.Sign_In_from .warning{border:1px solid #f00;}
+.Sign_In_from .error_msg{
+    position: absolute;
+    left: 5px;
+    color: red;
+    display: inline-block;
+    font-size: 11px;
+}
+
+.logo_bj_msk{
+    height:540px;
+    width:524px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 2;
+    background:rgba(0,0,0,.59);
+}
+.mask_img_position{
+    height:540px;
+    width:524px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 3;
+}
+.mask_img_position img{
+    display: block;
+}
+.mask_img_position img:nth-of-type(1){
+    margin:194px auto 0;
+}
+.mask_img_position img:nth-of-type(2){
+    margin:36px auto 0;
+}
+
+.Retrieve_paddingTB25{padding:25px 0;margin:75px 0 0 0;font-size:12px;text-align: center}
+.Retrieve_paddingTB25 span:nth-of-type(1){color:#999999;}
+.Retrieve_paddingTB25 a:nth-of-type(1){color:#4d85f6;}
+.Retrieve_paddingTB25 a:nth-of-type(2){color:#4d85f6;margin:0 0 0 60px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/fund_manageCo.js' />
+<div class="main">
+<div class="main_title">基金管理公司 > 公司股份构成列表&nbsp;<a href="{:u("Fund/manageCo_index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}" onclick="ms_add({$mid});" />
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fund" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,code:编码
+		,name:股东名称
+		,share:股份占比|100px
+		,remark|msubstr:备注
+ 		" 
+	actionlist="ms_edit:{%EDIT}, ms_del:{%DEL}" /> 
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

@@ -1,0 +1,29 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/news.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">资讯新闻列表</div>
+<div class="blank10"></div>
+<div class="button_row">
+<input type="button" class="button" value="{%ADD}" onclick="message_add();" /></div>
+<div class="blank10"></div>
+<html:list 
+  id="dataTable" 
+  style="dataTable" 
+  name="News" 
+  checkbox="true" 
+  action="true" 
+  datasource="list" 
+  show="id:{%ID}|50px
+      ,title:资讯标题|200px
+      ,http:链接网址|200px:message_http
+      ,create_time|to_date:创建时间|200px"
+      actionlist="message_edit:编辑, message_del:删除" />
+<div class="blank10"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

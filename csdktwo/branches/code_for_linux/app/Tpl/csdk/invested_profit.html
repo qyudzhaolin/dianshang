@@ -1,0 +1,353 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investors_profit.css";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jQuery_v1.8.3.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/Highcharts.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_box">
+        <a href='{url r="home"}'>我的个人中心</a>
+        <img src='{function name="get_spec_image" v="right_corner.jpg"}' alt="right_corner"/>
+        <span>我的收益</span>
+
+    </div>
+    <div class="personal_content clearfix">
+        {include file="inc/sidebar_user.html"}
+       <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+        {if $no_profit==1}
+        {if $invest_list}
+            <!-- 基金份额出资税前收益-->
+            <div class="Maintain_and_update My_investament pos_re">
+                <div class="set_box_slid_bj por_ab"></div>
+                <i class="active padd_l20 color262626">基金出资份额收益（税前）</i>
+            </div>
+            {foreach from=$invest_list item=vo name=keys  key=keys}
+            <div class="profit_infi_box mar_L90_R30">
+                <div class="padd_TB20 clearfix set_style_1">
+                    <span class="fl color_dba774 fn_siz14">{$vo.short_name}</span>
+                    <span class="fl clearfix fn_siz14"><img src="{function name="get_spec_image" v="zho.png"}" class="zho fl mar_top2"/> <i class="fl padd_L8">成立日期：{function name="to_date" v="$vo.establish_date" p="Y.m.d"}</i></span>
+                    <!--<span class="fl clearfix fn_siz14"><img src="{function name="get_spec_image" v="zho.png"}" class="zho fl mar_top2"/> <i class="fl padd_L8">购买日期：{function name="to_date" v="$vo.create_time" p="Y.m.d"}</i></span>-->
+                </div>
+                <ul class="back_Cfafafa set_style_2 clearfix">
+                    <li class="fl">
+					<div id="container{$keys}" style="min-width:400px;height:310px"></div>
+                    </li>
+                    <li class="fr c_C262626 fn_siz14 set_style_5 koz">
+                        <ul class="clearfix set_style_3 padd_tb40px">
+                            <li class="fl clearfix"> <i class="dis_block bj1 w8px fl mar_T6px"></i><span class="fl mar_L12px">基金账面收益率:{$vo.profit_ratio}％</span></li>
+                            <li class="fl clearfix"> <i class="dis_block bj1 w8px fl mar_T6px"></i><span class="fl mar_L12px">份额占比:{$vo.investor_rate}％</span></li>
+                        </ul>
+                        <p class="clearfix"> <i class="dis_block bj2 w8px fl mar_T6px"></i><span class="mar_L12px">购买金额</span></p>
+                        <p class="clearfix"> <i class="dis_block bj3 w8px fl mar_T6px"></i><span class="mar_L12px">基金规模</span></p>
+                        <p class="clearfix"> <i class="dis_block bj4 w8px fl mar_T6px"></i><span class="mar_L12px">基金最新公允价值</span></p>
+                        <p class="clearfix"> <i class="dis_block bj5 w8px fl mar_T6px"></i><span class="mar_L12px">基金出资份额收益（税前）</span></p>
+                    </li>
+                </ul>
+                <div class="bar_h20_brB1px"></div>
+            </div>
+            {/foreach}
+          {/if}
+           {if $carry_list}
+            <!-- 基金carry税前收益-->
+            <div class="Maintain_and_update My_investament pos_re m_top20 mar_t20px">
+                <div class="set_box_slid_bj por_ab"></div>
+                <i class="active padd_l20 color262626">基金carry分成收益（税前）</i>
+            </div>
+            
+             {foreach from=$carry_list item=vo name=keys key=keys}
+            <div class="profit_infi_box mar_L90_R30">
+                <div class="padd_TB20 clearfix set_style_1">
+                    <span class="fl color_dba774 fn_siz14">{$vo.short_name}</span>
+                    
+                    <span class="fl clearfix fn_siz14" style="float:right; padding-right:52px;"><img src="{function name="get_spec_image" v="zho.png"}" class="zho fl mar_top2"/> <i class="fl padd_L8">成立日期：{function name="to_date" v="$vo.establish_date" p="Y.m.d"}</i></span>
+                </div>
+                <ul class="back_Cfafafa set_style_2 clearfix">
+                    <li class="fl">
+                        <div id="carry_container{$keys}" style="width:400px;height:310px"></div>
+                    </li>
+                    <li class="fr c_C262626 fn_siz14 set_style_5 koz">
+                        <ul class="clearfix set_style_3 padd_tb40px">
+                            <li class="fl clearfix"> <i class="dis_block bj1 w8px fl mar_T6px"></i><span class="fl mar_L12px">协助募集基金占比:<p>{$vo.assist_rate}％</p></span></li>
+                            <li class="fl clearfix"> <i class="dis_block bj1 w8px fl mar_T6px"></i><span class="fl mar_L12px">分成占比:{$vo.fund_income_rate_partner}％</span></li>
+                        </ul>
+                        <p class="clearfix"> <i class="dis_block bj2 w8px fl mar_T6px"></i><span class="mar_L12px">协助募集基金金额</span></p>
+                        <p class="clearfix"> <i class="dis_block bj3 w8px fl mar_T6px"></i><span class="mar_L12px">基金规模</span></p>
+                        <p class="clearfix"> <i class="dis_block bj4 w8px fl mar_T6px"></i><span class="mar_L12px">基金最新公允价值</span></p>
+                        <p class="clearfix"> <i class="dis_block bj5 w8px fl mar_T6px"></i><span class="mar_L12px">基金carry分成收益（税前）</span></p>
+                    </li>
+                </ul>
+                <div class="bar_h20_brB1px"></div>
+
+            </div>
+            {/foreach}
+{/if}
+  <div class="profit_infi_box mar_L90_R30 setC_font_p">
+
+			   <p>基金收益计算公式（以下均为税前收益）：</p>
+			   <p>您的账面预期总收益＝基金carry分成收益＋基金出资份额收益</p>
+			   <p>预期收益率＝账面预期总收益（不含本金）／基金出资份额（本金）</p>
+			   <p>基金carry分成收益：</p>
+			   <p>指基金获得投资收益后分给您协助募资的激励，具体分成比例由基金管理公司决定</p>
+			   <p>基金出资份额收益（不含本金）：</p>
+			   <p>指您在扣除基金出资本金和carry分成后所获得的投资收益，具体收益由基金初始出资份额占比决定</p>
+
+		   </div>
+ {else}
+					<div class="no_profit">
+						{if $home_is_review==1}
+						您还未投资任何项目或已投项目,暂无收益数据 
+						{elseif $home_is_review==0}
+						您的会员身份还未认证，<a href='{url r="account"}'>&nbsp;&nbsp;请先认证！</a>
+						{else}
+						您的会员身份认证中，暂无收益数据！
+						{/if}
+					</div>
+					{/if}
+		 
+        </div>
+
+    </div>
+
+</div>
+
+{include file="inc/footer.html"} 
+
+<script>
+ $(function () {
+ //
+ 	 {foreach from=$invest_list item=vo name=keys key=keys}
+ var colors = Highcharts.getOptions().colors,
+        name = 'Browser brands',
+        data = [{
+                y: {$vo.investor_amount},
+                color: colors[0],
+               
+            }, {
+                y: {$vo.total_amount},
+                color: colors[1],
+                
+            }, {
+                y: {$vo.fair_value},
+                color: colors[2],
+                
+            }, {
+                y: {$vo.fund_income},
+                color: colors[3],
+                
+            }];
+
+    function setChart(name, categories, data, color) {
+	chart.xAxis[0].setCategories(categories, false);
+	chart.series[0].remove(false);
+	chart.addSeries({
+		name: name,
+		data: data,
+		color: color || 'white'
+	}, false);
+	chart.redraw();
+    }
+
+    var chart = $('#container{$keys}').highcharts({
+        chart: {
+            type: 'column',
+			plotBackgroundColor: null,
+			plotBorderWidth: null,
+			plotShadow: false,
+			backgroundColor: '#fafafa'
+        },
+        title: {
+            text: null
+        },
+        subtitle: {
+            text: null
+        },
+		legend: {
+	            enabled: false
+	    },
+        xAxis: {
+	            showEmpty:null,
+	            categories: ['','','',''],
+	            tickPositions:null,
+	            tickWidth:0
+	    },
+         yAxis: {
+	            min: 0,
+	            title: {
+	                text: null
+	            },
+	            labels: {
+	                formatter: function() {
+	                    return Highcharts.numberFormat(this.value,0,"",",")+'万';
+	                }
+	            },
+
+	            valueSuffix: ' 万',
+	            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	            '<td style="padding:0"><b>{point.y:0f} 万</b></td></tr>',
+	            //提醒框的头部，文字
+	            headerFormat: '<small>{point.key}<br/></small><table>',
+	            style: {
+	                padding: 10,
+	                fontWeight: 'normal',
+	                fontSize:'12px',
+	                
+	            }
+	    },
+        plotOptions: {
+            column: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function() {
+                            var drilldown = this.drilldown;
+                            if (drilldown) { // drill down
+                                setChart(drilldown.name, drilldown.categories, drilldown.data, drilldown.color);
+                            } else { // restore
+                                setChart(name, categories, data);
+                            }
+                        }
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    color: '#333',
+                    style: {
+                        fontWeight: 'normal',
+						fontSize:'12px',
+                    },
+                    formatter: function() {
+                        return this.y;
+						
+                    }
+                }
+            }
+        },
+        tooltip: {
+            enabled: false
+        },
+		credits: {
+	 	            enabled: false
+	 	},
+        series: [{
+            name: name,
+            data: data,
+            color: 'white'
+        }],
+        exporting: {
+            enabled: false
+        }
+    })
+   	    {/foreach}
+ // ===========================
+
+	     
+	    	 {foreach from=$carry_list item=vo name=keys  key=keys}
+ 				var colors = Highcharts.getOptions().colors,
+				data = [{
+					 y: {$vo.sum_investor_amount},
+					 color: colors[0]
+				 }, {
+					 y: {$vo.total_amount},
+					 color: colors[1]
+				 }, {
+					 y: {$vo.fair_value},
+					 color: colors[2]
+				 }, {
+					 y: {$vo.fund_income},
+					 color: colors[3]
+				 }];
+
+	 	    $('#carry_container{$keys}').highcharts({
+        chart: {
+            type: 'column',
+			plotBackgroundColor: null,
+			plotBorderWidth: null,
+			plotShadow: false,
+			backgroundColor: '#fafafa'
+        },
+        title: {
+            text: null
+        },
+        subtitle: {
+            text: null
+        },
+		legend: {
+	            enabled: false
+	    },
+        xAxis: {
+	            showEmpty:null,
+	            categories: ['','','',''],
+	            tickPositions:null,
+	            tickWidth:0
+	    },
+         yAxis: {
+	            min: 0,
+	            title: {
+	                text: null
+	            },
+	            labels: {
+	                formatter: function() {
+	                    return Highcharts.numberFormat(this.value,0,"",",")+'万';
+	                }
+	            },
+
+	            valueSuffix: ' 万',
+	            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	            '<td style="padding:0"><b>{point.y:0f} 万</b></td></tr>',
+	            //提醒框的头部，文字
+	            headerFormat: '<small>{point.key}<br/></small><table>',
+	            style: {
+	                padding: 10,
+	                fontWeight: 'normal',
+	                fontSize:'12px',
+	                
+	            }
+	    },
+        plotOptions: {
+            column: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function() {
+                            var drilldown = this.drilldown;
+                            if (drilldown) { // drill down
+                                setChart(drilldown.name, drilldown.categories, drilldown.data, drilldown.color);
+                            } else { // restore
+                                setChart(name, categories, data);
+                            }
+                        }
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    color: '#333',
+                    style: {
+                        fontWeight: 'normal',
+						fontSize:'12px',
+                    },
+                    formatter: function() {
+                        return this.y;
+						
+                    }
+                }
+            }
+        },
+        tooltip: {
+            enabled: false
+        },
+		credits: {
+	 	            enabled: false
+	 	},
+        series: [{
+            name: name,
+            data: data,
+            color: 'white'
+        }],
+        exporting: {
+            enabled: false
+        }
+    })
+	 	    {/foreach}
+	});
+ </script>

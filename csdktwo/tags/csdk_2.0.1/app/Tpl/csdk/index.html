@@ -1,0 +1,125 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/index.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/swiper.min.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/index.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/swiper.min.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<!--轮换图-->
+<div class="swiper-container swiper-container2" style="margin:70px auto 0">
+	<div class="swiper-wrapper">
+		{foreach from=$carousel item=vo}
+			<div class="swiper-slide">
+			    {if $vo.b_url}
+					<a href="{$vo.b_url}" target="_blank">
+						<img src='{$vo.b_pc_img}' alt="{$vo.b_title}" width="1000" height="360" />
+					</a>
+				{else}
+					<img src='{$vo.b_pc_img}' alt="{$vo.b_title}" width="1000" height="360" />
+				{/if}
+			</div>
+		{/foreach}
+	</div>
+	<!-- 如果需要导航按钮 -->
+	<div class="swiper-button-prev button-prev"></div>
+	<div class="swiper-button-next button-next"></div>
+	<!-- Add Pagination -->
+	<div class="swiper-pagination" id="swiper-pagination"></div>
+</div>
+
+<!--内容部分-->
+<div class="content_box index_box">
+    <!-- 左侧内容部分-->
+    <div class="relevant_content">
+        <div class="div1 clearfix">
+            <a href="javascript:;" class="all_options" rel="0" data-type="{$new_all_more}">全部</a>
+            <a href="javascript:;" rel="{$corner.1.id}" data-type="1">推荐</a>
+            <a href="javascript:;" rel="{$corner.0.id}" data-type="1">热点</a>
+            <a href="javascript:;" rel="3" data-type="1">项目资讯</a>
+            <div></div>
+        </div>
+        <div class="text_infi_content all_active">
+        	{if $new_all}
+	        	{foreach from=$new_all item=vo }
+					<dl class="news_content_list">
+						<dt class="bs">
+							<a href="{url r="news" p="id=$vo.id"}" target="_blank">
+								<img src="{function name="getQiniuPath" v="$vo.n_list_img" p="img"}?imageView2/1/w/200/h/200" width="136" height="136" alt="{$vo.n_title}" />
+							</a>
+						</dt>
+						<dd>
+							<h2>
+								<a href="{url r="news" p="id=$vo.id"}" target="_blank" title="{$vo.n_title}">{function name="msubstr" v="$vo.n_title" p1="0" p2="20" p3="utf-8" p4="1"}</a>
+							</h2>
+							<p class="p1">{function name="msubstr" v="$vo.n_brief" p1="0" p2="75"}</p>
+							<p class="p2">
+								<span>来源：{$vo.n_source}</span> <span>{function name="to_date" v="$vo.create_time" p="Y年m月d日" }</span>
+							</p>
+						</dd>
+					</dl>
+				{/foreach}
+        	{else}
+        		<dl class="news_content_list">
+        			<dd><span class="font14-none">暂无相关资讯</span></dd>
+        		</dl>
+        	{/if}
+		</div>
+        <div class="text_infi_content"></div>
+        <div class="text_infi_content"></div>
+        <div class="text_infi_content"></div>
+        <div class="news_more_box" {if $new_all_more eq 0} style ="display:none" {/if}>
+            <button type ="button" class="news_more index_more">查看更多</button>
+        </div>
+    </div>
+    <!-- 右侧内容部分-->
+    <div class="gengduo">
+        <div class="investors_location">
+            <div class="head_dynamic index_dynamic clearfix">
+                <a href="{url r="news#lists" p="id=$class.1.id"}" target="_self" class="head_dynamic_a">磁斯达克动态</a>
+                <a href="{url r="news#lists" p="id=$class.1.id"}" target="_self" class="head_dynamic_a2">更多</a>
+                <div></div>
+            </div>
+            {if $news_in}
+	            {foreach from=$news_in item=vo key=keys}
+	            	 <div class="online_box {if $keys eq 0}news_one{/if}">
+			            	<h2>
+			                	<a href="{url r="news" p="id=$vo.id"}" target="_blank" title="{$vo.n_title}">
+			                		{function name="msubstr" v="$vo.n_title" p1="0" p2="18" p3="utf-8" p4="1"}
+			                	</a>
+			                </h2>
+			                <p>{function name="to_date" v="$vo.create_time" p="Y年m月d日"}</p>
+			            </div>
+	            {/foreach}
+            {else}
+            	<div class="online_box clearfix" style="border-bottom-color: transparent;">
+	            	<h2>
+	            		<span class="font14-none">暂无相关资讯</span>
+	            	</h2>
+            	</div>
+            {/if}
+        </div>
+        <div class="investors_location2">
+            <div class="head_dynamic index_dynamic clearfix">
+                <a href="{url r="news#lists" p="id=$class.0.id"}" target="_self" class="head_dynamic_a">新闻资讯</a>
+                <a href="{url r="news#lists" p="id=$class.0.id"}" target="_self" class="head_dynamic_a2">更多</a>
+                <div></div>
+            </div>
+            {if $news_out}
+	            {foreach from=$news_out item=vo key=keys}
+	                <div class="online_box {if $keys eq 0}news_two{/if}">
+		            	<h2>
+		                	<a href="{url r="news" p="id=$vo.id"}" target="_blank" title="{$vo.n_title}">
+		                		{function name="msubstr" v="$vo.n_title" p1="0" p2="18" p3="utf-8" p4="1"}
+		                	</a>
+		                </h2>
+		                <p>{function name="to_date" v="$vo.create_time" p="Y年m月d日"}</p>
+		            </div>
+	            {/foreach}
+            {else}
+            	<div class="content_capital2 clearfix" style="border-bottom-color: transparent;"><span class="font14-none">暂无相关资讯</span></div>
+            {/if}
+        </div>
+    </div>
+</div>
+{include file="inc/footer.html"} 

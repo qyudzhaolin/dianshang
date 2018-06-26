@@ -1,0 +1,118 @@
+{include file="inc/header.html"}
+<?php
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/fund_raising_list.css";
+
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/fund_raising_box.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+
+<div class="content_box2 bg_white" id="personal_id">
+    <div class="personal_box">
+        <a href='{url r="home"}'>我的个人中心</a>
+        <img src="{function name="get_spec_image" v="right_corner.jpg" }" alt=""/>
+        <span>意向基金</span>
+    </div>
+    <div class="personal_content clearfix">
+        {include file="inc/sidebar_user.html"} 
+        <div class="fr bs size ma_B20px" style="border-left:1px solid #f4f4f4;width:790px;">
+            <!--意向基金-->
+            {if $raising_list}
+            
+            <div class="height100xx set_style_0">
+                <h2 class="h2_set">意向基金</h2>
+                <!-- one -->
+                {foreach from=$raising_list item=vo key=keys}
+                <div class="pa_20x ma_B20px">
+                    <ul class="clearfix set_style_1">
+                        <li class="fl">
+                            <p>基金名称： <a href="{url r="fund/raising_details" p="id=$vo.fund_id"}" target="_blank" >{$vo.fund_short_name}</a></p>
+                            <p>基金管理人：<span>{$vo.managers_name}</span></p>
+                        </li>
+                        <li class="fr">
+                            <p>募资开始时间：<span>{$vo.start_date}</span></p>
+                            <p>募资结束时间：<span>{$vo.end_date}</span></p>
+                        </li>
+                    </ul>
+                    <div class="clearfix set_style_2">
+                        <div class="fl"><span>{$vo.invest_min_amount}</span>万起投</div>
+                        <div class="fl">基金期限：{$vo.deadline}年</div>
+                    </div>
+                    <!-- 柱状图 -->
+                    <div class="pa_20_TBpx set_style_3">
+                        <div>
+                            <div style="width:50%" data-invest-amount=""></div>
+                        </div>
+                    </div>
+                    <p class="set_style_4">预期募集金额：<span>{$vo.total_amount}万元</span></p>
+                    
+                    <p class="set_style_5">基金简介：{$vo.summary}</p>
+                    <div class="set_style_6">
+                    {if $vo.director eq 0}
+                    	{if $vo.confirm eq 1}
+                        	<a href="javascript:;" class="showclick" id="showclick_{$vo.fund_id}" data-fid="{$vo.fund_id}" data-amount="{$vo.amount}" data-remark="{$vo.remark}">意向申购</a>
+                       	{else}
+                        	<a href="javascript:;" class="confirm">意向申购</a>
+                        {/if}
+                     {/if}
+                     <a href="{url r="fund/raising_details" p="id=$vo.fund_id"}" target="_blank" >基金详情</a>
+                    </div>
+                </div>
+                {/foreach}
+            </div>
+            {else}
+            <div class="no_deal">
+				暂无意向基金，敬请期待！
+			</div>
+        {/if}
+        </div>
+    </div>
+</div>
+<div class="cloud" id="cloud-3" style="z-index: 10003; margin: -50px 0px 0px -151px;">
+    <div class="cloud-main aaa">
+        <div class="cloud-content">
+            <div class="cloud-icon cloud-icon-success">意向投资已经发送！</div>
+        </div>
+        <input type="button" value="确定" class="fl showSend" id="send_btn_1"> 
+    </div>
+    <div class="cloud-cover"></div>
+</div>
+<!-- one -->
+<div class="clouedb">
+    <div class="content content">
+        <ul class="cloud-content">
+            <li class="clearfix set_style_7">
+                <div class="fl">基金名称：</div>
+                <span class="fl" id="fund_name"></span>
+            </li>
+            <li class="clearfix set_style_7">
+                <div class="fl">基金规模：</div>
+                <span class="fl" id="fund_total_amount"></span>
+            </li>
+            <li class="clearfix set_style_7">
+                <div class="fl">起投金额：</div>
+                <span class="fl" id="fund_invest_min_amount"></span>万元
+            </li>
+            <li class="clearfix set_style_7">
+                <div class="fl ">拟认购金额：</div>
+                <input type="text" class="fl input_style" maxlength="7" name="expect_invest_amount" id="expect_invest_amount" placeholder="请大于起投金额" title="请大于起投金额"   onblur="if(value==''){this.style.color='#b9b9b9';value='请输入公众号或者标签'}"
+        onfocus="if(value=='请大于起投金额'){this.style.color='#333';value=''}"
+        value="请大于起投金额" /> <span style="padding-left:10px;">万元</span>
+            	<span id="expect_invest_amount_msg"></span>
+            </li>
+            <li class="clearfix set_style_7 top_mar pos_re">
+                <div class="fl">申购说明：</div>
+                <textarea name="expect_invest_remark admin" maxlength="20" id="expect_invest_remark" placeholder="请留言，最多不超过20字" title="请留言，最多不超过20字" value="请留言，最多不超过20字" onblur="if(value==''){this.style.color='#b9b9b9';value='请留言，最多不超过20字'}"
+        onfocus="if(value=='请留言，最多不超过20字'){this.style.color='#333';value=''}"
+        value="请留言，最多不超过20字" ></textarea>
+            	<span id="expect_invest_remark_msg"></span>
+            </li>
+            <li class="clearfix set_style_8">
+                <input type="button" value="发送意向" class="fl showSend" id="showSend">
+                <input type="button" value="取消" class="fl removeclick" id="removeclick">
+                <input type="hidden" value="" id="fund_raising_id">
+            </li>
+        </ul>
+    </div>
+    <div class="bj bjclick" ></div>
+</div>
+{include file="inc/footer.html"}

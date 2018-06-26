@@ -1,0 +1,17 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fund" 
+	action="false" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,code:团队成员编号|100px
+		,title:职务名称|200px
+		,user_name:姓名|200px
+ 		"
+	actionlist="ft_team_select:选择" />
+<div class="blank5"></div>
+<div class="page">{$page}</div>

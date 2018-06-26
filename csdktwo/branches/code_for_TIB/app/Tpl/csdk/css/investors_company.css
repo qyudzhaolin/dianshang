@@ -1,0 +1,269 @@
+.bg_white .color262626{
+    color:#262626;
+}
+.fr.bs .My_investament {
+    height: 76px;
+}
+.Maintain_and_update {
+    width: 790px;
+    height: 82px;
+    position: relative;
+}
+.set_box_slid_bj {
+    height: 16px;
+    width: 6px;
+    background: #dba774;
+    display: block;
+}
+.fund_lower a{color:#84a7e1;}
+.por_ab {
+    position: absolute;
+    top: 30px;
+    left: 70px;
+}
+.My_investament i:nth-of-type(1) {
+    font-size: 18px;
+    margin: 0 0 0 70px;
+    line-height: 76px;
+}
+.padd_l20 {
+    padding-left: 20px;
+}
+.control_text_color{margin:0 auto; width:654px;}
+.control_text_color li{width:50%;}
+.control_text_color p{color:#262626;font-size:14px;line-height: 35px;}
+.control_text_color p span{color:#6b6b6b;padding-right:8px;}
+.alone_contrlo_cor{font-size:14px;line-height: 35px;color:#262626;padding-left:68px;}
+.alone_contrlo_cor span{color:#6b6b6b;padding-right:8px;}
+/*我管理的基金*/
+.form2 {
+    width: 650px;
+    margin: 0 auto;
+}
+.fund_lower {
+    margin: 0 0 20px 0;
+}
+.fund.bs.head {
+    background: #f4f4f4;
+    color: #6f6f6f;
+    font-size: 16px;
+    letter-spacing: 3px;
+}
+.fund.bs.head span:nth-of-type(1) {
+    margin: 0 0 0 40px;
+}
+.fund.bs.head span:nth-of-type(2) {
+    margin: 0 0 0 124px;
+}
+.fund.bs.head span:nth-of-type(3) {
+    margin: 0 0 0 112px;
+}
+.fund.bs.head span:nth-of-type(4) {
+    margin: 0 0 0 74px;
+}
+ul.fund_ul.bs {
+    border: none;
+}
+ul.fund_ul.bs li:nth-last-of-type(1) {
+    border-left: 1px solid #F4F4F4;
+    border-right: 1px solid #F4F4F4;
+    border-bottom: 1px solid #F4F4F4;
+}
+.fund_ul>li, .fund.bs.head, .fund {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid #f4f4f4;
+    height: 62px;
+    line-height: 24px;
+    width: 100%;
+}
+ul.fund_ul.bs li span:nth-of-type(1) {
+    width: 112px;
+}
+a {
+    text-decoration: none;
+    color: #333;
+}
+ul.fund_ul.bs li span {
+    float: left;
+    text-align: center;
+    line-height: 62px;
+    font-size: 14px;
+}
+ul.fund_ul.bs li span:nth-of-type(2) {
+    width: 216px;
+    margin: 0 10px;
+}
+ul.fund_ul.bs li span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+ul.fund_ul.bs li span:nth-of-type(3) {
+    width: 160px;
+}
+ul.fund_ul.bs li span:nth-of-type(4) {
+    width: 140px;
+}
+
+.m_top20{margin-top:20px}
+.m_top10{margin-top:10px}
+.overf{overflow: hidden}
+/*管理团队*/
+.character_boxli li {
+    margin: 0 32px 0 0;
+    float: left;
+    width: 144px;
+}
+li {
+    list-style: none;
+    vertical-align: top;
+}
+.border_1px {
+    width: 118px;
+    /* border-bottom: 1px solid #fff; */
+    padding: 10px;
+    height: 206px;
+    position: relative;
+}
+.w_616{width:674px;}
+.border_1px img {
+    width: 118px;
+}
+img {
+    display: block;
+}
+.character_boxli.clearfix dl {
+    width:98px;
+    padding: 15px 10px 0 10px;
+     height: 100px;
+}
+
+.dd_active{
+    text-align: left;
+    text-indent: 2em;
+    -webkit-transition: 1s all ease;
+    -moz-transition: 1s all ease ;
+    -ms-transition: 1s all ease ;
+    -o-transition: 1s all ease ;
+    transition: 1s all ease;
+    -webkit-transform: translate(0,100px);
+    -moz-transform: translate(0,100px);
+    -ms-transform: translate(0,100px);
+    -o-transform: translate(0,100px);
+    transform: translate(0,100px);
+    background: #fff;
+    position: absolute;
+    top:68px;left:0;z-index:10
+}
+.personal_box span, .personal_box a:nth-of-type(2){
+    text-indent: 5px;
+}
+.content_box2 .personal_box span{color:#7c7c7c}
+.personal_box a:nth-last-of-type(1){color:#1b1b1b}
+.personal_box a{    padding: 0px 0;}
+.border_1px dl {
+    line-height: 21px;
+    position: absolute;
+
+    left: 0px;
+    /* margin: 0 10px 0 10px; */
+    background: #fff;
+    overflow: hidden;
+}
+.character_boxli.clearfix dt {
+    color: #333;
+    display: block;
+    font-size: 16px;
+    text-align: center;
+}
+.mar_auto{
+    margin:0 auto;
+    padding: 0 0 0 6px;
+}
+.character_boxli.clearfix dd {
+    text-align: center;
+    color: #6b6b6b;
+    font-size: 12px;
+    padding: 8px 0 0 0;
+}
+
+.character_boxli li:nth-child(4n) {
+    margin: 0px;
+}
+.control{
+    padding:0 0 100px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

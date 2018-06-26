@@ -1,0 +1,75 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/paging.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor_attention_item.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/deals.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="wrap">
+<div class="height70"></div>
+	{include file="inc/sidebar_investor.html"}
+	<div class="investor content">
+	<ul class="investor_msg_list attention_item" id="attention_item">
+		<div class="focus_num">您已经发送了{$totals_select}个投资意向</div>
+		 {if $totals_select}
+		 <ul class="case_list">
+			{foreach from=$project_info item=list_item}
+			<a href="{url r="dealdetail" p="id=$list_item.id"}" target="_blank">
+			<div class="deal_intend">
+			<li class="no_margin">
+				<div class="top">
+					<h3 class="top_hd">{$list_item.name}</h3>
+					<div class="brief_list">
+						{foreach from=$list_item.brief_info_array item=point_item}
+  						<p><img src="{function name="get_spec_image" v="txt_bg1.png" }
+" alt="">{$point_item.point_info}</p>
+						{/foreach}
+  					</div>
+  					<div class="t_box">
+  						<b class="cty">{$list_item.deal_province}</b>
+  						<div class="inv_direction">
+  						{foreach from=$list_item.deal_cate_array item=deal_cate_array}
+  							<b>{$deal_cate_array.name}</b>
+  						{/foreach}
+  						</div>
+  						<div class="lun">
+  							<b>{$list_item.deal_period}</b>
+  						</div>
+  					</div>
+				</div>
+				<div class="bottom">
+					<div class="case_hd">
+						<h3 class="title">{$list_item.name}</h3>
+						<img src="{$list_item.img_deal_logo}" alt="{$list_item.name}">
+					</div>
+					<div class="case_con">
+						<h3 class="case_con_hd">{$list_item.deal_sign}</h3>
+						<div class="case_con_bd">
+						    {foreach from=$list_item.point_info_array item=brief_point_item}
+ 							<div>
+								<p class="case_con_bd_desc_item">{$brief_point_item.point_info}</p>
+ 							</div>
+							 {/foreach}
+						</div>
+					</div>
+				</div>
+ 			</li>
+			<p class="intend_date">{$list_item.time}发送投资意向</p>
+			</div>
+			</a>
+ 			{/foreach}
+ 		</ul>
+		{else}
+ 		<div class="no_deal">
+ 		您没有向任何项目发送投资意向，去<a href="{url r="deals#index"}">本期精品项目</a>里看看吧
+ 		</div>
+ 			{/if}
+	</ul>
+<div class="deal_page intend_page">
+{$pages}
+</div>
+	</div>
+</div>
+{include file="inc/footer.html"} 

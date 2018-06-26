@@ -1,0 +1,75 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sub_account.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/subuser.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/check.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="wrap">
+<div class="height70"></div>
+	{include file="inc/sidebar_investor.html"}
+	<div class="investor content">
+<!-- 		<div class="friendly_reminder">
+			<h5 class="friendly_reminder_tit">授权须知</h5>
+			<p class="friendly_reminder_msg">您可以授权三个手机号使用您的账号登录。您可以授权给您的投资顾问，投资同事，或者其他负责您投资业务的人员。在您没有时间的时候，他们可以帮您打理投资事务。</p>
+		</div> -->
+		<!-- <div class="subhline"></div> -->
+		<form action="javascript:void(0);">
+			<div class="height70"></div>
+			<ul class="sub_account continue_accredit">
+				<!-- <li class="mobile_box_manage">
+					<h3>输入手机号</h3>
+					{if $sub_user.mobile1}
+					<div id="div_mobile1" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile1" id="mobile1" value="{$sub_user.mobile1}" readonly><button class="del_btn" type="button" onclick="del_sub_account('1','mobile1')">解除授权</button>
+					</div>
+					{else}
+					<div  id="div_mobile1" style="display:none;" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile1" id="mobile1" value="" readonly><button class="del_btn" type="button" onclick="del_sub_account('1','mobile1')">解除授权</button>
+					</div>
+					{/if}
+					{if $sub_user.mobile2}
+					<div  id="div_mobile2" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile2" id="mobile2" value="{$sub_user.mobile2}" readonly><button class="del_btn" type="button" onclick="del_sub_account('1','mobile2')">解除授权</button>
+					</div>
+					{else}
+					<div  id="div_mobile2" style="display:none;" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile2" id="mobile2" value="" readonly><button class="del_btn" type="button" onclick="del_sub_account('1','mobile2')">解除授权</button>
+					</div>
+					{/if}
+					{if $sub_user.mobile3}
+					<div  id="div_mobile3" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile3" id="mobile3" value="{$sub_user.mobile3}" readonly><button class="del_btn" type="button" onclick="del_sub_account('1',mobile3')">解除授权</button>
+				    </div>
+					{else}
+					<div id="div_mobile3" style="display:none;" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile3" id="mobile3" value="" readonly><button class="del_btn" type="button" onclick="del_sub_account('1','mobile3')">解除授权</button>
+				   </div>
+					{/if}
+
+					<h3 class="already">已创建的子账号登录密码</h3>
+					<input type="text" maxlength="12" value="{$user_info.sub_user_pwd}" id="user_pwd" name="user_pwd"><button class="update_btn" type="button" onclick="update_sub_account_pwd()">修改密码</button>
+					<span id="user_pwd_msg" name="error_msg"></span>
+				</li> -->
+				
+				<li class="pwd_boxtwo">
+					<h4>输入手机号</h4>
+					<p class="accredit_num">输入您要授权的手机号，请务必保证授权手机号
+输入正确，错误的话将无法登录。
+<strong>您还可以授权<b id="extra_num">{$extra_num}</b>个子账号</strong></p>
+				<input type="text" own_type="number" maxlength="11" name="mobile_add" id="mobile_add">
+				<span id="mobile_msg" class="mobile_msg" name="error_msg"></span>
+				<button id="accredit_confirm" class="accredit_confirm" type="button" onclick="add_sub_account({$user_info.mobile})">确定授权</button>
+				<span id="err_msg" name="error_msg"></span>
+				</li>
+				<div class="subsline"></div>
+				<li>
+					<button class="my_account">我的子账号</button>
+				</li>
+			</ul>
+		</form>
+	</div>
+</div>
+{include file="inc/footer.html"} 

@@ -1,0 +1,131 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investors_profit.css";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jQuery_v1.8.3.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/Highcharts.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/invested_profit.js";
+?>
+
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+	<div class="personal_box">
+		<a href='{url r="home"}'>我的个人中心</a>
+		<img src='{function name="get_spec_image" v="right_corner.jpg"}' alt="right_corner" />
+		<span>我的收益</span>
+	</div>
+	<div class="personal_content clearfix">
+		{include file="inc/sidebar_user.html"}
+		<div class="fr bs size" style="border-left: 1px solid #f4f4f4; width: 790px;">
+{if $nope_profit neq 1}
+			{if ($profitList['profit_type'] eq 1) or ($profitList['profit_type'] eq 3)}
+				<!-- 基金份额出资税前收益-->
+				<div class="Maintain_and_update My_investament pos_re">
+					<div class="set_box_slid_bj por_ab"></div>
+					<i class="active padd_l20 color262626">基金出资份额收益（税前）</i>
+				</div>
+				<div class="profit_infi_box mar_L90_R30">
+					{foreach from=$profitListI item=vo}
+						<ul class="back_Cfafafa set_style_2" style="margin: 0 0 20px 0">
+							<li class="li1 set_style_3 clearfix c_4 li_height_2">
+								<div>
+									<p>基金名称：{$vo.short_name}</p>
+									<p>购买金额：{$vo.investor_amount}万</p>
+								</div>
+								<div>
+									<p>基金规模：{$vo.total_amount}万</p>
+									<p>份额占比：{$vo.investor_rate}％</p>
+								</div>
+								<div>
+									<p class="bj_Y">成立日期：{$vo.establish_date}</p>
+									<p class="bj_Y">购买日期：{$vo.create_time}</p>
+								</div>
+							</li>
+							<li class="clearfix display-flex set_style_8">
+								<div class="set_style_4 fl">
+									<div class="c_4 fn_s_14">基金账面收益率</div>
+									<div class="c_3">{if $vo.fund_income neq "-"}{$vo.profit_rate}%{else}-%{/if}</div>
+								</div>
+								<div class="flex-1 c_4 fn_s_14">基金份额出资税前收益（预计）：{$vo.fund_income}万 </div>
+							</li>
+							<li>
+								<div class="clearfix">
+								
+									<div class="fr set_style_7 c_2 income_analysis" data-id="{$vo.fund_id }" data-type="0">{if $vo.fund_income neq "-"}收益分析{else}{/if}</div>
+								</div>
+								<!-- 这里做 -->
+								<div class="div_none">
+									<div class="box_name display-flex">
+										<div class="name_txt flex-1 text_al_right">
+											<!-- ..... -->
+										</div>
+										<div class="data-txt flex-3">
+											<div class="side1">
+												<div class="bar">
+													<span>0</span><span>单位：万元</span>
+												</div>
+											</div>
+											<div class="side2"></div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					{/foreach}
+				</div>
+			{/if}
+			
+			{if ($profitList['profit_type'] eq 2) or ($profitList['profit_type'] eq 3)}
+				<!-- 基金carry分成收益（税前） -->
+				<div class="Maintain_and_update My_investament pos_re">
+					<div class="set_box_slid_bj por_ab"></div>
+					<i class="active padd_l20 color262626">基金carry分成收益（税前）</i>
+				</div>
+				<div class="profit_infi_box mar_L90_R30">
+					{foreach from=$profitListP item=vo}
+						<ul class="back_Cfafafa set_style_2">
+							<li class="li1 set_style_3 clearfix c_4 li_height_2">
+								<div>
+									<p>基金名称：{$vo.short_name}</p>
+									<p>协助募集金额：{$vo.sum_investor_amount}万</p>
+								</div>
+								<div>
+									<p>基金规模：{$vo.total_amount}万</p>
+									<p>募集金额占比：{$vo.assist_rate}％</p>
+								</div>
+								<div>
+									<p class="bj_Y">成立日期：{$vo.establish_date}</p>
+									<p class="bj_Y2">分成占比：{$vo.fund_income_rate_partner }％</p>
+								</div>
+							</li>
+							<li class="clearfix display-flex set_style_8">
+								<div class="set_style_4 fl">
+									<div class="c_4 fn_s_14">我的carry（税前）</div>
+									<div class="c_3">{$vo.fund_income}万</div>
+								</div>
+								<div class="flex-1 c_4 fn_s_14">我的carry税前收益：{$vo.fund_income}万</div>
+							</li>
+						</ul>
+					{/foreach}
+				</div>
+			{/if}
+			
+			<div class="clearfix pos_r">
+				<!-- 温馨提示 -->
+				<ul class="c_0 fn_s_12 set_style_9">
+					<li>{$profitList.compute_formula}</li>
+					<li class="barDiv">
+						<img src='{function name="get_spec_image" v="san.png"}' alt="right_corner" />
+						<i></i>
+					</li>
+				</ul>
+			</div>
+			{else}
+			<div class="no_deal">
+						 
+						您还未投资任何项目或已投项目暂无收益数据
+						 
+					</div>{/if}
+		</div>
+	</div>
+</div>
+{include file="inc/footer.html"}

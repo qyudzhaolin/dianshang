@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="Generator" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="{$seo_keyword}" />
+<meta name="description" content="{$seo_description}" />
+<title>{$site_name} - {if $page_title neq ''}{$page_title} - {/if} {$seo_title}</title>
+<?php
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/style.css";
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/index.css";
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/flow.css";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/js.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
+<script type="text/javascript">
+var APP_ROOT = '{$APP_ROOT}';
+</script>
+</head>
+<body>	
+<div class="header">
+	<div class="wrap">
+		<div class="logo f_l">
+			<a href="{url r="index"}">
+				<img src='{function name="app_conf" v="SITE_LOGO"}' alt="{function name="app_conf" v="SITE_NAME"}">
+			</a>
+		</div>
+		<ul class="main_nav f_l login_tiptwo">
+			{if $user_info && $user_info.is_effect eq 1 }
+				{if $user_info.user_type eq 1}
+					{if $user_info.is_review eq 1}
+						<li><a href="{url r="deals#index"}" class=""></a></li>
+            			<li><a href="javascript:void(0);" class="nohover"></a></li>
+            			<li><a href="{url r="about" p="id=6&gid=3"}#FAQ" target="_blank" class=""></a></li>
+					{else}
+						<li><a href="javascript:void(0);" class="click" onclick="pop_notice();"></a></li>
+      		 			<li><a href="javascript:void(0);" class="click nohover" ></a></li>
+      		 			<li><a href="{url r="about" p="id=6&gid=3"}#FAQ" target="_blank" class=""></a></li>
+					{/if}
+				{else}
+					{if $user_info.is_review eq 1}
+						<li><a href="javascript:void(0);" class="nohover"></a></li>
+            			<li><a href="{url r="investors#index"}" class=""></a></li>
+            			<li><a href="{url r="about" p="id=6&gid=3"}#FAQ"target="_blank" class=""></a></li>
+					{else}
+						<li><a href="javascript:void(0);" class="click nohover" ></a></li>
+      		 			<li><a href="javascript:void(0);" class="click" onclick="pop_notice();"></a></li>
+      		 			<li><a href="{url r="about" p="id=6&gid=3"}#FAQ"target="_blank" class=""></a></li>
+					{/if}
+				{/if}
+			{else}
+				<li><a href="javascript:void(0);" class="" onclick="pop_login();"></a></li>
+            	<li><a href="javascript:void(0);" class="" onclick="pop_login();"></a></li>
+            	<li><a href="{url r="about" p="id=6&gid=3"}#FAQ" target="_blank" class=""></a></li>
+			{/if}
+		</ul>
+		<div class="f_r">
+			<div class="login_tip">
+				<a href="{url r="download"}" class="click" target="_blank"></a>
+                {if $user_info}
+				<a href="{url r="home"}" class="click icon" >{if $user_info.user_name}{$user_info.user_name}{else}{$user_info.mobile}{/if}</a>
+				<a href="{url r="message"}" class="msg_count">消息{if $USER_NOTIFY_COUNT !=0}<small class="count">{$USER_NOTIFY_COUNT}</small>{/if}</a>
+                <a href="{url r="user#loginout"}" title="退出" class="click" id="user_login_out">退出</a> 
+				{else}
+				<a href="javascript:void(0);" class="click r_t" onclick="pop_register();">注册</a>
+				<a href="javascript:void(0);" class="click l_t" onclick="pop_login();">登录</a>
+				{/if}
+  			</div>
+		</div>
+	</div>
+</div>
+<div class="prompt_box sorry_box">
+	<button class="close_btn" onclick="close_btn_notice()"></button>
+	<h2>提示</h2>
+	<div><img src="{function name="get_spec_image" v="warn.png" }" alt=""></div>
+	<!-- <p>只有完成认证后才能查看{if $user_info.user_type eq 1}创业项目{else}投资人{/if}</p> -->
+	<p style="margin-top:30px;">{if $user_info}抱歉，当您完成{if $user_info.user_type eq 0}项目方{else}投资方{/if}认证才能完整体验磁斯达克提供的服务！{else}磁斯达克 -  好项目的第一站|创业、融资、投资就在磁斯达克|提供一站式资本解决方案的专业股权交易平台{/if}</p>
+</div>
+<div class="gray_box"></div>

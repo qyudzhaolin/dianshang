@@ -1,0 +1,169 @@
+ {include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal_preview.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/deal.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="deal_banner">
+	<div class="wrap">
+		<div class="deal_img"><img src="{$deal_item.img_deal_logo}" alt=""></div>
+		<div class="pos_box">
+			<h2 class="deal_tit">{$deal_item.name}</h2>
+			<h3 class="deal_desc">{$deal_item.deal_sign}</h3>
+			<h4 class="deal_status">融资进行中...</h4>
+		</div>
+	</div>
+</div>
+<div class="project_desc" id="item">
+	<div class="height20"></div>
+	<div class="wrap">
+		<div class="send_request_box" id="send_request_box">
+			<div class="fl_box">
+				<div class="dir">{foreach from=$deal_cate item=cate}
+				 <b>{$cate.name}</b>
+				{/foreach}</div>
+				<div class="round"><b>{$deal_period}</b></div>
+			</div>
+			<div class="company_link">{$deal_item.deal_url}</div>
+			<div class="city">{$deal_province}</div>
+		</div>
+		<div class="w_660">
+			<h2 class="size_22 font_left"><img src="{function name="get_spec_image" v="details_tit.png" }" alt=""></h2>
+			<p class="size_14">{$deal_item.deal_brief}</p>
+		</div>
+		<div class="w_660 good_project">
+			<h2 class="size_22 font_left"><img src="{function name="get_spec_image" v="why_project.png" }" alt=""></h2>
+			<p class="size_14">{$deal_item.entry_info}</p>
+			<p>{$deal_item.solve_pain_info}</p>
+			<ul>
+ 				{foreach from=$deal_milestone item=brief_point_item}
+				<li>-  {$brief_point_item.point_info}</li>
+				{/foreach}
+				 
+ 			</ul>
+		</div>
+	</div>
+</div>
+<div class="deal_milepost">
+	<div class="wrap">
+		<h2 class="tit"><img src="{function name="get_spec_image" v="deal_milepost_tit.png" }" alt=""></h2>
+		<div class="milepost_list">
+			<b>&nbsp;</b>
+			<ul>
+				{foreach from=$deal_event  key = key item=deal_event}
+  				<li>
+					<div class="l">{$deal_event_time_array[$key]}</div>
+					<div class="r"><img src="{function name="get_spec_image" v="i.png" }
+" alt="">{$deal_event.brief}</div>
+				</li>				
+				 {/foreach}	
+				 
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="busniss_model">
+	<div class="wrap">
+		<h3 class="model_tit"><img src="{function name="get_spec_image" v="model_tit.png" }" alt=""></h3>
+		<p class="model_desc">{$deal_item.business_mode}</p>
+	</div>
+</div>
+<div class="team_box">
+	<div class="wrap">
+		<img src="{function name="get_spec_image" v="team_member.png" }" alt="" class="team_title">
+		<h3 class="company_name">{$deal_item.company_name}</h3>
+		<ul class="one_col">
+			{foreach from=$deal_teammember item=member key=id}
+			<li>
+				<div class="memb_head">
+					<img src="{function name="get_spec_image" v="memb_head.png" }" alt="">
+				</div>
+				<div class="memb_msg">
+					<div>
+						<b class="memb_name">{$member.name}</b>
+						<b class="memb_status">{$member.title}</b>
+					</div>
+					<p>{$member.brief}</p>
+				</div>
+			</li>
+			{/foreach}
+			 
+			 
+		</ul>
+	</div>
+</div>
+<div class="deal_history">
+	<div class="wrap">
+		<h2 class="deal_his_tit"><img src="{function name="get_spec_image" v="deal_history_tit.png" }" alt=""></h2>
+		<div class="milepost_list">
+			<b>&nbsp;</b>
+			<ul>
+				{foreach from=$deal_trade_event  key = key item=deal_trade_event}
+  			 			
+			 			
+				<li>
+					<div class="l">{$trade_event_time_array[$key]}</div>
+					<div class="r"><img src="{function name="get_spec_image" v="i.png" }
+" alt="">完成{$deal_trade_event.period}轮融资（融资金额为人民币{$deal_trade_event.price}万元），引进{$deal_trade_event.brief}的投资。</div>
+				</li>				
+				  {/foreach}	 
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="financing_detail white_bg" id="business">
+	<div class="wrap">
+		<h2 class="size_22"><img src="{function name="get_spec_image" v="business_plan.png" }" alt=""></h2>
+		<div class="progress_box">
+			<span class="progress_bar">
+				<div class="progress_bar_jindu" style="width: {$invest_jindu};"></div>
+			</span>
+			<p class="trading">
+				<a href="javascript:void(0);" class="money_l">已融资：<i>{$deal_item.financing_amount} 万</i></a>
+				<a href="javascript:void(0);" class="money_r">融资目标：<i>{$deal_item.pe_amount_plan}万</i></a>
+			</p>
+		</div>
+		<div class="expect">
+			<div class="left">
+				<a href="javascript:viod(0);"><b>预期融资</b><i>{$deal_item.pe_amount_plan}万</i></a>
+				<a href="javascript:viod(0);"><b>出让股份</b><i>{$deal_item.pe_sell_scale}%</i></a>
+				<a href="javascript:viod(0);"><b>融资后估值</b><i>{$pe_evaluate}万</i></a>
+			</div>
+			<div class="right">
+				<a href="javascript:viod(0);"><b>融资阶段</b><i>{$deal_period}</i></a>
+				<a href="javascript:viod(0);"><b>起投金额</b><i>{$deal_item.pe_least_amount}万</i></a>
+				<a href="javascript:viod(0);"><b>融资币种</b><i>人民币</i></a>
+			</div>			
+		</div>
+		<div class="check_plan">
+			<h4 class="check_plan_tit">点击查看项目商业计划书</h4>
+ 			<a href ="{$deal_item.bp_url}" class="check_plan_link" target="_blank"><img src="{function name="get_spec_image" v="plan_head.png" }" alt=""></a>
+		</div>
+ 	</div>
+</div>
+<div class="h150"></div>
+<!-- <div class="sendbutton white_bg">
+	<div class="wrap">
+	<button class="send_request bottombutton" {$preview_end} onclick="send_request()"></button>
+	<button class="send_request_msg sendbuttonend"></button>
+	</div>
+	</div>
+<div class="ss">
+	<div class="wrap">
+		<ul class="ss_bar">
+			<li><a href="#item" id="item_class" class="tt">项目</a></li>
+			<li><a href="#point" id="point_class">亮点</a></li>
+			<li><a href="#team" id="team_class" >团队</a></li>
+			<li><a href="#invest" id="invest_class">投资人</a></li>
+ 			<li><a href="#model" id="model_class">采访</a></li>
+			<li><a href="#business" id="business_class">融资</a></li>
+		</ul>
+		<button class="send_request ss_barbj" {$preview_end} onclick="send_request()">发送投资意向</button>
+		<button class="send_request_msg">已发送投资意向</button>
+	</div>
+</div> -->
+<!-- <input type="hidden" id="deal_detail" value="deal_detail"> -->
+{include file="inc/login_box.html"} 
+{include file="inc/footer.html"}

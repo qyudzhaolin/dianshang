@@ -1,0 +1,57 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/get_pwd.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+<div class="container">
+	<div class="height80"></div>
+	<div class="wrap">
+		<div class="retrieve_box">
+			<h3><img src="{function name="get_spec_image" v="retrieve_title.png" }" alt=""></h3>
+			<ul>
+				<li class="cur">填写注册手机号</li>
+				<li>接收短信验证码</li>
+				<li>重置密码</li>
+			</ul>
+		</div>
+		<div class="gain_msg_box gain_msg_box1" style="display:block;">
+			<p><input type="text" value="{if $mobile}{$mobile}{else}请输入您注册时的手机号码{/if}" title="请输入您注册时的手机号码" maxlength="11" id="get_pwd_mobile" name="get_pwd_mobile"></p>
+			<p class="yzm_input">
+				<input type="text" class="yzm_input" name="img_verify_pwd" id="img_verify_pwd" maxlength="4" own_type="number" value="输入图形验证码" title="输入图形验证码">				
+				<img src='{url r="user#get_pwd_img_verify" }' alt="" id="get_pwd_verify" onclick="update_img_verify_pwd();">
+				<a href="javascript:onclick=update_img_verify_pwd();" class="change_next">换一张</a>			
+			</p>
+			<span class="loginregister" id="get_pwd_first_msg" name="error_msg"></span>
+			<button type="button" onclick="get_pwd_first_next();" id="get_pwd_first_next">下一步</button>
+		</div>
+		<!-- step2 -->
+		<div class="gain_msg_box gain_msg_box2" style="display:none;">
+			<p><input type="text" value="请输入手机收到的验证码" title="请输入手机收到的验证码" id="get_pwd_message" maxlength="6" name="get_pwd_message"></p>
+			<p>
+				<a onclick="get_verify_code('get_pwd');" class="change_next" id="get_pwd_btn_verify_code">获取短信验证码</a>
+				<!-- <div class="again_send"><b>59</b>秒后重新发送</div> -->			
+			</p>
+			<span class="loginregister" id="get_pwd_second_msg" name="error_msg"></span>
+			<button type="button" onclick="get_pwd_second_next();" id="get_pwd_second_next">下一步</button>
+		</div>
+		<!-- step3 -->
+		<div class="gain_msg_box gain_msg_box3" style="display:none;">
+			<div class="get_pwd"><strong>新密码</strong><input type="password" value="" placeholder="请输入6至12位数字或字母" id="get_pwd_user_pwd" name="get_pwd_user_pwd" class="default_font"></div>
+			<div class="get_pwd"><strong>确认新密码</strong><input type="password" value="" placeholder="请确认新密码" id="user_pwd_confirm" name="user_pwd_confirm" class="default_font"></div>
+			<span class="loginregister" id="get_pwd_third_msg" name="error_msg"></span>
+			<div><strong></strong><button onclick="get_pwd_third_next();" id="get_pwd_third_next">重置密码</button></div>
+		</div>
+		<!-- step4 -->
+		<div class="gain_msg_box gain_msg_box4" style="display:none;">
+			<div><img src="{function name="get_spec_image" v="success.png" }" alt=""></div>
+			<div>恭喜您！重置密码成功</div>
+			<div><button onclick="pop_login();">请登录</button></div>
+		</div>
+
+
+
+	</div>
+</div>
+{include file="inc/login_box.html"} 
+{include file="inc/footer.html"}

@@ -1,0 +1,5 @@
+{"level":3,"type":"Contents.Profit.ProfitList","flag":1,"extends":["ProfitList-我的收益首页","{\"uid\":1719}"]}
+{"level":3,"type":"Contents.Funds.FundsList","flag":1,"extends":["FundsList-我的基金列表","{\"uid\":\"1719\",\"label\":1}"]}
+{"level":3,"type":"Contents.Funds.FundsList","flag":1,"extends":["FundsList-我的基金列表","{\"uid\":\"1719\",\"label\":1}"]}
+{"level":3,"type":"Contents.Profit.ProfitList","flag":1,"extends":["ProfitList-我的收益首页","{\"uid\":1719}"]}
+{"level":3,"type":"Contents.Profit.ProfitList","flag":1,"extends":["ProfitList-我的收益首页","{\"uid\":1719}"]}

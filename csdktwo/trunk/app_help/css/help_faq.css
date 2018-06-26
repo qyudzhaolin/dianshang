@@ -1,0 +1,8 @@
+h3{font-size: 1.6em;margin-bottom: 40px;}
+p{line-height: 24px;}
+.mar_10{margin-bottom:10px;}
+.mar_40{margin-bottom: 40px;}
+.finac_list li{margin-bottom: 15px;line-height: 24px;}
+.finac_list li:nth-child(6){margin-bottom: 40px;}
+.fac_list li{margin-bottom: 15px;line-height: 24px;}
+.fac_list li:nth-child(5){margin-bottom: 40px;}

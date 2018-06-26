@@ -1,0 +1,208 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__ROOT__/system/region.js"></script>	
+<load href='__TMPL__Common/js/user_edit.js' />
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/dcom_array.js' />
+<load href='__TMPL__Common/js/upload.js' />
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<div class="main">
+<div class="main_title">{%ADD} <a href="{:u("User/index_investor")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="add" action="__APP__" autocomplete="off" method="post" enctype="multipart/form-data" onSubmit="return add_user_check()">
+<table class="form conf_tab"  cellpadding=0 cellspacing=0 >
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<!--
+	<tr>
+		<td class="item_title">会员编号</td>
+		<td class="item_input">{$vo.id}</td>
+	</tr>-->
+	<tr>
+		<td class="item_title">*会员姓名(6个字)</td>
+		<td class="item_input"><input type="text" maxlength="6" class="textbox3 require" name="user_name" value="{$user.user_name}" id="user_name"/><span id="user_name_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*登录密码<br>(6-12位数字字母)</td>
+		<td class="item_input"><input type="password" maxlength="12" class="textbox3 require" name="user_pwd" id="user_pwd"/><span id="user_pwd_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">* {%USER_MOBILE}</td>
+		<td class="item_input"><input type="text" maxlength="11" class="textbox require" name="mobile" /><span id="mobile_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title"></td>
+		<td class="item_input">
+			<label><input type="checkbox" name="role" value="1" style="margin:8px"/>是渠道合伙人</label>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">所在地区</td>
+		<td class="item_input">
+			<select name="province" class="textbox require">
+				<option value="">请选择</option>
+				<foreach name="region_lv2" item="region">
+					<option value="{$region.id}" rel="{$region.id}">{$region.name}</option>
+				</foreach>
+			</select>
+			<select name="city" class="textbox require">
+				<option value="">请选择</option>			
+			</select> 
+			<span id="province_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">最高学历</td>
+		<td class="item_input">
+			<select name="per_degree" class="textbox require">				
+				<option value="" rel="0">请选择</option>
+				<foreach name="per_degree_list" item="per_degree_item">
+					<option value="{$per_degree_item.id}" rel="{$per_degree_item.id}" <if condition="$per_degree_item['id'] eq $_REQUEST['per_degree'] ">selected="selected"</if>>{$per_degree_item.name}</option>
+				</foreach>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">电子邮箱(30个字)</td>
+		<td class="item_input">
+			<input type="text" maxlength="30" class="textbox3 require" value="{$_REQUEST['email']}" name="email" id="email"/><span id="email_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">头像</td>
+		<td class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'img');">
+			<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none"/>
+			<input type="hidden" class="require" name="img_user_logo"  id="img_user_logo"/>
+			<img src='' id="img_src" />
+			</label>
+			<label class="fileuploading hide" ></label>
+			<span id="img_user_logo_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+<table class="form conf_tab" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+		<td class="item_title">所在机构(20个字)</td>
+		<td class="item_input">
+			 <input type="text" maxlength="20" class="textbox3 require" value="{$_REQUEST['org_name']}" name="org_name" id="org_name" /><span id="org_name_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	 <tr>
+		<td class="item_title">职称(8个字)</td>
+		<td class="item_input">
+			<input type="text" class="textbox3 require" maxlength="8" name="org_title" value="{$_REQUEST['org_title']}" id="org_title" /><span id="org_title_msg" name="error_msg"></span>
+		</td>
+	</tr> 
+	<tr>
+		<td class="item_title">机构联系人(6个字)</td>
+		<td class="item_input"><input type="text" maxlength="6" class="textbox3 require" name="org_linkman" value="{$_REQUEST['org_linkman']}" id="org_linkman" /><span id="org_linkman_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">机构联系电话(16个字)</td>
+		<td class="item_input"><input type="text" maxlength="16" class="textbox3 require" name="org_mobile" value="{$_REQUEST['org_mobile']}" id="org_mobile"><span id="org_mobile_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">机构官网(50个字)</td>
+		<td class="item_input"><input type="text" maxlength="50" class="textbox3 require" name="org_url" value="{$_REQUEST['org_url']}" id="org_url"><span id="org_url_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">机构简介(200个字)</td>
+		<td class="item_input">
+			<textarea type="text"  maxlength="200"  name="org_desc" id="org_desc" class="textarea require">{$_REQUEST['org_desc']}</textarea><span id="org_desc_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+<table  class="form conf_tab" cellpadding=0 cellspacing=0>	
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+		<td class="item_title">身份证正面 </td>
+		<td class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'avatar_file');">
+			<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none"/>
+			<input type="hidden" class="require" name="id_cardz_logo" id="id_cardz_logo"/>
+			<img src='{$vo.id_cardz_real_url}' id="img_src"  style="width:240px;height:120px"/>
+			</label>
+			<label class="fileuploading hide" ></label>
+			<span id="id_cardz_logo_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+		</td>
+	</tr>	
+	<tr>
+		<td class="item_title">身份证反面 </td>
+		<td class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'avatar_file');">
+			<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none"/>
+			<input type="hidden" class="require" name="id_cardf_logo" id="id_cardf_logo"/>
+			<img src='{$vo.id_cardf_real_url}' id="img_src"  style="width:240px;height:120px"/>
+			</label>
+			<label class="fileuploading hide" ></label>
+			<span id="id_cardf_logo_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">名片 </td>
+		<td class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'avatar_file');">
+			<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none"/>
+			<input type="hidden" class="require" name="img_card_logo" id="img_card_logo"/>
+			<img src='{$vo.card_real_url}' id="img_src"  style="width:240px;height:120px"/>
+			</label>
+			<label class="fileuploading hide" ></label>
+			<span id="img_card_logo_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+		</td>
+	</tr>		
+	<tr>
+		<td class="item_title">会员状态</td>
+		<td class="item_input">
+			<label><input disabled type="radio" name="is_review" value="0"/>未认证</label>
+			<label><input disabled type="radio" name="is_review" value="2"/>认证中</label>
+			<label><input disabled type="radio" name="is_review" value="1" checked="checked" />已认证</label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+
+<div class="blank5"></div>
+<div class="blank5"></div>
+	<table class="form" cellpadding=0 cellspacing=0>
+		<tr>
+			<td colspan=2 class="topTd"></td>
+		</tr>
+		<tr>
+			<td class="item_title"></td>
+			<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="User" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="insert" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%ADD}" />
+			<input type="reset" class="button" value="{%RESET}" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 class="bottomTd"></td>
+		</tr>
+	</table> 		 
+</form>
+</div>
+<include file="Public:footer" />

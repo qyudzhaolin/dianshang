@@ -1,0 +1,35 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/System_notification.css";
+
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/message.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_box">
+        <a href='{url r="home"}'>我的个人中心</a>
+        <img src='{function name="get_spec_image" v="right_corner.jpg"}' alt="right_corner"/>
+        <span>我的消息</span>
+    </div>
+    <div class="personal_content clearfix">
+        {include file="inc/sidebar_user.html"} 
+        <!-- 系统通知：-->
+        <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+            <ul class="System_box">
+            	{foreach from=$msg_list item=vo}
+                <li>
+                    <span>系统通知：</span>
+                    <span>{function name=to_date v=$vo.log_time p="Y年m月d日"}</span>
+                    <p>{$vo.log_info}</p>
+                </li>
+				{/foreach}
+            </ul>
+            <div class="news_more_box System_btn">
+            	{if $msg_list_more}
+	                <button class="news_more index_more" >查看更多</button>
+            	{/if}
+            </div>
+        </div>
+    </div>
+</div>
+{include file="inc/footer.html"} 

@@ -1,0 +1,81 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<PHP>
+	function get_refund($id,$deal)
+	{
+		if($deal['is_success']==0&&$deal['end_time']<get_gmtime()&&$deal['end_time']!=0)
+		{
+			return "<a href='".u("Deal/batch_refund",array("id"=>$id))."'>批量退款</a>";
+		}
+	}
+</PHP>
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">项目列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<!--<input type="button" class="button" value="{%ADD}" onclick="add();" />-->
+	<input type="button" class="button" value="新建项目" onclick="add();" />
+<!-- 	<input type="button" class="button" value="移到回收站" onclick="del();" /> -->
+</div>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__?m=Deal&a=all_index" method="post">
+		项目名称：<input type="text" class="textbox" name="name" value="{:trim($_REQUEST['name'])}" style="width:100px;" />
+		项目简称：<input type="text" class="textbox" name="s_name" value="{:trim($_REQUEST['s_name'])}" style="width:100px;" />
+		可见度： <select name="vis" id="vis">
+				<option value="0" <if condition="$_REQUEST['vis'] eq 0">selected="selected"</if>>请选择</option>
+				<option value="1" <if condition="$_REQUEST['vis'] eq 1">selected="selected"</if>>认证会员可见</option>
+				<option value="2" <if condition="$_REQUEST['vis'] eq 2">selected="selected"</if>>全部会员可见</option>
+			</select> 
+		项目状态：<select name="is_effect" id="is_effect">
+				<option value="0" <if condition="$_REQUEST['is_effect'] eq 0">selected="selected"</if>>请选择</option>
+				<option value="1" <if condition="$_REQUEST['is_effect'] eq 1">selected="selected"</if>>申请中</option>
+				<option value="2" <if condition="$_REQUEST['is_effect'] eq 2">selected="selected"</if>>编辑中</option>
+				<option value="3" <if condition="$_REQUEST['is_effect'] eq 3">selected="selected"</if>>拟投资</option>
+				<option value="4" <if condition="$_REQUEST['is_effect'] eq 4">selected="selected"</if>>已投资</option>
+			</select>
+		发布状态：<select name="is_publish" id="is_publish">
+				<option value="0" <if condition="$_REQUEST['is_publish'] eq 0">selected="selected"</if>>请选择</option>
+				<option value="1" <if condition="$_REQUEST['is_publish'] eq 1">selected="selected"</if>>待发布</option>
+				<option value="2" <if condition="$_REQUEST['is_publish'] eq 2">selected="selected"</if>>已发布</option>
+			</select>
+			是否精品：<select name="is_best" id="is_best">
+				<option value="0" <if condition="$_REQUEST['is_best'] eq 0">selected="selected"</if>>请选择</option>
+				<option value="2" <if condition="$_REQUEST['is_best'] eq 2">selected="selected"</if>>是</option>
+				<option value="1" <if condition="$_REQUEST['is_best'] eq 1">selected="selected"</if>>否</option>
+				  
+			</select>
+		
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="deal" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,name|msubstr:项目名称|100px
+		,s_name|msubstr:项目简称|88px
+		,company_name|msubstr:所属公司|130px
+	 	,period_id:融资轮次|65px
+	 	,user_id:推荐人|145px
+	 	,is_effect:项目状态|65px
+	 	,is_publish:发布状态|65px
+	 	,is_best:精品|40px
+	 	,create_time:创建时间|90px
+	 	,sort|get_sort=$deal['id']:{%SORT}"
+	 	actionlist="deal_button"  
+  		 /> 
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

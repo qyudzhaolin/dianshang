@@ -1,0 +1,62 @@
+<div class="footer">
+	<div class="wrap">
+		<ul class="sub_nav">
+			<li class="no_margin"><a href="{url r="index"}"><img src="{function name="get_spec_image" v="cisdaq.com.png" }" alt=""></a></li>
+			<li><a href="{url r="about" p="id=6&tid=1"}" target="_blank">帮助中心</a></li>
+			<li><a href="{url r="about" p="id=4"}" target="_blank">关于我们</a></li>
+			<li><a href="{url r="about" p="id=5"}" target="_blank">联系我们</a></li>
+		</ul>
+		<div class="globle"><img src="{function name="get_spec_image" v="globle.png" }" alt=""></div>
+		<div class="helpurl">
+			<a href="{url r="about" p="id=6&gid=1"}#intro_help" target="_blank">新手指南</a>
+			<a href="{url r="about" p="id=6&gid=2"}#service_terms" target="_blank">服务条款</a>
+			<a href="{url r="about" p="id=6&gid=3"}#FAQ" target="_blank">FAQ</a>
+		</div>
+		<div class="footcontact">
+			<dl>
+			<dt class="telbj">联系电话：</dt>
+			<dd>400-862-8262</dd>
+		</dl>
+
+		<dl>
+			<dt class="emailbj">联系邮箱：</dt>
+			<dd>bp@cisdaq.com</dd>
+		</dl>
+
+		<dl>
+			<dt class="contactbj">联系地址：</dt>
+			<dd>北京市海淀区中关村SOHO大厦515</dd>
+		</dl>
+		<dl>
+			<dt class="attention_us">关注我们：</dt>
+			<dd>
+				<b>cisdaq</b>
+				<b>磁斯达克</b>
+			</dd>
+		</dl>
+		<dl>
+			<dt >版权所有：</dt>
+			<dd>
+				北京磁信信息技术有限公司
+			</dd>
+		</dl>		
+
+		</div>
+		<p class="copy_rights">{function name="app_conf" v="SITE_LICENSE"}</p>
+	</div>
+</div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?3dbb704d79acf3def448d3947d7907e2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<?php
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/js.js";
+?>
+<script type="text/javascript" src="{function name="parse_script" v="$pagejs"}"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<div class="main">
+<div class="main_title">{%ADD} <a href="{:u("Deal/event_list",array('deal_id'=>$event['deal_id']))}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" onSubmit="return add_event_check()">
+<table class="form" cellpadding=0 cellspacing=0>
+	<tbody>
+		<tr>
+			<td colspan=6 class="topTd"></td>
+		</tr>
+		<tr>
+			<th rowspan=4 class="item_title">预期融资信息</th>
+		</tr>
+		<tr>
+			<td style="width:180px">* 轮次信息：</td>
+			<td class="item_input" style="width:280px">
+				<select disabled="disabled" name="investor_record_type" class="require" id="investor_record_type">				
+				 	<option value="1" <eq name="event.investor_record_type" value="1">selected</eq>>最新轮次</option>
+				 	<option value="2" <eq name="event.investor_record_type" value="2">selected</eq>>历史轮次</option>
+	 			</select>
+	  			<span id="investor_record_type_msg" name="error_msg"></span>
+			</td>
+			<td style="width:180px">* 融资轮次：</td>
+			<td class="item_input">
+				<select disabled="disabled" name="period" class="require" id="period">
+				 	<option value="">{$event.period}</option>
+	 			</select>
+	  			<span id="period_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>* 预期融资金额（万元）：</td>
+			<td class="item_input">
+				<input readonly="readonly" type="text" class="textbox3 require" name="pe_amount_plan" id="pe_amount_plan" value="{$event.pe_amount_plan}" /> 
+				<span id="pe_amount_plan_msg" name="error_msg"></span>
+			</td>
+			<td>* 出让股权（%）：</td>
+			<td class="item_input">
+				<input readonly="readonly" type="text" class="textbox3 require" name="pe_sell_scale" id="pe_sell_scale" value="{$event.pe_sell_scale}" /> 
+				<span id="pe_sell_scale_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>* 融资后预估值（万元）：</td>
+			<td colspan="3" class="item_input">
+				<input readonly="readonly" type="text" class="textbox3" id="pe_evalute" value="{$event.pe_evalute}"/> 
+			</td>
+		</tr>
+	</tbody>
+	
+	<eq name="event.investor_record_type" value="2">
+		<tbody id="csdq_hisory_1">
+			<tr>
+				<td colspan="6" class="topTd"></td>
+			</tr>
+			<tr>
+				<th rowspan="4" class="item_title">实际融资信息</th>
+			</tr>
+			<tr>
+				<td>* 融资前估值（万元）：</td>
+				<td class="item_input">
+					<input readonly="readonly" type="text" class="textbox3 require" name="investor_before_evalute" id="investor_before_evalute" value="{$event.investor_before_evalute}" /> 
+					<span id="investor_before_evalute_msg" name="error_msg"></span>
+				</td>
+				<td>* 融资后估值（万元）：</td>
+				<td class="item_input">
+					<input readonly="readonly" type="text" class="textbox3 require" name="investor_after_evalute" id="investor_after_evalute" value="{$event.investor_after_evalute}" /> 
+					<span id="investor_after_evalute_msg" name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>* 估值增长率（%）：</td>
+				<td class="item_input">
+					<input readonly="readonly" type="text" class="textbox3 require" name="evalute_growth_rate" id="evalute_growth_rate" value="{$event.evalute_growth_rate}" /> 
+					<span id="evalute_growth_rate_msg" name="error_msg"></span>
+				</td>
+				<td>* 投资回报（倍数）：</td>
+				<td class="item_input">
+					<input readonly="readonly" type="text" class="textbox3 require" name="investor_payback" id="investor_payback" value="{$event.investor_payback}" /> 
+					<span id="investor_payback_msg" name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>* 融资完成日期：</td>
+				<td colspan="3" class="item_input">
+					<input readonly="readonly" type="text" class="textbox require" name="investor_time" value="{$event.investor_time}" id="investor_time" style="width:200px" />
+					<span id="investor_time_msg" name="error_msg"></span>
+				</td>
+			</tr>
+		</tbody>
+	</eq>	
+	<tbody id="csdq_hisory_2">
+		<tr>
+			<td colspan="5" class="topTd"></td>
+		</tr>
+		<tr>
+			<th rowspan="4" class="item_title">
+				投资基金<br />
+			</th>
+		</tr>
+		<tr>
+			<style>
+				.csdq_funds_area{height:30px;line-height:30px;border-bottom:#ccc solid 1px;padding:5px}
+				.csdq_funds_area p{display:inline-block;}
+				.csdq_funds_area em{font-style: normal}
+				.csdq_funds_area select{width:210px}
+			</style>
+			<td colspan="4" style="padding:0" id="csdq_hisory_area">
+				<volist name="fund" id="vo">
+					<div class="csdq_funds">
+						<gt name="key" value="0"><div class="topTd"></div></gt>
+						<div class="csdq_funds_area">
+							<p style="width:184px">* 是否磁斯达克参与：</p>
+							<p style="width:286px" class="item_input is_csdk_fund">
+								<select disabled="disabled" name="is_csdk_fund[]" class="require">
+									<option value="2" <eq name="vo.is_csdk_fund" value="2">selected</eq>>&nbsp;否&nbsp;</option>
+									<option value="1" <eq name="vo.is_csdk_fund" value="1">selected</eq>>&nbsp;是&nbsp;</option>
+								</select>
+							</p>
+							<p style="width:184px">* 投资日期：</p>
+							<p>
+								<input readonly="readonly" type="text" class="textbox require investor_date" name="investor_date[]" value="{$vo.investor_date}" style="width:200px" />
+								<span></span>
+							</p>
+						</div>
+						<div class="csdq_funds_area">
+							<eq name="vo.is_csdk_fund" value="2">
+								<p class="csdq_select_one" style="width:184px">
+									* 参与基金名称：
+								</p>
+								<p class="item_input csdq_select_two" style="width:286px">
+									<input readonly="readonly" type="text" class="textbox3 require name" name="name[]" value="{$vo.name}" /> 
+								</p>
+							<else />
+								<p class="csdq_select_one" style="width:184px">
+									 * 选择参与基金：
+								</p>
+								<p class="item_input csdq_select_two" style="width:286px">
+									<select disabled="disabled" name="fund_id[]" class="require">
+										<option value="" data-value="">{$vo.name}</option>
+									</select>
+								</p>
+							</eq>
+							<p style="width:184px">* 基金简称：</p>
+							<p>
+								<input readonly="readonly" type="text" class="textbox3 require short_name" name="short_name[]" value="{$vo.short_name}" /> 
+								<span></span>
+							</p>
+						</div>
+						<div class="csdq_funds_area">
+							<p style="width:184px">* 投资金额（万元）：</p>
+							<p style="width:286px">
+								<input readonly="readonly" type="text" class="textbox3 require investor_amount" name="investor_amount[]" value="{$vo.investor_amount}" /> 
+								<span></span>
+							</p>
+							<p style="width:184px">* 投资占比：</p>
+							<p>
+								<input readonly="readonly" type="text" class="textbox3 require investor_rate" name="investor_rate[]" value="{$vo.investor_rate}" /> 
+								<span></span>
+							</p>
+						</div>
+						<div class="csdq_funds_area" style="border:none;height:110px;line-height:110px">
+							<p style="width:191px;float:left">* 备注(200字)：</p>
+							<p style="clear:both">
+								<textarea readonly="readonly" type="text" maxlength="200" name="remark[]" class="textarea require remark">{$vo.remark}</textarea>
+								<span></span>
+							</p>
+						</div>
+					</div>
+				</volist>
+			</td>
+		</tr>
+	</tbody>
+	<tr>
+		<td class="item_title"></td>
+		<td colspan="4" class="item_input">
+			<a href="{:u("Deal/event_list",array('deal_id'=>$event['deal_id']))}"><input type="button" class="button" value="返回" /></a>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=6 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+</div>
+<include file="Public:footer" />

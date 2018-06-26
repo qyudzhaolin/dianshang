@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en"> 
+<head>
+<meta charset='utf-8'> 
+  <meta name="viewport" content="width=640, user-scalable=no, initital-scale=1">
+<?php
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/css/h5/js/jquery-2.1.1.min.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/css/h5/js/highcharts.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/css/h5/js/exporting.js";
+?>
+</head> 
+
+<script type="text/javascript" src="{function name="parse_script" v="$pagejs"}"></script>
+<script type="text/javascript">
+var APP_ROOT = '{$APP_ROOT}';
+</script>
+<body> 
+<!-- <div style="z-index:9999999999999999;position:absolute; width:100%; float:left;  height:100%; top:0px; left:0px;"></div> -->
+    <div id="container" style="width:100%;height:26rem;float:right;position:relative">
+        
+    </div>
+    <div class="content_ber" style="height:120vh;
+        width:1vh;
+        background:#fff;
+        position: absolute;
+        top:-20px;
+        
+        right:-10px;
+        z-index: 10000;">
+    </div>
+</body> 
+</html>
+
+<script>
+$(function () {
+    
+    var colors = Highcharts.getOptions().colors,
+        categories= [   {foreach from=$amount_list item=amountlist}
+    				 '{$amountlist.period}',   
+    					{/foreach}
+            ],
+        name = 'Browser brands',
+        data = [];
+
+    function setChart(name, categories, data, color) {
+    chart.xAxis[0].setCategories(categories, false);
+    chart.series[0].remove(false);
+    chart.addSeries({
+        name: name,
+        data: data,
+        color: color || 'white'
+    }, false);
+    chart.redraw();
+    }
+
+    var chart = $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: categories
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            labels: {
+                formatter: function() {
+                    return Highcharts.numberFormat(this.value,0,"",",")+'万';
+                }
+            }
+        },
+        plotOptions: {
+            column: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function() {
+                            var drilldown = this.drilldown;
+                            if (drilldown) { // drill down
+                                setChart(drilldown.name, drilldown.categories, drilldown.data, drilldown.color);
+                            } else { // restore
+                                setChart(name, categories, data);
+                            }
+                        }
+                    }
+                },
+                dataLabels: {
+                    enabled: false,
+
+                    style: {
+                        fontWeight: 'normal',
+                        color:'#399'
+
+                    },
+                    formatter: function() {
+                        return this.y +'万';
+                    }
+                }
+            }
+        },
+//        yAxis: [{
+//            lineWidth: 2
+//            // showEmpty: true // by default
+//        }, {
+//            lineWidth: 2,
+//            opposite: true,
+//            showEmpty: true
+//        }],
+         tooltip: {
+             headerFormat: '<span style="font-size:10px">{point.key}饭</span><table>',
+             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                 '<td style="padding:0"><b>{point.y:.1f} 万</b></td></tr>',
+             footerFormat: '</table>',
+             shared: true,
+             useHTML: true
+         },
+        credits: {
+                   enabled: false
+        },
+        legend: {
+                enabled: false
+        },
+        series: [{
+           name: 'London',
+            data: [ {foreach from=$amount_list item=amountlist}
+         				 [  {$amountlist.investor_amount}],
+         				{/foreach}],
+           color: colors[0],
+        }],
+        exporting: {
+            enabled: false
+        }
+    })
+    .highcharts(); // return chart
+}); 
+</script>
+<script>
+    $(function(){
+        $('html,body').css('fontSize','17px');
+        $('tspan').css({'fontSize':'1.4rem','fontWeight':'normal'});
+        $('#container').find('tspan').css({'WebkitTransform':'translateY(50px)','transform':'translateY(50px)','display':'block','textAlign':'left'});
+        $('g').css({'color':'red','height':'300px','width':'200px'})
+        $('text').css({'fontSize':'1.2rem','fontWeight':'normal','position':'relative','top':'100px'})
+    })
+</script>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css">
+
+    <script src="../js/jQuery_v1.8.3.js"></script>
+    <script src="../js/base.js"></script>
+    <script src="../js/from.js"></script>
+    <script src="../js/personal_header.js"></script>
+    <title>个人资料</title>
+</head>
+<body>
+<script src="../js/header.js"></script>
+<div class="content_box2 bg_white">
+    <div class="personal_box">
+        <span>我的个人中心</span>
+            <img src="../images/right_corner.jpg" alt=""/>
+        <span>账户设置</span>
+            <img src="../images/right_corner.jpg" alt=""/>
+        <span class="active">个人资料</span>
+    </div>
+    <div class="personal_content clearfix">
+        <div class="personal_project fl bs">
+            <a href="javascript:;" class="active">账户设置</a>
+            <a href="javascript:;">我的投资</a>
+            <a href="javascript:;">“我要投资”项目</a>
+            <a href="javascript:;">我的消息</a>
+        </div>
+        <!-- 个人资料，保存更新-->
+        <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+            <div class="Maintain_and_update">
+                <a href="javascript:;" class="active">个人资料</a>
+                <a href="javascript:;">公司消息</a>
+                <a href="javascript:;">账户安全</a>
+                <div class="bbr"></div>
+            </div>
+
+            <!-- 个人资料from表单-->
+            <form action="" class="form bs active margin_bottom" >
+                <div class="head" style="margin:0px auto 18px">
+                    <i>*</i>
+                    <b>更新头像:</b>
+                    <label for="" class="head_label" onclick="upd_file(this,'user_img','img_src','img_user_logo','img_user_logo_msg','img');">
+                        <input type="file" class="filebox file_active" name="user_img" id="user_img"/>
+                        <input type="hidden" value="{$home_user_info.img_user_logo}" name="img_user_logo" id="img_user_logo"/>
+                        <div class="div"></div>
+
+                        <img src='../images/sign_text_logo.png' id="img_src" class="div_img" alt=""/>
+
+
+                    </label>
+                </div>
+
+                <div>
+                    <i>*</i>
+                    <b>真实姓名:</b>
+
+                    <label for=""><input type="text" name="text2" disabled="disabled"/></label>
+                </div>
+                <div>
+                    <i>*</i>
+                    <b>手机号码:</b>
+                    <label for=""><input type="text" name="mobile_phone" disabled="disabled"/></label>
+                </div>
+
+                <div>
+                    <i>*</i>
+                    <b>会员类别:</b>
+                    <label for=""><input type="text" value="投资人" disabled="disabled"/></label>
+                </div>
+
+                <div class="address">
+                    <i>*</i>
+                    <b>所属地区:</b>
+                    <label for="">
+                        <select name="" id="">
+                            <option value="111">111</option>
+                            <option value="111">111</option>
+                            <option value="111">111</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        <select name="" id="">
+                            <option value="111">111</option>
+                            <option value="111">111</option>
+                            <option value="111">111</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="schedu">
+                    <i>*</i>
+                    <b>最高学历:</b>
+                    <label for="">
+                        <select name="" id="">
+                            <option value="111">本科</option>
+                            <option value="111">111</option>
+                            <option value="111">111</option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <i>*</i>
+                    <b>电子邮箱:</b>
+                    <label for=""><input type="email" value=""/></label>
+                </div>
+                <button class="save_btn">保存更新</button>
+            </form>
+
+            <!-- 公司信息-->
+            <form action="" class="form bs a" style="margin:0 0 108px 0">
+                <div>
+                    <i>*</i>
+                    <b>公司名称:</b>
+                    <label for=""><input type="text"  name="text1" value="公司名称"/></label>
+                </div>
+                <div>
+                    <i>*</i>
+                    <b>担任职务:</b>
+                    <label for=""><input type="text"  name="text1" value="担任职务"/></label>
+                </div>
+
+                <div>
+                    <i class="white">*</i>
+                    <b>公司联系人:</b>
+                    <label for=""><input type="text"  name="text1" value="会员类别"/></label>
+                </div>
+
+                <div>
+                    <i class="white">*</i>
+                    <b>联系电话:</b>
+                    <label for=""><input type="text" name="text1" value=""/></label>
+                </div>
+                <div>
+                    <i class="white">*</i>
+                    <b>公司官网:</b>
+                    <label for=""><input type="text" name="text1" value=""/></label>
+                </div>
+                <div class="textarea">
+                    <i class="white">*</i>
+                    <b>公司简介:</b>
+                    <label for=""><textarea name="" id="" value="不超过200字"></textarea></label>
+                </div>
+                <button class="save_btn">保存更新</button>
+            </form>
+
+            <!-- 账户安全-->
+            <form action="" class="form bs pos">
+                <div class="account_security">
+                    <div class="account_textarea">
+                        <i>公司认证</i>
+                        <b class="active"></b>
+                        <span>投资人会员资格已认证</span>
+                        <!--<div class="account_cation">立即认证</div>-->
+                        <div class="account_cation center">认证审核中</div>
+                        <!--<div class="account_cation green">已认证</div>-->
+                    </div>
+
+                    <div class="account_textarea">
+                        <i>登录密码</i>
+                        <b></b>
+                        <span>您已享受会员安全保障服务</span>
+                        <div class="account_modify Change_password">修改</div>
+                    </div>
+
+                    <div class="account_textarea">
+                        <i>手机绑定</i>
+                        <b></b>
+                        <span>您的身份验证方式</span>
+                        <div class="account_modify Bound_phone">换绑手机号码</div>
+                    </div>
+
+                </div>
+            </form>
+            <!-- 开始放的位置-->
+
+            <!-- 修改密码-->
+            <form action="" class="form bs Change_password" id="form_text">
+
+                <ul class="Unbundling-box Change">
+                    <li>
+                        <h2>修改密码</h2>
+                        <div class="clearfix">
+                            <i class="password_i old_password1">*</i>
+                            <span class="fl">旧密码：</span>
+                            <label for="" class="fl">
+                                <input type="text"/>
+                                <input type="hidden"/>
+                            </label>
+                        </div>
+                        <div class="clearfix">
+                            <i class="password_i old_password2">*</i>
+                            <span class="fl">新密码：</span>
+                            <label for="" class="fl">
+                                <input type="text" />
+                                <input type="hidden"/>
+                            </label>
+                        </div>
+                        <div class="clearfix">
+                            <i class="password_i old_password3">*</i>
+                            <span class="fl">确认新密码：</span>
+                            <label for="" class="fl">
+                                <input type="text"/>
+                                <input type="hidden"/>
+                            </label>
+                        </div>
+                    </li>
+
+
+                    <li>
+                        <ul class="btn_Unbundling Change">
+                            <li>确定</li>
+                            <li class="examine_cancel bs cancel">取消</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </form>
+            <form action="" class="form bs active2 infi" style="padding-top:0px">
+                <h2 class="form_h2">
+                    <div>1</div><span>请完善个人资料与公司信息</span>
+                </h2>
+
+                <div class="head margin_top28">
+                    <i>*</i>
+                    <b>更新头像:</b>
+                    <label for="" class="head_label">
+                        <input type="file" class="file_active"/>
+                        <input type="hidden"/>
+                        <div class="div"></div>
+
+                            <img src="../images/back.jpg"  class="div_img" alt=""/>
+
+
+                    </label>
+                </div>
+                <div>
+                    <i>*</i>
+                    <b>真实姓名:</b>
+                    <label for=""><input type="text" name="text2" disabled="disabled"/></label>
+                </div>
+                <div>
+                    <i>*</i>
+                    <b>手机号码:</b>
+                    <label for=""><input type="text" name="mobile_phone" disabled="disabled"/></label>
+                </div>
+
+                <div>
+                    <i>*</i>
+                    <b>会员类别:</b>
+                    <label for=""><input type="text" name="text1" value="投资人" disabled="disabled"/></label>
+                </div>
+
+                <div class="address">
+                    <i>*</i>
+                    <b>所属地区:</b>
+                    <label for="">
+                        <select name="" id="">
+                            <option value="111">111</option>
+                            <option value="111">111</option>
+                            <option value="111">111</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        <select name="" id="">
+                            <option value="111">111</option>
+                            <option value="111">111</option>
+                            <option value="111">111</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="schedu">
+                    <i>*</i>
+                    <b>最高学历:</b>
+                    <label for="">
+                        <select name="" id="">
+                            <option value="111">本科</option>
+                            <option value="111">111</option>
+                            <option value="111">111</option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <i>*</i>
+                    <b>公司名称:</b>
+                    <label for=""><input type="text"/></label>
+                </div>
+                <div>
+                    <i>*</i>
+                    <b>担任职务:</b>
+                    <label for=""><input type="text" name="text3"/></label>
+                </div>
+                <button class="save_btn next">下一步</button>
+            </form>
+
+            <!-- 认证审核页面-->
+
+            <form action="" class="form bs active2 update">
+                <h2 class="form_h2">
+                    <div>2</div><span>请上传身份证正、反面及名片照片</span>
+                </h2>
+
+                <h2 class="to_examine"><strong>身份证</strong>&nbsp;&nbsp;(请上传完整的身份证扫描件或照片)</h2>
+                <ul class="examine_page clearfix">
+                    <li class="fl" id="">
+                        <label for="">
+                            <input type="file" value="11"/>
+                            <input type="hidden"/>
+                            <img src="../" alt=""/>
+                        </label>
+                        <h3>个人信息所在面</h3>
+                    </li>
+                    <li class="fr">
+                        <label for="">
+                            <input type="file" value="11"/>
+                            <input type="hidden"/>
+                            <img src="../" alt=""/>
+                        </label>
+                        <h3>国徽图案面</h3>
+                    </li>
+                </ul>
+                <h2 class="to_examine"><strong>名片
+                </strong>&nbsp;&nbsp;(请上传完整的个人名片扫描件或照片)</h2>
+                <ul class="examine_page clearfix">
+                    <li class="fl" id="">
+                        <label for="">
+                            <input type="file" value="11"/>
+                            <input type="hidden"/>
+                            <img src="../" alt=""/>
+                        </label>
+                        <h3>个人名片</h3>
+                    </li>
+
+                </ul>
+                <ul class="btn_cancel_box">
+                    <li class="examine_btn">提交审核</li>
+                    <li class="examine_cancel bs">取消</li>
+                </ul>
+
+            </form>
+
+            <!-- 解绑旧手机号码-->
+            <form action="" class="form bs Unbundling" id="form_text">
+
+                <ul class="Unbundling-box">
+                    <li>
+                        <h2>解绑旧手机号码</h2>
+                        <div class="clearfix">
+                            <span class="fl phone">手机号码：</span>
+                            <label for="" class="fl">
+                                <input type="text"/>
+                                <input type="hidden"/>
+                            </label>
+                        </div>
+                        <div class="clearfix">
+                            <span class="fl phone">&nbsp;&nbsp;&nbsp;验证码：</span>
+                            <label for="" class="fl">
+                                <input type="text" class="Verification_code"/>
+                                <input type="button" value="获取验证码" class="Verification_code to"/>
+                                <input type="hidden"/>
+                            </label>
+                        </div>
+                    </li>
+
+                    <li class="Unbundling_li2">
+                        <h2>绑定新手机号码</h2>
+                        <div class="clearfix">
+                            <span class="fl phone">手机号码：</span>
+                            <label for="" class="fl">
+                                <input type="text"/>
+                                <input type="hidden"/>
+                            </label>
+                        </div>
+                        <div class="clearfix">
+                            <span class="fl phone">&nbsp;&nbsp;&nbsp;验证码：</span>
+                            <label for="" class="fl">
+                                <input type="text" class="Verification_code"/>
+                                <input type="button" value="42秒后获取" class="Verification_code to second"/>
+                                <input type="hidden"/>
+                            </label>
+                        </div>
+                    </li>
+                    <li>
+                        <ul class="btn_Unbundling">
+                            <li>确定</li>
+                            <li class="examine_cancel bs">提交</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </form>
+            <!-- 会员认证资格审核-->
+            <form action="" class="form bs Audit bs">
+                <ul class="Audit bs">
+                    <li>会员认证资格审核中...</li>
+                </ul>
+                <div class="head">
+                    <b>头像：</b>
+                    <label for="" class="head_label">
+                        <input type="file" class="file_active"/>
+                        <input type="hidden"/>
+                        <img src="../" alt="头像"/>
+                    </label>
+                </div>
+                <div>
+                    <b>真实姓名：</b>
+                    <label for="">王小二</label>
+                </div>
+                <div>
+                    <b>手机号码：</b>
+                    <label for="">1390000000</label>
+                </div>
+                <div>
+                    <b>会员类别：</b>
+                    <label for="">投资人</label>
+                </div>
+                <div class="Amount">
+                    <b>会费金额（¥）：</b>
+                    <label for="">0</label>
+                </div>
+                <div>
+                    <b>会员期限：</b>
+                    <label for="">0</label>
+                </div>
+                <div class="control_max clearfix">
+                    <b class="fl">身份证 ：</b>
+                    <div class="control_box fr">
+                        <img src="../images/Audit.jpg" alt=""/>
+                        <p>个人信息所在面</p>
+                    </div>
+
+                </div>
+                <div class="control_max clearfix">
+                    <div class="control_box2 fr">
+                        <img src="../images/back.jpg" alt=""/>
+                        <p>国徽图案面</p>
+                    </div>
+                </div>
+
+                <div class="control_max control_max2 clearfix">
+                    <b class="fl">名片 ：</b>
+                    <div class="control_box fr">
+                        <img src="../images/NAME.jpg" alt=""/>
+                        <p>个人名片</p>
+                    </div>
+                </div>
+                <button class="save_btn back bs">返回</button>
+            </form>
+        </div>
+    </div>
+
+
+
+</div>
+<script src="../js/footer.js"></script>
+</body>
+</html>

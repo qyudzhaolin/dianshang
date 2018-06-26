@@ -1,0 +1,45 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/fund_manageCo.js' />
+<div class="main">
+<div class="main_title">基金管理公司列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}" onclick="mc_add();" />
+</div>
+
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		公司简称：<input type="text" class="textbox" maxlength="6" name="short_name" value="{:trim($_REQUEST['short_name'])}" />
+		公司全称：<input type="text" class="textbox" maxlength="20" name="name" value="{:trim($_REQUEST['name'])}" />
+		<input type="hidden" value="Fund" name="m" />
+		<input type="hidden" value="manageCo_index" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+		<a href="{:U('Fund/manageCo_index')}"><input type="button" class="button" value="清空" /></a>
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fund" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,short_name|msubstr:基金公司简称|100px
+		,name|msubstr:基金公司全称|170px
+		,legal_person:法定代表人|150px
+		,registration_no:工商注册号|120px
+		,reg_found:注册资本（万）|120px
+		,com_time:成立时间|100px
+		,registration_address|msubstr:办公地址|150px
+ 		" 
+	actionlist="mc_edit:{%EDIT}, mc_del:{%DEL}, ms_index:股份构成, mt_index:管理团队" /> 
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

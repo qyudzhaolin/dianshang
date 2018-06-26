@@ -1,0 +1,9 @@
+
+    *{font-family:'微软雅黑';}
+    .input_box_all{position: relative;float:left;}
+    .input_box_all .s_btn{border:1px solid #000; height:26px;line-height:26px;text-indent: 5px;font-size:13px;width:200px;}
+    .input_box_all .ul{z-index:111;max-height:300px;overflow-x:auto;max-width:600px;background:#fff;border-radius:0 0 4px 4px;position: absolute;top:28px;left:0; border:1px solid #000;display:none; }
+    .input_box_all .ul li{word-break:keep-all;white-space:nowrap;display: block; letter-spacing: 1px;padding:5px 10px 5px 10px;line-height: 22px;min-width:200px;text-align: left;text-indent: 5px;font-size:14px;color:#867B7B;}
+    .input_box_all .ul li:hover{background: #ccc;cursor: pointer;color:#000;}
+    .input_box_all .infi{height:300px;width:400px;background:#fff;position: absolute;top:31px;left:0;border:1px solid #000;text-align: center;line-height: 100px;}
+

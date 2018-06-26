@@ -1,0 +1,57 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor_attention_item.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/deals.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="wrap">
+<div class="height70"></div>
+	{include file="inc/sidebar_investor.html"}
+	<div class="investor content">
+	<ul class="investor_msg_list attention_item" id="my_attention_item">
+		<div class="focus_num">您已经关注了{$totals_select}个项目</div>
+		{foreach from=$project_info item=list_item}
+		<li><a href="{url r="deal#detail" p="id=$list_item.id"}" class="item_link" target="_blank">
+			<div class="inv_pro_main">
+				<p class="head">
+				<img src="{$list_item.img_deal_logo}" alt="">
+				</p>
+				<p class="pro_main">
+					<div class="pro_tit">{$list_item.name}</div>
+					<p class="pro_desc">{$list_item.deal_sign}</p>
+				</p>
+				<p class="item_icon">
+				<b href="{url r="deal#detail" p="id=$list_item.id"}" title="浏览{$list_item.view_count}次" class="eye">{$list_item.view_count}</b>
+				<b href="{url r="deal#detail" p="id=$list_item.id"}" title="关注{$list_item.focus_count}次" class="fav">{$list_item.focus_count}</b>
+				</p>
+			</div>			
+			<dl class="inv_pro_label">
+			{foreach from=$list_item.point_info_array item=point_item}
+				<p>{$point_item.point_info}</p>
+			{/foreach}
+			</dl>
+			<div class="inv_pro_tag">
+				<p class="inv_dir">
+				{foreach from=$list_item.deal_cate_array item=cate_item}
+				<b href="javascript:void(0);">{$cate_item.name}</b>
+				{/foreach}
+				</p>
+				<span class="inv_stage">
+					<b href="javascript:void(0);">{$list_item.deal_period}</b>
+				</span>
+				<span class="inv_location">{$list_item.deal_province}</span>
+			</div>
+		</a></li>
+		{/foreach}
+ 	</ul>
+	{if $page_num}
+	<a href="{url r="deals#index" p="page=$page_num&focus=$project.focus"}" class="next_btn">下一页</a>
+	{else}
+	<a href="javascript:void(0);" class="gray_size" id="my_focus_btn">下一页</a>
+	{/if}
+	</div>
+ 
+</div>
+{include file="inc/footer.html"} 

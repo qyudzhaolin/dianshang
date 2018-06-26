@@ -1,0 +1,63 @@
+
+.sub_account{width:812px;height:auto; float: left; margin:0px auto 0;border:1px solid #f5f5f5;border-radius:4px;overflow:hidden;}
+.sub_account li{width:280px;float:left;padding:43px 62px 0px 62px;font:14px "微软雅黑";color:#818181;text-align:center;}
+.sub_account li h4{color:#333333;font-weight:normal;margin-bottom:20px;font-size: 14px;}
+.sub_account li p{font-size:12px;line-height:2em;margin-bottom:27px; color: #8a8a8a;}
+.mobile_box input{margin-bottom:12px;}
+#mobile3{margin-bottom:0px;}
+#div_mobile1,#div_mobile2{margin-bottom:15px;}
+
+.accredit_confirm{width:204px;height:40px;background:#4282c5;border-radius:4px;font:bold 14px/35px "微软雅黑";color:#fff;display:block;float: left;margin-left: 304px;}
+.accredit_confirm:hover{background: #3293f9}
+.friendly_reminder{width:524px;margin:40px auto 0;text-align:center;font:bold 14px "微软雅黑";color:#b8b8b8;}
+.friendly_reminder_tit{font-size:14px;margin-bottom:20px; color: #000000;font-weight: normal;}
+.friendly_reminder_msg{line-height:2em;color:#aaaaaa;font-size:12px;font-weight: normal;}
+
+.subhline{float: left;background:url(../images/subhline.png) repeat-x center;width: 700px;height: 2px;margin: 43px 0 0px 78px;}
+.subsline{float: left;background:url(../images/subsline.png) repeat-x center;width: 1px;height: 205px; margin-top:98px;}
+.pwd_box input{display:block;margin:80px auto 0;}
+/*success_msg*/
+.success_msg{width:800px;margin:0 auto;text-align:center;}
+.confirm_success_pic{margin:40px 0 15px;}
+.confirm_success_txt{font:14px "微软雅黑";color:#4282c5;}
+.confirm_success_inform{font-size:12px;color:#9d9d9d;margin-top:30px;}
+
+/*investor_sub_account_manage*/
+.continue_accredit{font:bold 14px "微软雅黑";color:#b8b8b8;}
+.del_btn,.update_btn{margin-left:-3px;cursor:pointer;width:77px;height:40px;border-radius:0px 4px 4px 0;background:#f6f7f9;font:12px "微软雅黑";color:#4282c5;  float: left;
+  /*position: relative;right: 20px;*/border-color:#4282c5;}
+  .del_btn:hover,.update_btn:hover{color:#fff;background: #4282c5;}
+.already{margin:50px 0 25px;}
+.mobile_box_manage input{min-width: 150px;float:left;}
+.update_pwd_box{width: 242px;margin:0 auto;overflow:hidden;}
+.continue_accredit li h3{color:#b8b8b8;font-weight:normal;margin-bottom:20px;font-size: 12px;}
+.continue_accredit li h4{color:#333333;font-weight:normal;margin-bottom:20px;font-size: 14px;}
+#user_pwd_msg{display:block;height:40px;line-height:40px;padding-left:0px;}
+.continue_accredit .pwd_box input{width:186px;}
+.continue_accredit .pwd_box button{width:204px;height:36px;font:bold 14px "微软雅黑";cursor:pointer;}
+.pwd_boxtwo .accredit_num{width:265px;margin:0 auto;height:auto;font-weight:normal;color:#767676;font-size: 12px; }
+.accredit_num strong{border-top:1px solid #e7e8ea;float: left;width: 100%;font-weight:normal;color:#b8b8b8;margin-top:30px;margin-bottom:20px;padding-top:30px;}
+.accredit_num p{line-height: 30px;}
+
+.continue_accredit .mobile_msg{width: 100%;height: 40px;line-height: 40px;padding-left:0px;display:block;}
+#accredit_confirm{float:none;margin:0 auto;/*margin-top:57px;*/}
+.continue_accredit .pwd_boxtwo input{width:185px; margin-top: 20px;}
+.continue_accredit .pwd_boxtwo button{width:204px;height:40px;font:bold 14px "微软雅黑";cursor:pointer;}
+.pwd_boxtwo h4{font-size:14px;color:#333333;}
+.div_mobile{width:242px;overflow:hidden;margin: 0 auto 10px;}
+.my_account{margin:148px auto 0;background:none;border-color:#4282c5;font-size:14px;line-height:15px;color:#4282c5;}
+.my_account:hover{border-color:#4282c5;background: #4282c5;color:#fff;}
+.my_account.blue_bg{border-color:#4282c5;background: #4282c5;color:#fff;}
+.impower_finish p{text-align: center;}
+.impower_finish button{display:block;margin:0 auto;background:#4282c5;font-size:14px;line-height:15px;color:#fff;border-color:#4282c5;}
+.impower_finish button:hover{background: #3293f9;border-color:#3293f9;}
+.impower_finish button.c9{background: #c9c9c9;border-color:#c9c9c9;}
+.mobile_blue{color:#4282c5;}
+#point_out{position:fixed;top:180px;z-index:1001;}
+#point_out p:nth-of-type(2){margin:28px auto 60px;}
+
+.yes{background:#4282c5;color: #fff; border:1px solid #4583c3;font-size: 15px;}
+.yes:hover{background:#3293f9;color: #fff; border:1px solid #3293f9;}
+
+.no{ color: #4583c3; border:1px solid #4583c3;font-size: 15px;}
+.no:hover{ color: #3293f9; border:1px solid #3293f9;}

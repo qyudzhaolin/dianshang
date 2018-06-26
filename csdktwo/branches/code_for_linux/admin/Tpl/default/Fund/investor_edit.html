@@ -1,0 +1,87 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/fund_edit.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<div class="main">
+<div class="main_title">{%EDIT} <a href="{:u("Fund/investor_list",array('fund_id'=>$vo['fund_id']))}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data" onsubmit="return add_fund_investor_check('edit')">
+<table class="form" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+		<td class="item_title">*投资人姓名:</td>
+		<td class="item_input" id="user_id_input">
+			<input type="text" readonly="true" class="textbox require readonly" name="user_name" id="linkDataProperty" value="{$vo.user_name}" />
+			<span id="investor_amount_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">所属渠道合伙人：</td>
+		<td class="item_input">
+			<select name="partner_user_id" id="partner_user_id" class="textbox require">	
+				<option value="0">请选择</option>
+				<foreach name="partners" item="val">
+					<option value="{$key}" <if condition="$vo.partner_user_id eq $key">selected</if>>{$val}</option>
+				</foreach>
+			</select>
+			<label><input type="checkbox" onclick="partner_user_check(this)" <if condition="$vo.partner_user_id eq 0">checked</if> />无渠道合伙人</label>
+			<span id="partner_user_id_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*投资人编号:</td>
+		<td class="item_input"><input type="text" class="textbox require readonly" readonly="readonly" value="{$vo.user_id}" name="user_id" id="user_id" /><span id="user_id_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*投资人手机号:</td>
+		<td class="item_input"><input type="text" class="textbox require readonly"  readonly="readonly" value="{$vo.mobile}" name="user_mobile" id="user_mobile" /><span id="user_mobile_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*购买金额(¥):</td>
+		<td class="item_input"><input type="text" class="textbox require" name="investor_amount"  maxlength="7" id="investor_amount"  value="{$vo.investor_amount}" data-amount="{$total_amount}" /> 万元<span id="investor_amount_msg" name="error_msg"></span></td> 
+	</tr>
+	<tr>
+		<td class="item_title">*购买占比(%):</td>
+		<td class="item_input"><input type="text" readonly="readonly" class="textbox readonly require" name="investor_rate" maxlength="5" id="investor_rate" value="{$vo.investor_rate}"/> %<span id="investor_rate_msg" name="error_msg"></span></td> 
+	</tr>
+	<tr>
+		<td class="item_title">*购买日期</td>
+		<td class="item_input">
+			<input type="text" class="textbox require" name="create_time" id="create_time" value="{$vo.create_time}" style="width:100px" readonly="true" />
+			<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_trade_event' onclick="return csdk_cal(this);" />
+			<span id="create_time_msg" name="error_msg"></span>
+		</td>
+	</tr>
+   	<tr>
+		<td class="item_title">备注(200个字)</td>
+		<td class="item_input">
+			 <!--<html:editor id="deal_brief" name="deal_brief" value="" type="other" content="{$vo.deal_brief}" />-->
+			 <textarea type="text"  maxlength="200"  name="remark" id="remark" class="textarea require">{$vo.remark}</textarea><span id="remark_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title"></td>
+		<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Fund" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="investor_update" />
+			<input type="hidden" name="fund_id" value="{$vo.fund_id}" />
+			<input type="hidden" name="id" value="{$vo.id}" />
+			<input type="hidden" name="partner_user_id_old" value="{$vo.partner_user_id}" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%EDIT}" />
+			<input type="reset" class="button" value="{%RESET}" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+</div>
+<include file="Public:footer" />

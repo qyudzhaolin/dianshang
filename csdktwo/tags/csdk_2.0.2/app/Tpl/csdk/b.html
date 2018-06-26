@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/app/Tpl/csdk/css/base.css">
+
+    <script src="/app/Tpl/csdk/js/jQuery_v1.8.3.js"></script>
+
+</head>
+<style>
+    *{font-family:'微软雅黑';}
+    .box,.box2{height:30px;width:400px;position: relative;margin:100px auto;}
+    .s_btn,.s_btn2{border:1px solid #000; width:200px;height:30px;text-indent: 5px;font-size:13px;}
+    .ul{max-height:300px;overflow-x:auto;background:#fff;width:200px;position: absolute;top:30px;left:0; border:1px solid #000;display:none; }
+    .ul li{line-height: 30px;text-align: left;text-indent: 5px;font-size:14px;color:#867B7B;}
+    .ul li:hover{background: #ccc;cursor: pointer;color:#000;}
+    .infi{height:300px;width:400px;background:#fff;position: absolute;top:31px;left:0;border:1px solid #000;text-align: center;line-height: 100px;}
+</style>
+<script>
+var j = $.noConflict();
+
+j(function(){
+    j('.box').searchAll({
+        url:'/m.php',
+        Deal:'Deal',
+        find_investor:'find_investor',
+        fn:'fn2'
+    });
+});
+(function($){
+    var num = null;
+    var settings = {};
+    var $parent = null;
+    function fntab(options){
+        //this 指向
+        $parent = this;
+
+        settings = $.extend(settings , options);
+
+        create_label();
+        keyup_fn();
+    }
+    //点击键盘发送
+    function keyup_fn(){
+        console.log($($parent).find('input'))
+        $($parent).bind('keyup',function(){
+            if(!$($parent).find('ul').length){
+                $($parent).append($('<ul class="ul"></ul>'))
+            }
+            if(!$($parent).find('i').length){
+                $($parent).append($('<i></i>'))
+            }
+            if($($parent).find('input').val() == ''){
+                $($parent).find('i').remove();
+                $($parent).find('ul').remove();
+                return;
+            }
+            ajax_fn()
+        })
+    }
+    //ajax 请求
+    function ajax_fn(){
+        $.ajax({
+            url:settings.url,
+            type:'GET',
+            dataType:'json',
+            data:{
+                m:settings.Deal,
+                a:settings.find_investor,
+                linkValue:$($parent).val()
+            },
+            success:function(data){
+                var $Li = '';
+                for(var i=0;i<data.data.length;i++){
+                    $Li += '<li id="'+data.data[i].id+'" number="'+data.data[i].third_data+'">'+data.data[i].name+'</li>';
+                }
+                $($parent).find('.ul').html($Li);
+                click_open()
+            },
+            beforeSend:function(){
+                $($parent).find('i').html('发送请求');
+                $($parent).find('.ul').css({'display':'none'})
+            },
+            complete:function(data){
+                $($parent).find('i').html('数据成功返回');
+                $($parent).find('.ul').css({'display':'block'});
+            },
+            error:function(){
+                console.log('失败')
+            }
+        })
+    }
+    //创建节点
+    function create_label(){
+        $('.box').append('' +
+                '<input type="text" class="s_btn"/>' +
+                '<ul class="ul"></ul>' +
+                '<i></i>' +
+                '')
+    }
+    //点击某一个数据
+    function click_open(){
+        $($parent).find('.ul').on('click',' li',function(ev){
+            ev.stopImmediatePropagation();
+            $($parent).find('i').html('');
+            $($parent).find('input').val($(this).html());
+//            $(this).find('.infi_id').html($(this).html()+': 的id是: '+$(this).attr('id'));
+//            $(this).find('.infi_number').html('手机号码是:'+$(this).attr('number')+'');
+            $($parent).find('ul').remove();
+            $($parent).find('ul').css({'display':'none'});
+            var This = this;
+            var bbb = {'id':$(This).attr('id'),'number':$(This).attr('number')}
+            settings.fn1 = function(){
+                alert(bbb.id)
+            };
+            settings.fn2 = function(){
+                alert(bbb.id)
+            };
+
+            settings[(settings.fn)]()
+
+
+
+        })
+    }
+    $.fn.extend({
+        searchAll:fntab
+    })
+})(jQuery)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<body>
+<div class="box">
+    <!--<input type="text" class="s_btn"/>-->
+    <!--<ul class="ul">-->
+        <!--<li>dasd</li>-->
+        <!--<li>ssss</li>-->
+        <!--<li>2222</li>-->
+    <!--</ul>-->
+</div>
+
+</body>
+</html>

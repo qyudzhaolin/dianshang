@@ -1,0 +1,8 @@
+<div style="padding:3px;" data="add_event" name="add_event">时间</td>
+		<td class="item_input">
+			<input type="text" class="textbox require" name="create_time_event[]" id="create_time_event{$len}" value="" onfocus="this.blur(); return showCalendar('create_time_event{$len}', '%Y-%m-%d', false, false, this.id);" />
+			<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_event' onclick="return showCalendar(create_time_event{$len}, '%Y-%m-%d', false, false, 'btn_create_time_event');" />
+			<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#create_time_event{$len}').val('');" />	
+			事件(14个字) <input type="text" maxlength="14" class="textbox require" name="brief_event[]" value="" />
+			<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+		</div>

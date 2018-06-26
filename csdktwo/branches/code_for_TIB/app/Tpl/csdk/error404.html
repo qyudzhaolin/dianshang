@@ -1,0 +1,15 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/error.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height40"></div>
+<div class="container error_bg">
+	<div class="error_bg_con">
+
+	<form action="/" method="get">
+		<button type="submit"></button>
+	</form>
+	</div>
+</div>
+{include file="inc/footer.html"} 

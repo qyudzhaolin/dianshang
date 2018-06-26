@@ -1,0 +1,57 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/fund_managePp.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">基金管理 > 拟投资项目 <a href="{:u("Fund/index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<neq name="fund.status" value="2">
+	<div class="button_row">
+		<input type="button" class="button" value="{%ADD}" onclick="mpp_add();"/>
+	</div>
+</neq>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		项目简称：<input type="text" class="textbox" maxlength="6" name="s_name" value="{:trim($_REQUEST['s_name'])}" />
+		项目名称：<input type="text" class="textbox" maxlength="14" name="name" value="{:trim($_REQUEST['name'])}" />
+		<input type="hidden" value="Fund" name="m" />
+		<input type="hidden" value="manage_proposed_project" name="a" />
+		<input type="hidden" name="id" value="{$fund_id}" id="id" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+		<a href="{:U('Fund/manage_proposed_project',array('id'=>$fund_id))}"><input type="button" class="button" value="清空" /></a>
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fund" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="deal_id:项目编号|70px
+		,name|msubstr:项目名称|280px
+		,s_name|msubstr:项目简称|180px
+		,period_cn:拟投轮次|80px
+		,pe_amount_plan|number_format:预期融资金额（万元）|140px
+		,pe_sell_scale:出让股份（%）|100px
+		,is_effect_cn:项目状态|80px
+		,is_publish_cn:发布状态|80px
+ 		" 
+	actionlist="button_list" /> 
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />
+<div class="main" id="mpp_main" style="display:none">
+	<div class="search_row">
+		项目名称：<input type="text" class="textbox" maxlength="14" name="name" />
+		<input id="mpp_button" type="button" class="button" value="{%SEARCH}" />
+		<input id="mpp_reset" type="button" class="button" value="清空" />
+	</div>
+	<div class="mpp_list">loading...</div>
+</div>

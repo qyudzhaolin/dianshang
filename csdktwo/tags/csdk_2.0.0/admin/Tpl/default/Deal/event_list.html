@@ -1,0 +1,59 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">融资记录列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+	 
+	<input type="button" class="button" value="添加融资记录" onclick="deal_event_add({$_REQUEST['deal_id']});" />
+  
+</div>
+<!-- <div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__?m=Deal&a=event_list" method="post">
+		融资金额：<input type="text" class="textbox" name="deal_name" value="{$filt_arr.deal_name}" style="width:100px;" />
+		磁斯达克是否参与：
+		<select name="vis">
+			<option value="0" <if condition="$filt_arr['vis'] eq 0">selected="selected"</if>>请选择</option>
+			<foreach name="vis_arr" item="vis_item">
+				<option value="{$vis_item.id}" <if condition="$filt_arr['vis'] eq $vis_item['id']">selected="selected"</if>>{$vis_item.desc}</option>
+			</foreach>
+		</select>
+ 
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div> -->
+<div class="blank5"></div>
+
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="deal_trade_event" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,period|msubstr:轮次 
+		,investor_amount|msubstr:融资金额 
+		,investor_rate|msubstr:融资占比
+		,investor_before_evalute|msubstr:融资前估值
+		,investor_after_evalute|msubstr:融资后估值
+		,evalute_growth_rate|msubstr:估值增长率
+		,investor_payback|msubstr:投资回报
+		,investor_time|msubstr:融资日期
+		,is_csdk_partake|msubstr:CSDAQ是否参与
+		,partake_fund_name|msubstr:参与基金名称
+		,brief|msubstr:备注
+  		" 
+		actionlist="deal_event_edit:编辑, event_del:删除 , deal_investor:投资机构管理 " /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

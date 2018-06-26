@@ -1,0 +1,47 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/user.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">会员列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}会员" onclick="add();" />
+	<input type="button" class="button" value="{%DEL}会员" onclick="del();" />
+</div>
+
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		真实姓名：<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
+		会员手机：<input type="text" class="textbox" name="mobile" value="{:trim($_REQUEST['mobile'])}" style="width:100px;" />
+		<input type="hidden" value="User" name="m" />
+		<input type="hidden" value="submit_investor" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="user" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+			,mobile|msubstr:手机|220px:edit
+			,user_name|msubstr:姓名
+			,title|msubstr:职称
+			 ,create_time|to_date:上传时间
+			,is_review_zh|msubstr:投资者状态|220px:edit
+			,apply_help_time|msubstr:是否申请磁斯达克协助
+	" 
+	        actionlist="edit:{%EDIT}, del:{%DEL}, account:{%USER_ACCOUNT},account_detail:{%USER_ACCOUNT_DETAIL}" /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

@@ -1,0 +1,14 @@
+.undone_msg{width:452px;height:292px;text-align:center;display:none;position:fixed;margin-top:-80px;font:normal 14px "微软雅黑";color:#bebebe;}
+.undone_msg .undone_news{color:#df3c3c;display:inline-block;padding:0 5px;font-size:16px;}
+.undone_msg h2{margin-bottom:47px;}
+.undone_msg p{margin-top:38px;}
+.authenticate{ float: right; margin-top:88px;  overflow: hidden; width: 816px; display: block;}
+.authenticate .running{text-align:center;margin-top:40px;}
+.authenticate p{width:500px;margin:0 auto;text-align: center;font:14px/25px "微软雅黑";color:#8d8d8d;  overflow: hidden; padding-top:35px;}
+.authenticate h3{text-align: center;font:16px/25px "微软雅黑";color:#767676; margin:15px 0px; overflow: hidden; }
+.authenticate h3 a{color:#4282c5; margin: 0 5px; }
+.authenticate .button{margin:40px auto 0;}
+.authenticate p b{color: #4282c5;float: left;width: 100%;padding-top: 20px;}
+
+.authenticate .buttonrz{ margin-left: 295px; margin-top: 58px; background: #f6f7f9; color: #9d9d9d;border: 1px solid #e4e4e4;}
+.sorry_msg{color:#868686;text-align:center;}

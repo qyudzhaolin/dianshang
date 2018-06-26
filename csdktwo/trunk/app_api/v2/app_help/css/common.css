@@ -1,0 +1,30 @@
+*{
+	margin:0px;
+	padding:0px;
+	list-style: none;
+}
+html{
+	font-size: 14px;
+}
+body{
+	width: 100%;
+	font-size: 14px;
+	color:#000;
+	letter-spacing: 2px;
+	overflow-x: hidden;
+
+}
+.about_box{
+	font-size: 14px;
+	padding:15% 6% 4%;
+	margin:auto;
+}
+.mar_40{margin-bottom: 20px;}
+
+
+
+
+
+@media only screen and (max-width:720px){
+body{font-size:14px; }
+}

@@ -1,0 +1,54 @@
+.examine_page .fl,.examine_page .fr{
+    height:203px;
+    width:337px;
+    top:0;
+    left:0;
+    background:url("../images/card_bj.jpg") no-repeat center;
+    z-index: 10;
+    overflow: hidden;
+    margin-top:28px;
+
+}
+.examine_page input[type=file]{
+    height:203px;
+    width:337px;
+    position: absolute;
+    top:0;
+    opacity: 0;
+    z-index: 2;
+    cursor:pointer;
+}
+#file_send_aa{
+    position: relative;
+}
+#file_send_aa .div_bar{
+    position: absolute;
+    top:0;
+    left:0;
+    
+    height:204px;
+    width:336px;
+    z-index: 10;
+
+}
+.examine_page .set_style_li_0{position: absolute;bottom:-26px;left:0;width:337px;height:20px;font-size:13px;color:red}
+.examine_page .gray{color:#ccc}
+
+.card_rw {padding:35px 0 30px 70px;width:100%;    font-size: 16px;
+    color: #dba775;}
+#active2_infi b {
+    
+    padding: 0px 36px 0px 10px;
+}
+.save_btn{margin-top:60px;margin-left:30px;font-family: '微软雅黑';}
+#upload_pic{color: #ccc; 
+ 
+   }
+ #img_card_logo_msg{position: relative;
+    left: 127px;
+    top: 89px; }
+    
+    #card_img_src  {
+    height: 203px;
+    width: 337px;
+}

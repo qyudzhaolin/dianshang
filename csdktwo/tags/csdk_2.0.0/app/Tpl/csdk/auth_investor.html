@@ -1,0 +1,31 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/authenticate.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/auth.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+{include file="inc/investor_flow.html"}
+<div class="wrap">
+	{include file="inc/sidebar_investor.html"}
+	 <div class="content">	
+		{if $user_info.is_review neq 1}
+		<form action="javascript:void(0);">
+ 			<div class="authenticate">			
+				<div class="running"><img src="{function name="get_spec_image" v="running.png" }" alt=""></div>
+				<p>您的身份信息正在认证中，请耐心等待，磁斯达克会在一个工作日内完成认证。</p>
+			</div> 
+		</form>
+		{else}
+		<div class="authenticate"> 
+				<p> 
+				<img src="{function name="get_spec_image" v="confirm_success_pic.png" }" alt="">
+				<b>恭喜您！您已经成功完成认证，祝您投资顺利。</b></p>				
+			</div>
+		{/if}
+	</div>
+ </div>
+</div>
+{include file="inc/footer.html"} 

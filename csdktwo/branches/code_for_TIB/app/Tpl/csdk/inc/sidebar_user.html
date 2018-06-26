@@ -1,0 +1,9 @@
+<div class="personal_project fl bs">
+    <a href='{url r="home"}' {if $sideType eq SIDE_MENU_HOME}class="active"{/if}>我的信息</a>
+    <a href='{url r="account"}' {if $sideType eq SIDE_MENU_ACCOUNT}class="active"{/if}>账户安全</a>
+    <a href='{url r="invested"}' {if $sideType eq SIDE_MENU_INVESTED}class="active"{/if}>我的基金</a>
+    <a href='{url r="profit"}'  {if $sideType eq SIDE_MENU_PROFIT}class="active"{/if}>我的收益</a>
+    <a href='{url r="investing"}' {if $sideType eq SIDE_MENU_INVESTING}class="active"{/if}>意向项目</a>
+    <a href='{url r="MESSAGE"}' {if $sideType eq SIDE_MENU_MESSAGE}class="active"{/if}>我的消息{if $msgNum}<div></div>{/if}</a>
+</div>
+

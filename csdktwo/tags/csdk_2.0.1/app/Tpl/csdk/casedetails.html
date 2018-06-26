@@ -1,0 +1,127 @@
+{include file="inc/header.html"} 
+<?php
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/Case_details.css";
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/swiper.min.css";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/swiper.min.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/upload.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/Case_detils.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_content paddingTop10 clearfix">
+        <div class="about_img">
+           <img src='{function name="getQiniuPath" v="$vo.img_deal_cover" p="img"}?imageView2/1/w/1000/h/360' alt="" width="1000" height="360" />
+        </div>
+        <div class="About_us_centent Case_details_h2">
+            <h2>
+                <span>项目简介</span>
+            </h2>
+            <div class="compent_data">
+                <span>{function name="app_nl2br" v=$vo.deal_brief}</span>
+            </div>
+            <h2>
+                 <span>历史融资纪录</span>
+            </h2>
+            <div class="swiper_box">
+                <div class="swiper_slider_01 swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide swiper_first">
+                            <span></span>
+                            <div class="com_slide1">公司成立<i class="i_bar"></i></div>
+                            <p class="com_date">{$vo.com_time}</p>
+                        </div>
+                          {foreach from=$dealtrade item=vo key=keys}
+                          {if $keys%2 eq 0 }<div class="swiper-slide swiper-slide2">
+                          {else}<div class="swiper-slide swiper-slide3">
+                          {/if}                     
+                            <span></span>
+                            <div>
+                                <span>{$vo.period}</span>
+                                <span>融资金额 :  &nbsp;{$vo.investor_amount}万</span>
+                                <span>投资机构 :<h3>
+                                        {foreach from=$vo.events item=val}
+                                           <p class="text_alignLeft">{$val.s_name}</p>
+                                        {/foreach}
+                                    </h3>
+                                </span>
+                                <i class="i_bar"></i>
+                            </div>
+                            {if $keys%2 eq 0 }<p class="com_date_top-60 text_alignLeft">{else}
+                            <p class="com_date text_alignLeft">{/if}
+                            {$vo.investor_time}</p>
+                        </div>
+                         {/foreach}
+              </div>
+              </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="bar"></div>
+            </div>
+            <h2>
+                <span>投资回报</span>
+            </h2>
+            <div class="compent_data">
+                <span>{function name="app_nl2br" v=$vo.capital}</span>
+            </div>
+            <h2>
+                <span>项目亮点</span>
+            </h2>
+            <div class="compent_data">
+                <span>
+              {function name="app_nl2br" v=$vo.entry_info}
+             
+              </span>
+            </div>
+            <h2>
+                <span>行业背景</span>
+            </h2>
+            <div class="compent_data">
+                <span>{function name="app_nl2br" v=$vo.profession_info}</span>
+            </div>
+            <h2>
+                <span>商业模式</span>
+             </h2>
+            <div class="compent_data">
+                <span>{function name="app_nl2br" v=$vo.operation_info}</span>
+            </div>
+            <ul class="pattern_box clearfix">
+             {foreach from=$operationsteps item=vo}
+                <li>
+                      <img src='{function name="getQiniuPath" v="$vo.img_deal_opera_steps" p="img"}?imageView2/1/w/660/h/1100' alt="" width="259" height="386" />
+                     <h4>{$vo.opera_steps_name}</h4>
+                    <p>{function name="app_nl2br" v=$vo.opera_steps_brief}</p>
+                </li>
+                 {/foreach }
+            </ul>
+            <h2>
+                <span>发展现状</span>
+            </h2>
+            <div class="compent_data SETimg clearfix">
+                {foreach from=$deal_data_img item=vo}
+                <li> <img src='{function name="getQiniuPath" v="$vo.img_data_url" p="img"}?imageView2/1/w/240/h/240' alt="" width="240" height="240" /></li>
+                 {/foreach}
+            </div>
+            <h2>
+                <span>发展规划</span>
+            </h2>
+            <div class="compent_data">
+                <span>{function name="app_nl2br" v=$vo.vision_info}
+                </span>
+            </div>
+            <h2>
+                <span>团队介绍</span>
+            </h2>
+            <div class="compent_data divFloat_Left clearfix">
+             {foreach from=$dealteam item=vo}
+                <div>
+                    <h2>{$vo.name}</h2>
+                    <h3>{$vo.title}</h3>
+                    <p>{function name="app_nl2br" v=$vo.brief}
+                    </p>
+                </div>
+                 {/foreach }
+        </div>
+    </div>
+</div>
+</div>
+{include file="inc/footer.html"} 

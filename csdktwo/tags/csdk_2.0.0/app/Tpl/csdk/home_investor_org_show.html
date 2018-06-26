@@ -1,0 +1,131 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/invest_org_show.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/upload.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/home.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/check.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+{include file="inc/investor_flow.html"}
+<div class="wrap">
+	{include file="inc/sidebar_investor.html"}
+	{if $user_info.is_review!=1 && $user_info.is_review!=2}
+	<div class="investor content">
+		<form action="javascript:void(0);" method="post" enctype="multipart/form-data">
+			<dl class="user_logo">
+				<dt class="p_name">机构LOGO</dt>
+				<dd>
+					<label class="fileupload" onclick="upd_file(this,'logo_img','logo_img_src','img_org_logo','img_org_logo_msg','img',0,0,2);">
+					<input type="file" class="filebox" name="logo_img" id="logo_img" />
+					<input type="hidden" value="{$user_ex_investor.img_org_logo}" name="img_org_logo" id="img_org_logo"/>
+					<img src='{$user_ex_investor.logo_real_img}' id="logo_img_src" {if $user_ex_investor.logo_real_img}{else}style="display:none;"{/if} />
+					</label>
+					
+					<span id="img_org_logo_msg" class="gray">请您上传2M以内的图片</span>
+				</dd>
+			</dl>
+			<dl class="long">
+				<dt class="p_name"><i class="radius"></i>机构名称</dt>
+				<dd class="org_desc">
+					<input type="text" maxlength="14"  value="{if $user_ex_investor.org_name}{$user_ex_investor.org_name}{else}请填写您的机构名称，如您没有在任何机构请填写您的公司名称(14个字以内){/if}" title="请填写您的机构名称，如您没有在任何机构请填写您的公司名称(14个字以内)" name="org_name"  id="org_name" class="organization">
+					<span id="organization_msg" name="error_msg"></span>
+				</dd>
+			</dl>
+			<dl class="education long">
+				<dt class="p_name"><i class="radius"></i>机构简介</dt>
+				<dd class="org_desc">
+					<textarea name="org_desc" maxlength="100"  cols="30" rows="10" name="org_desc" id="org_desc" title="请简单介绍您的所在机构，如您没有在任何机构请简单介绍您的公司。如您机构的主营业务及背景（100个字以内）">{if $user_ex_investor.org_desc}{$user_ex_investor.org_desc}{else}请简单介绍您的所在机构，如您没有在任何机构请简单介绍您的公司。如您机构的主营业务及背景（100个字以内）{/if}</textarea>
+					<span id="org_brief_msg" name="error_msg"></span>
+				</dd>
+			</dl>
+			<dl class="contact_way">
+				<dt class="p_name"><i class="radius"></i>机构联系方式</dt>
+				<dd>
+					<input type="text" maxlength="14"  value="{if $user_ex_investor.org_linkman}{$user_ex_investor.org_linkman}{else}联系人姓名(14个字以内){/if}" title="联系人姓名(14个字以内)" name="org_linkman"  id="org_linkman" class="org_linkman">
+					<span id="org_linkman_msg" name="error_msg"></span>
+					
+					<input type="text"  maxlength="13" value="{if $user_ex_investor.org_mobile}{$user_ex_investor.org_mobile}{else}联系人电话{/if}"  title="联系人电话" name="org_mobile" class="org_mobile" id="org_mobile">
+					<span id="org_mobile_msg" name="error_msg"></span>
+				</dd>
+			</dl>
+			
+			<dl class="long">
+				<dt class="p_name">机构网址</dt>
+				<dd class="deal_show_url"><input type="text" value="{if $user_ex_investor.org_url}{$user_ex_investor.org_url}{else}请输入您机构的网址，如您没有在任何机构请输入您的公司网址{/if}" title="请输入您机构的网址，如您没有在任何机构请输入您的公司网址" name="org_url"  id="org_url" >
+				<span id="org_url_msg"></span></dd>
+			</dl>
+			<dl class="card_logo">
+				<dt class="p_name"><i class="radius"></i>上传名片正面照</dt>
+ 				<dd>
+					<label class="fileupload" onclick="upd_file(this,'card_img','img_src','img_card_logo','img_card_logo_msg','img',0,0,2);">
+						<input type="file" class="filebox" name="card_img" id="card_img" />
+						<input type="hidden" value="{$investor.img_card_logo}" name="img_card_logo" id="img_card_logo"/>
+						<img src='{$user_ex_investor.card_real_img}' id="img_src" {if $user_ex_investor.card_real_img}{else}style="display:none;"{/if}/>
+					</label>
+					<span id="img_card_logo_msg"><b id="upload_pic">请上传您的个人名片照片</b></span>
+				</dd>
+			</dl>
+			<dl class="message"><dt>备注</dt><dd class="p_name"><i class="radius"></i>为必填项目</dd></dl>
+			<span  id="investor_org_msg" class="loginregister" name="error_msg"></span>
+			<dl class="next_btn_box education long"><dt></dt><dd class="p_name"><button class="next" onclick="organization_next()">下一步</button></dd><span id="error_msg" name="error_msg"></span></dl>
+			
+		</form>
+	</div>
+	{else}
+	<div class="investor content invest_show lefttext">
+	 
+			<dl class="img_user_logo">
+				<dt class="p_name">机构LOGO</dt>
+				<dd>
+					<label class="fileupload">
+					<img src='{$user_ex_investor.logo_real_img}' id="logo_img_src" {if $user_ex_investor.logo_real_img}{else}style="display:none;"{/if}/>
+					</label>
+					<span id="img_url_msg"></span>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="p_name">机构名称</dt>
+				<dd>
+					<p>{$user_ex_investor.org_name}</p>
+					<span id="organization_msg"></span>
+				</dd>
+			</dl>
+			<dl class="long jianjie">
+				<dt class="p_name">机构简介</dt>
+				<dd>
+					<p>{$user_ex_investor.org_desc}</p>
+				</dd>
+			</dl>
+			<dl class="long">
+				<dt class="p_name">机构联系方式</dt>
+				<dd>
+					<p>{$user_ex_investor.org_linkman}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$user_ex_investor.org_mobile}</p>
+					<span id="org_mobile_msg"></span>
+				</dd>
+			</dl>
+			
+			<dl class="long">
+				<dt class="p_name">机构网址</dt>
+				
+				<dd>
+ 						<p>{$user_ex_investor.org_url}</p>
+ 				</dd>
+			</dl>
+			<dl class="long">
+				<dt class="p_name">我的名片</dt>
+				<dd>
+					<p>已上传</p>
+					<span id="img_url_msg"></span>
+				</dd>
+			</dl>
+
+	</div>
+	{/if}
+
+</div>
+
+{include file="inc/footer.html"} 

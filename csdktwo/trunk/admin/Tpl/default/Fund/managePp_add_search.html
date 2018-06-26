@@ -1,0 +1,18 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fund" 
+	action="false" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,name|msubstr:项目名称|270px
+		,s_name|msubstr:项目简称|200px
+		,is_effect_cn:项目状态|80px
+		,is_publish_cn:发布状态|80px
+ 		"
+	actionlist="mpp_deal_select" />
+<div class="blank5"></div>
+<div class="page">{$page}</div>

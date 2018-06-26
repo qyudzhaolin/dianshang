@@ -1,0 +1,76 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sub_account.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/subuser.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/check.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="wrap">
+<div class="height70"></div>
+	{include file="inc/sidebar.html"}
+	<div class="investor content">
+		<form action="javascript:void(0);">
+			<div class="height70"></div>
+			<ul class="sub_account continue_accredit">
+				<li class="mobile_box_manage">
+					<h3>已创建的子账号</h3>
+					{if $sub_user.mobile1}
+					<div id="div_mobile1" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile1" id="mobile1" value="{$sub_user.mobile1}" readonly><button class="del_btn" type="button" onclick="del_show_notice('mobile1')">解除授权</button>
+					</div>
+					{else}
+					<div  id="div_mobile1" style="display:none;" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile1" id="mobile1" value="" readonly><button class="del_btn" type="button" onclick="del_show_notice('mobile1')">解除授权</button>
+					</div>
+					{/if}
+					{if $sub_user.mobile2}
+					<div  id="div_mobile2" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile2" id="mobile2" value="{$sub_user.mobile2}" readonly><button class="del_btn" type="button" onclick="del_show_notice('mobile2')">解除授权</button>
+					</div>
+					{else}
+					<div  id="div_mobile2" style="display:none;" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile2" id="mobile2" value="" readonly><button class="del_btn" type="button" onclick="del_show_notice('mobile2')">解除授权</button>
+					</div>
+					{/if}
+					{if $sub_user.mobile3}
+					<div  id="div_mobile3" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile3" id="mobile3" value="{$sub_user.mobile3}" readonly><button class="del_btn" type="button" onclick="del_show_notice('mobile3')">解除授权</button>
+				    </div>
+					{else}
+					<div id="div_mobile3" style="display:none;" class="div_mobile">
+					<input type="text" own_type="number" maxlength="11" name="mobile3" id="mobile3" value="" readonly><button class="del_btn" type="button" onclick="del_show_notice('mobile3')">解除授权</button>
+				   </div>
+					{/if}
+
+					<h3 class="already">已创建的子账号登录密码</h3>
+					<div class="update_pwd_box">
+					<input type="text" maxlength="12" value="{$user_info.sub_user_pwd}" id="user_pwd" name="user_pwd"><button class="update_btn" type="button" onclick="update_sub_account_pwd()">修改密码</button>
+					<input type="hidden" id="old_pwd" value="{$user_info.sub_user_pwd}">
+					</div>
+					<span id="user_pwd_msg" name="error_msg"></span>
+				</li>
+				<div class="subsline"></div>
+				<li class="impower_finish">
+					<div class="height70"></div>
+					<p>您已经授权了<b id="n">{$n}</b>个子帐号，还可以继续授权<b id="extra_num">{$extra_num}</b>个子账号</p>
+					{if $n==3}
+					<button class="c9" id="continue_add_button">继续授权</button>
+					{else}
+					<button onclick="continue_add();"id="continue_add_button">继续授权</button>
+					{/if}
+				</li>
+			</ul>
+		</form>
+	</div>
+</div>
+<div class="point_out" id="point_out">
+	<h2>提示</h2>
+	<p>您确认解除子帐号<b class="mobile_blue"></b>吗？</p>
+	<p>解除后该账号将不能登录磁斯达克</p>
+	<div id="button_box"><button class="no" onclick="sub_account_reset()">取消</button><button class="yes"  onclick="del_sub_account('0')" >确认</button>
+		<input type="hidden" id="del_mobile_num" value="">
+	</div>
+</div>
+{include file="inc/footer.html"} 

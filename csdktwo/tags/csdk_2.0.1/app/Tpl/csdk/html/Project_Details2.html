@@ -1,0 +1,276 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="../css/Project_Details2.css"/>
+    <script type="text/javascript" src="../js/jQuery_v1.8.3.js"></script>
+
+    <script>
+        $(function(){
+            //右侧点轨迹
+
+            $('.floatCtro').append('<b></b>');
+            $('.floatCtro p').append('<i></i>')
+
+
+            //   事件委托
+            var str = '';
+            var text_str = $('<div class="alt">'+str+'</div>');
+            $('body').append(text_str);
+
+            text_div('.send_request_box','.touzi_dir')
+            text_div('.send_request_box','a.csdq_link')
+            function text_div(fu_div,child){
+                $(fu_div).delegate(child,'mouseenter',function(ev){
+                    str = $(this).text();
+                    if($(this).html().length>8){
+                        $('.alt').css({'display':'block'});
+
+
+                        $('.alt').css({'top':ev.pageY-$('.alt').outerHeight()-$(window).scrollTop(),'left':ev.pageX+($('.alt').outerWidth()/4)});
+                        $('.alt').html(str)
+
+                    }
+                });
+                $(fu_div).delegate(child,'mouseleave',function(ev){
+                    $('.alt').css({'display':'none'});
+                });
+            }
+
+            var AllHet = $(window).height();
+            var mainHet= $('.floatCtro').height();
+            var fixedTop = (AllHet - mainHet)/2
+            $('div.floatCtro').css({top:fixedTop+'px'});
+            $('div.floatCtro p').click(function(){
+                var ind = $('div.floatCtro p').index(this)+1;
+                var topVal = $('#float0'+ind).offset().top;
+                $('body,html').animate({scrollTop:topVal},1000)
+            })
+            $('div.floatCtro a').click(function(){
+                $('body,html').animate({scrollTop:0},1000)
+            })
+            $(window).scroll(scrolls)
+            scrolls()
+            function scrolls(){
+                var f1,f2,f3,f4,f5,f6,f7,bck;
+                var fixRight = $('div.floatCtro p');
+                var blackTop = $('div.floatCtro a')
+                var sTop = $(window).scrollTop();
+                fl = $('#float01').offset().top;
+                f2 = $('#float02').offset().top;
+                f3 = $('#float03').offset().top;
+                f4 = $('#float04').offset().top;
+                f5 = $('#float05').offset().top;
+                f6 = $('#float06').offset().top;
+                f7 = $('#float07').offset().top;
+                var topPx = sTop+fixedTop
+                $('div.floatCtro').stop().animate({top:topPx});
+
+                if(sTop<=f2-100){
+                    blackTop.fadeOut(300).css('display','none')
+                }
+                else{
+                    blackTop.fadeIn(300).css('display','block')
+                }
+
+                if(sTop>=fl){
+                    fixRight.eq(0).addClass('cur').siblings().removeClass('cur');
+                }
+                if(sTop>=f2-100){
+                    fixRight.eq(1).addClass('cur').siblings().removeClass('cur');
+                }
+                if(sTop>=f3-100){
+                    fixRight.eq(2).addClass('cur').siblings().removeClass('cur');
+                }
+                if(sTop>=f4-100){
+                    fixRight.eq(3).addClass('cur').siblings().removeClass('cur');
+                }
+                if(sTop>=f5-100){
+                    fixRight.eq(4).addClass('cur').siblings().removeClass('cur');
+                }
+                if(sTop>=f6-100){
+                    fixRight.eq(5).addClass('cur').siblings().removeClass('cur');
+                }
+                if(sTop>=f7-100){
+                    fixRight.eq(6).addClass('cur').siblings().removeClass('cur');
+                }
+
+            }
+        })
+    </script>
+    <title>test</title>
+</head>
+
+<body>
+<div class="main">
+    <div id="float01" class="cur">
+        <img src="../images/about_us.jpg" alt="" class="img_center"/>
+        <div class="project_desc" id="item">
+            <div class="wrap clearfix width_1000px">
+                <div class="send_request_box">
+                    <button class="btn send_request" data-id="16" style="display: block;">我要投资</button>
+                    <button class="send_request_msg end">已发送投资意向</button>
+                    <p class="touzi_dir">
+                        关键词： <b>互联网</b>&nbsp;<b>企业服务</b>&nbsp;					</p>
+                    <a class="csdq_link" href="http://www.ququ.im" target="_blank">公司网址：http://www.ququ.im</a>
+                    <div class="eye_box" id="eye_box">
+                        <b class="call">A轮</b>						<b class="loca_city">福建</b>
+                    </div>
+                </div>
+                <div class="w_660 left_001 good_project">
+                    <h2>
+                        <span>项目简介</span>
+                    </h2>
+                    <p class="size_14">蛐蛐是一家为传统分销领域商家提供SAAS服务的公司，基于私有关系的B2B交易平台和SAAS服务以实现企业与企业商业连接，重构以“数据质押”为核心的多层级供应链金融互联网+生态圈，为企业提供贯穿全流程的风控、金融服务,提供更安全、快捷、更低成本的资金；贯穿全流程的货权、资金监管,实现虚拟货、虚拟资金交易。依靠企业入驻年费+金融平台构成整体收益，打造帮助企业采购，销售，营销于一体的企业级B2B平台。</p>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    <div id="float02" >
+        <div class="w_660 good_project">
+            <h2>
+                <span>行业亮点</span>
+            </h2>
+            <p class="size_14">该公司成立于1999年，是国内最具影响力的民营娱乐内容供应商之一；是集综艺节目、电视剧、电影的投资制作和发行、广告销售、跨媒体整合营销推广于一身的国际性传媒集团。<br>
+                公司成立15年来，秉承“欢乐传播，创值传媒”的企业精神，已建立起公司特有的电视、平面媒体、互联网相结合的传媒资源网，并与国内一线卫视平台、最强势的互联网平台结成紧密的战略合作。<br>
+            </p>
+        </div>
+    </div>
+    <div id="float03" class="good_project">
+        <h2>
+            <span>行业背景</span>
+        </h2>
+        <div class="compent_data">
+			<span>中国商品流通分销市场规模巨大，涵盖3C消费电子，快消品，建材，汽配，服装鞋帽，茶叶，食品，母婴，珠宝首饰，医药，超市连锁多个行业，市场规模几十万亿。在整个商品流通过程中，98.5％的企业与企业间交易基本上还是依靠人工人工商务方式进行，供应链效率极其低效。 <br>
+» 商品流通市场规模80万亿；<br>
+» 超过8万的专业批发市场；<br>
+» 超过4000万的中小企业；<br>
+» 行业资金周转效率低下，存在大量应收账款，每年有超过11万供应链金融需求。</span>
+        </div>
+    </div>
+    <div id="float04" class="good_project">
+        <h2>
+            <span>商业模式</span>
+        </h2>
+        <div class="compent_data">
+            <span>建立“私有关系”B2B交易平台和SAAS服务，帮助企业上下游打通资金流，信息流，物流，供应链金融体系。</span>
+        </div>
+        <ul class="pattern_box clearfix">
+            <li>
+                <img src="http://img.cisdaq.com/Fi591L_9H9KwHJ2T9upWEVQbbYTg?imageView2/1/w/230/h/390" alt="" width="230" height="390">
+                <h4>私有关系</h4>
+                <p>建立私有关系商业平台<br>
+                    实现企业之间商业对接</p>
+            </li>
+            <li>
+                <img src="http://img.cisdaq.com/FhDmOZx1yNWoGaOORWNFwn66hh9e?imageView2/1/w/230/h/390" alt="" width="230" height="390">
+                <h4>新型平台</h4>
+                <p>重构行业多层级关系<br>
+                    打造供应链金融生态</p>
+            </li>
+            <li>
+                <img src="http://img.cisdaq.com/FvEeG72iO2oizxnvwraL0LWVKV8O?imageView2/1/w/230/h/390" alt="" width="230" height="390">
+                <h4>盈利模式</h4>
+                <p>企业入驻年费<br>
+                    金融平台收益</p>
+            </li>
+        </ul>
+    </div>
+    <div id="float05" class="good_project">
+        <h2>
+            <span>发展现状</span>
+        </h2>
+        <div class="compent_data SETimg clearfix">
+            <img src="../images/3Y.png" alt=""/>
+            <img src="../images/30Y.png" alt=""/>
+            <img src="../images/1500G.png" alt=""/>
+        </div>
+    </div>
+    <div id="float06" class="good_project">
+        <h2>
+            <span>发展规划</span>
+        </h2>
+        <div class="compent_data">
+                <span>测试案例分析，是国内最具影响力的民营娱乐内容供应商之一；
+是集综艺节目、电视剧、电影的投资制作和发行、广告销售、跨媒体整合营销推广于一身的国际性传媒集团。
+公司成立15年来，秉承“欢乐传播，创值传媒”的企业精神，已建立起公司特有的电视、平面媒体、互联网相结合的传媒资源网，并与国内一线卫视平台、最强势的互联网平台结成紧密的战略合作。
+                </span>
+        </div>
+    </div>
+    <div id="float07" class="good_project">
+        <h2>
+            <span>团队介绍</span>
+        </h2>
+        <div class="compent_data divFloat_Left clearfix">
+            <div>
+                <h2>程政</h2>
+                <h3>董事长</h3>
+                <p>投资制作和发行、广告销售、跨媒体整合营销推广于一身的国际性传媒集团。
+                    公司成立15年来，秉承“欢乐传播，创值传媒”的企业精神，已建立投资制作和发行、广告销售、跨媒体整合营销推广于一身的国际性传媒集团。
+                    公司成立15年来，秉承“欢乐传播，创值传媒”的企业精神，已建立
+                </p>
+            </div>
+            <div>
+                <h2>程政</h2>
+                <h3>董事长</h3>
+                <p>投资制作和发行、广告销售、跨媒体整合营销推广于一身的国际性传媒集团。
+                    公司成立15年来，秉承“欢乐传播，创值传媒”的企业精神，已建立投资制作和发行、广告销售、跨媒体整合营销推广于一身的国际性传媒集团。
+                    公司成立15年来，秉承“欢乐传播，创值传媒”的企业精神，已建立
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="float08">
+        <div class="financing_detail white_bg" id="business">
+            <div class="wrap">
+                <h2 class="size_22">融资计划</h2>
+                <div class="progress_box">
+			<span class="progress_bar">
+				<div class="progress_bar_jindu" style="width: 25%;"></div>
+			</span>
+                    <p class="trading">
+                        <a href="javascript:void(0);" class="money_l">已融资：<i>500 万</i></a>
+                        <a href="javascript:void(0);" class="money_r">融资目标：<i>2000万</i></a>
+                    </p>
+                </div>
+                <div class="expect">
+                    <div class="left">
+                        <a href="javascript:viod(0);"><b>预期融资</b><i>2000万</i></a>
+                        <a href="javascript:viod(0);"><b>出让股份</b><i>15%</i></a>
+                        <a href="javascript:viod(0);"><b>融资后估值</b><i>13333万</i></a>
+                    </div>
+                    <div class="right">
+                        <a href="javascript:viod(0);"><b>融资阶段</b><i>A轮</i></a>
+                        <a href="javascript:viod(0);"><b>起投金额</b><i>100万</i></a>
+                        <a href="javascript:viod(0);"><b>融资币种</b><i>人民币</i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="floatCtro">
+        <p>项目简介</p>
+        <p>项目亮点</p>
+        <p>行业背景</p>
+        <p>商业模式</p>
+        <p>发展现状</p>
+        <p>发展规划</p>
+        <p>团队介绍</p>
+        <p>融资计划</p>
+        <a>
+
+            <span></span>
+        </a>
+    </div>
+</div>
+
+
+</body>
+</html>
+

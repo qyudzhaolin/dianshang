@@ -1,0 +1,67 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<PHP>
+	function get_refund($id,$deal)
+	{
+		if($deal['is_success']==0&&$deal['end_time']<get_gmtime()&&$deal['end_time']!=0)
+		{
+			return "<a href='".u("Deal/batch_refund",array("id"=>$id))."'>批量退款</a>";
+		}
+	}
+</PHP>
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">项目列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<!--<input type="button" class="button" value="{%ADD}" onclick="add();" />-->
+	<input type="button" class="button" value="上传项目" onclick="add();" />
+	<input type="button" class="button" value="移到回收站" onclick="del();" />
+</div>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		项目名称：<input type="text" class="textbox" name="name" value="{:trim($_REQUEST['name'])}" style="width:100px;" />
+		<!--时间:<select name="time_status">
+				<option value="0" <if condition="$_REQUEST['time_status'] eq 0">selected="selected"</if>>全部</option>
+				<option value="1" <if condition="$_REQUEST['time_status'] eq 1">selected="selected"</if>>未开始</option>
+				<option value="2" <if condition="$_REQUEST['time_status'] eq 2">selected="selected"</if>>进行中</option>
+				<option value="3" <if condition="$_REQUEST['time_status'] eq 3">selected="selected"</if>>已结束</option>
+			</select>-->
+		融资阶段:<select name="period_id">
+				<option value="0" <if condition="$_REQUEST['period_id'] eq 0">selected="selected"</if>>全部</option>
+				<foreach name="period_list" item="period_item">
+					<option value="{$period_item.id}" <if condition="$_REQUEST['period_id'] eq $period_item['id']">selected="selected"</if>>{$period_item.name}</option>
+				</foreach>
+			</select>
+		发起人ID: <input type="text" class="textbox" name="user_id" value="{:trim($_REQUEST['user_id'])}" style="width:30px;" />
+		<input type="hidden" value="Deal" name="m" />
+		<input type="hidden" value="{$action_name}" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="deal" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		
+		,name|msubstr:项目名称|220px:edit
+		,brief|msubstr:项目简介|220px:edit
+		,create_time|to_date:上传时间
+		,is_effect_zh|msubstr:项目状态|220px:edit
+		" 
+	actionlist="edit:{%EDIT}, del:移到回收站, deal_preview:项目预览,id|get_refund=$deal" /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

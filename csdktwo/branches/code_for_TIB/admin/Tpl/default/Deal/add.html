@@ -1,0 +1,352 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__ROOT__/system/region.js"></script>	
+<load href='__TMPL__Common/js/deal_edit.js' />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<!-- <load href='__TMPL__Common/js/calendar/calendar.js' /> -->
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/dcom_array.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/upload.js' />
+<load href='__TMPL__Common/js/scale.js' />
+<!-- <load href='__TMPL__Common/js/My97DatePicker/calendar.js' /> -->
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/js/dealinput.js' />
+<load href='__TMPL__Common/js/inputcomom.js' />
+<load href='__TMPL__Common/style/input.css' />
+<div class="main">
+<div class="main_title">{%ADD} <a href="{:u("Deal/all_index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" onSubmit="return add_deal_check('add')">
+<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+	<tr>
+		<td colspan=3 class="topTd"></td>
+	</tr>
+	<tr>
+		<td width="190" class="item_title">项目LOGO(1:1比例)</td>
+			<td colspan="2" class="item_input">
+			<label class="fileupload" onclick="upd_file_scale(this,'img',1,2);">
+			<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none" />
+			<input type="hidden" class="require" value="" name="img_deal_logo" id="img_deal_logo"/>
+			<img src='' id="logo_src"  class="<if condition="'' neq ''" >img_src<else/>no_img_src</if>" />
+			</label>
+			<label class="fileuploading hide" ></label>
+			<span id="img_deal_logo_msg"  name="error_msg"  style="position:relative;top:15px; left:5px;"></span>
+			</td>
+	</tr>
+	<tr>
+		<td class="item_title">排序</td>
+		<td colspan="2" class="item_input"><input type="text"  maxlength="3" class="textbox" name="sort" id="sort" value="0"/></td>
+	</tr>
+	<tr>
+		<td class="item_title">项目名称(14个字)</td>
+		<td colspan="2" class="item_input"><input type="text" maxlength="14" class="textbox3 require" name="name" id="name" /><span id="name_msg"  name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">项目简称(6个字)</td>
+		<td colspan="2" class="item_input"><input type="text" maxlength="6" class="textbox3 require" name="s_name" id="s_name" /><span id="s_name_msg"  name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">列表项目简介(28个字)</td>
+		<td colspan="2" class="item_input"><input type="text" maxlength="28" class="textbox2 require" name="deal_sign" id="deal_sign"/><span id="deal_sign_msg"  name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">所属行业(最多三个)</td>
+		<td colspan="2" class="item_input">
+			<foreach name="deal_cate" item="item" key="myId">
+				<label><input name="cate_choose[]" type="checkbox" value="{$item.id}" id="cate_choose{$myId}"  onClick="cate_choose_check(this)" tag="cate_choose"/>{$item.name}</label> 
+			</foreach>
+			<span id="cate_choose_msg" name="error_msg"></span>
+		</td>
+	</tr>	
+	<tr>
+		<td class="item_title">融资轮次</td>
+		 <td colspan="2" class="item_input">
+				<select name="period_id" class="require" id="period_id">
+					<option value=" "  >请选择融资轮次</option>				
+					<foreach name="deal_period" item="item">
+						<option value="{$item.id}"  >{$item.name}</option>
+					</foreach>
+				</select>
+				<span id="period_id_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">公司网址(50个字)</td>
+		<td colspan="2" class="item_input">
+		<input type="text" class="textbox require" maxlength="50"  name="deal_url" id="deal_url" style="width:500px;" /> 
+		<span id="deal_url_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">项目地点:</td>
+		<td colspan="2" class="item_input">
+			<select name="province" class="require" id="province">				
+			<option value="" rel="0">请选择省份</option>
+			<foreach name="region_lv2" item="region">
+				<option value="{$region.id}" rel="{$region.id}">{$region.name}</option>
+			</foreach>
+			</select>
+			<span id="province_msg" name="error_msg"></span>
+			<select name="city" id="city" class="require">				
+			<option value="" rel="0">请选择城市</option>
+			</select>
+			<script type="text/javascript">
+				load_city();
+			</script>
+			<span id="city_msg" name="error_msg"></span>
+		</td>
+	</tr>
+
+	<tr> 
+		<td class="item_title">项目简介(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <!--<html:editor id="deal_brief" name="deal_brief" type="other" content="" />-->
+			 <textarea type="text"  maxlength="200"  name="deal_brief" id="deal_brief" class="textarea require"></textarea>
+			 <span id="deal_brief_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<!--<tr>
+		<td class="item_title">项目里程碑 [<a href="javascript:void(0);" onclick="add_dcom('add_event',3);">增加</a>]</td>
+		<td colspan="2" class="item_input" id="faq_event">
+			<div style="padding:3px;" data="add_event" name="add_event">时间
+				<input type="text" class="textbox require" name="create_time_event[]" id="create_time_event[]" value="" style="width:100px" readonly="true" />
+				<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_event' onclick="return csdk_cal(this);" />
+				事件(14个字) <input type="text" maxlength="14" class="textbox require" name="brief_event[]" value="" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+				<span id="create_time_event_msg" name="error_msg"></span>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">项目亮点(16个字) [<a href="javascript:void(0);" onclick="add_dcom('add_point_event',3);">增加</a>]</td>
+		<td colspan="2" class="item_input" id="point_event{$len}">
+			<div style="padding:3px;" data="add_point_event" name="add_point_event" >
+				<input type="text" maxlength="16" class="textbox3 require" name="point_event[]" id="point_event[]" value="" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+			</div>
+			<span id="add_point_event_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">亮点数据(16个字) [<a href="javascript:void(0);" onclick="add_dcom('add_user_point_event',0);">增加</a>]</td>
+		<td colspan="2" class="item_input" id="user_point_event{$len}">
+			<div style="padding:3px;" data="add_user_point_event" name="add_user_point_event">
+				<input type="text" class="textbox3 require" maxlength="16" name="user_point_event[]" id="user_point_event[]" value="" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+			</div>
+			<span id="add_user_point_msg" name="error_msg"></span>
+		</td>
+	</tr>		
+	-->
+	<tr>
+		<td class="item_title">推荐人</td>
+		 <td colspan="2" class="item_input">
+		 	<div class="input_box_all" id="user_name" name="user_name" style="margin-right:20px">
+		 		<input type="text" class="textbox3 require" id="dealpersoninputid" autocomplete="off" />
+		 	</div>
+           	手机号： <input type="text" class="textbox3 require dealusename" style="background-color: #ccc" readonly="readonly" name="user_mobile" id="user_mobile" value=""/>
+			<div id="popup" style="position: absolute;">
+               	<table width="100%" bgcolor="#fffafa">
+                   	<tbody id="popupBody"></tbody>
+               	</table>
+           	</div>
+			<span id="user_id_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td rowspan="6" align="center" class="item_title">所属公司信息 </td>
+		
+		<td width="376" class="item_input">所属公司(20个字)&nbsp;&nbsp;<input type="text" maxlength="20" class="textbox3 require" name="company_name" id="company_name"/><span id="company_name_msg"  name="error_msg"></span></td>
+		<td width="522" class="item_input">联系电话&nbsp;&nbsp;<input type="text" maxlength="16" class="textbox3 require" id="com_tel" name="com_tel" /><span id="com_tel_msg"  name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_input">法人代表(06个字)&nbsp;&nbsp;<input type="text" maxlength="6" class="textbox3 require" name="com_legal" id="com_legal"/><span id="com_legal_msg"  name="error_msg"></span></td>
+		<td class="item_input">注册资本&nbsp;&nbsp;<input type="text" maxlength="7" class="textbox3 require" name="com_reg_found" id="com_reg_found"/><span id="com_reg_found_msg"  name="error_msg"></span>万元</td>
+	</tr>
+    <tr>
+		<td colspan="2" class="item_input">公司地址(50个字)&nbsp;&nbsp;<input type="text" maxlength="50" class="textbox2 require" name="com_addr" id="com_addr"/><span id="com_addr_msg"  name="error_msg"></span></td>
+		 
+	</tr>
+  
+	<tr>
+		<td class="item_input">公司官网(50个字)&nbsp;&nbsp;<input type="text" maxlength="50" class="textbox3 require" name="com_web" id="com_web"/><span id="com_web_msg"  name="error_msg"></span></td>
+ 		<td class="item_input">成立时间&nbsp;&nbsp;<input type="text" class="textbox require" name="com_time" id="com_time" value="" style="width:100px" readonly="true" />
+				<input type="button" class="button"  value="{%SELECT_TIME}" id='com_time' onclick="return csdk_cal(this);" /><span id="com_time_msg"  name="error_msg"></span></td>
+	</tr>
+	 <tr>
+		<td colspan="2" valign="top" class="item_input">主营业务(100个字)&nbsp;&nbsp;
+			<textarea type="text"  maxlength="100"  name="com_busi" id="com_busi" class="textarea require">{$vo.com_busi}</textarea>
+			<span id="com_busi_msg"  name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" valign="top" class="item_input">公司简介(200个字)&nbsp;&nbsp;
+			<!--<input type="text" maxlength="100" class="textbox require" name="company_brief" />-->
+			<textarea type="text"  maxlength="200"  name="company_brief" id="company_brief" class="textarea require">{$vo.company_brief}</textarea>
+			<span id="company_brief_msg"  name="error_msg"></span>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="item_title">团队成员 [<a href="javascript:void(0);" onclick="add_dcom('add_team',4);">增加</a>]</td>
+		<td colspan="2" class="item_input" id="faq">
+			<div style="padding:3px;" data="add_team" name="add_team">
+				头像(正方形)<label class="fileupload" id="fileupload" onclick="upd_file(this,'img');">
+							<input type="file" class="filebox" name="image_logo{$len}" id="image_logo{$len}" />
+							<input type="hidden" value=" " name="image_key[]" id="image_key{$len}"/>
+							<img src="" id="img_src{$len}" class="float_no <if condition="'' neq ''" >img_src<else/>no_img_src</if>" /> 
+							</label>
+				姓名(6个字)<input type="text" maxlength="6" class="textbox require" name="team_name[]" />
+				角色(8个字)<input type="text" maxlength="8" class="textbox require" name="title[]" /><br>
+				个人介绍(200个字) <textarea type="text"  maxlength="200"  name="brief[]" class="textarea require">{$faq_item.brief}</textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+			</div>
+			<span id="team_msg" name="error_msg"></span>
+		</td> 
+	</tr>
+	 
+<!--	<tr>
+		<td class="item_title">预期融资</td>
+		<td colspan="2" class="item_input">   
+		<input type="text" own_type="number" maxlength="7" class="textbox require" name="pe_amount_plan" id="pe_amount_plan" style="width:100px;" />万    <span id="pe_amount_plan_msg" name="error_msg"></span> 	
+		</td>
+	</tr>
+ 	<tr>
+		<td class="item_title">融资后估值</td>
+		<td class="item_input">   
+		<input type="text" class="textbox require"  value="" name="pe_evaluate" id="pe_evaluate"style="width:100px;" />万    <span id="pe_evaluate_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">起投金额</td>
+ 
+		<td colspan="2" class="item_input">
+		<input type="text" own_type="number" maxlength="7" class="textbox require" name="pe_least_amount" id="pe_least_amount" style="width:100px;" />万   <span id="pe_least_amount_msg" name="error_msg"></span> 
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">出让股权</td>
+		<td colspan="2" class="item_input">
+		<input type="text"  maxlength="5"  class="textbox require" name="pe_sell_scale" id="pe_sell_scale" style="width:100px;" />%   <span id="pe_sell_scale_msg" name="error_msg"></span> 
+		</td> 
+	</tr>
+	<tr>
+		<td class="item_title">已融资金额</td>
+		<td colspan="2" class="item_input">
+		<input type="text" own_type="number" maxlength="7" class="textbox require" name="financing_amount" id="financing_amount" style="width:100px;" />万   <span id="financing_amount_msg" name="error_msg"></span> 
+		</td> 
+	</tr>
+	<tr>
+		<td class="item_title">商业模式(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <html:editor id="business_mode" name="business_mode" type="other" content="" />
+			 <textarea type="text"  maxlength="200"  name="business_mode" id="business_mode" class="textarea require"></textarea>
+			 <span id="business_mode_msg" name="error_msg"></span>
+		</td>
+	</tr>-->
+	<tr>
+		<td class="item_title">查看BP</td>
+		<td colspan="2" class="item_input bp">
+			<label class="fileupload" onclick="upd_file(this,'bp');">
+			<input type="file" class="filebox" name="bp" id="bp" value="上传"/>
+			<input type="hidden" class="require" value="" name="bp_url" id="bp_url"/>
+			<a  href=' '  id="bp_real_url" target=_blank class="<if condition="$vo.real_url_bp neq ''" ><else/>no_bp_src</if>"/><img style="margin:5px 0 -10px 0px" src="__TMPL__Common/images/bp.png" /></a>
+			</label>
+			<label class="fileuploading hide" ></label>
+			<span id="bp_url_msg" name="error_msg"></span>
+	</tr>
+	
+	<tr>
+		<td class="item_title">投资退出计划(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <!--<html:editor id="business_mode" name="business_mode" type="other" content="" />-->
+			 <textarea type="text" value="out_plan" maxlength="200"  name="out_plan" id="out_plan" class="textarea require"></textarea>
+			 <span id="out_plan_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">线下关注度</td>
+		<td colspan="2" class="item_input">
+		<input type="text" own_type="number" maxlength="4" class="textbox require" name="support_count" id="support_count" style="width:100px;" />次 <span id="support_count_msg" name="error_msg"></span> 
+		</td> 
+	</tr>
+	<tr>
+		<td class="item_title">项目可见度</td>
+		 <td colspan="2" class="item_input">
+				<select name="vis" class="require" id="vis">
+					<option value=" ">请选择项目可见度</option>				
+ 						<option value="1">认证会员可见</option>
+						<option value="2">全部会员可见</option>
+ 				</select>
+				<span id="vis_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*是否精品项目</td>
+		 <td colspan="2" class="item_input">
+				<select name="is_best" class="require" id="is_best">
+					<option value=" ">请选择</option>				
+ 						<option value="1">是</option>
+						<option value="0">否</option>
+ 				</select>
+				<span id="is_best_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*是否经典案例</td>
+		<td colspan="2" class="item_input">
+				<select name="is_case" class="require" id="is_case" onchange="display_capital(this.options[this.options.selectedIndex].value)">		
+						<option value="0" selected="selected" >否</option>	
+ 						<option value="1">是</option>
+ 				</select>
+				<span id="is_case_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr id="is_display_capital" style="display:none;">
+		<td class="item_title">*投资回报(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <textarea type="text" maxlength="200"  name="capital" id="capital" class="textarea require"></textarea>
+			 <span id="capital_msg" name="error_msg"></span>
+		</td>
+	</tr>	
+	<tr>
+		<td class="item_title">验证</td>
+		<td colspan="2" class="item_input">
+			<label><input type="radio" name="is_effect" value="0" checked="checked" disabled />{%IS_EFFECT_0}</label>
+			<label><input type="radio" name="is_effect" value="1" disabled />{%IS_EFFECT_1}</label>
+			<label><input type="radio" name="is_effect" value="2" disabled />{%IS_EFFECT_2}</label>
+			<label><input type="radio" name="is_effect" value="3" disabled />{%IS_EFFECT_3}</label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3 class="bottomTd"></td>
+	</tr>
+</table>
+
+<div class="blank5"></div>
+	<table class="form" cellpadding=0 cellspacing=0>
+		<tr>
+			<td colspan=2 class="topTd"></td>
+		</tr>
+		<tr>
+			<td class="item_title"></td>
+			<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+			<input type="hidden" name="user_id" id="user_id" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="insert" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%ADD}" />
+			<input type="reset" class="button" value="{%RESET}" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 class="bottomTd"></td>
+		</tr>
+	</table> 		 
+</form>
+</div>
+<include file="Public:footer" />

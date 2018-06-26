@@ -1,0 +1,83 @@
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/style.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/login_box.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/user_check.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/check.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="reg_win reg_win1">
+	<span class="between_line"></span>
+	<button class="close_btn" onclick="close_btn()"></button>
+	<form action="javascript:void(0);" class="form reg_form"  name="register_form">
+		<dl>
+			<dt id="register_test"></dt>
+			<dd  class="real_name"><input type="text" id="user_name" value="请输入您的真实姓名" maxlength="14"title="请输入您的真实姓名"></dd>
+			<dd class="mobile"><input type="text" maxlength="11" own_type="number" name="mobile" id="mobile" value="请输入您的11位手机号码" title="请输入您的11位手机号码" ></dd>
+			<dd class="pwd"><input type="password" maxlength="12" name="user_pwd" id="user_pwd" placeholder="请输入6-12位密码" class="default_font"></dd>
+			<dd class="yzm_input">
+				<input type="text" class="yzm_input" name="img_verify" id="img_verify" maxlength="4" own_type="number" value="输入图形验证码" title="输入图形验证码">				
+				<img src="{url r="user#get_img_verify" }" alt="" id="verify" onclick="update_img_verify();">
+				<a href="javascript:onclick=update_img_verify();" class="change_next">换一张</a>
+			</dd>
+			<!-- <dd class="pwd_confirm"><input type="password" name="user_pwd_confirm" id="user_pwd_confirm" value="请确认您的密码" title="请确认您的密码" ></dd> -->
+			<dd class="ver_code"><input type="text"  maxlength="6" own_type="number" name="message" id="message" value="输入验证码" title="输入验证码" ><a onclick="check_img_verify('sms');" id="btn_verify_code"/>获取短信验证码</a></dd>
+			<dd class="agreement"><span id="read_agree" onclick="read_agree()"></span>我已经阅读并同意<a href="{url r="about" p="id=6&gid=2"}#service_terms" target="_blank" >磁斯达克服务协议</a></dd>
+			<span class="loginregister" id="check_register_msg" name="error_msg"></span>
+			<button class="reg_btn "  id="register_button" type="button" onclick="check_field()">下一步</button>
+		</dl>	
+	</form>
+	<form action="javascript:void(0);" class="form login_form_wr" method="post">
+		<dl id="login_t">
+			<dt id="logon_test" class="current"></dt>
+			<dd class="mobile"><input type="text" maxlength="11" own_type="number"  name="mobile_login" id="mobile_login"  value="请输入您的11位手机号码" title="请输入您的11位手机号码"></dd>
+			<dd class="pwd"><input type="password" maxlength="12" name="user_pwd_login" id="user_pwd_login" placeholder="请输入6-12位密码" class="default_font" ></dd>
+			<dd class="retrieve_pwd"><a onclick="get_pwd();" id="get_pwd">忘记密码</a></dd>
+			<span id="login_form_error" class="loginregister" name="error_msg"></span>
+			<button class="login_btn current"  id="login_button" type="button" onclick="check_field_login()">登录</button>
+		</dl>	
+	</form>
+</div>
+<div class="reg_win2" id="reg_win2">
+	<button class="close_btn"></button>
+	<form action="{url r="user#do_register"}" class="form reg_form" method="post" name="register_form">
+	<div class="reg_win">
+		<h4 class="prompt"><span class="tit"><img src="{function name="get_spec_image" v="status.png" }" alt=""></span><span class="staus">(只能选择一种身份)</span></h4>
+		<p class="status_select">
+			<input type="radio" checked="checked"  id="investor" name="user_type" value="1">
+			<label for="investor" class="checked" name="1">投资人</label>			
+ 			<input type="radio" name="user_type" id="estp"  value="0">
+			<label for="estp"  name="0">创业者</label> 
+		</p>
+		<div class="inv_inform">
+			<h3>注册须知：</h3>
+			<p>股权投融资是非常严谨审慎的行为，请您谨慎选择注册身份，并确认能够满足磁斯达克认证条件。不能满足认证条件的用户，即使注册磁斯达克，也无法通过认证享受磁斯达克提供的服务。
+</p>
+			<h3>投资人认证条件：</h3>
+			<p>拥有单笔投资100万人民币以上的能力，需要缴纳10万元人民币作为会员诚意金等。</p>
+			<h3>创业者认证条件：</h3>
+			<p>拥有真实存在的创业项目，拥有真实可查的项目主体，项目团队诚信等。</p>
+		</div>
+		<span  id="login_form_role_error" class="loginregister loginregister_top" name="error_msg"></span>
+		<button class="btn" type="button" onclick="do_register()">立即注册</button>
+		<a href="javascript:onclick=last_step();" class="back">返回上一级</a>
+		
+</div>
+</form>	
+</div>
+<!-- <div class="yzm">
+	<div class="yzm_top">
+		<p>为了确保是您本人操作，请您在下方右侧栏输入图形验证码，验证成功后会给您发送短信验证码</p>
+	</div>
+	<div class="yzm_con">
+		<div class="yzm_box"><img src="" alt="" id="verify" onclick="update_img_verify();"></div>
+		<input type="text" class="yzm_input" name="img_verify" id="img_verify" maxlength="4" own_type="number" value="请输入验证码" title="请输入验证码">
+		<a href="javascript:onclick=update_img_verify();" class="change_next">看不清，换一张</a>
+	</div>
+	<span id="img_verify_error" name="error_msg"></span>
+	<button class="submit" onclick="check_img_verify();">提交</button>
+	<a href="javascript:onclick=hide_img_verify();" class="back">返回上一级</a>
+</div> -->
+<div class="confirm_success">
+	<img src="{function name="get_spec_image" v="confirm_success_pic.png" }" alt="" class="confirm_success_pic">
+	<p class="confirm_success_txt">注册成功</p>
+</div>

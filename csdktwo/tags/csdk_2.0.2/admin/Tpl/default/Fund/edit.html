@@ -1,0 +1,179 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__ROOT__/system/region.js"></script>	
+<load href='__TMPL__Common/js/fund_edit.js' />
+<!--<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>-->
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<!-- <load href='__TMPL__Common/js/calendar/calendar.js' /> -->
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/upload.js' />
+<load href='__TMPL__Common/js/dcom_array.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/doCheck.js' />
+<load href='__TMPL__Common/js/check.js' />
+
+<div class="main">
+<div class="main_title">{%EDIT} <a href="{:u("Fund/index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data" onSubmit="return add_fund_check('edit') ">
+
+<table class="form conf_tab" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<!--<tr>
+		<td class="item_title">基金编码</td>
+		<td class="item_input"><input type="text" maxlength="10" class="textbox2 require" value="{$vo.code}" name="code" id="code"/><span id="code_msg" name="error_msg"></span></td>
+	</tr>
+   	--><tr>
+		<td class="item_title">基金名称(30个字)</td>
+		<td class="item_input"><input type="text" maxlength="30" class="textbox2 require" value="{$vo.name}" name="name" id="name"/><span id="name_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">基金简称(6个字)</td>
+		<td class="item_input"><input type="text" maxlength="6" class="textbox require" value="{$vo.short_name}" name="short_name" id="short_name"/><span id="short_name_msg" name="error_msg"></span></td>
+	</tr>
+  	<tr>
+		<td class="item_title">基金管理人(20个字)</td>
+		</td>
+		<td class="item_input">
+		<input type="text" class="textbox2 require" maxlength="20" name="manager" id="manager"  value="{$vo.manager}"/> 
+		<span id="manager_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">基金规模(¥)</td>
+		</td>
+		<td class="item_input">
+		<input type="text" class="textbox3 require"  maxlength="8" name="total_amount" id="total_amount"  value="{$vo.total_amount}"/> 万元
+		<span id="total_amount_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">成立日期</td>
+		</td>
+		<td class="item_input">
+		<input type="text" class="textbox require" name="establish_date" id="establish_date" value="{$vo.establish_date}" style="width:100px" readonly="true" />
+				<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_trade_event' onclick="return csdk_cal(this);" />
+		<span id="establish_date_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	 
+	<tr>
+		<td class="item_title">基金期限</td>
+		</td>
+		<td class="item_input">
+		<input type="text" class="textbox3 require" maxlength="6" name="deadline" id="deadline"  value="{$vo.deadline}"/> 年
+		<span id="deadline_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	 <tr>
+		<td class="item_title">基金简介(200个字)</td>
+		
+		<td class="item_input">
+			<!--<input type="text" maxlength="100" class="textbox require" name="company_brief" />-->
+			<textarea type="text"  maxlength="200"  name="summary" id="summary" class="textarea require">{$vo.summary}</textarea>
+			<span id="summary_msg"  name="error_msg"></span>
+		</td>
+	</tr>
+	 <tr>
+		<td class="item_title">已投资项目单个最高回报</td>
+		</td>
+		<td class="item_input">
+		<input type="text" class="textbox3 require" name="max_payback" maxlength="6" id="max_payback"  value="{$vo.max_payback}"/> 倍
+		<span id="max_payback_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">已投资项目总体平均回报</td>
+		</td>
+		<td class="item_input">
+		<input type="text" class="textbox3 require" name="average_payback" maxlength="6" id="average_payback"  value="{$vo.average_payback}"/> 倍
+		<span id="average_payback_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">基金整体回报</td>
+		</td>
+		<td class="item_input">
+		<input type="text" class="textbox3 require" name="total_payback"  maxlength="6" id="total_payback"  value="{$vo.total_payback}"/> 倍
+		<span id="total_payback_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	 
+	<tr>
+		<td class="item_title">基金管理团队 [<a href="javascript:void(0);" onclick="add_dcom('add_team',5);">增加</a>]</td>
+		<td class="item_input" id="faq">
+		<if condition="$qa_list neq 0">
+			<foreach name="qa_list" item="faq_item"  key="myId">
+				<div style="padding:3px;" data="add_team" name="add_team">
+				头像<label class="fileupload" onclick="upd_file(this,'img');">
+						<input type="file" class="filebox" name="img_logo{$myId+1}" id="img_logo{$myId+1}" />
+						<input type="hidden" value="{$faq_item.head_logo}" name="image_key[]" id="image_key{$myId+1}"/>
+						<img src='{$faq_item.real_url}' id="img_src{$myId+1}" class="img_src" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+						</label>
+				姓名(6个字) <input type="text" maxlength="6" class="textbox require" name="team_name[]" value="{$faq_item.name}" />
+				职位(8个字)<input type="text" maxlength="8" class="textbox require" name="title[]" value="{$faq_item.position}" /><br>
+				个人介绍(200个字)
+				<textarea type="text"  maxlength="200"  name="brief[]" class="textarea require">{$faq_item.summary}</textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+				</div>
+			</foreach>
+		<else/>
+				<div style="padding:3px;" data="add_team" name="add_team">
+				头像(500*500)<label class="fileupload" onclick="upd_file(this,'img');">
+						<input type="file" class="filebox" name="img_logo{$myId+1}" id="img_logo{$myId+1}" />
+						<input type="hidden" value="{$faq_item.img_logo}" name="image_key[]" id="image_key{$myId+1}"/>
+						<img src='{$faq_item.real_url}' id="img_src{$myId+1}" class="img_src" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+						</label>
+				姓名(6个字) <input type="text" maxlength="6" class="textbox require" name="team_name[]" value="{$faq_item.name}" />
+				角色(8个字) <input type="text" maxlength="8" class="textbox require" name="title[]" value="{$faq_item.position}" /><br>
+				个人介绍(200个字) 
+				<textarea type="text"  maxlength="200"  name="brief[]" class="textarea require">{$faq_item.brief}</textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+				</div>
+		</if>
+		<span id="team_msg" name="error_msg"></span>
+		</td> 
+	</tr>
+	 
+	<tr>
+		<td class="item_title">状态</td>
+		<td class="item_input">
+			<label><input type="radio" name="status" value="1" <if condition="$vo['status'] eq 1">checked="checked"</if> />{%F_PUBLISH_0}</label>
+			<label><input type="radio" name="status" value="2" <if condition="$vo['status'] eq 2">checked="checked"</if>/>{%F_PUBLISH_1}</label>
+			<label><input type="radio" name="status" value="3" <if condition="$vo['status'] eq 3">checked="checked"</if>/>撤回</label>
+	</td>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+
+<div class="blank5"></div>
+	<table class="form" cellpadding=0 cellspacing=0>
+		<tr>
+			<td colspan=2 class="topTd"></td>
+		</tr>
+		<tr>
+			<td class="item_title"></td>
+			<td class="item_input" style="position:relative;">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Fund" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="update" />
+			<input type="hidden" name="id" value="{$vo.id}" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%EDIT}" />
+			<input type="reset" class="button" value="{%RESET}" />
+			<!-- <input type="preview" class="button" value="{%PREVIEW}" /> -->
+			<!-- <a href='/index.php?ctl=dealdetail&id={$vo.id}&preview=1' target="_Blank" style="position:absolute;left:174px;top:7px;display:inline-block;padding:9px 21px;background:#4E6A81;margin-top:-1px;box-shadow:2px 2px 0px #000;color:#fff;text-align:center;;font-weight:bold;">预览</a> -->
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 class="bottomTd"></td>
+		</tr>
+	</table> 		 
+</form>
+</div>
+<include file="Public:footer" />

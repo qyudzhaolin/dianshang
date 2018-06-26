@@ -1,0 +1,37 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/fund.js' />
+<div class="main">
+<div class="main_title">基金投资项目列表</div>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">
+		项目简称：<input type="text" maxlength="6" class="textbox" name="s_name" value="{:trim($_REQUEST['s_name'])}" />
+		项目全称：<input type="text" maxlength="14" class="textbox" name="name" value="{:trim($_REQUEST['name'])}" />
+		<input type="hidden" value="{:trim($_REQUEST['fund_id'])}" name="fund_id" />
+		<input type="hidden" value="Fund" name="m" />
+		<input type="hidden" value="relation_list" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="vo" 
+	checkbox="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,s_name|msubstr:项目简称
+		,name|msubstr:项目名称
+		,period:轮次|90px
+		,investor_amount:投资金额（万）|150px
+		,investor_date:投资日期|100px
+		,remark|msubstr:备注|220px
+		,sort|get_sort=$vo['id']#relation_set_sort:{%SORT}|80px"
+ /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

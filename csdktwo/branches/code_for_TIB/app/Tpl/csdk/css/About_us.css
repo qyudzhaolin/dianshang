@@ -1,0 +1,53 @@
+
+.discuss_centent{
+    margin:0 0 10px 0;
+}
+.discuss_centent dt{
+    color:#1b1b1b;
+    line-height: 36px;
+    font-size:18px;
+}
+.discuss_centent dd{
+    color:#6b6b6b;
+    line-height: 25px;
+    font-size:14px;
+}
+.character_img{
+    width:130px;
+    height:150px;
+}
+.character_img img{
+    height:100%;
+    width:100%;
+}
+.character_boxli li{
+    margin:0 38px 0 0;
+    float:left;
+    width:130px;
+    height:289px;
+}
+.character_boxli li:nth-last-child(1){
+    margin:0px;
+}
+.character_boxli.clearfix dl{
+    padding:15px 0 0 0;
+}
+.character_boxli.clearfix dt{
+    color:#1b1b1b;
+    font-size:16px;
+    padding:0 0 13px 0;
+}
+.character_boxli.clearfix dd{
+    color:#6b6b6b;
+    font-size:14px;
+}
+
+
+
+
+
+
+
+
+
+

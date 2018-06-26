@@ -1,0 +1,62 @@
+.investor input{min-width:186px;max-width:424px;}
+.img_user_logo{margin-top:28px;}
+#img_user_log{height: 54px;}
+#img_user_log label{width: 54px;height: 54px;border-radius: 100%;background:url(../images/circle_head.png);}
+#img_user_log .logored{background:url(../images/circle_headred.png);}
+label.logored{background:url(../images/headred.png) no-repeat top center;}
+#img_user_log img{width: 54px;height: 54px;border-radius:100%;}
+.label .area_box{width:204px;height:30px;border:1px solid #f2f2f2;overflow:hidden;}
+.content{border-bottom:1px solid #f2f2f2;margin-bottom:0px;}
+.content dl dd{line-height: 50px;height: 50px;}
+.content .upload_card dd{line-height:20px;}
+.content .upload_card .msg{display:block;}
+.education{height:139px;}
+.invest_show dt,.invest_show dd{line-height:20px;}
+.invest_show .txtarea{height:100px;line-height:2em;}
+.invest_show .txtarea dd{width:424px;padding-top:12px;line-height:24px;}
+
+.invest_show .txtarea2{height:auto;line-height:2em;}
+.invest_show .txtarea2 dd{width:424px;padding-top:12px;line-height:24px;}
+/*investor_about*/
+.invest_show dl dt{color:#9d9d9d;}
+.invest_show dl dd{color:#333;}
+.content dd{position:relative;}
+#mark a,#style a{color:#888;}
+#mark_msg,#style_msg{position:absolute;left:384px;top:0px;line-height:auto;width:149px;}
+.invest_show #mark,.invest_show #style{line-height:50px;}
+.content dl.experience{height:auto;}
+.goal{padding-top:28px;}
+.invest_show .investor_fav{height:auto;}
+
+.inv_pre{width:238px;height:40px;border:1px solid #bcbcbc;margin-bottom:10px;}
+.prompt_case{margin-bottom:10px;margin-left:269px;}
+.prompt_case p{height:25px;line-height:25px;}
+.prompt_case_tit{color:#333333;}
+.prompt_case_con{color:#a8a8a8;}
+
+.company_post{width: 90px;}
+.company_name{width: 40px;}
+.company_title{width: 60px;}
+.company_brief{width: 294px;}
+
+
+/*investor_org*/
+#org_linkman{width:78px;}
+#org_mobile{width:100px;min-width:auto;}
+
+
+.about_show dl dd{line-height: 50px; height: auto; }
+.about_show a{color: #ccc;}
+.touzi {padding-top: 7px; padding-bottom: 20px;}
+.touzi li{ line-height: 35px;/*background:url(../images/touzid.png) no-repeat left center; padding-left: 15px; */float: left;width: 500px;  clear: both;}
+.touzi li strong{font-weight: normal;}
+.about_show b{color: #bbbbbb;}
+ #img_user_logo_msg{position: absolute; left: 121px;top: 0px;width:310px;}
+
+ #img_org_logo_msg{position: absolute; left: 121px;top: 0px;width:225px;}
+ #img_card_logo_msg{position: absolute; left: 121px;top: 0px;width:225px;}
+
+.deal_show_url input{width: 356px;}
+ #upload_pic{color:#BCBEC0;}
+.no_deal{width: 100%;text-align: center;padding: 189px 0;font-size: 14px;color: #8d8d8d;}
+.no_deal a{color: #4282c5;text-decoration: none;padding: 0 10px;}

@@ -1,0 +1,116 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/My_investment_index.css";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/invested_index.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+	<div class="personal_box">
+		<a href='{url r="home"}'>我的个人中心</a>
+		<img src='{function name="get_spec_image" v="right_corner.jpg"}' alt="right_corner"/>
+		<span>我的基金</span>
+	</div>
+	<div class="personal_content clearfix">
+		{include file="inc/sidebar_user.html"}
+		<!-- 与我有关系的基金列表-->
+		<div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+		{if $no_list==1}
+		<!-- 我投资的基金-->
+		{if $invest_result}
+			<div class="Maintain_and_update My_investament pos_re">
+				<div class="set_box_slid_bj por_ab"></div>
+				<i class="active padd_l20">我投资的基金</i>
+			</div>
+
+			<form action="" class="form2 bs active">
+				<div class="bs fund_lower">
+					<div class="fund bs head">
+						<span>基金</span><span>基金管理人</span><span>基金规模</span><span>我的投资金额</span><span>成立时间</span>
+					</div>
+					<ul class="fund_ul bs">
+						{foreach from=$invest_result item=vo name=keys}
+						<li class="clearfix">
+							<!--<span>{$smarty.foreach.keys.iteration}</span>-->
+							<span><a href="{url r="invested#invested_fund" p="id=$vo.fund_id&id2=1"}">{$vo.short_name}</a></span>
+							<span><a href="{url r="company#index" p="id=$vo.managers_id"}">{$vo.name}</a></span>
+							<span>{function name="number_format" v="$vo.total_amount"}万</span>
+							<span>{function name="number_format" v="$vo.investor_amount"}万</span>
+							<span>{function name="to_date" v="$vo.establish_date" p="Y.m.d"}</span>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</form>
+		{/if}
+	 
+	 
+	    <!-- 我管理的基金-->
+		{if $partner_result}
+			<div class="Maintain_and_update My_investament pos_re">
+				<div class="set_box_slid_bj por_ab"></div>
+				<i class="active padd_l20">我管理的基金</i>
+			</div>
+
+			<form action="" class="form2 bs active">
+				<div class="bs fund_lower">
+					<div class="fund bs head">
+						<span>基金</span><span>基金管理人</span><span>基金规模</span><span>我的投资金额</span><span>成立时间</span>
+					</div>
+					<ul class="fund_ul bs">
+						{foreach from=$partner_result item=vo name=keys}
+						<li class="clearfix">
+							<!--<span>{$smarty.foreach.keys.iteration}</span>-->
+							<span><a href="{url r="invested#invested_fund" p="id=$vo.fund_id&id2=4"}">{$vo.short_name}</a></span>
+							<span><a href="{url r="company#index" p="id=$vo.managers_id"}">{$vo.name}</a></span>
+							<span>{function name="number_format" v="$vo.total_amount"}万</span>
+							<span>{function name="number_format" v="$vo.investor_amount"}万</span>
+							<span>{function name="to_date" v="$vo.establish_date" p="Y.m.d"}</span>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</form>
+		{/if}
+		
+		<!-- 我协助发起的基金-->
+		{if $director_result}
+			<div class="Maintain_and_update My_investament pos_re">
+				<div class="set_box_slid_bj por_ab"></div>
+				<i class="active padd_l20">我协助发起的基金</i>
+			</div>
+
+			<form action="" class="form2 bs active">
+				<div class="bs fund_lower">
+					<div class="fund bs head">
+						<span>基金</span><span>基金管理人</span><span>基金规模</span><span>我的投资金额</span><span>成立时间</span>
+					</div>
+					<ul class="fund_ul bs">
+						{foreach from=$director_result item=vo name=keys}
+						<li class="clearfix">
+							<!--<span>{$smarty.foreach.keys.iteration}</span>-->
+							<span><a href="{url r="invested#invested_fund" p="id=$vo.fund_id&id2=3"}">{$vo.short_name}</a></span>
+							<span><a href="{url r="company#index" p="id=$vo.managers_id"}">{$vo.name}</a></span>
+							<span>{function name="number_format" v="$vo.total_amount"}万</span>
+							<span>{function name="number_format" v="$vo.investor_amount"}万</span>
+							<span>{function name="to_date" v="$vo.establish_date" p="Y.m.d"}</span>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</form>
+		{/if}
+	    {else}
+					<div class="no_deal">
+						{if $home_is_review==1}
+						您在磁斯达克还没有任何投资，马上去<a href='{url r="deals"}'>《平台项目》</a>看看有什么感兴趣的项目
+						{elseif $home_is_review==0}
+						您的会员身份还未认证， <a href='{url r="account"}'>请先认证！</a>
+						{else}
+						您的会员身份认证中，暂无基金数据！
+						{/if}
+					</div>
+					{/if}
+		</div>
+	</div>
+</div>
+{include file="inc/footer.html"} 

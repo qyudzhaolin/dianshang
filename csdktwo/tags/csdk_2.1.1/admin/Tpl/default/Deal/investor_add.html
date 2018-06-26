@@ -1,0 +1,69 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+<load href='__TMPL__Common/js/invertor_edit.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/dcom_array.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/js/doCheck.js' />
+<load href='__TMPL__Common/js/check.js' />
+<div class="main">
+<div class="main_title">{%ADD} <a href="{:u("Deal/investor_list",array('event_id'=>$_REQUEST['event_id']))}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data" onSubmit="return add_investor_check('add')">
+<table class="form" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+ 	<tr>
+		<td class="item_title">*机构名称(20个字):</td>
+		<td class="item_input"><input type="text" maxlength="20" class="textbox2 require" name="name" id="name" /><span id="name_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*机构简称(6个字):</td>
+		<td class="item_input"><input type="text" maxlength="6" class="textbox require" name="s_name" id="s_name" /><span id="s_name_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*融资金额(万元):</td>
+		<td class="item_input"><input type="text" maxlength="7" class="textbox require" name="investor_amount" id="investor_amount" /><span id="investor_amount_msg" name="error_msg"></span>
+	</td></tr>
+	<tr>
+		<td class="item_title">*融资占比(%):</td>
+		<td class="item_input"><input type="text" maxlength="5" class="textbox require" name="investor_rate" id="investor_rate" /><span id="investor_rate_msg" name="error_msg"></span>
+	</td></tr>
+	<tr>
+		<td class="item_title">*是否磁斯达克机构:</td>
+		<td class="item_input">
+			<label><input type="radio" name="is_csdk_partake" value="0" checked="checked" />否</label>
+			<label><input type="radio" name="is_csdk_partake" value="1"  />是</label>
+			<span id="is_csdk_partake_msg" name="error_msg"></span></td>
+	</tr>
+    <tr>
+		<td class="item_title">备注(200个字)</td>
+		<td class="item_input">
+			 <!--<html:editor id="deal_brief" name="deal_brief" value="" type="other" content="{$vo.deal_brief}" />-->
+			 <textarea type="text"  maxlength="200"  name="brief" id="brief" class="textarea require">{$vo.brief}</textarea><span id="brief_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title"></td>
+		<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="investor_insert" />
+			<input type="hidden" name="event_id" value="{$event_id}" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%ADD}" />
+			<input type="reset" class="button" value="{%RESET}" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+</div>
+<include file="Public:footer" />

@@ -1,0 +1,7 @@
+.message_center_box{ margin-left: 122px; margin-top: 41px;}
+.message_center_msg{background: #fff;padding: 30px 63px 14px;float: left; width: 330px; margin-bottom: 15px;position: relative;}
+.message_center_msg span{background:url(../images/diqiu.png) no-repeat 0px 0px;position: absolute;left:41px;width: 16px;height: 16px;}
+.message_center_msg h5{float: left;width: 100%;font:12px "微软雅黑"; }
+.message_center_msg h5.titt{color: #b8b8b8;float: left;margin-bottom:10px;}
+.message_center_msg  b{float: right;color: #b8b8b8;}
+.message_center_msg  p{font:14px "微软雅黑"; color: #676767; line-height: 25px;padding-top: 10px;}

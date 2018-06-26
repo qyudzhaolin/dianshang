@@ -1,0 +1,119 @@
+{include file="inc/header.html"} 
+<?php
+  $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/I_would_project.css";
+  $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/popup.css";
+  $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/region.js";
+  $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/TweenMax.min.js";
+  $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/CSSPlugin.min.js";
+  $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/i_deal.js";
+  $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/popup.js";
+  $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/from.js";
+  $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/js.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_box would">
+        项目信息
+    </div>
+    <div class="would_project_box">
+        <form action="" class="would bs">
+          <div class="clearfix pos_re2">
+                <i>*</i>
+                <b>项目名称：</b>
+                <label><input type="text" placeholder="项目名称,不超过14个字" title="项目名称,不超过14个字" name="text1" id="deal_name" class="require" value="" maxlength="14"/>
+                <span id="deal_name_msg" name="error_msg" class="a_span"></span>
+                </label>
+            </div>
+            <div class="clearfix pos_re2">
+                  <i>*</i>
+                <b>项目简介：</b>
+                <label>
+                <input type="text" name="text1" id="deal_sign" placeholder="请用一句话描述,不超过28个字" title="请用一句话描述,不超过28个字" maxlength="28"value="" class="require" value=""/>
+                <span id="deal_sign_msg" name="error_msg" class="a_span"></span>
+                </label>
+            </div>
+            <div class="clearfix pos_re2 paddingButtom10px">
+                <i>*</i>
+                <b>所属行业：<span>(最多三个)</span></b>
+                <ul class="clearfix ul_label_ideal">
+                {foreach from=$dealcate item=list_cate key=myId}
+                        <label>
+                            <input type="checkbox" name="deal_cate" id="deal_cate{$myId}" onClick="doCheck(this,3,'deal_cate')"   value="{$list_cate.id}" tag="deal_cate"/>
+                            <span class="tx_c">{$list_cate.name}</span>
+                        </label>
+                 {/foreach}
+                </ul>
+                <span id="deal_cate_msg" name="error_msg" class="a_span"></span>
+            </div>
+
+            <div class="clearfix pos_re2 paddingButtom10px">
+                <i>*</i>
+                <b>所属地区：</b>
+               <div class="address clearfix">
+                        <div>
+                           <select name='province' id="province" class="require select_2" > 
+                                <option value="" >请选择省份</option>
+                               {foreach from=$region_lv2 item=region}
+                               <option value="{$region.id}" rel="{$region.id}" id="province{$region.id}" {if $region.selected==1}selected{/if}>{$region.name}
+                               </option>
+                               {/foreach}
+                            </select>
+                        </div>
+                        <div>
+                             <select name='city' id="city" class="require select_2">
+                               {if $region_lv3}
+                                {foreach from = $region_lv3 item=region_city}
+                                    <option value="{$region_city.id}" rel="{$region_city.id}"  id="city{$region_city.id}" {if $region_city.selected==1}selected{/if}>{$region_city.name}</option>
+                                {/foreach}
+                            {else}
+                                <option value="" rel="0">请选择市</option>
+                            {/if}
+                            </select>
+                           <span id="region_msg" name="error_msg" class="a_span"></span>
+                        </div> 
+                </div>
+            </div>
+            <div class="clearfix pos_re2 paddingButtom10px">
+                <i>*</i>
+                <b>融资轮次：</b>
+                <ul class="clearfix">
+                         {foreach from=$period_list item=vo}
+                        <label>
+                        <input  type="radio" name="deal_period" id="deal_period" value="{$vo.id}"/>
+                         <span class="tx_c" >{$vo.mapname}</span>
+                        </label>
+                        {/foreach}
+                </ul>
+                <span id="deal_period_msg" name="error_msg" class="a_span"></span>
+            </div>
+
+            <div class="textarea clearfix pos_re2">
+                <i>*</i>
+                <b>项目详情：</b>
+                <label for="">
+                <textarea name="deal_brief" id="deal_brief" maxlength="200" value="" placeholder="不超过200个字" title="不超过200个字"></textarea>
+                </label>
+                <span id="deal_brief_msg" name="error_msg" class="a_span"></span>
+            </div>
+            <button    class="would_btn" type="button" onclick="
+            {if $login_user eq 2 }
+            binge(2)
+            {elseif $login_user eq 0}
+            binge(1)
+            {else}
+            deal_save()
+            {/if}
+            " >提交</button>
+        </form>
+    </div>
+
+</div>
+
+    
+{include file="inc/footer.html"}
+{if $login_user eq 2 }
+<script type="text/javascript">binge(2)</script>
+{elseif $login_user eq 0}
+<script type="text/javascript">binge(1)</script>
+{/if}
+

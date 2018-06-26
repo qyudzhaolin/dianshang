@@ -1,0 +1,724 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__ROOT__/system/region.js"></script>	
+<load href='__TMPL__Common/js/deal_edit.js' />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/upload.js' />
+<load href='__TMPL__Common/js/dcom_array.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/js/thinkinput.js' />
+<load href='__TMPL__Common/js/dealinput.js' />
+<load href='__TMPL__Common/js/inputcomom.js' />
+<load href='__TMPL__Common/style/input.css' />
+<div class="main">
+<div class="main_title">{%EDIT} <a href="{:u("Deal/all_index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" onSubmit="return add_deal_check('edit')">
+
+<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+	<tr>
+		<td colspan=3 class="topTd"></td>
+	</tr>
+	<tr>
+		<td style="width:190px" class="item_title">项目编号</td>
+		<td colspan="2" class="item_input">{$vo.id}</td>
+	</tr>
+	<tr>
+		<td class="item_title">项目LOGO(1:1比例)</td>
+			<td colspan="2" class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'img',200,200,2,1);">
+				<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none"  />
+				<input type="hidden" value="{$vo.img_deal_logo}" name="img_deal_logo" id="img_deal_logo"/>
+				<img src='{$vo.real_url}' id="logo_src" class="<if condition="$vo.real_url neq ''" >img_src<else/>no_img_src</if>"/>
+				<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: 0px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+			</label>
+			</label>
+			<label class="fileuploading" style="display:none">正在上传</label>
+			<span id="img_deal_logo_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">排序</td>
+		<td colspan="2" class="item_input"><input type="text"  maxlength="3" class="textbox" name="sort" id="sort" value="<if condition="$vo.sort neq ''" >{$vo.sort}<else/>0</if>"/></td>
+	</tr>
+	<tr>
+		<td class="item_title">PC项目封面(1920*700)</td>
+			<td colspan="2" class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'img',1920,700,2);">
+				<input type="file" class="filebox" name="img_deal_cover_file" id="img_deal_cover_file" style="display:none" />
+				<input type="hidden" value="{$vo.img_deal_cover}" name="img_deal_cover" id="img_deal_cover"/>
+				<img src='{$vo.real_url_cover}' id="img_deal_cover_src" class="<if condition="$vo.real_url_cover neq ''" >img_src<else/>no_img_src</if>"/>
+				<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: 0px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+			</label>
+			</label>
+			<label class="fileuploading" style="display:none">正在上传</label>
+			<span id="img_deal_cover_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+			</td>
+	</tr>
+	<tr>
+		<td class="item_title">APP项目封面(1242*874)</td>
+			<td colspan="2" class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'img',1242,874,2);">
+				<input type="file" class="filebox" name="img_deal_app_cover_file" id="img_deal_app_cover_file" style="display:none" />
+				<input type="hidden" value="{$vo.img_deal_app_cover}" name="img_deal_app_cover" id="img_deal_app_cover"/>
+				<img src='{$vo.real_url_app_cover}' id="img_deal_app_cover_src" class="<if condition="$vo.real_url_app_cover neq ''" >img_src<else/>no_img_src</if>"/>
+				<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: 0px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+			</label>
+			</label>
+			<label class="fileuploading" style="display:none">正在上传</label>
+			<span id="img_deal_app_cover_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+			</td>
+	</tr>
+	<tr>
+		<td class="item_title">项目名称(14个字)</td>
+		<td colspan="2" class="item_input"><input type="text" maxlength="14" class="textbox3 require" value="{$vo.name}" name="name" id="name"/><span id="name_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">项目简称(6个字)</td>
+		<td colspan="2" class="item_input"><input type="text" maxlength="6" class="textbox3 require" value="{$vo.s_name}" name="s_name" id="s_name" /><span id="s_name_msg"  name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">列表项目简介(28个字)</td>
+		<td colspan="2" class="item_input"><input type="text" maxlength="28" class="textbox2 require" value="{$vo.deal_sign}" name="deal_sign" id="deal_sign"/><span id="deal_sign_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">所属行业（最多三个）</td>
+		<td colspan="2" class="item_input">
+			<foreach name="deal_cate" item="item" key="myId">
+				<label><input name="cate_choose[]" type="checkbox" value="{$item.id}" id="cate_choose{$myId}" tag="cate_choose" <if condition="$item['check'] ">checked="checked"</if> onClick="cate_choose_check(this)"/>{$item.name}</label> 
+			</foreach>
+			<span id="cate_choose_msg" name="error_msg"></span>
+		</td>
+	</tr>
+<!-- 	<tr>
+		<td class="item_title">融资轮次</td>
+		 <td colspan="2" class="item_input">
+				<select name="period_id" id="period_id">
+					<option value=" "  >请选择融资轮次</option>				
+					<foreach name="deal_period" item="item">
+						<option value="{$item.id}" <if condition="$item['id'] eq $vo['period_id']">selected="selected"</if> >{$item.name}</option>
+					</foreach>
+				</select>
+				<span id="period_id_msg" name="error_msg"></span>
+		</td>
+	</tr> -->
+	<tr>
+		<td class="item_title">公司网址(50个字)</td>
+		<td colspan="2" class="item_input">
+		<input type="text" class="textbox3 require" name="deal_url" maxlength="50"  id="deal_url"value="{$vo.deal_url}" style="width:500px;" /> 
+		<span id="deal_url_msg" name="error_msg"></span>	
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">项目地点:</td>
+		<td colspan="2" class="item_input">
+			<select name="province" class="require">				
+				<option value="" rel="0">请选择省份</option>
+				<foreach name="region_lv2" item="region">
+					<option value="{$region.id}" rel="{$region.id}" <if condition="$region['selected']">selected="selected"</if>>{$region.name}</option>
+				</foreach>
+			</select>
+			<span id="province_msg" name="error_msg"></span>
+			<select name="city" id="city" >				
+				<option value="" rel="0">请选择城市</option>
+				<foreach name="region_lv3" item="region">
+					<option value="{$region.id}" rel="{$region.id}" <if condition="$region['selected']">selected="selected"</if>>{$region.name}</option>
+				</foreach>
+			</select>
+			<span id="city_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">项目简介(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <!--<html:editor id="deal_brief" name="deal_brief" value="" type="other" content="{$vo.deal_brief}" />-->
+			 <textarea type="text"  maxlength="200"  name="deal_brief" id="deal_brief" class="textarea require">{$vo.deal_brief}</textarea><span id="deal_brief_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td rowspan="2" class="item_title">项目亮点(400个字)</td>
+		<td colspan="1" class="item_input">
+			APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+							<input type="file" class="filebox" name="spot_app_img_file" id="spot_app_img_file" />
+							<input type="hidden" value="{$vo.spot_app_img}" name="spot_app_img" id="spot_app_img"/>
+							<img src="{$vo.spot_app_img_url}" id="spot_app_img_src" class="<if condition="$vo.spot_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+							<input type="hidden" class="fileupload_scale" value="{$vo.spot_app_img_scale}" name="spot_app_img_scale" id="spot_app_img_scale"/>
+							<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: -20px;left:10px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+			</label>
+			<label class="fileuploading" style="display:none">正在上传</label>
+		</td>
+		<td colspan="2" class="item_input">
+			网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+							<input type="file" class="filebox" name="spot_pc_img_file" id="spot_pc_img_file" />
+							<input type="hidden" value="{$vo.spot_pc_img}" name="spot_pc_img" id="spot_pc_img"/>
+							<img src="{$vo.spot_pc_img_url}" id="spot_pc_img_src" class="<if condition="$vo.spot_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+							<input type="hidden" class="fileupload_scale" value="{$vo.spot_pc_img_scale}" name="spot_pc_img_scale" id="spot_pc_img_scale"/>
+							<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: -20px;left:10px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+			</label>
+			<label class="fileuploading" style="display:none">正在上传</label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<textarea type="text" name="entry_info" maxlength="400" id="entry_info" class="textarea">{$vo.entry_info}</textarea><span id="entry_info_msg" name="error_msg"></span>
+		</td>
+	</tr>
+
+	<!--<tr>
+		<td class="item_title">解决痛点方法(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <textarea type="text" name="solve_pain_info" maxlength="200" id="solve_pain_info" class="textarea require">{$vo.solve_pain_info}</textarea><span id="solve_pain_info_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="item_title">项目里程碑 [<a href="javascript:void(0);" onclick="add_dcom('add_event',3)">增加</a>]</td>
+		<td colspan="2" class="item_input" id="faq_event">
+		<if condition="$faq_event_list neq 0">
+			<foreach name="faq_event_list" item="faq_event_item" key="myId">
+				<div style="padding:3px;" data="add_event" name="add_event">
+				时间 <input type="text" class="textbox require" style="width:100px" name="create_time_event[]" value="{$faq_event_item.create_time}" id="create_time_event[]" readonly="true" />
+				<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_event' onclick="return csdk_cal(this);" />
+				事件(14个字) <input type="text" maxlength="14" class="textbox require" name="brief_event[]" value="{$faq_event_item.brief}" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="create_time_event_msg"></span>
+				</div>
+			</foreach>
+		<else/>
+			<div style="padding:3px;" data="add_event" name="add_event">时间
+				<input type="text" class="textbox require" style="width:100px" name="create_time_event[]" id="create_time_event[]" value="" readonly="true" />
+				<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_event' onclick="return csdk_cal(this);" />
+				事件(14个字) <input type="text" maxlength="14" class="textbox require" name="brief_event[]" value="" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="create_time_event_msg"></span>
+			</div>
+		</if>
+		<span id="create_time_event_msg" name="error_msg"></span>
+		</td>
+	</tr>	
+
+	<tr>
+		<td class="item_title"> 项目亮点(16个字)[<a href="javascript:void(0);" onclick="add_dcom('add_point_event',3);">增加</a>]</td>
+		<td colspan="2" class="item_input" id="point_event{$len}">
+		<if condition="$deal_point_list neq 0">
+			<foreach name="deal_point_list" item="deal_point_event_item" key="myP">
+				<div style="padding:3px;" data="add_point_event" name="add_point_event">
+				<input type="text" maxlength="16" class="textbox3 require" name="point_event[]" value="{$deal_point_event_item.point_info}" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+				</div>
+			</foreach>
+		<else/>
+			<div style="padding:3px;" data="add_point_event" name="add_point_event" >
+				<input type="text" maxlength="16" class="textbox3 require" name="point_event[]" id="point_event{$len}" value="" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+			</div>
+		</if>
+		<span id="add_point_event_msg" name="error_msg"></span>
+		</td>
+	</tr>
+		<tr>
+		<td class="item_title">亮点数据(16个字) [<a href="javascript:void(0);" onclick="add_dcom('add_user_point_event',0);">增加</a>]</td>
+		<td colspan="2" class="item_input" id="user_point_event{$len}">
+		<if condition="$deal_user_point_list neq 0 ">
+			<foreach name="deal_user_point_list" item="deal_user_point_event_item" key="myP">
+				<div style="padding:3px;" data="add_user_point_event" name="add_user_point_event">
+				 <input type="text" maxlength="16" class="textbox3 require" name="user_point_event[]" value="{$deal_user_point_event_item.point_info}" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="add_user_point_msg"></span>
+				</div>
+			</foreach>
+		<else/>
+			<div style="padding:3px;" data="add_user_point_event" name="add_user_point_event">
+				<input type="text" class="textbox3 require" maxlength="16" name="user_point_event[]" id="user_point_event{$len}" value="" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="add_user_point_msg"></span>
+			</div>
+		</if>
+		<span id="add_user_point_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">推荐理由(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <textarea type="text" name="recommend_reason"  maxlength="200"  id="recommend_reason" class="textarea require">{$vo.recommend_reason}</textarea><span id="recommend_reason_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">行业调查数据(30个字) [<a href="javascript:void(0);" onclick="add_dcom('data_info_event',0);">增加</a>]</td>
+		<td colspan="2" class="item_input" id="data_info{$len}">
+		<if condition="$deal_profession_data neq 0">
+			<foreach name="deal_profession_data" item="deal_profession_data" key="myP">
+				<div style="padding:3px;" data="data_info_event" name="data_info_event">
+				<input type="text" class="textbox2 require" maxlength="30" name="data_info[]" value="{$deal_profession_data.data_info}" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+				</div>
+			</foreach>
+		<else/>
+			<div style="padding:3px;" data="data_info_event" name="data_info_event" >
+				<input type="text" class="textbox2 require" maxlength="30" name="data_info[]" id="data_info{$len}" value="" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+			</div>
+		</if>
+		</td>
+	</tr>
+	-->
+	<tr>
+		<td rowspan="2" class="item_title">行业背景(400个字)</td>
+		<td colspan="1" class="item_input">
+			APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+							<input type="file" class="filebox" name="profession_app_img_file" id="profession_app_img_file" />
+							<input type="hidden" value="{$vo.profession_app_img}" name="profession_app_img" id="profession_app_img"/>
+							<img src='{$vo.profession_app_img_url}' id="profession_app_img_src" class="<if condition="$vo.profession_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+							<input type="hidden" class="fileupload_scale" value="{$vo.profession_app_img_scale}" name="profession_app_img_scale" id="profession_app_img_scale"/>
+							<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: -20px;left:10px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+						</label>
+			<label class="fileuploading" style="display:none">正在上传</label>
+		</td>
+		<td colspan="2" class="item_input">
+			网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+							<input type="file" class="filebox" name="profession_pc_img_file" id="profession_pc_img_file" />
+							<input type="hidden" value="{$vo.profession_pc_img}" name="profession_pc_img" id="profession_pc_img"/>
+							<img src='{$vo.profession_pc_img_url}' id="profession_pc_img_src" class="<if condition="$vo.profession_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+							<input type="hidden" class="fileupload_scale" value="{$vo.profession_pc_img_scale}" name="profession_pc_img_scale" id="profession_pc_img_scale"/>
+							<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: -20px;left:10px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+						</label>
+			<label class="fileuploading" style="display:none">正在上传</label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+		    <textarea type="text" name="profession_info" maxlength="400" id="profession_info" class="textarea">{$vo.profession_info}</textarea><span id="profession_info_msg" name="error_msg"></span>	
+		</td>
+	</tr>
+<!-- 	<tr>
+		<td class="item_title">商业模式简介(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <textarea type="text" maxlength="200" name="operation_info" id="operation_info" class="textarea require">{$vo.operation_info}</textarea><span id="operation_info_msg" name="error_msg"></span>
+		</td>
+	</tr> -->
+	<tr>
+		<td class="item_title">商业模式 [<a href="javascript:void(0);" onclick="add_dcom('deal_operation_steps_event',3,'no');">增加</a>]</td>
+		<td colspan="2" class="item_input" id="deal_operation_steps_faq">
+		<if condition="$deal_operation_steps neq 0">
+			<foreach name="deal_operation_steps" item="deal_operation_steps"  key="myId">
+				<div style="margin:15px 0 5px 3px;" data="deal_operation_steps_event" name="deal_operation_steps_event">
+				图片(660*1110)<label class="fileupload" onclick="upd_file(this,'img',660,1110,2);">
+							<input type="file" class="filebox" name="img_deal_opera_steps_logo{$myId+1}" id="img_deal_opera_steps_logo{$myId+1}" />
+							<input type="hidden" value="{$deal_operation_steps.img_deal_opera_steps}" name="img_deal_opera_steps[]" id="img_deal_opera_steps{$myId+1}"/>
+							<img src='{$deal_operation_steps.real_url}' id="img_deal_opera_steps_src{$myId+1}" class="img_src" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+						</label><label class="fileuploading" style="display:none">正在上传</label><br />
+				名称(14个字) <input type="text" class="textbox3" name="opera_steps_name[]" value="{$deal_operation_steps.opera_steps_name}" maxlength="14"/><br /><br />
+				一句话描述(200个字) <textarea type="text" name="opera_steps_brief[]" maxlength="200" class="textarea">{$deal_operation_steps.opera_steps_brief}</textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>  
+				</div>				
+			</foreach>
+		<else/>
+			<div style="margin:15px 0 5px 3px;" data="deal_operation_steps_event" name="deal_operation_steps_event">
+				图片(660*1110)<label class="fileupload" onclick="upd_file(this,'img',660,1110,2);">
+							<input type="file" class="filebox" name="img_deal_opera_steps_logo{$myId+1}" id="img_deal_opera_steps_logo{$myId+1}" />
+							<input type="hidden" value="{$deal_operation_steps.img_deal_opera_steps}" name="img_deal_opera_steps[]" id="img_deal_opera_steps{$myId+1}"/>
+							<img src='{$deal_operation_steps.real_url}' id="img_deal_opera_steps_src{$myId+1}" name='hello' class="img_src" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+						</label><label class="fileuploading" style="display:none">正在上传</label><br />
+				名称(14个字) <input type="text" class="textbox3" name="opera_steps_name[]" value="{$deal_operation_steps.opera_steps_name}" maxlength="14"/><br /><br />
+				一句话描述(200个字) <textarea type="text" name="opera_steps_brief[]" maxlength="200" class="textarea">{$deal_operation_steps.opera_steps_brief}</textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+				</div>	
+		</if>
+		<span id="deal_operation_steps_msg" name="error_msg"></span>
+		</td> 
+	</tr>
+	<!--<tr>
+		<td class="item_title">成绩数据简介(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <textarea type="text"maxlength="200"  name="mark_data_info" id="mark_data_info" class="textarea require">{$vo.mark_data_info}</textarea><span id="mark_data_info_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	-->
+	<tr>
+	<td class="item_title">发展现状(500*500)<p>[<a href="javascript:void(0);" onclick="add_dcom('deal_data_img_event',3);">增加</a>]</p> </td>
+		<td colspan="2" class="item_input" id="faq">
+		<if condition="$deal_data_img neq 0">
+			<foreach name="deal_data_img" item="deal_data_img"  key="myId">
+				<div style="padding:3px;" data="deal_data_img_event" name="deal_data_img_event">
+					<label class="fileupload" onclick="upd_file(this,'img',500,500,2);">
+						<input type="file" class="filebox" name="img_data_url{$myId+1}" id="img_data_url_logo{$myId+1}" />
+						<input type="hidden" value="{$deal_data_img.img_data_url}" name="img_data_url[]" id="img_data_url{$myId+1}"/>
+						<img src='{$deal_data_img.real_url}' id="img_data_url_src{$myId+1}" class="img_src" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+						<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: -20px;left:10px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+					</label>
+					<label class="fileuploading" style="display:none">正在上传</label>
+					<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="team_msg" name="error_msg"></span>
+				</div>				
+			</foreach>
+		<else/>
+			<div style="padding:3px;" data="deal_data_img_event" name="deal_data_img_event">
+				<label class="fileupload" onclick="upd_file(this,'img',500,500,2);">
+					<input type="file" class="filebox" name="img_data_url{$myId+1}" id="img_data_url_logo{$myId+1}" />
+					<input type="hidden" value="{$deal_data_img.img_data_url}" name="img_data_url[]" id="img_data_url{$myId+1}"/>
+					<img src='{$deal_data_img.real_url}' id="img_data_url_src{$myId+1}" class="img_src" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+					<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: -20px;left:10px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+				</label>
+				<label class="fileuploading" style="display:none">正在上传</label>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+			</div>
+		</if>
+		<span id="deal_data_img_event_msg" name="error_msg"></span>		
+		</td> 
+	</tr>
+	<!--<tr>
+		<td class="item_title">成就简介(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <textarea type="text" maxlength="200" name="achievement_info" id="achievement_info" class="textarea require">{$vo.achievement_info}</textarea><span id="achievement_info_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">成就图(650*500)</td>
+		<td class="item_input" id="faq">
+			<div style="padding:3px;" data="img_achievement_event" name="img_achievement_event">
+			<label class="fileupload" onclick="upd_file(this,'img',650,500,2);">
+					<input type="file" class="filebox" name="img_achievement" id="img_achievement_logo" />
+					<input type="hidden" value="{$vo.img_achievement}" name="img_achievement" id="img_achievement"/>
+					<img src='{$vo.real_url_img_achievement}' id="img_achievement_src" class="img_src" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+			</div>
+			<span id="img_achievement_msg" name="img_achievement_msg"></span>
+		</td> 
+	</tr>
+	-->
+	<tr>
+		<td rowspan="2" class="item_title">发展规划(400个字)</td>
+		<td colspan="1" class="item_input">
+			APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+							<input type="file" class="filebox" name="vision_app_img_file" id="vision_app_img_file" />
+							<input type="hidden" value="{$vo.vision_app_img}" name="vision_app_img" id="vision_app_img"/>
+							<img src='{$vo.vision_app_img_url}' id="vision_app_img_src" class="<if condition="$vo.vision_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+							<input type="hidden" class="fileupload_scale" value="{$vo.vision_app_img_scale}" name="vision_app_img_scale" id="vision_app_img_scale"/>
+							<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: -20px;left:10px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+						</label>
+			<label class="fileuploading" style="display:none">正在上传</label>
+		</td>
+		<td colspan="2" class="item_input">
+			网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+							<input type="file" class="filebox" name="vision_pc_img_file" id="vision_pc_img_file" />
+							<input type="hidden" value="{$vo.vision_pc_img}" name="vision_pc_img" id="vision_pc_img"/>
+							<img src='{$vo.vision_pc_img_url}' id="vision_pc_img_src" class="<if condition="$vo.vision_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+							<input type="hidden" class="fileupload_scale" value="{$vo.vision_pc_img_scale}" name="vision_pc_img_scale" id="vision_pc_img_scale"/>
+							<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: -20px;left:10px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+						</label>
+			<label class="fileuploading" style="display:none">正在上传</label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			 <textarea type="text" maxlength="400" name="vision_info" id="vision_info" class="textarea">{$vo.vision_info}</textarea><span id="vision_info_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<!--<tr>
+		<td class="item_title">愿景图(650*500)</td>
+		<td class="item_input" id="faq">
+			<div style="padding:3px;" data="img_vision_event" name="img_vision_event">
+			<label class="fileupload" onclick="upd_file(this,'img',650,500,2);">
+					<input type="file" class="filebox" name="img_vision" id="img_vision_logo" />
+					<input type="hidden" value="{$vo.img_vision}" name="img_vision" id="img_vision"/>
+					<img src='{$vo.real_url_img_vision}' id="img_vision_src" class="img_src" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+			</div>
+			<span id="img_vision_msg" name="error_msg"></span>
+		</td> 
+	</tr>
+	<tr>
+		<td class="item_title">知名人士、机构推荐 [<a href="javascript:void(0);" onclick="add_dcom('deal_recommend_event',0);">增加</a>]</td>
+		<td colspan="2" class="item_input" id="faq">
+		<if condition="$deal_recommend neq 0">
+			<foreach name="deal_recommend" item="deal_recommend_item"  key="myId">
+				<div style="padding:3px;" data="deal_recommend_event" name="deal_recommend_event">
+				推荐姓名(6个字)<input type="text" maxlength="6" class="textbox require" name="recommend_person[]" value="{$deal_recommend_item.recommend_person }" /><br />	
+				推荐内容(100个字) <textarea type="text"  maxlength="100"  name="recommend_info[]" class="textarea require">{$deal_recommend_item.recommend_info}</textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+				</div>
+				<span id="deal_recommend_msg" name="error_msg"></span>
+			</foreach>
+		<else/>
+				<div style="padding:3px;" data="deal_recommend_event" name="deal_recommend_event">
+				推荐姓名(6个字) <input type="text" maxlength="6" class="textbox require" name="recommend_person[]" value="" /><br />
+				推荐内容(100个字) <textarea type="text"  maxlength="100"  name="recommend_info[]" class="textarea require">{$deal_recommend_item.recommend_info}</textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+				</div>
+				<span id="deal_recommend_msg" name="error_msg"></span>
+		</if>
+		</td> 
+	</tr>
+	-->
+	<tr>
+		<td class="item_title">推荐人</td>
+	 	<td colspan="2" class="item_input">
+		 	<div class="input_box_all" id="user_name" name="user_name" style="margin:0 10px 0 0">
+				<input type="text" class="textbox3 require" id="dealpersoninputid" autocomplete="off" value="{$vo.user_name}" />
+			</div>
+           	手机号： <input type="text" class="textbox3 dealusename require" style="background-color: #ccc" readonly="readonly" name="user_mobile" id="user_mobile" value="{$vo.user_mobile}" />
+			<div id="popup" style="position: absolute;">
+               	<table width="100%" bgcolor="#fffafa">
+                   	<tbody id="popupBody"></tbody>
+               	</table>
+           	</div>
+			<span id="user_id_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td rowspan="6" align="center" valign="middle" class="item_title">所属公司信息</td>
+		
+		<td width="393" class="item_input">所属公司(20个字)&nbsp;&nbsp;<input type="text" maxlength="20" class="textbox3 require" value="{$vo.company_name}" name="company_name" id="company_name"/><span id="company_name_msg"  name="error_msg"></span></td>
+		<td width="761" class="item_input">联系电话&nbsp;&nbsp;<input type="text" maxlength="16" class="textbox3 require" value="{$vo.com_tel}" id="com_tel" name="com_tel" /><span id="com_tel_msg"  name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_input">法人代表(06个字)&nbsp;&nbsp;<input type="text" maxlength="6" class="textbox3 require" value="{$vo.com_legal}" name="com_legal" id="com_legal"/><span id="com_legal_msg"  name="error_msg"></span></td>
+		<td class="item_input">注册资本&nbsp;&nbsp;<input type="text" maxlength="7" class="textbox3 require" value="{$vo.com_reg_found}" name="com_reg_found" id="com_reg_found"/><span id="com_reg_found_msg"  name="error_msg"></span>万元</td>
+	</tr>
+ 
+	<tr>
+		<td colspan="2" class="item_input"> 公司地址(50个字)&nbsp;&nbsp;<input type="text" maxlength="50" class="textbox2 require" value="{$vo.com_addr}" name="com_addr" id="com_addr"/><span id="com_addr_msg"  name="error_msg"></span></td>
+		 
+	</tr>
+	<tr>
+		<td class="item_input">公司官网(50个字)&nbsp;&nbsp;<input type="text" maxlength="50" class="textbox3 require" value="{$vo.com_web}" name="com_web" id="com_web"/><span id="com_web_msg"  name="error_msg"></span></td>
+ 		<td class="item_input">成立时间&nbsp;&nbsp;<input type="text" class="textbox require" name="com_time" value="{$vo.com_time}" id="com_time"   style="width:100px" readonly="true" />
+				<input type="button" class="button"  value="{%SELECT_TIME}" id='com_time' onclick="return csdk_cal(this);" /><span id="com_time_msg"  name="error_msg"></span></td>
+	</tr>
+	 <tr>
+		<td colspan="2" class="item_input"><!--<input type="text" maxlength="100" class="textbox" value="{$vo.company_brief}" name="company_brief" />-->主营业务(100个字)&nbsp;&nbsp;
+	    <textarea type="text"  maxlength="100"  name="com_busi" id="com_busi" class="textarea require">{$vo.com_busi}</textarea><span id="com_busi_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="item_input"><!--<input type="text" maxlength="100" class="textbox" value="{$vo.company_brief}" name="company_brief" />-->公司简介(200个字)&nbsp;&nbsp;
+	    <textarea type="text"  maxlength="200"  name="company_brief" id="company_brief" class="textarea require">{$vo.company_brief}</textarea><span id="company_brief_msg" name="error_msg"></span></td>
+	</tr>
+ 
+	<tr>
+		<td class="item_title">团队介绍 [<a href="javascript:void(0);" onclick="add_dcom('add_team',4);">增加</a>]</td>
+		<td colspan="2" class="item_input" id="faq">
+		<if condition="$faq_list neq 0">
+			<foreach name="faq_list" item="faq_item"  key="myId">
+				<div style="padding:3px;" data="add_team" name="add_team">
+				头像(500*500)<label class="fileupload" onclick="upd_file(this,'img',500,500,2);">
+							<input type="file" class="filebox" name="img_logo{$myId+1}" id="img_logo{$myId+1}" />
+							<input type="hidden" value="{$faq_item.img_logo}" name="image_key[]" id="image_key{$myId+1}"/>
+							<img src='{$faq_item.real_url}' id="img_src{$myId+1}" class="img_src" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+							<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: -20px;left:10px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+						</label>
+						<label class="fileuploading" style="display:none">正在上传</label>
+				姓名(6个字) <input type="text" maxlength="6" class="textbox require" name="team_name[]" value="{$faq_item.name}" />
+				角色(8个字) <input type="text" maxlength="8" class="textbox require" name="title[]" value="{$faq_item.title}" /><br>
+				个人介绍(200个字)
+				<textarea type="text"  maxlength="200"  name="brief[]" class="textarea require">{$faq_item.brief}</textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+				</div>
+ 
+			</foreach>
+		<else/>
+				<div style="padding:3px;" data="add_team" name="add_team">
+				头像(500*500)<label class="fileupload" onclick="upd_file(this,'img',500,500,2);">
+							<input type="file" class="filebox" name="img_logo{$myId+1}" id="img_logo{$myId+1}" />
+							<input type="hidden" value="{$faq_item.img_logo}" name="image_key[]" id="image_key{$myId+1}"/>
+							<img src='{$faq_item.real_url}' id="img_src{$myId+1}" class="img_src" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+							<s style="position: absolute;display: block;width: 44px;height: 44px;padding: 5px;top: -20px;left:10px;z-index: 1111;opacity: 0;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;filter: alpha(opacity=0);background-color: #fff;cursor: pointer;"></s>
+						</label>
+						<label class="fileuploading" style="display:none">正在上传</label>
+				姓名(6个字) <input type="text" maxlength="6" class="textbox require" name="team_name[]" value="{$faq_item.name}" />
+				角色(8个字) <input type="text" maxlength="8" class="textbox require" name="title[]" value="{$faq_item.title}" /><br>
+				个人介绍(200个字) 
+				<textarea type="text"  maxlength="200"  name="brief[]" class="textarea require">{$faq_item.brief}</textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+				</div>
+				<span id="team_msg" name="error_msg"></span>
+		</if>
+		</td> 
+	</tr>
+	<!--<tr>
+		<td class="item_title">融资简介(200个字)</td>
+		
+		<td colspan="2" class="item_input"><input type="text" maxlength="100" class="textbox" value="{$vo.company_brief}" name="company_brief" />
+		<textarea type="text"  maxlength="200"  name="financing_info" id="financing_info" class="textarea require">{$vo.financing_info}</textarea><span id="financing_info_msg" name="error_msg"></span></td>
+	</tr>
+ 
+	 
+	<tr>
+		<td class="item_title">磁斯达克的采访 [<a href="javascript:void(0);" onclick="add_dcom('deal_interviem_event',0);">增加</a>]</td>
+		<td colspan="2" class="item_input" id="faq">
+		采访时间 <input type="text" class="textbox require"  style="width:100px"  name="interview_time" value="{$vo.interview_time}" id="interview_time" readonly="true" />
+		<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_interviem_event' onclick="return csdk_cal(this);" />
+		<if condition="$deal_interviem neq 0">
+			<foreach name="deal_interviem" item="deal_interviem"  key="myId">
+				<div style="padding:3px;" data="deal_interviem_event" name="deal_interviem_event" >
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;问题(50个字) <input type="text" maxlength="50" class="textbox require" style="width:400px" name="problem_info[]" value="{$deal_interviem.problem_info}" /><br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;答案(200个字) <textarea type="text" maxlength="200" name="answer_info[]" id="answer_info" class="textarea require">{$deal_interviem.answer_info}</textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="deal_interviem_event_msg"></span>
+				</div>
+			</foreach>
+		<else/>
+				<div style="padding:3px;" data="deal_interviem_event" name="deal_interviem_event" >
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;问题(50个字) <input type="text" maxlength="50" class="textbox require" style="width:400px" name="problem_info[]" value="{$deal_interviem.problem_info}" /><br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;答案(200个字) <textarea type="text" maxlength="200" name="answer_info[]" id="answer_info" class="textarea require">{$deal_interviem.answer_info}</textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="deal_interviem_event_msg"></span>
+				</div>
+		</if>
+		</td> 
+	</tr>
+	<tr>
+		<td class="item_title">预期融资</td>
+		<td colspan="2" class="item_input">   
+		<input type="text" own_type="number" maxlength="7"  class="textbox3 require" value="{$vo.pe_amount_plan}" name="pe_amount_plan" id="pe_amount_plan" style="width:100px;" />万    <span id="pe_amount_plan_msg" name="error_msg"></span>	
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">融资后估值</td>
+		<td colspan="2" class="item_input"> 
+		<small>{$vo.pe_evaluate}&nbsp;万</small>  
+		<input type="text" class="textbox3 require" value="{$vo.pe_evaluate}" name="pe_evaluate" style="width:100px;" />万    <span id="pe_evaluate_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">起投金额</td>
+		<td colspan="2" class="item_input">
+		<input type="text" own_type="number" maxlength="7"  class="textbox3 require" value="{$vo.pe_least_amount}" name="pe_least_amount" style="width:100px;" />万    <span id="pe_least_amount_msg" name="error_msg"></span>	
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">出让股权</td>
+		<td colspan="2" class="item_input">
+		<input type="text"   class="textbox3 require"  maxlength="5"  value="{$vo.pe_sell_scale}" name="pe_sell_scale" style="width:100px;" />%    <span id="pe_sell_scale_msg" name="error_msg"></span>	
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">已融资金额</td>
+		<td colspan="2" class="item_input">
+		<input type="text" own_type="number" class="textbox require" maxlength="7" value="{$vo.financing_amount}" name="financing_amount" id="financing_amount" style="width:100px;" />万   <span id="financing_amount_msg" name="error_msg"></span> 
+		</td> 
+	</tr>
+	<tr>
+		<td class="item_title">商业模式(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <html:editor id="business_mode" name="business_mode" value="" type="other" content="{$vo.business_mode}" />
+			 <textarea type="text"  maxlength="200"  name="business_mode" id="business_mode" class="textarea require">{$vo.business_mode}</textarea>
+			 <span id="business_mode_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">查看BP</td>
+		<td colspan="2" class="item_input bp">
+			<label class="fileupload" onclick="upd_file(this,'bp');">
+			<div style="height:30px;width:89px;padding-top:10px;padding-left:10px; float:left">点击替换文档</div>
+			<input type="file" class="filebox" name="bp" style="opacity:0;width:0px; float:left" id="bp"/>
+			<input type="hidden" class="require" value="{$vo.bp_url}" name="bp_url" id="bp_url"/>
+			 <a  href='{$vo.real_url_bp}'  id="bp_real_url" target=_blank  class="<if condition="$vo.real_url_bp neq ''" ><else/>no_bp_src</if>" /><img style="margin:5px 0 -10px 0px" src="__TMPL__Common/images/bp.png" /></a>
+			</label>
+			<label class="fileuploading" style="display:none">正在上传</label>
+			<span id="bp_url_msg" name="error_msg"></span>	
+	</tr>
+	-->
+<tr>
+		<td class="item_title">投资退出计划(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <!--<html:editor id="business_mode" name="business_mode" type="other" content="" />-->
+			 <textarea type="text"  maxlength="200"  name="out_plan" id="out_plan" class="textarea require">{$vo.out_plan}</textarea>
+			 <span id="out_plan_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">线下关注度</td>
+		<td colspan="2" class="item_input">
+		<input type="text" own_type="number" maxlength="4" class="textbox require"  value="{$vo.support_count}" name="support_count" id="support_count" style="width:100px;" />次 <span id="support_count_msg" name="error_msg"></span> 
+		   ，线上关注度  <input type="text" own_type="number" class="textbox require"  value="{$vo.focus_count}" name="focus_count" readonly=”readonly” id="focus_count" style="width:100px;" />次(无法修改)</td> 
+	</tr>
+	<tr>
+		<td class="item_title">项目可见度</td>
+		 <td colspan="2" class="item_input">
+				<select name="vis" class="require" id="vis">
+						<option value="0"  <if condition="$vo['vis'] eq 0">selected="selected"</if> >请选择项目可见度</option>
+  						<option value="1"  <if condition="$vo['vis'] eq 1">selected="selected"</if> >认证会员可见</option>
+						<option value="2"  <if condition="$vo['vis'] eq 2">selected="selected"</if> >全部会员可见</option>
+ 				</select>
+				<span id="vis_msg" name="error_msg"></span>
+		</td>
+	</tr>
+<tr>
+		<td class="item_title">是否精品项目</td>
+		 <td colspan="2" class="item_input">
+				<select name="is_best" class="require" id="is_best">
+ 
+ 						<option value="1" <if condition="$vo['is_best'] eq 1">selected="selected"</if>>是</option>
+						<option value="0" <if condition="$vo['is_best'] eq 0">selected="selected"</if>>否</option>
+ 				</select>
+				<span id="is_best_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	 <tr>
+		<td class="item_title">是否经典案例</td>
+		 <td colspan="2" class="item_input">
+				<select name="is_case" class="require" id="is_case" onchange="display_capital(this.options[this.options.selectedIndex].value)">
+						<option value="0" <if condition="$vo['is_case'] eq 0">selected="selected"</if>>否</option>
+ 						<option value="1" <if condition="$vo['is_case'] eq 1">selected="selected"</if>>是</option>
+ 				</select>
+				<span id="is_case_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr id="is_display_capital" style="display:none;">
+		<td class="item_title">*投资回报(200个字)</td>
+		<td colspan="2" class="item_input">
+			 <textarea type="text" maxlength="200"  name="capital"  id="capital" class="textarea require">{$vo.capital}</textarea>
+			 <span id="capital_msg" name="error_msg"></span>
+		</td>
+	</tr>	
+	<tr>
+		<td class="item_title">验证</td>
+		<td colspan="2" class="item_input">
+			<label><input type="radio" name="is_effect" value="0" disabled <if condition="$vo['is_effect'] eq 0">checked="checked"</if> />{%IS_EFFECT_0}</label>
+			<label><input type="radio" name="is_effect" value="1" disabled <if condition="$vo['is_effect'] eq 1">checked="checked"</if>/>{%IS_EFFECT_1}</label>
+			
+			<label><input type="radio" name="is_effect" value="2" disabled <if condition="$vo['is_effect'] eq 2">checked="checked"</if>/>{%IS_EFFECT_2}</label>
+			<label><input type="radio" name="is_effect" value="3" disabled <if condition="$vo['is_effect'] eq 3">checked="checked"</if>/>{%IS_EFFECT_3}</label>
+	</td>
+	<tr>
+		<td colspan=3 class="bottomTd"></td>
+	</tr>
+</table>
+<if condition="$deal_see neq 1">
+<div class="blank5"></div>
+	<table class="form" cellpadding=0 cellspacing=0>
+		<tr>
+			<td colspan=2 class="topTd"></td>
+		</tr>
+		<tr>
+			<td class="item_title"></td>
+			<td class="item_input" style="position:relative;">
+			
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="update" />
+			<input type="hidden" name="id" value="{$vo.id}" />
+            <input type="hidden" name="dealperson"  class="dealperson"  value="{$vo.user_name}" />
+            <input type="hidden" name="dealmoblile"  class="dealmoblile" value="{$vo.user_mobile}" />
+
+
+			<input type="hidden" name="user_id" id="user_id" value="{$vo.user_id}" />
+			<input type="hidden" name="old_is_effect" value="{$vo.is_effect}" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%EDIT}" />
+			<input type="reset" class="button" value="{%RESET}" />
+			<!-- <input type="preview" class="button" value="{%PREVIEW}" /> -->
+			<a href='/index.php?ctl=dealdetails&id={$vo.id}&preview=1' target="_Blank" style="position:absolute;left:174px;top:7px;display:inline-block;padding:9px 21px;background:#4E6A81;margin-top:-1px;box-shadow:2px 2px 0px #000;color:#fff;text-align:center;;font-weight:bold;">预览</a>
+			
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan=2 class="bottomTd"></td>
+		</tr>
+	</table> 
+	<else />
+		<script>
+			$(function(){
+				$("input,select,textarea").attr("disabled",true);
+			})
+		</script>
+	</if>		 
+</form>
+</div>
+<include file="Public:footer" />

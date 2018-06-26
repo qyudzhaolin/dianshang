@@ -1,0 +1,113 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor_detail.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/login_box.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/investor.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+	 
+<div class="investor_top">
+	<div class="h160"></div>
+	<h2 class="inv_head"><img src="{$invest_detail.img_user_logo}" alt=""></h2>
+	<div class="investor_text">
+		<h3>{$invest_detail.user_name}</h3>
+		<h4 class="inv_desc">（{$invest_detail_ex.org_name}）</h4>
+		<ul>
+			{foreach from = $investor_point item = point}
+				<li><img src="{function name="get_spec_image" v="investor_fff.png" }" alt="">&nbsp;&nbsp;{$point.point_info}</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>
+<div class="investor_point" id="view">
+	<div class="wrap">
+		<h2 class="investor_item size_22"><img src="{function name="get_spec_image" v="his_point.png" }" alt=""></h2>
+		<div class="send_request_box">
+			<p class="invest_intention">发送投资意向<b>{$project_intend}</b>次</p>
+			<p class="touzi_dir">
+				{foreach from = $deal_cate item = cate}
+						<b>{$cate.name}</b>
+				{/foreach}
+			<div class="eye_box">
+				{foreach from = $deal_period item = period}
+					<b class="turn">{$period.name}</b>
+				{/foreach}
+				<b class="loca_city">{$region_lv2}</b></div>
+			<a class="csdq_link" target="_black">{$invest_detail_ex.org_url}</a>
+		</div>
+		<p class="personal_feel">{$invest_detail.per_sign}</p>
+	</div>
+	
+</div>
+
+<div class="investor_grey" id="investor">
+	<div class="wrap">
+	<div class="investor_item">
+		<h3 class="size_22"><img src="{function name="get_spec_image" v="this_investor.png" }" alt=""></h3>
+		<ul class="investor_data">
+			<li>
+				<h4><img src="{function name="get_spec_image" v="1.png" }" alt=""></h4>
+				<div>
+					{foreach from = $invest_detail_mark item = mark}
+						<p>{$mark.mark_info}</p>
+					{/foreach}
+				</div>
+			</li>
+			<li>
+				<h4><img src="{function name="get_spec_image" v="2.png" }" alt=""></h4>
+				<div>
+					{foreach from = $invest_detail_style item = style}
+						<p>{$style.style_info}</p>
+					{/foreach}
+				</div>
+			</li>
+			<li>
+				<h4><img src="{function name="get_spec_image" v="3.png" }" alt=""></h4>
+				<div>
+					{foreach from = $deal_cate item = cate}
+						<p>{$cate.name}</p>
+					{/foreach}
+				</div>
+			</li>
+			<li>
+				<h4><img src="{function name="get_spec_image" v="4.png" }" alt=""></h4>
+				<div>
+					{foreach from = $deal_period item = period}
+						<p>{$period.name}</p>
+					{/foreach}
+				</div>
+			</li>									
+		</ul>
+	</div>
+	</div>
+</div>
+<div class="relative_msg white_bg" id="info">
+	<div class="wrap">
+		<h2 class="size_22"><img src="{function name="get_spec_image" v="relative.png" }" alt=""></h2>
+		<div class="per_brief">
+			<h4 class="size_18"><img src="{function name="get_spec_image" v="per.png" }" alt=""></h4>
+			<p class="color_888">{$invest_detail.per_brief}</p>
+		</div>
+		<div class="org_brief">
+			<h4 class="size_18"><img src="{function name="get_spec_image" v="where_location.png" }" alt=""></h4>
+			<p class="color_888">{$invest_detail_ex.org_desc}</p>
+		</div>
+		<div class="org_link">
+			<h4 class="size_18"><img src="{function name="get_spec_image" v="gov_web.png" }" alt=""></h4>
+			<p class="color_888"><a  target="_black">{$invest_detail_ex.org_url}</a></p>
+		</div>				
+	</div>
+</div>
+
+<div class="ss">
+	<div class="wrap">
+		<ul class="ss_bar">
+			<li><a href="#view" id="view_class" class="tt">观点</a></li>
+			<li><a href="#investor" id="investor_class">投资</a></li>
+			<li><a href="#info" id="info_class">相关信息</a></li>
+		</ul>
+	</div>
+</div>
+<input type="hidden" id="investor_detail" value="investor_detail">
+{include file="inc/footer.html"} 

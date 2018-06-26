@@ -1,0 +1,18 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/login_box.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/error.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height40"></div>
+<div class="container error_bg">
+	<div class="error_bg_con">
+	<p>您所访问的页面不存在或您已失去连接，请检查您的网络或重新加载。</p>
+	<form action="/" method="get">
+	<button type="submit">返回首页</button>
+	</form>
+	</div>
+</div>
+
+{include file="inc/login_box.html"} 
+{include file="inc/footer.html"} 

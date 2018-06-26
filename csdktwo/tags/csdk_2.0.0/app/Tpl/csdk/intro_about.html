@@ -1,0 +1,49 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/intro.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/login_box.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/intro_help.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="intro_banner"></div>
+<div class="wrap">
+	{include file="inc/sidebar_intro.html"}	 
+	{if $id eq 4}
+	<div class="intro_text">
+		{$intro_about_show}	
+	</div>
+	{/if}
+	{if $id eq 5}
+	<div class="intro_contact">
+		{$intro_contact_show}
+	</div>
+	{/if}
+	{if $id eq 6}
+	<div class="intro_help"  id="intro_help">
+		<ul>
+		
+	        <li class="vtitle"><a {if $gid eq 1}class='cur'{/if}><em class="v">&nbsp;</em>新手指南</a>
+	        <div class="vcon"  {if $gid eq 1}style="display:block;"{else}style="display:none;"{/if}>
+	        {$intro_help_show}
+	        </div>
+       		</li>
+    
+	        <li class="vtitle" id="service_terms"><a {if $gid eq 2}class='cur'{/if}><em class="v">&nbsp;</em>服务条款</a>
+	        <div class="vcon"  {if $gid eq 2}style="display:block;"{else}style="display:none;"{/if}>
+	        {$intro_term_show}
+	        </div>
+	        </li>
+
+	        <li class="vtitle"  id="FAQ"><a {if $gid eq 3}class='cur'{/if}><em class="v">&nbsp;</em>FAQ</a>
+	        <div class="vcon" {if $gid eq 3}style="display:block;"{else}style="display:none;"{/if}>
+	        {$intro_faq_show}
+	        </div>
+	        </li>
+		
+        </ul>
+	</div>
+	{/if}
+</div>
+{include file="inc/login_box.html"} 
+{include file="inc/footer.html"} 

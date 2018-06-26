@@ -1,0 +1,60 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/My_investment_index.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/invested_index.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_box">
+        <a href='{url r="home"}'>我的个人中心</a>
+        <img src='{function name="get_spec_image" v="right_corner.jpg"}' alt="right_corner"/>
+        <span>我的投资</span>
+    </div>
+    <div class="personal_content clearfix">
+		{include file="inc/sidebar_user.html"} 
+        <!-- 个人资料，保存更新-->
+        <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+            <div class="Maintain_and_update My_investament">
+                <i class="active">我购买的基金</i>
+                {if $my_invested}
+	                <div class="news_top_r">
+	                    <input type="text" placeholder="请输入基金关键字" title="请输入基金关键字" name="keyword" class="bdr bs" id="keyword">
+	                    <div class="search" id="invested_search"></div>
+	                </div>
+                {/if}
+            </div>
+            <!-- 个人资料from表单-->
+            <form action="" class="form2 bs active">
+                <div class="bs fund_lower">
+                   	{if $my_invested}
+	                    <div class="fund bs head">
+	                        <span>基金</span><span>基金名称</span><span>基金规模</span><span>我的投资金额</span><span>成立时间</span>
+	                    </div>
+	                    <ul class="fund_ul bs">
+	                    	{foreach from=$my_invested item=vo name=keys}
+		                        <li>
+		                            <span>{$smarty.foreach.keys.iteration}</span>
+		                            <span><a href="{url r="invested#invested_fund" p="id=$vo.fund_id"}">{$vo.short_name}</a></span>
+		                            <span>{$vo.name}</span>
+		                            <span>{function name="number_format" v="$vo.total_amount"}万</span>
+		                            <span>{function name="number_format" v="$vo.investor_amount"}万</span>
+		                            <span>{function name="to_date" v="$vo.establish_date" p="Y.m.d"}</span>
+		                        </li>
+	                        {/foreach}
+	                    </ul>
+                        <div class="news_more_box">
+                         	{if $my_invested_more}
+	                            <button type ="button" class="news_more fund_more">查看更多</button>
+                         	{/if}
+                        </div>
+                   	{else}
+                   		<div class="no_deal">
+	                   		您在磁斯达克还没有任何投资，马上去<a href='{url r="deals"}'>《平台项目》</a>看看有什么感兴趣的项目
+                   		</div>
+                   	{/if}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{include file="inc/footer.html"} 

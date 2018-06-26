@@ -1,0 +1,7 @@
+<div class="slide" id="slide_icon">
+	<ul class="slide_nav">
+		<li {if $intro_help eq intro_help} class="selected"{/if}><span class="icon {if $intro_help eq intro_help}pitch{/if}"></span><a href="{url r="about" p="id=6&tid=1"}" {if $intro_help eq intro_help} class="cur"{/if}>帮助中心</a></li>
+		<li {if $intro_about eq intro_about} class="selected"{/if}><span class="icon {if $intro_about eq intro_about}pitch{/if}"></span><a href="{url r="about" p="id=4"}" {if $intro_about eq intro_about} class="cur"{/if}>关于我们</a></li>
+		<li {if $intro_contact eq intro_contact} class="selected"{/if}><span class="icon {if $intro_contact eq intro_contact}pitch{/if}"></span><a href="{url r="about" p="id=5"}" {if $intro_contact eq intro_contact} class="cur"{/if}>联系我们</a></li>
+	</ul>
+</div>

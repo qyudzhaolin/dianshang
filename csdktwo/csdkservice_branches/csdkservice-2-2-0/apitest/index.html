@@ -1,0 +1,126 @@
+<head>
+<meta http-equiv=Content-Type content="text/html;charset=utf-8">
+        <title>Server_Api_Call_Client</title>
+        <style type="text/css">
+			input{width: 100%;height: 40px;font-size: 20px;padding-left: 8px;}
+			pre {  
+				white-space: pre-wrap;       /* css-3 */ 
+				white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */ 
+				white-space: -pre-wrap;      /* Opera 4-6 */ 
+				white-space: -o-pre-wrap;    /* Opera 7 */ 
+				word-wrap: break-word;       /* Internet Explorer 5.5+ */ 
+			}
+			#box{width: 85%;margin:0 auto;padding: 25px;}
+			#sendRequest{width: 100%;height: 55px;font-size: 20px;padding-left: 8px;}
+			#tblMain{width: 99%;border: 1px solid gray;margin: auto 15px auto 15px;padding: 25px;}
+			tr{height: 50px; }
+			#subTitle{font-size:35px;}
+			#RESPONSE{width: 99%;  min-height: 150px;  border: 1px solid silver;padding: 5px;}
+        </style>
+        <script type="text/javascript" src="js/md5.min.js"></script>
+        <script type="text/javascript" src="js/JsonUti.js"></script>
+        <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+        <script type="text/javascript">
+        	var ApiConfig={
+        			'apiHost': 'http://' + window.location.host,
+        			'entryPage': '/index.php'
+        	};
+        
+        	function sendRequest(){
+        		var secKey = document.getElementById("secKey").value;
+        		if(secKey.length<1){
+        			alert("加密密钥输入有误, 请重新输入...");
+        			return false;
+        		}
+        		
+        		var apiPath = document.getElementById("apiPath").value;
+        		if(apiPath.length<5){
+        			alert("请求路径输入有误, 请重新输入...");
+        			return false;
+        		}
+        		
+        		var apiArgs = document.getElementById("apiArgs").value;
+        		if(apiArgs.length<2){
+        			alert("JSON参数输入有误, 请重新输入...");
+        			return false;
+        		}
+        		
+        		window.localStorage.setItem('ApiSecKey',secKey);
+        		window.localStorage.setItem('ApiPath',apiPath);
+        		window.localStorage.setItem('ApiArgs',apiArgs);
+        		
+        		var signKey = md5(apiArgs + secKey + apiPath);
+        		$( "#RESPONSE" ).html( '' );
+               var request = $.ajax({
+               	  url: ApiConfig.apiHost + ApiConfig.entryPage,
+               	  type: "POST",
+               	  data: { 'func' : apiPath, 'params': apiArgs, 'signKey': signKey },
+               	  //dataType: "json",
+               	  success: function( data ) {
+               		  try{
+	               		var jsonStr = JsonUti.convertToString( eval( "("+data+")" ) )
+	               		$( "#RESPONSE" ).css("border-color","green").html( jsonStr );  
+               		  }catch(exception){
+	               		$( "#RESPONSE" ).css("border-color","red").html( data );  
+               		  }
+	               	}
+               	});
+               	 
+        	}
+        
+        	
+        	$(function(){
+        		$("#sendRequest").click(sendRequest);
+        		if(window.localStorage.getItem('ApiSecKey'))
+        			$("#secKey").val(window.localStorage.getItem('ApiSecKey'));
+        		if(window.localStorage.getItem('ApiPath'))
+        			$("#apiPath").val(window.localStorage.getItem('ApiPath'));
+        		if(window.localStorage.getItem('ApiArgs'))
+        			$("#apiArgs").val(window.localStorage.getItem('ApiArgs'));
+        	});
+        </script>
+</head>
+<body>
+
+<center id="box">
+	<table id="tblMain">
+	<tr>
+	  	<th colspan="2" ><span id="subTitle">Server Api Call Client</span><hr></th>
+	  </tr>
+	<tr>
+	  	<th width="100">加密密钥: </th>
+	  	<td>
+	  		<input type="text" id="secKey"  value=""/>
+	  	</td>
+	  </tr>
+	  
+	  <th>请求路径:</th>
+	  	<td>
+	  		<input type="text" id="apiPath"  value=""/>
+	  	</td>
+	  </tr>
+	  
+	  <th>JSON参数:  </th>
+	  	<td>
+	  		<input type="text" id="apiArgs"  value=""/>
+	  	</td>
+	  </tr>
+	  
+	   <tr>
+		   	<td colspan="2">
+		   		<input type="button" id="sendRequest" value="确认并发送请求">
+		   	</td>
+	   </tr>
+	
+	  <th valign="top">返回结果:   </th>
+	  	<td>
+	  		<pre id="RESPONSE" ></pre>
+	  	</td>
+	  </tr>
+	  
+	</table>
+
+</center>
+
+</body>
+</html>

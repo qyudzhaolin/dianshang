@@ -1,0 +1,8 @@
+{"level":3,"type":"Common.Sms.sendSmsOnly","flag":1,"extends":["sendSmsOnly-发送短信，传入的参数","{\"mobile\":\"15811000000\",\"content\":\"尊敬的用户，您的验证码为：759776，请勿告知他人！\",\"source\":\"web\",\"type\":0,\"code\":759776}"]}
+{"level":3,"type":"Common.Sms.sendSmsOnly","flag":1,"extends":["sendSmsOnly-发送短信，传入的参数","{\"mobile\":\"15811000000\",\"content\":\"尊敬的用户，您的验证码为：947519，请勿告知他人！\",\"source\":\"web\",\"type\":0,\"code\":947519}"]}
+{"level":3,"type":"Contents.Funds.FundsList","flag":1,"extends":["FundsList-我的基金列表","{\"uid\":\"1719\",\"label\":1}"]}
+{"level":3,"type":"Contents.Funds.FundsList","flag":1,"extends":["FundsList-我的基金列表","{\"uid\":\"1719\",\"label\":1}"]}
+{"level":3,"type":"Contents.FundInfo.RaisingFundInfo","flag":1,"extends":["RaisingFundInfo-募集基金详情","{\"uid\":1719,\"fund_id\":44,\"SOURCE\":\"pc\"}"]}
+{"level":3,"type":"Contents.FundInfo.RaisingUserType","flag":1,"extends":["RaisingUserType-募集基金身份判断","{\"uid\":1719,\"fund_id\":44}"]}
+{"level":3,"type":"Contents.FundInfo.RaisingFundInfo","flag":1,"extends":["RaisingFundInfo-募集基金详情","{\"uid\":1719,\"fund_id\":44,\"SOURCE\":\"pc\"}"]}
+{"level":3,"type":"Contents.FundInfo.RaisingUserType","flag":1,"extends":["RaisingUserType-募集基金身份判断","{\"uid\":1719,\"fund_id\":44}"]}

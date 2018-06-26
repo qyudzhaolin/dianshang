@@ -1,0 +1,21 @@
+/*error404*/
+.error_bg{width:100%;height:697px;background:url(../images/Slice-1.png) no-repeat center;position: relative;}
+.height40{width:100%;height:40px;}
+.error_bg_con{padding-top:442px;}
+.error_bg_con p{text-align:center;font-size:16px;color:#fff;}
+.error_bg_con button{
+    position: absolute;
+    bottom:160px;
+    left:50%;
+    margin-left:18px;
+    cursor: pointer;
+    font-size:19px; width:156px;height:40px;overflow:hidden;border:0px;background:url(../images/blck.png) no-repeat;display:block;color:#5674a2;line-height: 15px}
+.error_bg_con button:hover{background: url(../images/blck2.png);color: #fff;
+    -webkit-transition: .3s all ease;
+    -moz-transition: .3s all ease;
+    -ms-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;}
+.error_bg_con button:active{
+    background: url(../images/blck2.jpg);
+}

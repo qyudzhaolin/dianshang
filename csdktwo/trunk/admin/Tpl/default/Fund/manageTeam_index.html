@@ -1,0 +1,45 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/fund_manageCo.js' />
+<div class="main">
+<div class="main_title">基金管理公司 >  管理团队列表&nbsp;<a href="{:u("Fund/manageCo_index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}" onclick="mt_add({$mid});" />
+</div>
+
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		职务名称：<input type="text" class="textbox" maxlength="6" name="title" value="{:trim($_REQUEST['title'])}" />
+		姓名：<input type="text" class="textbox" maxlength="20" name="name" value="{:trim($_REQUEST['name'])}" />
+		<input type="hidden" value="Fund" name="m" />
+		<input type="hidden" value="manageTeam_index" name="a" />
+		<input type="hidden" name="mid" value="{$mid}" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+		<a href="{:U('Fund/manageTeam_index',array('mid'=>$mid))}"><input type="button" class="button" value="清空" /></a>
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fund" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,code:编码|80px
+		,title:职务名称|150px
+		,name:姓名|100px
+		,graduate_university|msubstr:毕业院校|230px
+		,education_degree_cn:学历|100px
+		,brief|msubstr:个人简介|300px
+ 		" 
+	actionlist="mt_edit:{%EDIT}, mt_del:{%DEL}" /> 
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

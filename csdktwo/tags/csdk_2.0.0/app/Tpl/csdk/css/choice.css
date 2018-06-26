@@ -1,0 +1,24 @@
+
+.choice{margin: 140px auto 178px auto; width:510px;overflow: hidden;}
+.confirm_success{width:510px; border-radius:4px;text-align:center; }
+.confirm_success_pic{width:48px;height:48px; }
+.confirm_success_txt{font:16px "微软雅黑";color:#4282c5;text-align: center; line-height: 35px;}
+
+.choicetext{width: 100%; color:#515151;font:14px "微软雅黑";text-align: center; line-height: 30px; 
+margin: 43px 0 0 0;overflow: hidden;}
+.choiceselect{float: left;padding-left: 110px;font:14px "微软雅黑";text-align: left;color:#515151;line-height: 25px;}
+.choiceselect dl {  }
+.choiceselect dl dt{  background: url(../images/choice01.png) no-repeat 0px 6px;margin: 25px 0 0 0; padding: 0 0 0 20px }
+.choiceselect dl dd a{width: 100%;color:#4282c5;text-align: left; padding: 0 0 0 20px}
+.choiceselect dl dt.two{background: url(../images/choice02.png) no-repeat 0px 6px;}
+
+
+
+/*choice_success*/
+.choice_success{display:none;width:455px;height: 278px;border:6px solid #bcc2c9;border-radius:10px;text-align:center;position:fixed;left:58%;margin-left:-344px;top:118px;z-index:998;background:#fff;}
+ 
+.choice_success_txt{font:16px "微软雅黑";color:#404040;text-align: center; border-bottom: 1px solid #f0f3f5; height:63px;line-height: 63px;}
+
+.choice_success_div{color: #333;font: 14px "微软雅黑";padding: 50px 54px;line-height: 30px;}
+.choice_success_div button{width:240px;margin-top:30px;margin-left:55px;height:40px;background:#4282c5;color:#fff;font-weight:bold;right:97px;bottom:50px;border-radius:5px;}
+.choice_success_div button:hover{background:#59A4F0; }

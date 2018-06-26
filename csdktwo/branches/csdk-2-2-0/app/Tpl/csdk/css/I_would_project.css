@@ -1,0 +1,261 @@
+.personal_box.would {
+    padding: 30px 0;
+    font-size: 18px;
+    text-align: center;
+    color: #dba774;
+}
+
+.would_project_box {
+    padding: 50px 167px 0 212px;
+}
+
+/*????*/
+.address select {
+    width: 194px;
+    height: 38px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 4px;
+
+
+    text-indent: 4px;
+    position: relative;
+    float: left
+}
+#city{margin:0 0 0 10px}
+#province{margin:0 0 0 26px; width:118px;}
+.address>div:nth-of-type(1){margin:0 0 0 10px;}
+.address .select_1 {
+    width: 104px;
+    margin: 0 0 0 28px; 
+}
+
+.address .select_2 {
+    width: 128px;
+    margin: 0 0 0 6px; 
+}
+
+.textarea label {
+    float: left;
+}
+.textarea.clearfix.pos_re2{
+    line-height: 1;
+}
+textarea {
+    margin: 0 0 0 28px;
+    resize: none;
+    width: 360px;
+    height: 120px;
+    border: 1px solid #cfcfcf;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 10px;
+    line-height: 22px;
+}
+
+select {
+    background: url("../images/select_btn.png") no-repeat right center;
+}
+
+.address input, select {
+    height: 40px;
+    
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    text-indent: 10px;
+    -webkit-appearance: none;
+}
+
+select option {
+
+    background: #ffffff;
+    text-indent: 10px;
+    border: 0px;
+}
+
+i,b {
+    float: left;position:relative
+}
+b span{  left: 9px;
+    position: absolute;
+    top: 30px;}
+ul {
+    width: 392px;
+    float: left;
+    padding: 5px 0 10px 25px;
+}
+
+ul li {
+    float: left;
+    margin: -2px 40px -6px 0;
+}
+
+label span {
+    font-size: 14px;
+    color: #6b6b6b;
+}
+#deal_cate_msg{margin:6px 0 0 0;}
+#deal_period_msg{margin:6px 0 0 0;}
+#region_msg,#deal_brief_msg,#deal_period_msg,#deal_cate_msg{float:right;font-size:13px;text-indent: 4px;color:red}
+label span.a_span{color:red;font-size:13px;float:right;}
+body .spanColor_size{font-size:13px;text-indent: 4px;color:red}
+input[type=text] {
+    width: 378px;
+    height: 38px;
+  
+    text-indent: 17px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    font-family: '微软雅黑';
+    -webkit-appearance: none;
+    margin: 0 0 18px 28px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+
+input[type=text].book {
+    width: 282px;
+    height: 38px;
+    border: 1px solid #cfcfcf;
+    text-indent: 17px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    font-family: '微软雅黑';
+    -webkit-appearance: none;
+    margin: 0 0 18px 28px;
+}
+
+div {
+    line-height: 40px;
+}
+
+textarea {
+    width: 382px;
+    margin: 0 0 0 28px;
+    padding:6px;
+     
+    font-size: 14px;
+}
+
+i {
+    padding: 0 0 0 46px;
+    color: red;
+}
+
+b {
+    padding: 0 0 0 12px;
+    color: #333;
+    font-size: 14px;
+}
+
+.hidden_file {
+    height: 38px;
+    width: 92px;
+    line-height: 38px;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    top: 3px;
+    left: 0;
+    border: 1px dashed #e5e5e5;
+    background: url("../images/jia.png") no-repeat 62px 14px;
+    margin: 0 0 0 6px;
+}
+
+.hidden_file input[type=file] {
+    opacity: 0;
+}
+
+.hidden_file span {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
+.textarea .white {
+    padding: 0 0 0 32px;
+}
+ 
+.would_btn {
+    display: block;
+    width: 135px;
+    height: 36px;
+    line-height: 25px;
+    background: #dba775;
+    color: #ffffff;
+    font-size: 16px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin: 69px auto 75px 168px;
+    cursor: pointer;
+    border: 0px;
+    letter-spacing: 1px;
+    outline: none;
+}
+.require{  border: 1px solid #cfcfcf;}
+.warnning {
+    border: 1px solid #f00;
+    box-sizing: border-box;
+}
+.ul_label_ideal label{display: inline-block}
+
+.paddingButtom10px{
+    padding-bottom: 4px;
+}
+#deal_name_msg{
+    position: absolute;
+    bottom: -12px;
+    left: 168px;
+}
+#deal_sign_msg{
+    position: absolute;
+    bottom: -13px;
+    left: 168px;
+}
+#deal_cate_msg{
+    position: absolute;
+    bottom: -4px;
+    left: 166px;
+}
+#region_msg{
+    position: absolute;
+    bottom: -26px;
+    left: 166px;
+}
+#deal_period_msg{
+    position: absolute;
+    bottom: -7px;
+    left: 168px;
+}
+#deal_brief{
+    font-size:12px;
+    overflow-y:auto;
+}
+input[type=text]{
+    font-size:12px;
+}
+#deal_brief_msg{
+    position: absolute;
+    bottom: -8px;
+    left: 168px;
+    line-height: 0;
+}
+.pos_re2{
+    position: relative;
+}

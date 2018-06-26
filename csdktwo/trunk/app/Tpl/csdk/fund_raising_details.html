@@ -1,0 +1,252 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/fund_raising_details.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/fund_raising_details.js";  
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+  <div class="main">
+    <div id="float01" class="cur">
+        <div class="project_desc" id="item">
+            <div class="wrap clearfix width_1000px">
+                <div class="w_660 left_001 good_project">
+                    <h2>
+                        <span class="paL10px">基金概述</span>
+                    </h2>
+                    <ul>
+                      <li class="clearfix">
+                      <span>基金名称 ：</span><span>{$response.fund_name}</span>
+                      </li>
+                      {if $state neq 0}
+                      <li class="clearfix">
+                      <span>管理费 ：</span> <span>{function name="nl2br" v="$response.manage_fee"}</span>
+                      </li>
+                      <li class="clearfix">
+                      <span>出资节奏 ：</span> <span>{function name="nl2br" v="$response.pace_of_invest"}</span> 
+                      </li>
+                      <li class="clearfix">
+                      <span>投资方式：</span> <span>{function name="nl2br" v="$response.invest_type"}</span> 
+                      </li>
+                      <li class="clearfix">
+                      <span>投票方式：</span> <span>{function name="nl2br" v="$response.vote_type"}</span> 
+                      </li>
+                      {/if}
+                      <li class="clearfix">
+                      <span>拟投资行业 ：</span><span>{function name="nl2br" v="$response.intend_profession"}</span>
+                      </li>
+                      <li class="clearfix">
+                      <span >价值与定位 ：</span>
+                      <span>{function name="nl2br" v="$response.value_orientation"}</span></li>
+                      
+					  {if $state eq 0}
+                      <li class="clearfix explain2">
+                        <span class="warn fl"></span>
+                        <span style="width:670px" style="padding-top:0">管理费/出资节奏/投资方式/投票方式，申请通过后可见！</span>
+                      </li>
+                    {/if}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    <div id="float02" >
+        <div class="w_660 good_project">
+            <h2>
+                <span class="paL10px">行业背景</span>
+            </h2>
+            
+            <p class="size_14">{function name="nl2br" v="$profession_info.desc"}
+            </p>
+             {if $profession_info.img}
+           <img src="{function name="getQiniuPath" v="$profession_info.img" p="img"}?imageView2/1/w/800" alt="" class="set_ing_802"/>
+            {/if}
+        </div>
+    </div>
+    <div id="float03" class="good_project">
+        <h2>
+            <span class="paL10px">投资理念</span>
+        </h2>
+        
+        <div class="compent_data">
+      <span>{function name="nl2br" v="$invest_philosophy.desc"}</span>
+        </div>  {if $invest_philosophy.img}
+         <img src="{function name="getQiniuPath" v="$invest_philosophy.img" p="img"}?imageView2/1/w/800" alt="" class="set_ing_802"/>
+           {/if}
+    </div>
+    <div id="float04" class="good_project">
+        <h2>
+            <span class="paL10px">拟投资项目</span>
+        </h2>
+         
+        <ul class="pattern_box clearfix">
+             {foreach from=$intend_deal_list item=vo}
+             {if $state eq 0}
+             <li>
+				    <img src="{function name="get_spec_image" v="biaodi.png" }" alt="" >
+				    <h4>标的{$vo.number}</h4>
+				    <p>{function name="nl2br" v="$vo.deal_sign"}</p>
+				</li>
+             {else}
+				<li>
+				     <a href="{url r="dealdetails"  p="id=$vo.deal_id"}" target="_blank" class="left_position"><img src="{function name="getQiniuPath" v="$vo.img_deal_logo" p="img"}?imageView2/1" alt="" ></a>
+				    <h4>{$vo.deal_name}</h4>
+				    <p>{function name="nl2br" v="$vo.deal_sign"}</p>
+				</li>
+				{/if}
+             {/foreach}
+        </ul>
+         
+    </div>
+    <div id="float05" class="good_project">
+        <h2>
+            <span class="paL10px">基金管理人</span>
+        </h2>
+        <a href="{url r="company#index" p="id=$response.managers_id"}" target="_blank"  style="color:#88b7f2;font-14px;">{$fund_company_obj.company_name}</a>
+    </div>
+
+    <div id="float06" class="good_project">
+        <h2>
+            <span class="paL10px">核心管理团队</span>
+        </h2>
+        <div class="centent_margin_box_0">
+         {foreach from=$team_list item=vo}
+        <ul class="centent_margin bs character clearfix centent_margin_box">
+               
+                  <li class="bs">
+                  <img src="{function name="getQiniuPath" v="$vo.user_logo" p="img"}?imageView2/1/w/300/h/300" alt="logo" width="82" height="82">
+                  </li>
+                  <li>
+                      <dl>
+                          <dt>{$vo.user_name}<span>({$vo.title})</span></dt>
+                          <dd>{function name="nl2br" v="$vo.brief"}</dd>
+                      </dl>
+                  </li>
+               
+        </ul>
+         {/foreach}
+        </div>
+    </div>
+    
+     <div id="float07" >
+        <div class="w_660 good_project">
+            <h2 class="clearfix bor_set_color">
+                 <span class="paL10px">设立方案</span>
+                {if $state eq 0}  <span class="fr" style="font-size:14px;color:#6b6b6b">申请通过后可见</span> {/if}
+            </h2>
+        </div>
+     </div>
+     
+    <div  class="set_style_16px">
+      {if $state neq 0}
+      {foreach from=$plans_obj item=vo}
+        <div class="w_660 good_project">
+            <h2>
+                 <span>{$vo.title}</span>
+            </h2>
+            <p class="size_14">{function name="nl2br" v="$vo.desc"}
+            </p>
+            {if $vo.img}
+            <img src="{function name="getQiniuPath" v="$vo.img" p="img"}?imageView2/1/w/800" alt="" class="set_ing_802"/>{/if}
+        </div>
+          {/foreach }
+    
+    {/if}
+    </div>
+     {if $att_url neq 0}
+    <div id="float08" class="w_660 good_project">
+        <h2 class="size_22 bor_set_color"><span class="paL10px">基金档案</span> {if $state eq 0}  <span class="fr" style="font-size:14px;color:#6b6b6b">申请通过后可见</span> {/if}</h2>
+          {if $state neq 0}
+        <ul>
+                 {foreach from=$attachment_list item=vo}
+                  {if $vo.att_type eq 1}
+                <li class="clearfix"><img src='{function name="get_spec_image" v="JPG-icon.png"}' alt="" class="fl" style="margin:4px 20px 0 0"/><a class="fl" href="{$vo.att_url}" target="_blank" style="padding-left:18px;">{$vo.att_title}.jpg</a> </li>
+                  {/if}
+                  {if $vo.att_type eq 2}
+                 <li class="clearfix"><img src='{function name="get_spec_image" v="pdf-icon.png"}' alt="" class="fl" style="margin:4px 20px 0 0"/><a class="fl" href="{$vo.att_url}" target="_blank" style="padding-left:18px;">{$vo.att_title}.pdf</a> </li>
+                  {/if}
+                {/foreach }
+        </ul> 
+          {/if}
+    </div>
+      {/if}
+     </div>
+    <div class="floatCtro">
+        <p>基金概述</p>
+        <p>行业背景</p>
+        <p>投资理念</p>
+        <p>拟投资项目</p>
+        <p>基金管理人</p>
+        <p>核心管理团队</p>
+        <p>设立方案</p>
+        {if $att_url neq 0} <p>基金档案</p>{/if}
+    <!--     <p>投资原则及方式</p>
+        <p>决策流程</p>
+        <p>退出渠道</p>
+        <p>收益构成及分配</p>
+        <p>收益率预测</p>
+        <p></p> -->
+        <a>
+
+            <span></span>
+        </a>
+         <div class="send_request_box po_a">
+         	{if $state neq 2}
+         	{if $pc_status eq 2}
+              <button class="btn send_request" id="confirm">意向申购</button> 
+             {else}
+             <button class="btn send_request" id="showclick">意向申购</button>
+             <input type="hidden" >
+             {/if}
+            {/if}
+         </div>
+    </div>
+
+<!-- 2 -->
+  <div class="cloud" id="cloud-3" style="z-index: 10003; margin: -50px 0px 0px -151px; ">
+    <div class="cloud-main aaa">
+        <div class="cloud-content">
+    <div class="cloud-icon cloud-icon-success">意向投资已经发送！</div>
+  </div>
+  <input type="button" value="确定" class="fl showSend" id="send_btn_1"> 
+  </div>
+      <div class="cloud-cover"></div>
+  </div>
+<!-- 1 -->
+  <div class="clouedb cloudHide popup" style="display: none; margin-left: -291px; margin-top: -202.5px;">
+    <div class="content content" style="transform: scale(1); transition: 0.3s;">
+        <ul class="cloud-content" style="display: block;">
+            <li class="clearfix set_style_7">
+                <div class="fl">基金名称：</div>
+                <span class="fl" id="fund_name">{$response.fund_short_name}</span>
+            </li>
+            <li class="clearfix set_style_7">
+                <div class="fl">基金规模：</div>
+                <span class="fl" id="fund_total_amount">{$response.total_amount}万元</span>
+            </li>
+            <li class="clearfix set_style_7">
+                <div class="fl">起投金额：</div>
+                <span class="fl" id="fund_invest_min_amount">{$response.invest_min_amount}</span>万元
+            </li>
+            <li class="clearfix set_style_7">
+                <div class="fl set_bj_style">拟认购金额：</div>
+                <input type="text" class="fl input_style" maxlength="7" value="{$response.amount}" name="expect_invest_amount" id="expect_invest_amount" placeholder="请大于起投金额" title="请大于起投金额"  onblur="if(value==''){this.style.color='#b9b9b9';value='请输入公众号或者标签'}"
+        onfocus="if(value=='请大于起投金额'){this.style.color='#333';value=''}"
+        value="请大于起投金额" /><span style="padding-left:10px;">万元</span>
+              	<span id="expect_invest_amount_msg"></span>
+            </li>
+            <li class="clearfix set_style_7 top_mar pos_re">
+                <div class="fl">申购说明：</div>
+                <textarea name="expect_invest_remark" maxlength="20" id="expect_invest_remark" placeholder="请留言，最多不超过20字" title="请留言，最多不超过20字" class=""  onblur="if(value==''){this.style.color='#b9b9b9';value='请留言，最多不超过20字'}"
+        onfocus="if(value=='请留言，最多不超过20字'){this.style.color='#333';value=''}"
+        value="请留言，最多不超过20字">{$response.remark}</textarea>
+              	<span id="expect_invest_remark_msg"></span>
+            </li>
+            <li class="clearfix set_style_8">
+                <input type="button" value="发送意向" class="fl showSend" id="showSend">
+                <input type="button" value="取消" class="fl removeclick" id="removeclick">
+                <input type="hidden" value="{$response.fund_id}" id="fund_raising_id">
+            </li>
+        </ul>
+    </div>
+    <div class="bj bjclick" style="display: block;"></div>
+</div>
+{include file="inc/footer.html"} 

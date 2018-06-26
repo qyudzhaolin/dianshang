@@ -1,0 +1,503 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/fund_edit.js' />
+<load href='__TMPL__Common/js/fund_edit_team.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/dcom_array.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/upload.js' />
+<div class="main">
+<div class="main_title">基金详情 <a href="{:u("Fund/index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+
+<table class="form conf_tab" cellpadding=0 cellspacing=0>
+	<tbody>
+		<tr><td colspan=4 class="topTd"></td></tr>
+		<tr>
+			<th colspan="4" class="item_title">基金基本信息</th>
+		</tr>
+		<tr>
+			<td style="width:165px" class="item_title">*基金名称(30个字)</td>
+			<td colspan="3" class="item_input"><input type="text" maxlength="30" class="textbox2 require" value="{$vo.name}" name="name" id="name"/><span id="name_msg"  name="error_msg"></span></td>
+		</tr>
+		<tr>
+			<td class="item_title">*基金简称(6个字)</td>
+			<td style="width:375px" class="item_input"><input type="text" maxlength="6" class="textbox3 require" value="{$vo.short_name}" name="short_name" id="short_name"/><span id="short_name_msg"  name="error_msg"></span></td>
+			<td style="width:165px" class="item_title item_input">*基金管理人</td>
+			<td class="item_input">
+				<select name="managers_id" id="managers_id" class="textbox require">
+					<option value="">请选择</option>
+					<foreach name="manages" item="voo">
+						<option value="{$voo.id}" <if condition="$vo.managers_id eq $voo['id']">selected="selected"</if>>{$voo.short_name}</option>
+					</foreach>
+				</select>
+				<span id="managers_id_msg" name="error_msg"></span>
+				<span id="managers_id_msg2" style="padding-left:10px;font-size:12px;color:#f99;display:none">修改会清空基金管理团队信息</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="item_title">*基金规模(¥)</td>
+			<td class="item_input">
+				<input type="text" own_type="number"  maxlength="7" class="textbox3 require" name="total_amount" id="total_amount"  value="{$vo.total_amount}" /> 万元
+				<span id="total_amount_msg" name="error_msg"></span>
+			</td>
+			<td class="item_title item_input">*成立日期</td>
+			<td class="item_input">
+				<input type="text" class="textbox3 require" name="establish_date" id="establish_date" value="{$vo.establish_date}" readonly="true" />
+				<span id="establish_date_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="item_title">*基金期限</td>
+			<td class="item_input">
+				<input type="text" class="textbox3 require"  maxlength="6" name="deadline" id="deadline" value="{$vo.deadline}" /> 年
+				<span id="deadline_msg" name="error_msg"></span>
+			</td>
+			<td class="item_title item_input">*起投金额</td>
+			<td class="item_input">
+				<input type="text" class="textbox3 require" own_type="number" name="invest_min_amount" id="invest_min_amount" value="{$vo.invest_min_amount}" /> 万元
+				<span id="invest_min_amount_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="item_title">*基金简介(200个字)</td>
+			<td colspan="3" class="item_input">
+				<textarea type="text"  maxlength="200"  name="summary" id="summary" class="textarea require">{$vo.summary}</textarea>
+				<span id="summary_msg"  name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="item_title">*基金管理团队<br /></td>
+			<td colspan="3" class="item_input" id="faq">
+				<if condition="$team_list">
+					<foreach name="team_list" item="to"  key="myId">
+						<div style="padding:3px;" data="add_team" name="add_team">
+							头像<label class="fileupload" id="fileupload" onclick="">
+									<img src="{$to.user_logo}" id="img_src" class="float_no no_img_src" style="margin-left: 0px;"/>
+								</label>
+							姓名(6个字)<input type="text" disabled="disabled" class="textbox require" value="{$to.name}" />
+							职位(8个字)<input type="text" maxlength="8" class="textbox require" name="position[]" value="{$to.position}" />
+							<input type="hidden" value="{$to.managers_team_id}" name="managers_team_id[]" />
+							<input type="hidden" value="{$to.user_id}" name="user_id[]" />
+							<input type="hidden" value="{$to.is_director}" name="is_director[]" title="2" />
+							<input type="checkbox" onclick="is_director_check(this)" <if condition="$to.is_director eq 1">checked="checked"</if> />是否主合伙人(投资总监)
+							个人简介(200个字) <textarea type="text"  maxlength="200"  name="brief[]" class="textarea require">{$to.brief}</textarea>
+						</div>
+					</foreach>
+				<else/>
+					<div style="padding:3px;" data="add_team" name="add_team">
+						头像<label class="fileupload" id="fileupload" onclick="">
+								<img src="" id="img_src" class="float_no no_img_src" style="margin-left: 0px;"/>
+							</label>
+						姓名(6个字)<input type="text" disabled="disabled" class="textbox require" />
+						职位(8个字)<input type="text" maxlength="8" class="textbox require" name="position[]" />
+						<input type="hidden" value="" name="managers_team_id[]" />
+						<input type="hidden" value="" name="user_id[]" />
+						<input type="hidden" value="2" name="is_director[]" title="2" />
+						<input type="checkbox" onclick="is_director_check(this)"/>是否主合伙人(投资总监)
+						个人简介(200个字) <textarea type="text"  maxlength="200"  name="brief[]" class="textarea require"></textarea>
+					</div>
+				</if>
+				<span id="team_msg" name="error_msg"></span>
+			</td> 
+		</tr>
+		<tr>
+			<td class="item_title">*基金阶段</td>
+			<td>
+				<select name="fund_period" id="fund_period" class="textbox3 require" data-type="edit">
+					<foreach name="fund_period_list" item="status_item">
+						<option value="{$status_item.id}" <if condition="$vo['fund_period'] eq $status_item['id']">selected="selected"</if>>{$status_item.name}</option>
+					</foreach>
+				</select>
+				<span id="fund_period_msg" name="error_msg"></span>
+			</td>
+			<td class="item_title item_input">*基金状态</td>
+			<td class="item_input">
+				<label><input type="radio" disabled="disabled" name="status" value="1" <if condition="$vo['status'] eq 1">checked="checked"</if> />{%F_PUBLISH_0}</label>
+				<label><input type="radio" disabled="disabled" name="status" value="2" <if condition="$vo['status'] eq 2">checked="checked"</if>/>{%F_PUBLISH_1}</label>
+				<label><input type="radio" disabled="disabled" name="status" value="3" <if condition="$vo['status'] eq 3">checked="checked"</if>/>撤回</label>
+			</td>
+		</tr>
+	</tbody>
+
+	<tbody id="csdq_raising_period" style="display:none">
+		<tr>
+			<td colspan=4 class="topTd"></td>
+		</tr>
+		<tr>
+			<th colspan="4" class="item_title">募集阶段信息</th>
+		</tr>
+		<tr>
+			<td class="item_title">*募集开始日期</td>
+			<td class="item_input">
+				<input type="text" class="textbox3 require" name="raising_start_date" id="raising_start_date" value="{$vo.raising_start_date}" readonly="true" />
+				<span id="raising_start_date_msg" name="error_msg"></span>
+			</td>
+			<td class="item_title item_input">*募集结束日期</td>
+			<td class="item_input">
+				<input type="text" class="textbox3 require" name="raising_end_date" id="raising_end_date" value="{$vo.raising_end_date}" readonly="true" />
+				<span id="raising_end_date_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="item_title">*拟投资行业（200字）</td>
+			<td colspan="3" class="item_input">
+				<textarea type="text"  maxlength="200" name="intend_profession" id="intend_profession" class="textarea require">{$vo.intend_profession}</textarea>
+				<span id="intend_profession_msg"  name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="item_title">*出资节奏（200字）</td>
+			<td colspan="3" class="item_input">
+				<textarea type="text"  maxlength="200" name="pace_of_invest" id="pace_of_invest" class="textarea require">{$vo.pace_of_invest}</textarea>
+				<span id="pace_of_invest_msg"  name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="item_title">*管理费（200字）</td>
+			<td colspan="3" class="item_input">
+				<textarea type="text"  maxlength="200" name="manage_fee" id="manage_fee" class="textarea require">{$vo.manage_fee}</textarea>
+				<span id="manage_fee_msg"  name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="item_title">*投资方式（200字）</td>
+			<td colspan="3" class="item_input">
+				<textarea type="text"  maxlength="200" name="invest_type" id="invest_type" class="textarea require">{$vo.invest_type}</textarea>
+				<span id="invest_type_msg"  name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="item_title">*投票方式（100字）</td>
+			<td colspan="3" class="item_input">
+				<textarea type="text"  maxlength="100" name="vote_type" id="vote_type" class="textarea require">{$vo.vote_type}</textarea>
+				<span id="vote_type_msg"  name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="item_title">*价值与定位（200字）</td>
+			<td colspan="3" class="item_input">
+				<textarea type="text"  maxlength="200" name="value_orientation" id="value_orientation" class="textarea require">{$vo.value_orientation}</textarea>
+				<span id="value_orientation_msg"  name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="2" class="item_title">*行业背景(400个字)</td>
+			<td colspan="1" class="item_input">
+				APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+								<input type="file" class="filebox" name="profession_app_img_file" id="profession_app_img_file" />
+								<input type="hidden" value="{$vo.profession_app_img}" name="profession_app_img" id="profession_app_img"/>
+								<img src='{$vo.profession_app_img|getQiniuPath}' id="profession_app_img_src" class="<if condition="$vo.profession_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.profession_app_img_scale}" name="profession_app_img_scale" id="profession_app_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label>
+			</td>
+			<td colspan="2" class="item_input">
+				网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+								<input type="file" class="filebox" name="profession_pc_img_file" id="profession_pc_img_file" />
+								<input type="hidden" value="{$vo.profession_pc_img}" name="profession_pc_img" id="profession_pc_img"/>
+								<img src='{$vo.profession_pc_img|getQiniuPath}' id="profession_pc_img_src" class="<if condition="$vo.profession_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.profession_pc_img_scale}" name="profession_pc_img_scale" id="profession_pc_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label></td>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<textarea type="text" maxlength="400" name="profession_info" id="profession_info" class="textarea">{$vo.profession_info}</textarea><span id="profession_info_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="2" class="item_title">*投资理念(400个字)</td>
+			<td colspan="1" class="item_input">
+				APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+								<input type="file" class="filebox" name="invest_philosophy_app_img_file" id="invest_philosophy_app_img_file" />
+								<input type="hidden" value="{$vo.invest_philosophy_app_img}" name="invest_philosophy_app_img" id="invest_philosophy_app_img"/>
+								<img src='{$vo.invest_philosophy_app_img|getQiniuPath}' id="invest_philosophy_app_img_src" class="<if condition="$vo.invest_philosophy_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.invest_philosophy_app_img_scale}" name="invest_philosophy_app_img_scale" id="invest_philosophy_app_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label>
+			</td>
+			<td colspan="2" class="item_input">
+				网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+								<input type="file" class="filebox" name="invest_philosophy_pc_img_file" id="invest_philosophy_pc_img_file" />
+								<input type="hidden" value="{$vo.invest_philosophy_pc_img}" name="invest_philosophy_pc_img" id="invest_philosophy_pc_img"/>
+								<img src='{$vo.invest_philosophy_pc_img|getQiniuPath}' id="invest_philosophy_pc_img_src" class="<if condition="$vo.invest_philosophy_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.invest_philosophy_pc_img_scale}" name="invest_philosophy_pc_img_scale" id="invest_philosophy_pc_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label></td>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<textarea type="text" maxlength="400" name="invest_philosophy" id="invest_philosophy" class="textarea">{$vo.invest_philosophy}</textarea><span id="invest_philosophy_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		
+		<!-- 以下非必填 -->
+		<tr>
+			<td rowspan="2" class="item_title">【设立方案】<br>核心优势(400个字)</td>
+			<td colspan="1" class="item_input">
+				APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+								<input type="file" class="filebox" name="advantage_app_img_file" id="advantage_app_img_file" />
+								<input type="hidden" value="{$vo.advantage_app_img}" name="advantage_app_img" id="advantage_app_img"/>
+								<img src='{$vo.advantage_app_img|getQiniuPath}' id="advantage_app_img_src" class="<if condition="$vo.advantage_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.advantage_app_img_scale}" name="advantage_app_img_scale" id="advantage_app_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label>
+			</td>
+			<td colspan="2" class="item_input">
+				网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+								<input type="file" class="filebox" name="advantage_pc_img_file" id="advantage_pc_img_file" />
+								<input type="hidden" value="{$vo.advantage_pc_img}" name="advantage_pc_img" id="advantage_pc_img"/>
+								<img src='{$vo.advantage_pc_img|getQiniuPath}' id="advantage_pc_img_src" class="<if condition="$vo.advantage_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.advantage_pc_img_scale}" name="advantage_pc_img_scale" id="advantage_pc_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label></td>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<textarea type="text" maxlength="400" name="advantage" id="advantage" class="textarea">{$vo.advantage}</textarea><span id="advantage_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		
+		<tr>
+			<td rowspan="2" class="item_title">【设立方案】<br>投资原则及方式(400个字)</td>
+			<td colspan="1" class="item_input">
+				APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+								<input type="file" class="filebox" name="invest_principle_app_img_file" id="invest_principle_app_img_file" />
+								<input type="hidden" value="{$vo.invest_principle_app_img}" name="invest_principle_app_img" id="invest_principle_app_img"/>
+								<img src='{$vo.invest_principle_app_img|getQiniuPath}' id="invest_principle_app_img_src" class="<if condition="$vo.invest_principle_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.invest_principle_app_img_scale}" name="invest_principle_app_img_scale" id="invest_principle_app_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label>
+			</td>
+			<td colspan="2" class="item_input">
+				网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+								<input type="file" class="filebox" name="invest_principle_pc_img_file" id="invest_principle_pc_img_file" />
+								<input type="hidden" value="{$vo.invest_principle_pc_img}" name="invest_principle_pc_img" id="invest_principle_pc_img"/>
+								<img src='{$vo.invest_principle_pc_img|getQiniuPath}' id="invest_principle_pc_img_src" class="<if condition="$vo.invest_principle_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.invest_principle_pc_img_scale}" name="invest_principle_pc_img_scale" id="invest_principle_pc_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label></td>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<textarea type="text" maxlength="400" name="invest_principle" id="invest_principle" class="textarea">{$vo.invest_principle}</textarea><span id="invest_principle_msg" name="error_msg"></span>
+			</td>
+		</tr>
+	
+		<tr>
+			<td rowspan="2" class="item_title">【设立方案】<br>决策流程(400个字)</td>
+			<td colspan="1" class="item_input">
+				APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+								<input type="file" class="filebox" name="decision_process_app_img_file" id="decision_process_app_img_file" />
+								<input type="hidden" value="{$vo.decision_process_app_img}" name="decision_process_app_img" id="decision_process_app_img"/>
+								<img src='{$vo.decision_process_app_img|getQiniuPath}' id="decision_process_app_img_src" class="<if condition="$vo.decision_process_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.decision_process_app_img_scale}" name="decision_process_app_img_scale" id="decision_process_app_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label>
+			</td>
+			<td colspan="2" class="item_input">
+				网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+								<input type="file" class="filebox" name="decision_process_pc_img_file" id="decision_process_pc_img_file" />
+								<input type="hidden" value="{$vo.decision_process_pc_img}" name="decision_process_pc_img" id="decision_process_pc_img"/>
+								<img src='{$vo.decision_process_pc_img|getQiniuPath}' id="decision_process_pc_img_src" class="<if condition="$vo.decision_process_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.decision_process_pc_img_scale}" name="decision_process_pc_img_scale" id="decision_process_pc_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label></td>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				 <textarea type="text" maxlength="400" name="decision_process" id="decision_process" class="textarea">{$vo.decision_process}</textarea><span id="decision_process_msg" name="error_msg"></span>
+			</td>
+		</tr>
+
+		<tr>
+			<td rowspan="2" class="item_title">【设立方案】<br>退出渠道(400个字)</td>
+			<td colspan="1" class="item_input">
+				APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+								<input type="file" class="filebox" name="exit_channel_app_img_file" id="exit_channel_app_img_file" />
+								<input type="hidden" value="{$vo.exit_channel_app_img}" name="exit_channel_app_img" id="exit_channel_app_img"/>
+								<img src='{$vo.exit_channel_app_img|getQiniuPath}' id="exit_channel_app_img_src" class="<if condition="$vo.exit_channel_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.exit_channel_app_img_scale}" name="exit_channel_app_img_scale" id="exit_channel_app_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label>
+			</td>
+			<td colspan="2" class="item_input">
+				网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+								<input type="file" class="filebox" name="exit_channel_pc_img_file" id="exit_channel_pc_img_file" />
+								<input type="hidden" value="{$vo.exit_channel_pc_img}" name="exit_channel_pc_img" id="exit_channel_pc_img"/>
+								<img src='{$vo.exit_channel_pc_img|getQiniuPath}' id="exit_channel_pc_img_src" class="<if condition="$vo.exit_channel_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.exit_channel_pc_img_scale}" name="exit_channel_pc_img_scale" id="exit_channel_pc_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label></td>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				 <textarea type="text" maxlength="400" name="exit_channel" id="exit_channel" class="textarea">{$vo.exit_channel}</textarea><span id="exit_channel_msg" name="error_msg"></span>
+			</td>
+		</tr>
+
+		<tr>
+			<td rowspan="2" class="item_title">【设立方案】<br>收益构成及分配(400个字)</td>
+			<td colspan="1" class="item_input">
+				APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+								<input type="file" class="filebox" name="income_share_app_img_file" id="vision_app_img_file" />
+								<input type="hidden" value="{$vo.income_share_app_img}" name="income_share_app_img" id="income_share_app_img"/>
+								<img src='{$vo.income_share_app_img|getQiniuPath}' id="income_share_app_img_src" class="<if condition="$vo.income_share_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.income_share_app_img_scale}" name="income_share_app_img_scale" id="income_share_app_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label>
+			</td>
+			<td colspan="2" class="item_input">
+				网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+								<input type="file" class="filebox" name="income_share_pc_img_file" id="income_share_pc_img_file" />
+								<input type="hidden" value="{$vo.income_share_pc_img}" name="income_share_pc_img" id="income_share_pc_img"/>
+								<img src='{$vo.income_share_pc_img|getQiniuPath}' id="income_share_pc_img_src" class="<if condition="$vo.income_share_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.income_share_pc_img_scale}" name="income_share_pc_img_scale" id="income_share_pc_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label></td>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				 <textarea type="text" maxlength="400" name="income_share" id="income_share" class="textarea">{$vo.income_share}</textarea><span id="income_share_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		
+		<tr>
+			<td rowspan="2" class="item_title">【设立方案】<br>收益率预测(400个字)</td>
+			<td colspan="1" class="item_input">
+				APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+								<input type="file" class="filebox" name="income_rate_calculate_app_img_file" id="income_rate_calculate_app_img_file" />
+								<input type="hidden" value="{$vo.income_rate_calculate_app_img}" name="income_rate_calculate_app_img" id="income_rate_calculate_app_img"/>
+								<img src='{$vo.income_rate_calculate_app_img|getQiniuPath}' id="income_rate_calculate_app_img_src" class="<if condition="$vo.income_rate_calculate_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.income_rate_calculate_app_img_scale}" name="income_rate_calculate_app_img_scale" id="income_rate_calculate_app_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label>
+			</td>
+			<td colspan="2" class="item_input">
+				网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+								<input type="file" class="filebox" name="income_rate_calculate_pc_img_file" id="income_rate_calculate_pc_img_file" />
+								<input type="hidden" value="{$vo.income_rate_calculate_pc_img}" name="income_rate_calculate_pc_img" id="income_rate_calculate_pc_img"/>
+								<img src='{$vo.income_rate_calculate_pc_img|getQiniuPath}' id="income_rate_calculate_pc_img_src" class="<if condition="$vo.income_rate_calculate_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.income_rate_calculate_pc_img_scale}" name="income_rate_calculate_pc_img_scale" id="income_rate_calculate_pc_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label></td>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				 <textarea type="text" maxlength="400" name="income_rate_calculate" id="income_rate_calculate" class="textarea">{$vo.income_rate_calculate}</textarea><span id="income_rate_calculate_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		
+		<tr>
+			<td rowspan="2" class="item_title">【设立方案】<br>风险提示(400个字)</td>
+			<td colspan="1" class="item_input">
+				APP(宽660，高不限制)<label class="fileupload" onclick="upd_file(this,'img',660,0,2);">
+								<input type="file" class="filebox" name="risk_type_app_img_file" id="risk_type_app_img_file" />
+								<input type="hidden" value="{$vo.risk_type_app_img}" name="risk_type_app_img" id="risk_type_app_img"/>
+								<img src='{$vo.risk_type_app_img|getQiniuPath}' id="risk_type_app_img_src" class="<if condition="$vo.risk_type_app_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.risk_type_app_img_scale}" name="risk_type_app_img_scale" id="risk_type_app_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label>
+			</td>
+			<td colspan="2" class="item_input">
+				网站(宽800，高不限制)<label class="fileupload" onclick="upd_file(this,'img',800,0,2);">
+								<input type="file" class="filebox" name="risk_type_pc_img_file" id="risk_type_pc_img_file" />
+								<input type="hidden" value="{$vo.risk_type_pc_img}" name="risk_type_pc_img" id="risk_type_pc_img"/>
+								<img src='{$vo.risk_type_pc_img|getQiniuPath}' id="risk_type_pc_img_src" class="<if condition="$vo.risk_type_pc_img neq ''" >img_src<else/>no_img_src</if>" style="border:1px solid #CCC;float:none;margin-left:-50px;" />
+								<input type="hidden" class="fileupload_scale" value="{$vo.risk_type_pc_img_scale}" name="risk_type_pc_img_scale" id="risk_type_pc_img_scale"/>
+							</label>
+				<label class="fileuploading" style="display:none">正在上传</label></td>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				 <textarea type="text" maxlength="400" name="risk_type" id="risk_type" class="textarea">{$vo.risk_type}</textarea><span id="risk_type_msg" name="error_msg"></span>
+			</td>
+		</tr>
+	</tbody>
+
+	<tbody id="csdq_online_period" style="display:none">
+		<tr>
+			<td colspan=4 class="topTd"></td>
+		</tr>
+		<tr>
+			<th colspan="4" class="item_title">管理阶段信息</th>
+		</tr>
+	    <tr>
+			<td class="item_title">*已投资项目单个最高回报</td>
+			<td class="item_input">
+				<input type="text" disabled="disabled" class="textbox3 require" name="max_payback" maxlength="6" id="max_payback" value="{$vo.max_payback}"  /> 倍
+				<span id="max_payback_msg" name="error_msg"></span>
+			</td>
+			<td class="item_title item_input">*已投资项目总体平均回报</td>
+			<td class="item_input">
+				<input type="text" disabled="disabled"class="textbox3 require" name="average_payback" maxlength="6" id="average_payback"  value="{$vo.average_payback}" /> 倍
+				<span id="average_payback_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="item_title">*基金整体回报</td>
+			<td colspan="3" class="item_input">
+				<input type="text" disabled="disabled" class="textbox3 require" name="total_payback" maxlength="6" id="total_payback"  value="{$vo.total_payback}" /> 倍
+				<span id="total_payback_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="4" class="item_title">*基金收益分配</td>
+			<td colspan="3" class="item_input" id="fund_income_rate">
+				<span style="display:inline-block;width:180px;color:#000">投资总监分配比例（%）：</span>
+				<input type="text" own_type="float" maxlength="5" class="textbox require" name="fund_income_rate_director" id="fund_income_rate_director" value="{$vo.fund_income_rate_director}" />
+				<span id="fund_income_rate_director_msg" name="error_msg"></span>
+			</td> 
+		</tr>
+		<tr>
+			<td colspan="3" class="item_input" id="fund_income_rate">
+				<span style="display:inline-block;width:180px;color:#000">渠道合伙人分配比例（%）：</span>
+				<input type="text" own_type="float" maxlength="5" class="textbox require" name="fund_income_rate_partner" id="fund_income_rate_partner" value="{$vo.fund_income_rate_partner}" />
+				<span id="fund_income_rate_partner_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="item_input" id="fund_income_rate">
+				<span style="display:inline-block;width:180px;color:#000">磁斯达克分配比例（%）：</span>
+				<input type="text" own_type="float" maxlength="5" class="textbox require" name="fund_income_rate_cisdaq" id="fund_income_rate_cisdaq" value="{$vo.fund_income_rate_cisdaq}" />
+				<span id="fund_income_rate_cisdaq_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="item_input" id="fund_income_rate">
+				<span style="display:inline-block;width:180px;color:#000">LP基金收益分配比例（%）：</span>
+				<input type="text" own_type="float" maxlength="5" class="textbox require" name="fund_income_rate_invester" id="fund_income_rate_invester" value="{$vo.fund_income_rate_invester}" />
+				<span id="fund_income_rate_invester_msg" name="error_msg"></span>
+			</td>
+		</tr>
+	</tbody>
+
+	<tbody>
+		<tr>
+			<td colspan=6 class="topTd"></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<include file="Public:footer" />
+<script>
+$(function(){
+	$("input,textarea").attr("readonly",true).addClass("readonly");
+})
+</script>

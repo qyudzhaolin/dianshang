@@ -1,0 +1,222 @@
+{include file="inc/header.html"}
+<?php
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/main.css";
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/check.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/upload.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/personal_header.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/account.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/md5.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/SMS.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+
+<div class="content_box2 bg_white" id="personal_id">
+    <div class="personal_box">
+        <a href='{url r="home"}'>我的个人中心</a>
+        <img src="{function name="get_spec_image" v="right_corner.jpg" }" alt=""/>
+        <span>账户安全</span>
+    </div>
+    <div class="personal_content clearfix">
+        {include file="inc/sidebar_user.html"}
+        <!-- 个人资料，保存更新-->
+        <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+
+
+
+
+             <!--账户安全-->
+            <form action="" class="form bs pos" id="display_block">
+                <div class="account_security">
+                    <div class="account_textarea">
+                        <i>会员认证</i>
+                        <b {if $home_user_info.is_review==1}class=""{else}class="active"{/if}></b>
+
+                        {if $home_user_info.is_review==0}<span  id='is_review_text'>认证成功后才可以进行项目投资</span><div class="account_cation" id='is_review_button'>立即认证</div>{/if}
+                        {if $home_user_info.is_review==2}<span>投资人认证资格审核中...</span><div class="account_cation center" >认证审核中</div>{/if}
+                        {if $home_user_info.is_review==1}<span>投资人会员资格已认证</span><div class="account_cation  green">已认证</div>{/if}
+                    </div>
+
+                    <div class="account_textarea">
+                        <i>登录密码</i>
+                        <b></b>
+                        <span>您已享受会员安全保障服务</span>
+                        <div class="account_modify Change_password">修改</div>
+                    </div>
+
+                    <div class="account_textarea">
+                        <i>手机绑定</i>
+                        <b></b>
+                        <span>您的身份验证方式</span>
+                        <div class="account_modify Bound_phone">换绑手机号码</div>
+                    </div>
+
+                </div>
+            </form>
+            <!-- 修改密码-->
+            <form action="" class="form bs Change_password" id="form_text" style="margin:54px 0 0 0;">
+
+                <ul class="Unbundling-box Change">
+                    <li>
+                        <h2>修改密码</h2>
+                        <div class="clearfix pos_re">
+                            <i class="password_i old_password1">*</i>
+                            <span class="fl">旧密码：</span>
+
+                            <input type="password" maxlength="12" value="" placeholder="请输入旧密码" title="请输入旧密码" id="user_old_pwd" name="user_old_pwd" class="default_font">
+
+                            <input type="hidden" value="{$home_user_info.user_pwd}" id="user_old_pwd_db">
+                            <span id="user_old_pwd_msg" name="error_msg"></span>
+                        </div>
+
+                        <div class="clearfix pos_re">
+                            <i class="password_i old_password2">*</i>
+                            <span class="fl">新密码：</span>
+
+                            <input type="password" maxlength="12" value="" placeholder="请输入6至12位数字或字母" title="请输入6至12位数字或字母" id="user_new_pwd" name="user_new_pwd" class="default_font">
+                            <span id="user_new_pwd_msg" name="error_msg"></span>
+
+                        </div>
+                        <div class="clearfix pos_re">
+                            <i class="password_i old_password3">*</i>
+                            <span class="fl">确认新密码：</span>
+                            <input type="password" maxlength="12" value="" placeholder="请确认新密码" title="请确认新密码" id="user_new_pwd_confirm" name="user_new_pwd_confirm" class="default_font">
+                            <span id="user_new_pwd_confirm_msg" name="error_msg"></span>
+                            <span id="get_pwd_third_msg" name="error_msg"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <ul class="btn_Unbundling Change">
+                            <li onclick="reset_pwd();">确认</li>
+                            <li class="examine_cancel bs cancel">取消</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </form>
+            <!-- 解绑旧手机号码-->
+            <form action="" class="form bs Unbundling" id="form_text" style="margin:54px 0 0 0;">
+                <ul class="Unbundling-box">
+                    <li>
+                        <h2>解绑旧手机号码</h2>
+                        <div class="clearfix">
+                            <span class="fl phone">手机号码：</span>
+                            <input type="text" name="get_pwd_mobile" id='get_pwd_mobile' value="{$home_user_info.mobile}" readonly="readonly" maxlength="11" disabled />
+                            <input type="hidden" value="2" id="business_type">
+                        </div>
+                        <div class="clearfix pos_re">
+                            <span class="fl phone">&nbsp;&nbsp;&nbsp;验证码：</span>
+                            <label for="" class="fl">
+                                <input type="text" class="Verification_code"  id="get_pwd_message" maxlength="6" name="get_pwd_message"/>
+
+                                <a onclick="get_verify_code('get_pwd');" class="change_next" id="get_pwd_btn_verify_code">获取短信验证码</a>
+                            </label>
+
+                            <span class="loginregister" id="get_pwd_msg" name="error_msg"></span>
+
+                        </div>
+                    </li>
+
+                    <li class="Unbundling_li2">
+                        <h2>绑定新手机号码</h2>
+                        <div class="clearfix pos_re">
+                            <span class="fl phone">手机号码：</span>
+                            <input type="text" name="get_news_mobile" id="get_news_mobile" maxlength="11"  value="" />
+                            <input type="hidden" value="1" id="business_type">
+                            <span id="get_news_mobile_msg" name="error_msg"></span>
+                        </div>
+ 
+                        <div class="clearfix  pos_re">
+                            <span class="fl phone">&nbsp;&nbsp;&nbsp;验证码：</span>
+                            <label for="" class="fl">
+                                <input type="text" class="Verification_code"  id="get_new_message" maxlength="6" name="get_new_message"/>
+                                <span id="get_new_message_msg" name="error_msg"></span>
+                                <a onclick="get_verify_code('get_new');" class="change_next" id="get_pwd_btn_verify_code_new">获取短信验证码</a>
+                            </label>
+                            <span class="loginregister" id="get_pwd_second_msg" name="error_msg"></span>
+
+                        </div>
+
+                    </li>
+                    <li>
+                        <ul class="btn_Unbundling DA_DU">
+                            <li onclick="bind_mobile();">确定</li>
+                            <li class="examine_cancel bs">取消</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </form>
+            
+            <form action="" class="form bs active2 infi" style="padding-top:0px" id="active2_infi">
+                <h2 class="form_h2 card_rw">
+                    名片认证 
+                    <input type="hidden" value="{$home_user_info.is_review}" name="is_review_url" id="is_review_url"/>
+                </h2>
+                 
+                <div>
+                    <i></i>
+                    <b>真实姓名</b>
+                    <input type="text" id="user_name" name="user_name"  maxlength="6" value="{$home_user_info.user_name}" />
+                    <span id="user_name_msg"></span>
+                </div>
+                <div>
+                    <i></i>
+                    <b>手机号码</b>
+                    <input type="text" id="mobile_01" name="mobile" autocomplete="off" readonly="readonly" value="{$home_user_info.mobile}" disabled="disabled"/>
+                </div>
+                <ul class="examine_page clearfix">
+                    <li class="fl" id="">
+                        <label id="personal_card" class="fileupload" onclick="upd_file(this,'img',0,0,2);">
+                            <input type="file" class="filebox" name="card_img" id="card_img" />
+                            <input type="hidden" value="{$home_user_info.img_card_logo}" name="img_card_logo" id="img_card_logo"/>
+                            <img src='{$home_user_info.card_real_img}' id="card_img_src" {if $home_user_info.card_real_img}{else}style="display:none;"{/if}/>
+                        </label>
+                        <span id="img_card_logo_msg"><b id="upload_pic" class="fileuploading">请上传您的名片</b></span>
+                    </li>
+                </ul>
+                <button type="button" class="save_btn next" onclick="user_review()">提交审核</button>
+            </form>
+            <!-- 会员认证资格审核-->
+            <form action="" class="form bs Audit bs" style="margin:54px 0 0 0;">
+                <ul class="Audit bs">
+                    {if $home_user_info.is_review==1}
+                    <li>已认证</li>
+                    {else}
+                    <li>会员认证资格审核中...</li>
+                    {/if}
+                </ul>
+
+                <div style="margin:20px 0 0 32px;">
+                    <b>真实姓名：</b>
+                    <label for="" style="height:0px;">{$home_user_info.user_name}</label>
+                </div>
+                <div>
+                    <b>手机号码：</b>
+                    <label for="" style="height:0px;">{$home_user_info.mobile}</label>
+                </div>
+               
+              
+                {if $home_user_info.card_real_img}
+                <div class="control_max control_max2 clearfix" style="    margin:  6px 0px 0px 32px;">
+                    <b class="fl">个人名片：</b>
+                    <div class="control_box fr">
+                        <img src='{$home_user_info.card_real_img}' id="is_card"  alt="个人名片" />
+                        <p></p>
+                    </div>
+                </div>
+                {/if}
+                <button class="save_btn back bs">返回</button>
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+{include file="inc/footer.html"}

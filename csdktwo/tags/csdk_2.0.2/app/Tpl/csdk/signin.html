@@ -1,0 +1,32 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/Sign_In.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/user_check_new.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/signin.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="Sign_In_bj_mask">
+    <div class="Sign_In_box clearfix">
+        <div class="fl"></div>
+
+        <div class="fl Sign_In_from">
+            <from action="#">
+                <h2>登录</h2>
+                <label class="Sign_In_label_01">
+                    <i></i>
+                    <input type="text" class="input1" maxlength="11" name="mobile" id="mobile" placeholder="请输入您的11位手机号码" title="请输入您的11位手机号码" />
+                	<span class="error_msg" id="mobile_error_msg"></span>
+                </label>
+                <label class="Sign_In_label_02">
+                    <i></i>
+                	<input type="password" class="input2" maxlength="12" name="pwd" id="pwd" placeholder="请输入登录密码" title="请输入登录密码" value=""/>
+                	<span class="error_msg" id="pwd_error_msg"></span>
+                </label>
+                <input type="button" value="登录" class="btn" onclick="signin()" id="signin" />
+                <input type="hidden" name="backurl" value="{$backurl}" />
+            </from>
+            <div class="Retrieve_paddingTB25"><span>没有账号？</span><a href="{url r="user#signup"}">马上注册</a><a href="{url r="user#findPassword"}">忘记密码？</a></span></div>
+        </div>
+    </div>
+</div>
+{include file="inc/footer.html"} 

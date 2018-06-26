@@ -1,0 +1,264 @@
+
+{include file="inc/header.html"} 
+<?php
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/base.css";
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/introduce.css";
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/swiper.min.css";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jQuery_v1.8.3.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/base.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/upload.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/Introduce.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/swiper.min.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_content clearfix">
+
+        <!--轮换图-->
+        <div class="swiper-container swiper-container3" style="margin:0px auto 0">
+            <div class="swiper-wrapper">
+                {foreach from=$carousel item=vo}
+                	<div class="swiper-slide">
+			            {if $vo.b_url}
+						<a href="{$vo.b_url}" target="_blank">
+							<img src='{$vo.b_pc_img}' alt="{$vo.b_title}" width="1000" height="360" />
+						</a>
+						{else}
+						<img src='{$vo.b_pc_img}' alt="{$vo.b_title}" width="1000" height="360" />
+						{/if}
+	                </div>
+                {/foreach}
+            </div>
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev button-prev3"></div>
+            <div class="swiper-button-next button-next3"></div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination" id="swiper-pagination3"></div>
+        </div>
+
+
+        <div class="About_us_centent">
+            <h2 class="Selection_bar">
+                <span>管理团队</span>
+            </h2>
+            <div class="team_div clearfix">
+                <ul class="left_team">
+
+                    <li class="clearfix img_child_border">
+                        <img src="{function name="get_spec_image" v="bos_1.png" }" alt="" class="toz_img"/>
+                        <dl class="dl_bar">
+                            <dt>刘宇</dt><br >
+                            <dt>董事长</dt>
+                            <dd dataindex="0">原正和磁系创始人兼CEO，浙商创投合伙人<br >
+                                发起了中国第一支O2O创新消费基金<br >
+                                原窝窝团销售副总裁<br >
+                                在资本运作和投资领域有极强判断力和丰富经验
+
+                            </dd>
+                            <img src="{function name="get_spec_image" v="up_j.png" }" alt="" class="up_pos"/>
+                        </dl>
+
+                    </li>
+
+                    <li class="clearfix img_child_border">
+                        <img src="{function name="get_spec_image" v="bos_4.png" }" alt="" class="toz_img"/>
+                        <dl class="dl_bar">
+                            <dt>徐飞</dt><br >
+                            <dt>CEO</dt>
+                            <dd dataindex="2">曾任职于艺龙网、窝窝团、软银中国、普华永道等知名企业<br >
+                                参与投资并购的企业交易额达数十亿<br >
+                                拥有国际化的背景和前瞻性的投资理念
+                            </dd>
+                            <img src="{function name="get_spec_image" v="up_j.png" }" alt="" class="up_pos"/>
+                        </dl>
+
+                    </li>
+                    <li class="clearfix img_child_border">
+                        <img src="{function name="get_spec_image" v="bos_2.png" }" alt="" class="toz_img"/>
+                        <dl class="dl_bar">
+                            <dt>刘铁铮</dt><br >
+                            <dt>首席风控官</dt>
+                            <dd dataindex="4">历任华泰汽车董事长秘书、汉王科技法务总监、窝窝团首席法务官<br >
+                                直接参与汉王科技A股、窝窝团美股的发行<br >
+                                拥有十余年法律、投资等方面管理经验
+                            </dd>
+                            <img src="{function name="get_spec_image" v="up_j.png" }" alt="" class="up_pos"/>
+                        </dl>
+
+                    </li>
+                </ul>
+                <ul class="right_team">
+                    <li class="clearfix img_child_border" >
+                        <img src="{function name="get_spec_image" v="to_4.png" }" alt="" class="toz_img"/>
+                        <dl class="dl_bar">
+                            <dt>严旭</dt><br >
+                            <dt>副董事长</dt>
+                            <dd dataindex="1" style="height:60px">原青岛啤酒股份有限公司全球营销总裁<br>
+                                盖娅资本创始合伙人兼董事长
+                            </dd>
+                            <img src="{function name="get_spec_image" v="up_j.png" }" alt="" class="up_pos" id="up_posP_get"/>
+                        </dl>
+
+                    </li>
+                    <li class="clearfix img_child_border">
+                        <img src="{function name="get_spec_image" v="bos_5.png" }" alt="" class="toz_img"/>
+                        <dl class="dl_bar">
+                            <dt>刘毅</dt><br >
+                            <dt>首席架构师</dt>
+                            <dd dataindex="3">原现代联合网络首席运营官，原窝窝团运营副总裁<br >
+                                著名互联网模式产品架构设计师<br >
+                                在互联网运营和移动互联网运营领域具有丰富经验
+                            </dd>
+                            <img src="{function name="get_spec_image" v="up_j.png" }" alt="" class="up_pos"/>
+                        </dl>
+
+                    </li>
+
+                    <li class="clearfix img_child_border">
+                        <img src="{function name="get_spec_image" v="bos_3.png" }" alt="" class="toz_img"/>
+                        <dl class="dl_bar">
+                            <dt>陈洋</dt><br >
+                            <dt>CTO</dt>
+                            <dd dataindex="5">曾任职窝窝团、幸福 9号、美国宏道、软通动力等多家知名企业<br >
+                                在产品设计、业务架构、团队管理等方面有丰富实践经验<br >
+                                熟悉互联网运营体系，擅长产品及运营的决策把控
+                            </dd>
+                            <img src="{function name="get_spec_image" v="up_j.png" }" alt="" class="up_pos"/>
+                        </dl>
+
+                    </li>
+
+                </ul>
+                 <!--1 -->
+                 <!--3 -->
+                <!-- 5-->
+                <!-- 7-->
+                <!-- ========== -->
+                <!-- 2-->
+                 <!--4 -->
+                <!-- 6-->
+            </div>
+            <h2>
+                <span>专家顾问</span>
+            </h2>
+            <ul class="character_boxli clearfix">
+                <li>
+                    <div>
+                        <div class="border_1px">
+                         <img src="{function name="get_spec_image" v="to_1.png" }" alt=""/>
+                            <dl>
+                                <dt>刘东华</dt>
+                                <dd>正和岛创始人兼首席架构师</dd>
+                            </dl>
+                        </div>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div class="border_1px">
+                         <img src="{function name="get_spec_image" v="to_3.png" }" alt=""/>
+                            <dl>
+                                <dt>夏华</dt>
+                                <dd>依文集团董事长</dd>
+                            </dl>
+                        </div>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div class="border_1px">
+                         <img src="{function name="get_spec_image" v="to_tz_2.png" }" alt=""/>
+                            <dl>
+                                <dt>孙锋峰</dt>
+                                <dd>金固股份[002488]董事长</dd>
+                            </dl>
+                        </div>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="border_1px">
+                     <img src="{function name="get_spec_image" v="to_tz_4.png" }" alt=""/>
+                        <dl>
+                            <dt>曾宪经</dt>
+                            <dd>量子高科[300149]董事长</dd>
+                        </dl>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="character_boxli clearfix">
+                <li>
+                    <div>
+                        <div class="border_1px">
+                            <img src="{function name="get_spec_image" v="to_2.png" }" alt=""/>
+                            <dl>
+                                <dt>沈琳</dt>
+                                <dd>东霖食品[834020]董事长</dd>
+                            </dl>
+                        </div>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div class="border_1px">
+                            <img src="{function name="get_spec_image" v="to_2_02.png" }" alt=""/>
+                            <dl>
+                                <dt>李大学</dt>
+                                <dd>慈云科技CEO</dd>
+                            </dl>
+                        </div>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div class="border_1px">
+                            <img src="{function name="get_spec_image" v="to_tz_5.png" }" alt=""/>
+                            <dl>
+                                <dt>杨君敏</dt>
+                                <dd>双塔集团[002481]董事长</dd>
+                            </dl>
+                        </div>
+
+                    </div>
+                </li>
+
+
+                <li>
+                    <div>
+                        <div class="border_1px">
+                            <img src="{function name="get_spec_image" v="to_2_04.png" }" alt=""/>
+                            <dl>
+                                <dt>陈钦鹏</dt>
+                                <dd>齐心集团[002301]董事长</dd>
+                            </dl>
+                        </div>
+
+                    </div>
+                </li>
+
+
+            </ul>
+            <h2 class="Selection_bar">
+               <span>我们的服务</span>
+            </h2>
+            <ul>
+             <img src="{function name="get_spec_image" v="wo_m.png" }" />
+
+            </ul>
+            <h2 class="value_bar">
+                <span>我们的价值</span>
+            </h2>
+            <div class="padding_100">
+                 <img src="{function name="get_spec_image" v="wo_01.png" }" />
+                <img src="{function name="get_spec_image" v="wo_02.png" }"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="inc/footer.html"} 

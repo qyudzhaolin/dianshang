@@ -1,0 +1,30 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">投资意向列表</div>
+<div class="blank5"></div>
+
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="deal" 
+	checkbox="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,user_name|msubstr:投资人|220px
+		,mobile|msubstr:投资人电话|220px
+		,deal_name|msubstr:项目名称|220px
+		,create_time|to_date:发送投资意向时间
+  		" 
+	/> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

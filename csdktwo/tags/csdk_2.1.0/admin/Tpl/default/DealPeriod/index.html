@@ -1,0 +1,24 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<div class="main">
+<div class="main_title">融资阶段列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}" onclick="add();" />
+	
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="cate" 
+	checkbox="true" 
+	datasource="list" 
+	show="id:{%ID}|50px,name:分类名称:,mapname:查询映射名称:,brief:一句话简介:,sort|get_sort=$cate['id']:{%SORT}" 
+ /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

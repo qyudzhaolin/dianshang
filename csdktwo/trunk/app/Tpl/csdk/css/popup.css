@@ -1,0 +1,246 @@
+.mask{
+    position: absolute;
+    filter: alpha(opacity=30);
+    background-color: #777;
+    z-index: 1002; left: 0px;
+    opacity:0.3; -moz-opacity:0.3;
+    top:0;left:0;
+    background: #000;opacity: 0.3;
+
+}
+.text_div{
+
+    position: fixed;
+    /*top:calc(50% - 100px);*/
+    /*left:calc(50% - 200px);*/
+    top:50%;
+    left:50%;
+    margin-left:-200px;
+    margin-top:-130px;
+    height:262px;
+    width:400px;
+    background: #fff;
+    
+
+    z-index: 1111;
+    border-radius: 0px;
+    
+
+    -webkit-transform:perspective(800px) ;
+    -moz-transform: perspective(800px);
+    -ms-transform: perspective(800px);
+    -o-transform: perspective(800px);
+    transform: perspective(800px);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+
+
+
+    
+
+}
+.box a.register.center:nth-of-type(1){
+    position: absolute;
+    top:0;
+    left:50%;
+    margin-left:-65px;
+    float: left;
+    display: inline-block;
+    line-height: 30px;
+    height: 30px;
+    padding: 0 30px;
+
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.Sign_In2{
+    position: absolute;
+    height:43px;
+    width:42px;
+    right:-20px;
+    top:-20px;
+    text-align: center;
+    line-height: 40px;
+    background: url("../images/close_mi.png") no-repeat center;
+    z-index:1111 ;
+    color:#dba775;
+}
+
+.text_div .b{
+    position:absolute;
+    top:6px;
+
+    height:38px;
+    width:400px;
+    border-radius:4px 4px 0 0;
+    padding: 0 0 0 0px;
+    text-align: center;
+    line-height: 38px;
+    font-size:16px;
+    color:#dba775;
+}
+.text_div .box{
+    position: absolute;
+    left:0;
+    height:50px;
+
+    width:400px;
+    background: #fff;
+    text-align: center;
+
+
+}
+.box a:nth-of-type(1){
+    float:left;
+    display: inline-block;
+    line-height: 30px;
+    height:30px;
+    padding:0 30px;
+    margin:0 0 0 80px;
+    border-radius: 4px;
+    font-size: 16px;
+
+}
+.box a:nth-of-type(2){
+    margin:0 80px 0 0;
+    float:right;
+    display: inline-block;
+    line-height: 30px;
+    height:30px;
+    padding:0 30px;
+    border-radius: 5px;
+    font-size:16px;
+}
+
+.box .active{
+    background: #dba874;
+    color:#fff;
+    border:1px solid #dba874;
+}
+.Sign_In,.register{
+    position: relative;
+    z-index: 1212;
+    border-radius: 4px;
+    border:1px solid #e3e3e5;
+}
+#b{
+    position: relative;
+    z-index: 1212;
+    border-radius: 4px;
+    font-size:14px;
+    color:#999;
+
+
+}
+.Prompt{
+    color:#333;
+
+    height:100px;
+    width:360px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 100px;
+    margin:0 20px;
+    border-bottom:1px solid #c5c5c5;
+}
+.Sign_In.active:active{
+    background-color:#E87E12;
+    -webkit-transition:.12s;
+    -moz-transition:.12s;
+    transition:.12s;
+    color:#D4D3D2;
+}
+
+.set_p_style_1,.set_p_style_2{position: relative;}
+.set_p_style_1 i{
+    position: absolute;
+    top: 2px;
+    left: 84px;
+    height: 36px;
+    width: 36px;
+    background: url("../images/End-call.png") no-repeat 12px center;
+    z-index: 10;
+}
+.set_p_style_2 i{
+    position: absolute;
+    top: 24px;
+    left: 84px;;
+    height: 36px;
+    width: 36px;
+    background: url("../images/Lock-.png") no-repeat 12px center;
+    z-index: 10;
+}
+.set_p_style_1 .error_msg,.set_p_style_2 .error_msg{
+    position: absolute;
+    bottom: -14px;
+    left: 84px;
+    font-size: 12px;
+    line-height: 1em;
+    color:#C10808;
+}
+
+.anim_1{
+    -webkit-animation-name:anim_1;
+    -webkit-animation-duration:.2s;
+    -webkit-animation-timing-function:ease-out;
+    -webkit-animation-fill-mode:forwards;
+    -webkit-animation-direction:alternate;
+
+    -moz-animation-name:anim_1;
+    -moz-animation-duration:.2s;
+    -moz-animation-timing-function:ease-out;
+    -moz-animation-fill-mode:forwards;
+    -moz-animation-direction:alternate;
+
+    animation-name:anim_1;
+    animation-duration:.2s;
+    animation-timing-function:ease-out;
+    animation-fill-mode:forwards;
+    animation-direction:alternate;
+}
+
+@-webkit-keyframes anim_1{
+    0%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    10%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);}
+    20%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    30%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);}
+    40%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    50%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);
+    60%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    70%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);}
+    80%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    90%{-webkit-transform:translate3d(5px,0,0);-moz-transform:translate3d(5px,0,0);transform:translate3d(5px,0,0);}
+    100%{-webkit-transform:translate3d(0px,0,0);-moz-transform:translate3d(0px,0,0);transform:translate3d(0px,0,0);
+}
+
+@-moz-keyframes anim_1{
+    0%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    10%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);}
+    20%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    30%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);}
+    40%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    50%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);
+    60%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    70%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);}
+    80%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    90%{-webkit-transform:translate3d(5px,0,0);-moz-transform:translate3d(5px,0,0);transform:translate3d(5px,0,0);}
+    100%{-webkit-transform:translate3d(0px,0,0);-moz-transform:translate3d(0px,0,0);transform:translate3d(0px,0,0);
+}
+
+@keyframes anim_1{
+    0%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    10%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);}
+    20%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    30%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);}
+    40%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    50%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);
+    60%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    70%{-webkit-transform:translate3d(10px,0,0);-moz-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0);}
+    80%{-webkit-transform:translate3d(-10px,0,0);-moz-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0);}
+    90%{-webkit-transform:translate3d(5px,0,0);-moz-transform:translate3d(5px,0,0);transform:translate3d(5px,0,0);}
+    100%{-webkit-transform:translate3d(0px,0,0);-moz-transform:translate3d(0px,0,0);transform:translate3d(0px,0,0);
+}

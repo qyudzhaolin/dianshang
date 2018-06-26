@@ -1,0 +1,139 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	// $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/estp.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/upload.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/deal.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/dcom_array.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/check.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+{include file="inc/estp_flow.html"}
+<div class="wrap">
+	{include file="inc/sidebar.html"}
+	{if $user_info.is_review!=1 && $user_info.is_review!=2}
+	<div class="investor content estp_show">
+		<form action="javascript:void(0);" method="post" enctype="multipart/form-data">
+			<dl class=" comp_name">
+				<dt class="p_name"><i class="radius"></i>公司名称</dt>
+				<dd class="deal_show_five">
+					<input type="text" class="estp_name" maxlength="14" value="{if $deal.company_name}{$deal.company_name}{else}请填写您的公司名称（14字以内）{/if}" title="请填写您的公司名称（14字以内）" name="company_name"  id="company_name">
+					<span id="company_name_msg" name="error_msg"></span>
+				</dd>
+			</dl>
+
+			<dl class="long">
+				<dt class="p_name"><i class="radius"></i>公司简介</dt>
+				<dd>
+					<textarea name="company_brief" maxlength="100" title="请简要介绍公司概况（100字以内）"id="company_brief" cols="30" rows="10">{if $deal.company_brief}{$deal.company_brief}{else}请简要介绍公司概况（100字以内）{/if}</textarea>
+					<!-- <input type="text" value="{if $deal.company_brief}{$deal.company_brief}{else}请简要介绍公司概况（28字以内）{/if}" title="请简要介绍公司概况（28字以内）" name="company_brief"  id="company_brief"> -->
+					<span id="company_brief_msg" name="error_msg"></span>
+				</dd>
+			</dl>
+			 
+			<dl class="long">
+				<dt class="p_name"><i class="radius"></i>您担任的职务</dt>
+				<dd class="deal_show_five">
+					<input type="text"  maxlength="14" class="company_post" value="{if $deal.company_title}{$deal.company_title}{else}您的职务{/if}" title="您的职务" name="company_title"  id="company_title">
+					<input type="text"  maxlength="28" value="{if $deal.company_scope}{$deal.company_scope}{else}请介绍您的工作范围（28字以内）{/if}" title="请介绍您的工作范围（28字以内）" name="company_scope"  id="company_scope">
+					<span id="company_title_msg" name="error_msg"></span><!-- <span id="company_scope_msg"></span> -->
+				</dd>
+			</dl>
+
+			<dl class="long">
+				<dt class="p_name"><i class="radius"></i>公司团队或成员</dt>
+				<dd id="team">
+					{if $deal_team}
+					{foreach from = $deal_team item = deal_team_item}
+					<div name="deal_team_tag" data="deal_team_tag" class="team_box">
+					<input type="text"  maxlength="14" class="company_name" name="team_name" title="姓名"   value="{if $deal_team_item.name}{$deal_team_item.name}{else}姓名{/if}" />
+					<input type="text"  maxlength="14" class="company_title" name="team_title" title="职务"  value="{if $deal_team_item.title}{$deal_team_item.title}{else}职务{/if}" />
+					<input type="text"  maxlength="28" class="company_brief" name="team_intro" title="请介绍您的团队成员（28字以内）"  value="{$deal_team_item.brief}" />
+
+					<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+					</div>
+					{/foreach}
+					{else}
+					<div name="deal_team_tag" data="deal_team_tag" class="team_box">
+					<input type="text"  maxlength="14" class="company_name" name="team_name" title="姓名"  value="姓名" />
+					<input type="text"  maxlength="14" class="company_title" name="team_title" title="职务" value="职务" />
+					<input type="text"  maxlength="28" class="company_brief" name="team_intro" title="请介绍您的团队成员（28字以内）"  value="请介绍您的团队成员（28字以内）" />
+					 <a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+					</div>
+					
+					 {/if}
+					<p class="msg_tag"><button class="add" onclick="add_dcom('deal_team_tag',4);">继续添加成员</button>
+					<span id="team_msg" name="error_msg"></span></p>
+				</dd>
+				<!-- <span id="title_msg"></span><span id="intro_msg"></span> -->
+			</dl>
+<!-- 			<dl>
+				<dt></dt>
+				<dd> 
+					<p class="prompt_tag">
+						<button class="add" onclick="add_dcom('team','name','add_team',0);">继续添加成员</button>
+					</p>
+					</dd>
+			</dl> -->
+ 
+			<dl class="message"><dt>备注</dt><dd class="p_name"><i class="radius"></i>为必填项目</dd></dl>
+			<dl class="next_btn_box experience" id="ex">
+				<dt></dt>
+				<dd class="p_name">
+					<div class="clear_both">
+				    	<input type="hidden" id="preview_id" name="preview_id" value="{$deal.id}">
+						<button class="next" id="preview_btn"  onclick="preview_next()">预览我的项目</button>
+						<button class="next" onclick="company_next()">进入磁斯达克审核认证</button>
+					</div>
+					<p class="hint">提示：一旦进入磁斯达克审核认证，您所填写的信息将无法修改，请谨慎操作。</p>
+				</dd>
+				<span id="error_msg" name="error_msg"></span></dl>
+		</form>
+	</div>
+	{else}
+	<div class="investor content estp_show about_show estp_lefttext">
+		<form action="javascript:void(0);" method="post" enctype="multipart/form-data">
+			<dl class="long estp_logo">
+				<dt class="p_name">公司名称</dt>
+				<dd class="deal_show_five">
+				<p>{$deal.company_name}</p>
+ 					<span id="company_name_msg"></span>
+				</dd>
+			</dl>
+			<dl class="long txtarea2">
+				<dt class="p_name">公司简介</dt>
+				<dd>
+				<p>{$deal.company_brief}</p>
+					 
+					<span id="company_brief_msg"></span>
+				</dd>
+			</dl>
+			 
+			<dl class="long" id="pos">
+				<dt class="p_name">您担任的职务</dt>
+				<dd class="deal_show_five">
+				<p><b>{$deal.company_title}</b><b>{$deal.company_scope}</b></p>
+					 
+					<span id="company_title_msg"></span><span id="company_scope_msg"></span>
+				</dd>
+			</dl>
+
+			<dl class="long">
+				<dt class="p_name">公司团队或成员</dt>
+				<dd id="team" class="touzi">
+					{foreach from = $deal_team item = deal_team_item}
+					<li><b>{$deal_team_item.name}</b><b>{$deal_team_item.title}</b><strong>{$deal_team_item.brief}</strong></li>
+					{/foreach}
+					<span id="name_msg"></span><span id="title_msg"></span><span id="intro_msg"></span>
+				</dd>
+			</dl>
+		</form>
+	</div>
+	{/if}
+
+</div>
+
+{include file="inc/footer.html"} 

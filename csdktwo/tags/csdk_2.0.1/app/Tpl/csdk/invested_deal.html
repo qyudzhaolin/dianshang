@@ -1,0 +1,319 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/play_film.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/invested_deal.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/exporting.js";
+
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_box">
+        <a href='{url r="home"}'>我的个人中心</a>
+        <img src='{function name="get_spec_image" v="right_corner.jpg"}' alt="right_corner"/>
+        <a href='{url r="invested"}'>我的投资</a>
+        <img src='{function name="get_spec_image" v="right_corner.jpg"}' alt="right_corner"/>
+        <a href='{url r="invested#invested_fund" p="id=$invest_info.id"}'>我购买的基金（{$invest_info.short_name}）</a>
+        <img src='{function name="get_spec_image" v="right_corner.jpg"}' alt="right_corner"/>
+        <span>基金投资项目（{$deal_info.s_name}）</span>
+    </div>
+    <div class="personal_content clearfix" id="date_new">
+        {include file="inc/sidebar_user.html"} 
+        <!-- 个人资料，保存更新-->
+        <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+            <div class="Fund_details marginTop4">
+                <h2>{$invest_info.short_name}参与{$info_csdk.period}融资</h2>
+            </div>
+            <div class="cnetent_margin74_114 bor">
+                <p>投资前估值：{$info_csdk.investor_before_evalute}万</p>
+                <p>投资后估值：{$info_csdk.investor_after_evalute}万</p>
+                <p>该轮融资总额：{$info_csdk.investor_amount}万</p>
+                <p>磁系互联基金投资总额：{$info_csdk.csdk_investor_amount}万</p>
+                <p>最新估值：{function name="number_format" v="$deal_new.investor_after_evalute"}万</p>
+                <p>目前投资回报：{function name="app_floatval" v="$deal_new.investor_payback"}倍</p>
+            </div>
+            <div class="Map_close">
+                <ul>
+                    <div class="list_map1"></div>
+                    <li id="container" style="z-index: 222"></li>
+                    <li id="container3"></li>
+                </ul>
+            </div>
+            <ol class="ol_padding76">
+                <li ><a href="javascript:;" class="active">项目估值</a></li>
+                <li><a href="javascript:;">融资金额</a></li>
+            </ol>
+            <div class="information_box">
+                <ul>
+                    <li class="active">融资信息</li>
+                    <li>资本退出计划</li>
+                    <li>公司简介</li>
+                    <li data-id="{$deal_info.id}" data-type="teams">核心团队</li>
+                    <li data-type="news">新闻动态</li>
+                    <li>磁观点</li>
+                </ul>
+                <div class="bar"></div>
+            </div>
+            <!-- 融资信息-->
+            <div class="class_ifi_cation display active ">
+                <img src="{function name="get_spec_image" v="TOP_tom.png"}" alt="" class="TOP_tom"/>
+                <!-- yi-->
+                <ul class="ifi_ul active clearfix">
+                    <li class="a_two">{function name="to_date" v="$deal_info.com_time" p="Y年m月"}</li>
+                    <li>公司成立</li>
+                    <li></li>
+                </ul>
+                <!-- er-->
+                {foreach from=$trade item=vo}
+	                <ul class="ifi_ul clearfix">
+	                    <li {if $vo.is_csdk_partake}class="active date_new"{else}class="a_two"{/if}>{function name="to_date" v="$vo.investor_time" p="Y年m月"}{if $vo.is_csdk_partake}<p>（磁系互联介入）</p>{/if}</li>
+	                    <li {if $vo.is_csdk_partake}class="active date_new2"{else}class="a_three"{/if}>{$vo.period}（融资总额：{function name="number_format" v="$vo.investor_amount"}万）</li>
+	                    <li></li>
+	                    <li>
+	                        <p>投资前估值：<span>{function name="number_format" v="$vo.investor_before_evalute"}万</span></p>
+	                        <p>投资后估值：<span>{function name="number_format" v="$vo.investor_after_evalute"}万</span></p>
+	                        <p>投资占比：<span>{function name="floatval" v="$vo.investor_rate"}％</span></p>
+	                        <div>
+                                <p class="tozi_1">投资机构：</p>
+	                        	{if $vo.is_csdk_partake}
+	                        		{foreach from=$vo.event item=val key=keys}
+                                        <p class="tozi_2">
+                                            <span>名称：{$val.s_name}</span>
+                                            <span>金额：{function name="number_format" v="$val.investor_amount"}万</span>
+                                            <span>占比：{function name="floatval" v="$val.investor_rate"}％</span>
+                                        </p>
+		                            {/foreach}
+	                        	{else}
+		                        	{foreach from=$vo.event item=val key=keys}
+                                        <p class="tozi_2">
+                                            <span>名称：{$val.s_name}</span>
+                                            <span>金额：{function name="number_format" v="$val.investor_amount"}万</span>
+                                        </p>
+                                    {/foreach}
+	                            {/if}
+	                        </div>
+	                        <i></i>
+	                    </li>
+	                </ul>
+                {/foreach}
+
+
+            </div>
+            <!-- 资本退出计划-->
+            <div class="class_ifi_cation display pad140">
+
+                <div class="capital_infi">
+                    <p>{function name="nl2br" v="$deal_info.out_plan"}</p>
+                </div>
+            </div>
+            <!-- 公司简介-->
+            <div class="class_ifi_cation display pad118">
+                <div class="pad118_infi">
+                    <p>公司名称: <span>&nbsp;&nbsp;{$deal_info.company_name}</span></p>
+                    <p>法人代表: <span>&nbsp;&nbsp;{$deal_info.com_legal}</span></p>
+                    <p>注册资本：<span>&nbsp;{function name="number_format" v="$deal_info.com_reg_found"}万</span></p>
+                    <p>联系电话：<span>&nbsp;{$deal_info.com_tel}</span></p>
+                    <p>公司官网：<span>&nbsp;{$deal_info.com_web}</span></p>
+                    <div class="clearfix">
+                        <p>公司地址：</p>
+                        <p><span>&nbsp;{$deal_info.com_addr}</span></p>
+                    </div>
+                    <div class="clearfix">
+                        <p>主营业务：</p>
+                        <p><span>&nbsp;{$deal_info.com_busi}</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- 核心团队-->
+            <div class="class_ifi_cation display pad59"></div>
+            <!--新闻动态-->
+            <div class="class_ifi_cation display pad62"></div>
+            <!--磁观点-->
+            <div class="class_ifi_cation display pad140">
+                <div class="capital_infi">
+                    <p>{function name="nl2br" v="$deal_info.entry_info"}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="inc/footer.html"}
+<script>
+    $(function () {
+    	$('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                align: 'left',
+                text: '估值金额（万元）'
+            },
+
+            xAxis: {
+                categories: [{$chart.period}]
+            },
+
+            yAxis: {
+                lineColor: '#ccc',
+                lineWidth: 2,
+                min: 0,
+                title: {
+                    text: ''
+                },
+                labels: {
+                    formatter: function() {
+                        return Highcharts.numberFormat(this.value,0,"",",")+'万';
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} 万</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true,
+                style: {
+                    color:'#000',
+                         fontSize: '12px',
+                }
+            },
+            plotOptions: {
+				column: {
+                    cursor: 'pointer',
+                    point: {
+                        events: {
+                            click: function() {
+                                var drilldown = this.drilldown;
+                                if (drilldown) { // drill down
+                                    setChart(drilldown.name, drilldown.categories, drilldown.data, drilldown.color);
+                                } else { // restore
+                                    setChart(name, categories, data);
+                                }
+                            }
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false,
+
+                        style: {
+                            fontWeight: 'normal',
+                            color:'#399'
+
+                        },
+                        formatter: function() {
+                            return this.y +'万';
+                        }
+                    }
+                }
+
+            },
+            legend: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: '项目估值',
+                // type: 'pie',
+                // name: 'Browser share',
+                data: [{$chart.evalute}]
+            }]
+        });
+    });
+    $(function () {
+    	$('#container3').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                align: 'left',
+                text: '融资金额（万元）'
+            },
+
+            xAxis: {
+                categories: [{$chart.period}]
+            },
+
+            yAxis: {
+                lineColor: '#ccc',
+                lineWidth: 2,
+                min: 0,
+                title: {
+                    text: ''
+                },
+                labels: {
+                    formatter: function() {
+                        return Highcharts.numberFormat(this.value,0,"",",")+'万';
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} 万</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true,
+                style: {
+
+                    color:'#000',
+                    fontSize: '12px',
+                }
+            },
+            plotOptions: {
+				column: {
+                    cursor: 'pointer',
+                    point: {
+                        events: {
+                            click: function() {
+                                var drilldown = this.drilldown;
+                                if (drilldown) { // drill down
+                                    setChart(drilldown.name, drilldown.categories, drilldown.data, drilldown.color);
+                                } else { // restore
+                                    setChart(name, categories, data);
+                                }
+                            }
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false,
+
+                        style: {
+                            fontWeight: 'normal',
+                            color:'#399'
+
+                        },
+                        formatter: function() {
+                            return this.y +'万';
+                        }
+                    }
+                }
+
+            },
+            legend: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: '融资金额',
+                // type: 'pie',
+                // name: 'Browser share',
+                data: [{$chart.amount}]
+            }]
+        });
+    });
+</script>
+<script>
+    $(function(){
+        $('html,body').css('fontSize','20px');
+        $('tspan').css({'fontSize':'.7rem','fontWeight':'normal'});
+        $('#container').find('tspan').css({'WebkitTransform':'translateY(50px)','transform':'translateY(50px)','display':'block','textAlign':'left'});
+        $('g').css({'color':'red','height':'300px','width':'200px'})
+        $('text').css({'fontSize':'.7rem','fontWeight':'normal'})
+    });
+</script>

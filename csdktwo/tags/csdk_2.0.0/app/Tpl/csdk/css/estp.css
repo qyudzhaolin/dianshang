@@ -1,0 +1,145 @@
+.estp dl{margin-bottom: 5px;}
+.estp .deal_show_five{line-height: 50px; height: 50px; }
+.estp .txtarea{margin-bottom: 10px;}
+.estp #region_msg{right:5px;top:26px;padding-left:0px;    position: relative;}
+.estp_logo{margin-top:28px;}
+#img_user_log{height: 54px;}
+#img_user_log label{width: 54px;height: 54px;border-radius: 100%;background:url(../images/circle_head.png);}
+#img_user_log .logored{background:url(../images/circle_headred.png);}
+#img_user_log img{width: 54px;height: 54px;border-radius:100%;}
+.estp_logo  dd{position: relative;}
+.label .area_box{width:204px;height:30px;border:1px solid #f2f2f2;overflow:hidden;}
+.content dl dd{line-height:0px;}
+.content{margin-bottom:0px;position:relative;}
+.comp_name{margin-top:39px;}
+.content dl.experience dd{height:auto;}
+#preview_btn{border:1px solid #4282c5;background:none;color:#4282c5;}
+#preview_btn:hover{background: #3293F9;color:#fff;border-color:#3293F9;}
+#preview_btn~.next{float:left;margin-top:-38px;margin-left:447px;}
+.clear_both{clear:both;overflow: hidden;}
+.hint{color:#4282c5;width: 456px;line-height:20px;float:left;margin-top:10px;margin-left:210px;text-align:center;}
+
+
+.content .upload_card dd{line-height:20px;}
+.content .upload_card .msg{display:block;}
+#create_time>div input:nth-of-type(3){width:240px;}
+#btn_select_time{padding:0 10px;cursor:pointer;}
+#upload_plan dd{height:50px;line-height:50px;}
+/*investor_about*/
+.goal{padding-top:30px;}
+.prompt_tag{height:25px;font:bold 12px/25px "微软雅黑";margin-bottom:20px;overflow:hidden;}
+.add{color:#4282c5;background:none;cursor:pointer;font-weight:bold;}
+.prompt_tag b{color:#bcbcbc;margin-left:-3px;}
+#point_msg{float:right;margin-right:25px;font-weight: normal;padding:0px;}
+.inv_pre{width:238px;height:40px;border:1px solid #bcbcbc;margin-bottom:10px;}
+.prompt_case{margin-bottom:10px;}
+.prompt_case p{height:25px;line-height:25px;}
+.prompt_case_tit{color:#808080;}
+.prompt_case_con{color:#bebebe;}
+#create_time_msg{float:right;margin-right:28px;font-weight: normal;padding:0px;}
+.business_model{margin-top:0px;}
+/*estp_finacing*/
+.space{width:100%;height:25px;position:relative;}
+.space .next_page{position:absolute;right:0px;top:0px;}
+.finacing_plan{height:220px;/*margin-top:40px;*/line-height:0px;position: relative;}
+.touzimoney{color: #9d9d9d; height: 50px; left: 608px; line-height: 50px; position: absolute; top: 46px; width: auto;} .finacing_plan b{width:70px;text-align:right;display:inline-block;font:12px '微软雅黑';color:#9d9d9d;padding-right:10px;}
+.finacing_plan ul li{height:50px;}
+small{display:inline-block;color:#9d9d9d;font:12px '微软雅黑';padding:0 10px;}
+#time_event{width:565px;overflow:hidden;padding-left:46px;}
+#time_event #deal_trade_period{width:50px;}
+.date_box{margin-top:5px;}
+#time_event .date_box>*{margin-right:5px;}
+#time_event .date_box small{padding:0px;}
+#time_event .date_box a{margin-right: 0px;}
+#time_event .date_box a:link,#time_event .date_box a:visited{color:#888;}
+#time_event .date_box a:hover{color:#4282c5}
+#btn_create_time_event{padding-left:0px;cursor:pointer;}
+#date_btn_box{padding-left:0px;float:left;display:inline-block;position:relative;width:auto;height:40px;overflow:hidden;margin-right:15px;}
+#date_btn_box>*{float:left;}
+#date_btn_box .date{border-right:0px;}
+#date_btn_box .button{display:inline-block;margin-top:-1px;height:42px;line-height:15px;margin-left:-4px;background:#4282C5;border-radius:0;color:#fff;padding:0 10px;}
+#invest_history_msg{margin-right:66px;}
+.date{width:85px;}
+.org{width:180px;margin-right:15px;}
+.amount{width:70px;}
+#invest_price{padding-left:10px;width:50px;}
+.big_events{width:210px;}
+.finacing{padding-top:40px;}
+.finacing p{display:inline-block;zoom:1;height:17px;line-height:17px;}
+.finacing p:nth-of-type(1){width:155px;text-align:right;padding-right:10px;}
+.finacing p:nth-of-type(2){max-width:315px;text-align:center;padding-right:10px;}
+.finacing p:nth-of-type(3){color:#3F81C7;}
+#finacing_list li{height:auto;background:none;margin-bottom:10px;}
+#finacing_list p{width:190px;text-align:center;color:#3f81c7;}
+#finacing_list b,#finacing_list,small{color:#333333;}
+.content .message{line-height: 50px;margin-top: -9px;margin-bottom:30px;}
+.content .message dt{ height: 50px;line-height: 50px;}
+.content .message dd{ height: 50px;line-height: 50px;}
+.estp_show dl dd{height: auto;position: relative; }
+.estp_show .deal_show_five{line-height: 50px; height: 50px; }
+.estp_show .deal_show_five p{width: 521px; }
+.estp_show .txtarea2{height:auto;line-height:2em;}
+.estp_show .txtarea2 dd{width:424px;padding-top:12px;line-height:24px;}
+.estp_show dl dt {color: #333; } .estp_show #record div{margin-top:17px;}
+#company_title{width:74px;}
+#company_scope{width:381px;}
+#team{width:571px;}
+.team_box{width:571px;float:left;margin-top:10px;}
+.team_box:nth-of-type(1){margin-top:0px;}
+#team input:nth-child(1){width:74px;}
+#team input:nth-child(2){width:74px;}
+#team input:nth-child(3){width:332px;}
+#team li{padding-left:0px;background:none;height:35px;overflow:hidden;}
+#team li>*{color:#333;text-align:left;float:left;height:35px;line-height:35px;margin-right:10px;}
+#team li b:nth-child(1){width:65px;}
+#team li b:nth-child(2){width:65px;}
+#team li strong:nth-child(3){width:auto;font-weight: normal;margin-right:0px;}
+#team a:link,#team a:visited{color:#888;}
+#team a:hover{color:#4282c5;}
+#pos b{display:inline-block;color:#333;text-align:left;}
+#pos b:nth-child(1){width:65px;}
+#pos b:nth-child(2){width:auto;}
+.msg_tag{width:100%;height:50px;line-height:50px;overflow:hidden;text-align:right;}
+.msg_tag .add{float:left;height:50px;line-height:50px;margin-top:0px;}
+.estp_show dl dt {  color: #333;}
+ #img_user_logo_msg{position: absolute; left: 121px;top: 25px;width: 310px;}
+ #img_deal_logo_msg{position: absolute; left: 121px;top: 0px;width: 458px;}
+.loca{width:552px;overflow:hidden;border:1px solid #e4e4e4;position:relative;padding:10px 0;margin-bottom: 0px;}
+.loca .tit{margin-top:17px;margin-bottom:0px;color:#bfbfbf;font:bold 12px "微软雅黑"; float: left;width: 94px;}
+.loca .tittwo{ margin-bottom:0px;color:#bfbfbf;font:bold 12px "微软雅黑";float: left;width: 430px;}
+#black_color{color:#333;font-weight:normal;text-indent: 10px;}
+#point,#create_time{line-height: 10px; }
+#point>div,#create_time>div{overflow: hidden;}
+#point input,#create_time input{margin-bottom: 10px;}
+#point a,#create_time a{display:inline-block;margin-left:5px; }
+#point a:link,#point a:visited,#create_time a:link,#create_time a:visited{color:#888888;}
+#point a:hover,#create_time a:hover{color:#4282c5}
+.estp_show .deal_show_six{line-height: 50px; height: 136px; }
+.estp_show .deal_show_business{line-height: 50px; height: 205px; }
+label.logored{background:url(../images/headred.png) no-repeat top center;}
+.content dl label{position:relative;}
+.bp_see{width: 50px; height: 17px; display: block; position:absolute; left: 86px; top: 16px; line-height: 17px;color: #808080} .be_nosee{display: none;}
+.estp_name{width: 184px;}
+#upload_plan dd{position: relative;}
+ #bp_url_msg{position: absolute; left: 121px;top: 0px;width:105px; background: #f6f7f9;}
+.estp_lefttext  dl dt{color: #9d9d9d}
+.estp_lefttext .cates .tit,.estp_lefttext  .periods .tit{color: #9d9d9d;text-align: left;width: 60px}
+.estp_lefttext #inv_dir_box_show{margin: 0px;}
+.estp_lefttext .deal_show_five img{padding: 10px 0 0 0;}
+.estp_lefttext .touzi{padding-bottom: 0px;}
+.estp_lefttext  #team li b:nth-child(1){width: 160px;}
+.estp_lefttext  #team li b:nth-child(2){width: 160px;}
+.estp_lefttext  #team li strong:nth-child(3){width: 160px;}
+.estp_lefttext .touzi li{width: 500px;}
+dl.card_logo{margin:15px 0 0 0px;}
+.card_logo{position: relative;}
+ #img_card_logo_msg{position: absolute; left: 121px;top: 25px;width:225px;}
+.onlineurl a{color: #333;text-decoration: none;}
+.onlineurl a:hover{color: #4282c5}
+.finacing_item p:nth-child(1){width:72px;padding-right: 30px;}
+/*项目标签*/
+#inv_dir_box_show{margin-bottom:30px;}
+#inv_dir_box_show li{border:none;padding:0px;height:36px;}
+#inv_dir_box_show .show_content{margin-top:17px;}
+#inv_dir_box_show li b{color:#333;text-align:center;display:inline-block;height:17px;line-height:17px;padding:0 25px;}
+#inv_dir_box_show li big{padding:0 25px;}

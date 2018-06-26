@@ -1,0 +1,281 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+<load href='__TMPL__Common/js/event_edit.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/check.js' />
+<div class="main">
+<div class="main_title">{%ADD} <a href="{:u("Deal/event_list",array('deal_id'=>$event['deal_id']))}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" onSubmit="return edit_event_check()">
+<table class="form" cellpadding=0 cellspacing=0>
+	<tbody>
+		<tr>
+			<td colspan=6 class="topTd"></td>
+		</tr>
+		<tr>
+			<th rowspan=4 class="item_title">预期融资信息</th>
+		</tr>
+		<tr>
+			<td style="width:180px">* 轮次信息：</td>
+			<td class="item_input" style="width:280px">
+				<select disabled="disabled" name="investor_record_type" class="require" id="investor_record_type">				
+				 	<option value="1" <eq name="event.investor_record_type" value="1">selected</eq>>最新轮次</option>
+				 	<option value="2" <eq name="event.investor_record_type" value="2">selected</eq>>历史轮次</option>
+	 			</select>
+	  			<span id="investor_record_type_msg" name="error_msg"></span>
+			</td>
+			<td style="width:180px">* 融资轮次：</td>
+			<td class="item_input">
+				<select disabled="disabled" name="period" class="require" id="period">
+				 	<option value="{$event.period}">{$event.period}</option>
+	 			</select>
+	  			<span id="period_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>* 预期融资金额（万元）：</td>
+			<td class="item_input">
+				<input readonly="readonly" maxlength="7" type="text" class="textbox3 require" name="pe_amount_plan" id="pe_amount_plan" value="{$event.pe_amount_plan}" /> 
+				<span id="pe_amount_plan_msg" name="error_msg"></span>
+			</td>
+			<td>* 出让股权（%）：</td>
+			<td class="item_input">
+				<input readonly="readonly" maxlength="4" type="text" class="textbox3 require" name="pe_sell_scale" id="pe_sell_scale" value="{$event.pe_sell_scale}" /> 
+				<span id="pe_sell_scale_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>* 融资前估值（万元）：</td>
+			
+				<td class="item_input">
+					<input  <if condition="$isfund eq 1"> readonly="readonly" class="readonly textbox3 require"<else /> class="textbox3 require"  </if> value="{$event.investor_before_evalute}"maxlength="7" type="text"  name="investor_before_evalute" id="investor_before_evalute" /> 
+					<span id="investor_before_evalute_msg" name="error_msg"></span>
+				</td>
+			
+			<td>* 融资后预估值（万元）：</td>
+			<td colspan="3" class="item_input">
+				<input readonly="readonly" type="text" class="textbox3" id="pe_evalute" value="{$event.pe_evalute}"/> 
+			</td>
+		</tr>
+	</tbody>
+	
+	<eq name="event.investor_record_type" value="2">
+		<tbody id="csdq_hisory_1">
+			<tr>
+				<td colspan="6" class="topTd"></td>
+			</tr>
+			<tr>
+				<th rowspan="4" class="item_title">实际融资信息</th>
+			</tr>
+			<tr>
+				<td>* 融资后估值（万元）：</td>
+				<td class="item_input">
+					<input readonly="readonly" maxlength="7" type="text" class="textbox3 require" name="investor_after_evalute" id="investor_after_evalute" value="{$event.investor_after_evalute}" /> 
+					<span id="investor_after_evalute_msg" name="error_msg"></span>
+				</td>
+				<td>* 融资完成日期：</td>
+				<td colspan="3" class="item_input">
+					<input readonly="readonly" type="text" class="textbox require" name="investor_time" value="{$event.investor_time}" id="investor_time" style="width:200px" />
+					<span id="investor_time_msg" name="error_msg"></span>
+				</td>
+			</tr>
+		</tbody>
+	</eq>
+	<tbody id="csdq_hisory_2">
+		<tr>
+			<td colspan="5" class="topTd"></td>
+		</tr>
+		<tr>
+			<th rowspan="4" class="item_title">
+				投资基金<br />
+				<a href="javascript:void(0)" onclick="add_csdq_funds()">（增加）</a>
+			</th>
+		</tr>
+		<tr>
+			<style>
+				.csdq_funds_area{height:30px;line-height:30px;border-bottom:#ccc solid 1px;padding:5px}
+				.csdq_funds_area p{display:inline-block;}
+				.csdq_funds_area em{font-style: normal}
+				.csdq_funds_area select{width:210px}
+			</style>
+			<td colspan="4" style="padding:0" id="csdq_hisory_area">
+				<empty name="fund">
+					<script>
+						$(function(){
+							$("#csdq_hisory_area").html($("#csdq_funds").html());
+						})
+					</script>
+				<else />
+					<volist name="fund" id="vo">
+						<div class="csdq_funds" id="csdq_funds_{$vo.id}">
+							<gt name="key" value="0"><div class="topTd"></div></gt>
+							<div class="csdq_funds_area">
+								<p style="width:184px">* 是否磁斯达克参与：</p>
+								<p style="width:286px" class="item_input is_csdk_fund">
+									<select name="is_csdk_fund[]" class="require">
+										<option value="2" <eq name="vo.is_csdk_fund" value="2">selected</eq>>&nbsp;否&nbsp;</option>
+										<option value="1" <eq name="vo.is_csdk_fund" value="1">selected</eq>>&nbsp;是&nbsp;</option>
+									</select>
+								</p>
+								<p style="width:184px">* 投资日期：</p>
+								<p>
+									<input type="text" readonly class="textbox require investor_date" name="investor_date[]" value="{$vo.investor_date}" style="width:200px"  onclick="return csdk_cal(this);"/>
+									<span></span>
+								</p>
+							</div>
+							<div class="csdq_funds_area">
+								<p class="csdq_select_one" style="width:184px">
+									<em <eq name="vo.is_csdk_fund" value="1">style="display:none"</eq>>* 参与基金名称：</em>
+									<em <eq name="vo.is_csdk_fund" value="2">style="display:none"</eq>>* 选择参与基金：</em>
+								</p>
+								<p class="item_input csdq_select_two" style="width:286px">
+									<eq name="vo.is_csdk_fund" value="1">
+										<em style="display:none">
+											<input type="text" maxlength="20" class="textbox3 require name" name="name[]" value="" /> 
+											<span></span>
+										</em>
+									<else />
+										<em>
+											<input type="text" maxlength="20" class="textbox3 require name" name="name[]" value="{$vo.name}" /> 
+											<span></span>
+										</em>
+									</eq>
+									<em <eq name="vo.is_csdk_fund" value="2">style="display:none"</eq>>
+										<select name="fund_id[]" class="require">
+											<option value="" data-value="">请选择</option>
+											<volist name="fund_list" id="fvo">
+												<option value="{$fvo.id}" <eq name="fvo.id" value="$vo.fund_id">selected</eq> data-value="{$fvo.short_name}">{$fvo.name}</option>
+											</volist>
+										</select>
+										<span></span>
+									</em>
+								</p>
+								<p style="width:184px">* 基金简称：</p>
+								<p>
+									<input maxlength="6" <eq name="vo.is_csdk_fund" value="1">readonly="readonly"</eq> type="text" class="textbox3 require short_name" name="short_name[]" value="{$vo.short_name}" /> 
+									<span></span>
+								</p>
+							</div>
+							<div class="csdq_funds_area">
+								<p style="width:184px">* 投资金额（万元）：</p>
+								<p style="width:286px">
+									<input type="text" maxlength="8" own_type="number" class="textbox3 require investor_amount" name="investor_amount[]" value="{$vo.investor_amount}" /> 
+									<span></span>
+								</p>
+								<p style="width:184px">* 最新占比（%）：</p>
+								<p>
+									<input type="text" disabled="disabled" maxlength="4" own_type="float" class="textbox3 require investor_rate" name="investor_rate[]" value="{$vo.investor_rate}" /> 
+									<span></span>
+								</p>
+							</div>
+						
+                   <div class="csdq_funds_area">
+						<p style="width:184px">* 投资回报</p>
+						<p style="width:286px">
+							<input type="text" disabled="disabled" maxlength="8" own_type='number' class="textbox3 require investor_payback" name="investor_payback[]" value="{$vo.investor_payback}" /> 
+							<span></span>
+						</p>
+								<a href="javascript:void(0)" onclick="deal_trade_fund_del({$vo.id})">删除</a>
+							</div>
+							<input type="hidden" name="id[]" value="{$vo.id}" />
+							<input type="hidden" name="old_fund_id[]" value="{$vo.fund_id}" />
+						</div>
+					</volist>
+				</empty>
+			</td>
+		</tr>
+	</tbody>
+	<tr>
+		<td class="item_title"></td>
+		<td colspan="4" class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="deal_trade_fund_update" />
+			<input type="hidden" name="deal_trade_event_id" value="{$event.id}" />
+			<input type="hidden" name="deal_id" value="{$event.deal_id}" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%EDIT}" />
+			<input type="reset" class="button" value="{%RESET}" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan=6 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+<div id="csdq_funds" style="display:none">
+	<div class="csdq_funds">
+		<div class="topTd"></div>
+		<div class="csdq_funds_area">
+			<p style="width:184px">* 是否磁斯达克参与：</p>
+			<p style="width:286px" class="item_input is_csdk_fund">
+				<select name="is_csdk_fund[]" class="require">
+					<option value="2">&nbsp;否&nbsp;</option>
+					<option value="1">&nbsp;是&nbsp;</option>
+				</select>
+			</p>
+			<p style="width:184px">* 投资日期：</p>
+			<p>
+				<input type="text" readonly class="textbox require investor_date" name="investor_date[]" value="" style="width:200px" onclick="return csdk_cal(this);"/>
+				<span></span>
+			</p>
+		</div>
+		<div class="csdq_funds_area">
+			<p class="csdq_select_one" style="width:184px">
+				<em>* 参与基金名称：</em>
+				<em style="display:none">* 选择参与基金：</em>
+			</p>
+			<p class="item_input csdq_select_two" style="width:286px">
+				<em>
+					<input type="text" maxlength="20" class="textbox3 require name" name="name[]" value="" /> 
+					<span></span>
+				</em>
+				<em style="display:none">
+					<select name="fund_id[]" class="require">
+						<option value="" data-value="">请选择</option>
+						<volist name="fund_list" id="vo">
+							<option value="{$vo.id}" data-value="{$vo.short_name}">{$vo.name}</option>
+						</volist>
+					</select>
+					<span></span>
+				</em>
+			</p>
+			<p style="width:184px">* 基金简称：</p>
+			<p>
+				<input type="text" maxlength="6" class="textbox3 require short_name" name="short_name[]" value="" /> 
+				<span></span>
+			</p>
+		</div>
+		<div class="csdq_funds_area">
+			<p style="width:184px">* 投资金额（万元）：</p>
+			<p style="width:286px">
+				<input type="text" maxlength="8" own_type="number" class="textbox3 require investor_amount" name="investor_amount[]" value="" /> 
+				<span></span>
+			</p>
+			<p style="width:184px">* 最新占比（%）：</p>
+			<p>
+				<input disabled="disabled" type="text" maxlength="4" own_type="float" class="textbox3 require investor_rate" name="investor_rate[]" value="" /> 
+				<span></span>
+			</p>
+		</div>
+		<div class="csdq_funds_area" style="border:none">
+					<p style="width:184px">* 投资回报</p>
+						<p style="width:286px">
+							<input disabled="disabled" type="text" maxlength="8" own_type='number' class="textbox3 require investor_payback" name="investor_payback[]" value="" /> 
+							<span></span>
+						</p>
+			<a href="javascript:void(0)" class="del_csdq_funds">删除</a>
+		</div>
+		<input type="hidden" name="id[]" value="" />
+	</div>
+</div>
+</div>
+<include file="Public:footer" />
+<script>
+$(function(){
+	trade_fund_del_btn_show();
+})
+</script>

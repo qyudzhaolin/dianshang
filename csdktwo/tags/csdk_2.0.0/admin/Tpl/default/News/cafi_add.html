@@ -1,0 +1,113 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__ROOT__/system/region.js"></script>  
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/news.js' />
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/upload.js' />
+<div class="main_title">{%ADD} <a href="{:u("news/cafi_index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<!-- <form name="edit" action="__APP__" method="post" enctype="multipart/form-data"> -->
+<form name="add" action="__APP__" method="post" enctype="multipart/form-data" onSubmit="return add_banner_check()">
+    <table class="form conf_tab" cellpadding=0 cellspacing=0>
+  <tr>
+    <td colspan=2 class="topTd"></td>
+  </tr>
+  <tr>
+        <td class="item_title">发布渠道</td>
+        <td class="item_input">
+      <select name="b_channel" class="require" id="b_channel" onchange="select_upload_img(this.options[this.options.selectedIndex].value)">        
+          <foreach name="channel_type" item="region">
+          	<option value="{$region.id}" id="n_channel" <if condition="$region['id'] eq 3">selected</if>>{$region.name}</option>
+          </foreach>
+          </select>
+       <span id="b_channel_msg" name="error_msg"></span>
+     </td>
+  </tr>
+    <td class="item_title">轮播组</td>
+    <td class="item_input">
+      <select name="b_bygroup" class="require" id="b_bygroup">  
+          <foreach name="bygroup_type" item="region">
+          	<option value="{$region.id}" id="b_bygroup">{$region.name}</option>
+          </foreach>
+    </select>
+     <span id="b_bygroup_msg"  name="error_msg"></span>
+  </tr>
+  <tr>
+    <td class="item_title">轮播标题(20个字)</td>
+         <td class="item_input">
+         	<input type="text" maxlength="20" class="textbox3 require" name="b_title" id="b_title" style="width:600px;" />
+         	<span id="b_title_msg" name="error_msg"></span>
+    	</td>
+  </tr>
+  <tr>
+   	<td class="item_title">链接网址(100个字)</td>
+  	<td class="item_input">
+  		<input type="text" maxlength="20" class="textbox3 require" name="b_url" id="b_url" style="width:600px;" />
+  		<span id="b_url_msg" name="error_msg"></span>
+    </td>
+  </tr>
+  <tr id="is_display_pc_img">
+    <td class="item_title">官网图片(1000*360)</td>
+    <td class="item_input">
+      <label class="fileupload" onclick="upd_file(this,'img',1000,360,2);">
+      <input type="file" class="filebox" name="app_file" id="app_file" style="display:none" /> 
+      <input type="hidden" class="require" value="" name="b_pc_img" id="b_pc_img"/>
+      <img src=' ' id="img_src" />
+      </label>
+      <label class="fileuploading hide" ></label><span id="b_pc_img_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+    </td>
+  </tr>
+  <tr id="is_display_app_img">
+    <td class="item_title">app图片(750*422)</td>
+    <td class="item_input">
+      <label class="fileupload" onclick="upd_file(this,'img',750,422,2);">
+      <input type="file" class="filebox" name="app_file" id="app_file" style="display:none" />
+      <input type="hidden" class="require" value="" name="b_app_img" id="b_app_img"/>
+      <img src=' ' id="img_src" width="750" height="422" />
+      </label>
+      <label class="fileuploading hide" ></label><span id="b_app_img_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+    </td>
+  </tr>
+  <tr>
+    <td class="item_title">显示顺序</td>
+    <td class="item_input">
+     	<input type="text"  maxlength="1" own_type="number"  name="b_sort" id="b_sort" class="require" style="width:100px;" >
+     	<span id="b_sort_msg" name="error_msg"></span>
+    </td>
+  </tr>
+   <tr>
+    <td class="item_title">状态</td>
+    <td colspan="2" class="item_input">
+      <label><input type="radio" name="b_publish_state" value="1" checked="checked" />未发布</label>
+      <label><input type="radio" name="b_publish_state" value="2" />已经发布</label>
+    </td>
+  </tr>
+</table>
+<div class="blank5"></div>
+  <table class="form" cellpadding=0 cellspacing=0>
+    <tr>
+      <td colspan=2 class="topTd"></td>
+    </tr>
+    <tr>
+      <td class="item_title"></td>
+      <td class="item_input">
+      <!--隐藏元素-->
+      <input type="hidden" name="{:conf("VAR_MODULE")}" value="Banner" />
+      <input type="hidden" name="{:conf("VAR_ACTION")}" value="cafi_insert" />
+      <!--隐藏元素-->
+      <input type="submit" class="button" value="{%ADD}" />
+      <input type="reset" class="button" value="{%RESET}" />
+      </td>
+    </tr>
+    <tr>
+      <td colspan=2 class="bottomTd"></td>
+    </tr>
+  </table>     
+</form>
+</div>
+<include file="Public:footer" />

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="Generator" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="{$seo_keyword}" />
+<meta name="description" content="{$seo_description}" />
+<title>{$site_name} - {if $page_title neq ''}{$page_title} -{/if} {$seo_title}</title>
+<?php
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/base.css";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jQuery_v1.8.3.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/base.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss" }" />
+<script type="text/javascript">
+	var APP_ROOT = '{$APP_ROOT}';
+	var APP_DOMAIN = '<?php echo APP_DOMAIN; ?>';
+	document.domain = APP_DOMAIN;
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0b7a935087a9e3a913e14fa886a615f1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body>
+	<div>
+		<div class="header_box">
+			<div class="header clearfix">
+				<h1 class="fl">
+					<a href="/">{function name="app_conf" v="SITE_NAME"}</a>
+				</h1>
+				<div class="header_infi clearfix">
+					<div class="user fr clearfix">
+						{if $user_info }
+							<a href='{url r="home"}' {if $pageType eq PAGE_MENU_USER_CENTER}class="infi_active"{/if}>{if $user_info.user_name neq ''}{$user_info.user_name}{else}{$user_info.mobile}{/if}</a>
+		                	<a href='{url r="user#sign_out"}' title="退出"> 退出</a> 
+						{else}
+							<a href='{url r="user#signin"}' {if $pageType eq PAGE_MENU_LOGIN}class="infi_active"{/if}>登录</a>
+							<a href='{url r="user#signup"}' {if $pageType eq PAGE_MENU_REGISTER}class="infi_active"{/if}>注册</a>
+						{/if}
+					</div>
+					<div class="fl sketch clearfix">
+						<a href="/" {if $pageType eq PAGE_MENU_INDEX}class="infi_active"{/if}>资讯</a>
+						<a href='{url r="investors"}' {if $pageType eq PAGE_MENU_INVESTOR}class="infi_active bj_corner"{else} class="bj_corner"{/if}>投资人</a>
+						<a href='{url r="deals"}' {if $pageType eq PAGE_MENU_DEAL}class="infi_active"{/if}>项目介绍</a>
+						<a href='{url r="introduce"}' {if $pageType eq PAGE_MENU_INTRODUCTION}class="infi_active"{/if}>公司介绍</a>
+						<!--<a href='{url r="ideal"}'{if $pageType eq PAGE_MENU_RECOM_DEAL}class="infi_active"{/if}>我要推荐项目</a>-->
+						<a href='{url r="download"}' {if $pageType eq PAGE_MENU_APP}class="infi_active"{/if}>移动APP</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="investor_page">
+			<a href='{url r="investors"}' class="li_firast">我是投资人</a>
+			<a href='{url r="deals"}'>找平台项目</a>
+			{if $user_info}
+				<a href='{url r="invested"}'>我的基金</a>
+			{/if}
+		</div>
+	</div>

@@ -1,0 +1,28 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/login_box.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/app.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+<div class="container">
+	<div class="wrap">
+		<div class="cisdaq_tit">
+			<img src="{function name="get_spec_image" v="cisdaq_tit.png" }" alt="">
+		</div>
+		<div class="two-dimension">
+			<div class="left">
+				<p class="weixin_bg"><img src="{function name="get_spec_image" v="ios_img.png" }" alt=""></p>
+				<img src="{function name="get_spec_image" v="ios.png" }" alt="" class="top_36">
+				<img src="{function name="get_spec_image" v="ios_version.png" }" alt="" class="top_20">
+			</div>
+			<div class="right">
+				<p class="weixin_bg"><img src="{function name="get_spec_image" v="android_img.png" }" alt=""></p>
+				<img src="{function name="get_spec_image" v="andriod.png" }" alt="" class="top_36">
+				<img src="{function name="get_spec_image" v="andriod_version.png" }" alt="" class="top_20">
+			</div>			
+		</div>
+	</div>
+</div>
+{include file="inc/login_box.html"} 
+{include file="inc/footer.html"} 

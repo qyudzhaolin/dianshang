@@ -1,0 +1,109 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/estp.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/calendar.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/check.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/deal.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/calendar.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/dcom_array.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+{include file="inc/estp_flow.html"}
+<div class="wrap">
+	{include file="inc/sidebar.html"}
+	{if $user_info.is_review!=1 && $user_info.is_review!=2}
+	<div class="content">
+		<div class="space"></div>
+		<div class="space"></div>
+		<dl class="finacing_plan">
+			<dt class="p_name"><i class="radius"></i>本期融资计划</dt>
+			<dd>
+				<ul>
+					<li><b>预期融资</b><input type="text" own_type="number" name="pe_amount_plan" id="pe_amount_plan"{if $deal.pe_amount_plan} value="{$deal.pe_amount_plan}"{/if} onBlur="pe_evaluateData()"><small>万</small>
+					<span id="pe_amount_plan_msg" name="error_msg"></span>
+					</li>
+					<li><b>起投金额</b><input type="text" own_type="number" name="pe_least_amount" id="pe_least_amount"{if $deal.pe_least_amount}value="{$deal.pe_least_amount}"{/if}><small>万</small>
+					<div class="touzimoney">单个投资人最低投资额度为100万人民币</div>
+					<span id="pe_least_amount_msg" name="error_msg"></span>
+					</li>
+					<li><b>出让股权</b><input type="text" own_type="number" maxlength="2" name="pe_sell_scale" id="pe_sell_scale"{if $deal.pe_sell_scale}value="{$deal.pe_sell_scale}"{/if} onBlur="pe_evaluateData()"><small>%</small>
+					<span id="pe_sell_scale_msg" name="error_msg"></span>
+					</li>
+					<li><b>融资后估值</b><input type="text" own_type="number" disabled name="pe_evaluate" id="pe_evaluate" {if $deal.pe_evaluate}value="{$deal.pe_evaluate}"{/if}><small>万</small>
+ 					</li>
+				</ul>
+			</dd>
+		</dl>
+		<dl class="finacing_record">
+			<dt class="p_name">历史融资纪录</dt>
+			<dd id="time_event">
+				{if $deal_trade_event}
+				{foreach from = $deal_trade_event item = deal_trade_event_item key="myId" }
+				<div data="create_time_event_tag" name="create_time_event_tag" class="date_box">
+					<span id="date_btn_box">
+					<input type="text" class="date" id="create_time_event" name="create_time_event" value="{$deal_trade_event_item.create_time}" readonly="true">
+					<input type="button" class="button"  value="选择"  id='btn_create_time_event' onclick="return csdk_cal(this);" />
+					</span>
+					<input type="text" id="deal_trade_brief" name="deal_trade_brief" title="请填写机构名称(14个字以内)" maxlength="14"  value="{$deal_trade_event_item.brief}" class="org">
+					<input type="text" id="deal_trade_period" name="deal_trade_period" title="轮次" maxlength="5"  value="{$deal_trade_event_item.period}" class="turn">轮
+					<input type="text" id="invest_price" own_type="number" name="invest_price" title="投资金额" value="{$deal_trade_event_item.price}" class="amount">
+					<small>万</small><a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+					<!-- <span id="invest_history_msg"></span> -->
+				</div>
+				{/foreach}
+				{else}
+				<div data="create_time_event_tag" name="create_time_event_tag" class="date_box">
+				<span id="date_btn_box">
+				<input type="text" class="date" id="create_time_event" name="create_time_event" title="时间" value="时间" readonly="true">
+				<input type="button" class="button"  value="选择" id='btn_create_time_event' onclick="return csdk_cal(this);" />
+				</span>
+				<input type="text" id="deal_trade_brief" name="deal_trade_brief" title="请填写机构名称(14个字以内)" maxlength="14"  value="请填写机构名称(14个字以内)" class="org">
+				<input type="text" maxlength="5" id="deal_trade_period" name="deal_trade_period" title="轮次" value="轮次" class="org">轮
+				<input type="text" id="invest_price" name="invest_price" own_type="number" title="投资金额" value="投资金额" class="amount">
+
+				<small>万</small><a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+				<!-- <span id="invest_history_msg"></span> -->
+				</div>
+				{/if}
+				<p class="msg_tag">
+				<button class="add"  onclick="add_dcom('create_time_event_tag',0)">继续添加</button>
+				<span id="invest_history_msg" name="error_msg"></span></p>
+			</dd>
+		</dl>
+		<dl class="message"><dt>备注</dt><dd class="p_name"><i class="radius"></i>为必填项目</dd></dl>
+		<dl  class="next_btn_box experience"><dt></dt><dd class="p_name"><button class="next" type="button" onclick="estp_finacing()">下一步</button></dd><span id="error_msg" name="error_msg"></span></dl>		
+	</div>
+	{else}
+	<div class="content finacing about_show estp_show estp_lefttext">
+		<div class="space"></div>
+		<dl class="finacing_plan">
+			<dt class="p_name">本期融资计划</dt>
+			<dd class="touzi">
+				<ul id="finacing_list">
+					<li><b>预期融资</b><p>{$deal.pe_amount_plan}</p><small>万</small></li>
+					<li><b>起投金额</b><p>{$deal.pe_least_amount}</p><small>万</small></li>
+					<li><b>出让股权</b><p>{$deal.pe_sell_scale}</p><small>%</small></li>
+					<li><b>融资后估值</b><p>{$deal.pe_evaluate}</p><small>万</small></li>
+				</ul>
+			</dd>
+		</dl>
+		<dl class="finacing_record">
+			<dt class="p_name">历史融资纪录</dt>
+			<dd id="record">
+				
+					{foreach from = $deal_trade_event item = trade_event_item}
+					<div class="finacing_item">
+					<p>{$trade_event_item.create_time|date='Y-m-d',###}</p>
+					<p>获得{$trade_event_item.brief}{$trade_event_item.price}万{$trade_event_item.period}轮投资</p>
+					</div>
+					{/foreach}
+				
+			</dd>
+		</dl>
+<!-- 		<dl><dt></dt><dd class="p_name"><button class="next" type="button" onclick="personal_msg_next_scan()">下一步</button></dd></dl>		 -->
+	</div>
+	{/if}	
+</div>
+ 	{include file="inc/footer.html"}

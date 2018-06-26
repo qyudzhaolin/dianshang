@@ -1,0 +1,183 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/Fund_details.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/exporting.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/invested_fund.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_box">
+        <a href='{url r="home"}'>我的个人中心</a>
+        <img src="{function name="get_spec_image" v="right_corner.jpg"}" alt="right_corner"/>
+        <a href="{url r="invested"}">我的投资</a>
+        <img src="{function name="get_spec_image" v="right_corner.jpg"}" alt="right_corner"/>
+        <span>我购买的基金（{$invested.short_name}）</span>
+    </div>
+    <div class="personal_content clearfix">
+        {include file="inc/sidebar_user.html"} 
+        <!-- 个人资料，保存更新-->
+        <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+            <div class="Fund_details">
+                <h2>基金介绍</h2>
+            </div>
+            <div class="fund_next_cneter bs centent_padding">
+                <span>{$invested.summary}</span>
+            </div>
+            <!-- 饼图-->
+            <ul class="bs Pie_chart radius Up_down clearfix">
+                <!-- 上下布局-->
+                <li class="bs">
+                    <div class="zIndex11">
+                        <div id="container_01" style="width:210px;height:140px;">
+                        </div>
+                        <div class="width260">
+                            <div><i></i>&nbsp;已投资金额 : <span>{function name="number_format" v="$invested.amount_total"}万</span></div>
+                            <div><i></i>&nbsp;基金规模 : <span>{function name="number_format" v="$invested.total_amount"}万</span></div>
+                        </div>
+                    </div>
+                </li>
+                <li class="bs li_time">
+                	<p>成立日期：{function name="to_date" v="$invested.establish_date" p="Y-m-d"}</p>
+                    <p>存续期限：{$invested.deadline}年</p>
+                    <p>我的投资金额：{function name="number_format" v="$invested.my_invested.investor_amount"}万</p>
+                    <p>基金份额占比：{function name="floatval" v="$invested.my_invested.investor_rate"}%</p>
+                    <p>截至目前基金业绩：</p>
+                    <p class="p-left">已投资项目单个最高回报：{function name="app_floatval" v="$invested.max_payback"}倍</p>
+                    <p class="p-left">已投资项目总体平均回报：{function name="app_floatval" v="$invested.average_payback"}倍</p>
+                    <p class="p-left">基金整体回报：{function name="app_floatval" v="$invested.total_payback"}倍</p>
+                </li>
+            </ul>
+            <div class="Fund_next_header">
+                <h2>基金管理人</h2>
+            </div>
+            <div class="centent_padding fund_next_cneter bs">
+                <span>{$invested.manager}</span>
+            </div>
+            <div class="Fund_next_header">
+                <h2 style="margin:0px 0 10px 0">核心管理团队</h2>
+            </div>
+            {foreach from=$manage_team item=vo}
+	            <ul class="centent_margin bs character clearfix">
+	                <li class="bs">
+	                	{if $vo['head_logo']}
+	                    	<img src='{function name="getQiniuPath" v="$vo.head_logo" p="img"}?imageView2/1/w/300/h/300' alt="logo" width="82" height="82" />
+	                	{else}
+	                    	<img src='{function name="get_spec_image" v="mem_logo.png"}' alt="logo" width="82" height="82" />
+	                	{/if}
+	                </li>
+	                <li>
+	                    <dl>
+	                        <dt>{$vo.name}<span>（{$vo.position}）</span></dt>
+	                        <dd>{$vo.summary}</dd>
+	                    </dl>
+	                </li>
+	            </ul>
+            {/foreach}
+            <div class="Fund_next_header" style="padding:35px 0 0 0">
+                <h2>基金投资项目列表</h2>
+            </div>
+            <!-- 个人资料from表单-->
+            <form action="#" class="form2 bs active project Serial_sdk">
+                <div class="bs fund_lower">
+                    <div class="fund bs head number">
+                        <span>序号</span>
+                        <span>项目</span>
+                        <span>项目名称</span>
+                        <span>投资金额</span>
+                        <span>最近估值</span>
+                        <span>投资日期</span>
+                    </div>
+                    <ul class="fund_ul bs Serial_number">
+                    	{foreach from=$deal item=vo name=keys}
+	                        <li>
+	                            <span>{$smarty.foreach.keys.iteration}</span>
+	                            <span><a href="{url r="invested#deal_details" p="fund_id=$vo.fund_id&deal_id=$vo.deal_id"}">{$vo.s_name}</a></span>
+	                            <span>{$vo.name}</span>
+	                            <span>{$vo.investor_amount}万</span>
+	                            <span>{$vo.valuations}万</span>
+	                            <span>{$vo.investor_date}</span>
+	                        </li>
+                        {/foreach}
+                        <li>
+                            <div class="news_more_box">
+	                        	{if $my_deal_more}
+	                                <button type ="button" class="news_more fund_more" data-id="{$invested.id}">查看更多</button>
+	                        	{/if}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{include file="inc/footer.html"}
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function () {
+        // Build the chart
+        $('#container_01').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                labels: {
+                    formatter: function() {
+                        return Highcharts.numberFormat(this.value,0,"",",")+'万';
+                    },
+                },
+
+
+                //提醒框
+
+                valueSuffix: ' 万',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:0f} 万</b></td></tr>',
+                //提醒框的头部，文字
+                headerFormat: '<small>{point.key}<br/></small><table>',
+                style: {
+                    padding: 10,
+                    fontWeight: 'bold',
+                    fontSize:'12px',
+                    color:'#666666'
+                }
+            },
+            plotOptions: {
+                pie: {
+
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        formatter:function() {
+                            return '<b>' + this.point.name + '</b>:' + this.point.percentage.toFixed(2) + "%";
+                        },
+                        onnectorWidth:0,
+                        connectorPadding:0,
+                        distance:-30
+                    },
+                    showInLegend: false
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                name: '金额',
+                data: [
+                    ['已投资金额',  {$invested.amount_total}],
+                    ['基金规模',  {$invested.total_amount}]
+                ]
+            }]
+        });
+    });
+
+});
+</script>

@@ -1,0 +1,49 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">投资意向列表</div>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		投资人姓名：<input type="text" class="textbox" maxlength="6" name="name" value="{:trim($_REQUEST['name'])}" style="width:80px;" />
+		投资人手机：<input type="text" class="textbox" maxlength="20" name="mobile" value="{:trim($_REQUEST['mobile'])}" style="width:100px;" />
+		项目简称: <input type="text" class="textbox" maxlength="20" name="deal_short_name" value="{:trim($_REQUEST['deal_short_name'])}" style="width:100px;" />
+		项目名称: <input type="text" class="textbox" maxlength="20" name="deal_name" value="{:trim($_REQUEST['deal_name'])}" style="width:100px;" />
+		投资意向状态:
+				<select name="state" style="width:80px;">
+					<option value="999" <if condition="$_REQUEST['state'] eq '999'">selected="selected"</if>>全部</option>
+					<foreach name="deal_intend_list" item="state_item">
+						<option value="{$state_item.id}" <if condition="$_REQUEST['state'] eq $state_item['id']">selected="selected"</if>>{$state_item.name}</option>
+					</foreach>
+			 	</select>
+		<input type="hidden" value="Deal" name="m" />
+		<input type="hidden" value="intend_list" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+  id="dataTable" 
+  style="dataTable" 
+  name="Deal" 
+  checkbox="true" 
+  action="true" 
+  datasource="list" 
+  show="id:{%ID}|50px
+		,user_name|msubstr:投资人|100px
+		,mobile|msubstr:投资人电话|120px
+		,deal_name|msubstr:项目名称|300px
+		,deal_short_name|msubstr:项目简称|100px
+		,create_time|to_date:发送投资意向时间|200px
+		,state:投资意向状态|100px"
+	    actionlist="dealinted_edit:{%EDIT}"		
+	/> 
+<div class="blank10"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

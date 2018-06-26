@@ -1,0 +1,67 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/vip_account.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+{include file="inc/investor_flow.html"}
+<div class="wrap">
+	{include file="inc/sidebar_investor.html"}
+	<div class="investor content">
+		<div class="padding_left">
+			<div class="height38"></div>
+			<h3 class="account_tit size_18">什么是会员账户?</h3>
+			<p class="introduction_txt">
+	开通会员账户是成为磁斯达克认证投资人的必须条件，开通会员账户后您可以享受到磁斯达克专业的在线股权投资服务。认证投资人可在线查看经过磁斯达克完整的审查体系调查通过、由磁斯达克专业项目组根据投资人的偏好精心筛选推荐的优质创业项目，并可完整享受由磁斯达克为投资人定制的线上、线下专业投资相关服务。
+	</p>	
+			<div class="height50"></div>
+			<h3 class="account_tit size_18">如何开通会员账户？</h3>
+			<p class="introduction_txt">会员申请开通会员账户，需要缴纳十（10）万元人民币至临时账户作为会员诚意金。经财务审核确认后，临时账户即转变为正式的会员账户，会员通过会员账户按本协议的约定享受相关投资服务。一旦会员在磁斯达克平台成功完成一次投资行为，会员即可申请全额退还会员诚意金，并终身保留磁斯达克认证投资人身份。若自会员账户自开通之日起一年内未在平台成功发生过任何投资行为或申请取消磁斯达克认证投资人身份，平台有权从会员诚意金中扣除五（5）万元人民币作为当年的平台服务费；若在会员账户自开通之日起第二年内仍未在平台成功发生任何投资行为或申请取消磁斯达克认证投资人身份，平台同样有权从会员诚意金中扣除五（5）万元人民币作为当年的平台服务费。若会员账户金额为零，平台有权冻结磁斯达克认证投资人身份及其会员账户功能，直至充值后方可重新使用。如申请人未能开通正式的会员账户，平台将向申请人退还其缴纳的全部会员诚意金。</p>
+<!-- 			<ul class="process_step_list">
+				<li>1.若自审核通过日起一年内在磁斯达克平台发生过投资行为，会员诚意金则顺延成为下一年的会员诚意金。</li>
+				<li>2.若自审核通过日起一年内未在磁斯达克平台发生过投资行为或者自审核通过日起未满一年申请取消磁斯达克平台会员身份，平台将会从会员诚意金扣除5万元人民币作为平台服务费。</li>
+				<li>3.若会员账户金额为0，则冻结会员资格，直至充值后方可开通。</li>
+			</ul> -->
+			<div class="height50"></div>
+			<div class="chart">
+				<h2 class="size_18">开通会员帐户流程</h2>
+				<div class="chart_pic"><img src="{function name="get_spec_image" v="chart_pic.png" }" alt=""></div>
+			</div>
+			{if $is_exist_vip_account eq 1}
+			<a class="vip_money_button" href="{url r="account#vip_account_account" }">我的会员账户</a>
+			{else}
+			<a class="vip_money_button" href="{url r="account#vip_account_fee" }">缴纳会员诚意金</a>
+			{/if}
+		</div>
+	</div>
+	<div class="investor content" style="display:none">
+		<div class="w_420 float_left">
+			<div class="height38"></div>
+			<h3 class="account_tit size_18">什么是会员账户?</h3>
+			<p class="introduction_txt">
+	开通会员账户是成为磁斯达克认证投资人的必须条件，开通会员账户后您可以享受到磁斯达克专业的在线股权投资服务。认证投资人可在线查看经过磁斯达克完整的审查体系调查通过、由磁斯达克专业项目组根据投资人的偏好精心筛选推荐的优质创业项目，并可完整享受由磁斯达克为投资人定制的线上、线下专业投资相关服务。
+	</p>	
+			<div class="height50"></div>
+			<h3 class="account_tit size_18">如何开通会员账户？</h3>
+			<p class="introduction_txt">开通会员账户需要缴纳十万元人民币作为会员诚意金，这十万元会员诚意金会长久的保存在您的会员账户内。</p>
+			<ul class="process_step_list">
+				<li>1.若自审核通过日起一年内在磁斯达克平台发生过投资行为，会员诚意金则顺延成为下一年的会员诚意金。</li>
+				<li>2.若自审核通过日起一年内未在磁斯达克平台发生过投资行为或者自审核通过日起未满一年申请取消磁斯达克平台会员身份，平台将会从会员诚意金扣除5万元人民币作为平台服务费。</li>
+				<li>3.若会员账户金额为0，则冻结会员资格，直至充值后方可开通。</li>
+			</ul>
+			<div class="height50"></div>
+			<div class="chart">
+ 				<h2 class="size_18">开通会员帐户流程</h2>
+				<div class="chart_pic"><img src="{function name="get_spec_image" v="chart_pic1.png" }" alt=""></div>
+			</div>
+		</div>
+<div class="my_money"><a class="vip_money_button" href="" }">我的会员账户</a></div>
+
+	</div>
+
+
+</div>
+
+{include file="inc/footer.html"} 

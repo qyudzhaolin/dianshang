@@ -1,0 +1,117 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/fund_manageCo.js' />
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/upload.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+	<div class="main_title">基金管理公司 > {%ADD}公司管理团队&nbsp;<a href="{:u("Fund/manageTeam_index",array('mid'=>$mid))}" class="back_list">{%BACK_LIST}</a></div>
+	<div class="blank5"></div>
+	<form name="edit" action="__APP__" method="post" onSubmit="return mt_check() ">
+		<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+			<tr>
+				<td colspan=2 class="topTd"></td>
+			</tr>
+			<tr>
+				<td class="item_title">*编码</td>
+				<td class="item_input">
+					<input readonly="readonly" type="text" class="textbox require readonly" name="code" id="code" value="{$code}" data-value="{$code}" />
+					<span id="code_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*姓名(6个字)</td>
+				<td class="item_input">
+					<input type="text" disabled="disabled" maxlength="6" class="textbox require" name="name" id="name" />
+					<input type="button" class="button" value="{%SEARCH}" onclick="mt_user_search()" />
+					<span id="user_id_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*头像</td>
+				<td class="item_input">
+					<label class="fileupload" onclick="upd_file(this,'img',500,500);">
+						<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none"/>
+						<input type="hidden" class="require" name="user_logo"  id="user_logo"/>
+						<img src="" id="img_src" />
+					</label>
+					<label class="fileuploading hide" ></label>
+					<span id="user_logo_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*职务名称(6个字)</td>
+				<td class="item_input">
+					<input type="text" maxlength="6"  class="textbox require" name="title" id="title"/>
+					<span id="title_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*毕业院校(20个字)</td>
+				<td class="item_input">
+					<input type="text" maxlength="20"  class="textbox2 require" name="graduate_university" id="graduate_university"/>
+					<span id="graduate_university_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*最高学历</td>
+				<td class="item_input">
+					<select name="education_degree" id="education_degree" class="textbox require">				
+						<option value="">请选择</option>
+						<foreach name="per_degree_list" item="per_degree_item">
+							<option value="{$per_degree_item.id}">{$per_degree_item.name}</option>
+						</foreach>
+					</select>
+					<span id="education_degree_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*个人简介(200个字)</td>
+				<td class="item_input">
+					<textarea type="text"  maxlength="200"  name="brief" id="brief" class="textarea require"></textarea>
+					<span id="brief_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 class="bottomTd"></td>
+			</tr>
+		</table>
+		<div class="blank5"></div>
+		<table class="form" cellpadding=0 cellspacing=0>
+			<tr>
+				<td colspan=2 class="topTd"></td>
+			</tr>
+			<tr>
+				<td class="item_title"></td>
+				<td class="item_input">
+				<!--隐藏元素-->
+				<input type="hidden" name="{:conf("VAR_MODULE")}" value="Fund" />
+				<input type="hidden" name="{:conf("VAR_ACTION")}" value="do_manageTeam_add" />
+				<input type="hidden" name="managers_id" value="{$mid}" id="managers_id" />
+				<input type="hidden" name="user_id" id="user_id" value="" />
+				<input type="hidden" name="id_exist" id="id_exist" value="" />
+				<!--隐藏元素-->
+				<input type="submit" class="button" value="{%ADD}" />
+				<input type="reset" class="button" value="{%RESET}" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 class="bottomTd"></td>
+			</tr>
+		</table> 		 
+	</form>
+</div>
+<include file="Public:footer" />
+<div class="main" id="mt_main" style="display:none">
+	<div class="search_row">
+		姓名：<input type="text" class="textbox" maxlength="6" name="user_name" />
+		职务名称：<input type="text" class="textbox" maxlength="6" name="org_title" />
+		<input id="mt_user_button" type="button" class="button" value="{%SEARCH}" />
+		<input id="mt_user_reset" type="button" class="button" value="清空" />
+	</div>
+	<div class="mt_user_list">loading...</div>
+</div>

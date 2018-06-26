@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/play_film.css">
+
+    <script src="../js/jQuery_v1.8.3.js"></script>
+
+    <script type="text/javascript" src="../js/exporting.js"></script>
+
+    <script src="../js/base.js"></script>
+    <script src="../js/invested_deal.js"></script>
+    <title>我的投资</title>
+</head>
+
+<body>
+<script src="../js/header.js"></script>
+<div class="content_box2 bg_white">
+    <div class="personal_box">
+        <span>我的个人中心</span>
+        <img src="../images/right_corner.jpg" alt=""/>
+        <span>我的投资</span>
+        <img src="../images/right_corner.jpg" alt=""/>
+        <span>我购买的基金（正和磁系基金）</span>
+        <img src="../images/right_corner.jpg" alt=""/>
+        <span>基金投资项目（娱乐影业）</span>
+
+    </div>
+    <div class="personal_content clearfix">
+        <div class="personal_project fl bs">
+            <a href="javascript:;">账户设置</a>
+            <a href="javascript:;" class="active">我的投资</a>
+            <a href="javascript:;">“我要投资”项目</a>
+            <a href="javascript:;">我的消息</a>
+        </div>
+        <!-- 个人资料，保存更新-->
+        <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+            <div class="Fund_details marginTop4">
+                <h2>正和基金参与B轮融资</h2>
+            </div>
+            <div class="cnetent_margin74_114 bor">
+                <p>投资前估值：1000万</p>
+
+                <p>投资后估值：6000万</p>
+
+                <p>该轮融资总额：5000万</p>
+
+                <p>正和互联磁系基金投资总额：2000万</p>
+
+                <p>最新估值：20000万</p>
+
+                <p>投资回报：2倍</p>
+            </div>
+
+            <div class="Map_close">
+                <ul>
+                    <div class="list_map1"></div>
+                    <li id="container" style="z-index: 222">
+
+                        <script>
+                            $(function () {
+                                $('#container').highcharts({
+                                    chart: {
+                                        type: 'column'
+                                    },
+                                    title: {
+                                        align: 'left',
+                                        text: '估值金额（万元）',
+                                        style:{
+                                            marginTop:'10px 0 0 0'
+                                        }
+                                    },
+
+                                    xAxis: {
+                                        categories: ['天使轮', 'A轮', 'Pre-A轮', 'B轮', 'C轮']
+                                    },
+
+                                    yAxis: {
+                                        lineColor: '#ccc',
+                                        lineWidth: 2,
+                                        min: 0,
+                                        title: {
+                                            text: ''
+                                        },
+                                        labels: {
+                                            formatter: function() {
+                                                return Highcharts.numberFormat(this.value,0,"",",")+'万';
+                                            }
+                                        }
+                                    },
+
+                                    tooltip: {
+                                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                                        footerFormat: '</table>',
+                                        shared: true,
+                                        useHTML: true,
+                                        style: {
+
+                                            color:'#000',
+                                            fontSize: '12px',
+                                        },
+
+
+                                    },
+                                    plotOptions: {
+
+                                        column: {
+                                            cursor: 'pointer',
+                                            point: {
+                                                events: {
+                                                    click: function() {
+                                                        var drilldown = this.drilldown;
+                                                        if (drilldown) { // drill down
+                                                            setChart(drilldown.name, drilldown.categories, drilldown.data, drilldown.color);
+                                                        } else { // restore
+                                                            setChart(name, categories, data);
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            dataLabels: {
+                                                enabled: false,
+
+                                                style: {
+                                                    fontWeight: 'normal',
+                                                    color:'#399'
+
+                                                },
+                                                formatter: function() {
+                                                    return this.y +'万';
+                                                }
+                                            }
+                                        }
+                                    },
+                                    legend: {
+                                        enabled: false
+                                    },
+                                    credits: {
+                                        enabled: false
+                                    },
+                                    series: [{
+                                        name: '项目估值',
+                                        // type: 'pie',
+                                        // name: 'Browser share',
+                                        data: [49.9, 75555551.5, 106.4, 129.2, 144.0]
+
+                                    }]
+                                });
+                            });
+                        </script>
+                    </li>
+
+                    <li id="container3">
+                        <script>
+                            $(function () {
+                                var chart = new Highcharts.Chart({
+                                    chart: {
+                                        renderTo: 'container3',
+                                        type: 'pie'
+                                    },
+
+                                    legend: {
+                                        enabled: false
+                                    },
+                                    title:{
+                                        text:''
+                                    },
+                                    yAxis: {
+                                        allowDecimals: false,
+                                        min: 0,
+                                        title: {
+                                            text: ''
+                                        }
+
+                                    },
+
+                                    plotOptions: {
+                                        pie: {
+                                            startAngle: -90,
+                                            endAngle:90,
+                                            center: ['50%', '70%']
+                                        }
+                                    },
+                                    credits: {
+                                        enabled: false
+                                    },
+                                    series: [{
+                                        name: '融资额',
+                                        data: [
+                                            ['A轮融资',   10.0],
+                                            ['B轮融资',       20.0],
+                                            ['C轮融资',       30.0],
+                                            ['最新轮融资',    40.0]
+                                        ]
+                                    }]
+                                });
+
+
+
+                            });
+
+                        </script>
+                    </li>
+                </ul>
+
+            </div>
+            <ol class="ol_padding76">
+                <li ><a href="javascript:;" class="active">项目估值</a></li>
+
+                <li><a href="javascript:;">融资额</a></li>
+            </ol>
+            <div class="information_box">
+                <ul>
+                    <li class="active">融资信息</li>
+                    <li>资本退出计划</li>
+                    <li>公司简介</li>
+                    <li>核心团队</li>
+                    <li>新闻动态</li>
+                    <li>磁观点</li>
+                </ul>
+                <div class="bar"></div>
+            </div>
+            <!-- 融资信息-->
+            <div class="class_ifi_cation display active ">
+                <!-- yi-->
+                <ul class="ifi_ul active clearfix">
+                    <li>2014年2月12日</li>
+                    <li>公司成立</li>
+                    <li></li>
+                </ul>
+                <!-- er-->
+                <ul class="ifi_ul clearfix">
+                    <li>2014年2月12日<p></p></li>
+                    <li>天使轮（融资总额：300万）</li>
+                    <li></li>
+                    <li>
+                        <p>投资前估值：<span>100万</span></p>
+                        <p>投资后估值：<span>500万</span></p>
+                        <p>投资占比：<span>20％</span></p>
+
+                        <div>
+                            <p class="tozi_1">投资机构：<span>正和互联磁系基金有限公司－</span><span>200万</span></p>
+                            <p class="tozi_2">正和小岛资本有限公司－<span>200万</span></p>
+                        </div>
+                        <i></i>
+                    </li>
+                </ul>
+                <!-- san-->
+                <ul class="ifi_ul clearfix">
+                    <li class="active">2014年2月12日<p>（磁斯达克）</p></li>
+                    <li class="active">天使轮（融资总额：300万）</li>
+                    <li></li>
+                    <li>
+                        <p>投资前估值：<span>100万</span></p>
+                        <p>投资后估值：<span>500万</span></p>
+                        <p>投资占比：<span>20％</span></p>
+
+                        <div>
+                            <p class="tozi_1">投资机构：<span>正和互联磁系基金有限公司－</span><span>200万</span></p>
+                            <p class="tozi_2">正和小岛资本有限公司－<span>200万</span></p>
+                        </div>
+                        <i></i>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- 资本退出计划-->
+            <div class="class_ifi_cation display pad140">
+                <div class="capital_infi">
+                    <p>资本运作又称资本经营、消费投资、连锁销售、亮点经济、离岸经济等，是中国大陆企业界创造的概念。它指利用市场法则，
+                        通过资本本身的技巧性运作或资本的科学运动，实现价值增值、效益增长的一种经营方式。</p>
+                    <p>简言之就是利用资本市场，以小变大、以无生有的诀窍和手段，通过买卖企业和资产而赚钱的经营活动。</p>
+
+                </div>
+            </div>
+            <!-- 公司简介-->
+            <div class="class_ifi_cation display pad118">
+                <div class="pad118_infi">
+                    <p>公司名称: <span>&nbsp;&nbsp;北京正和磁系信息技术有限公司</span></p>
+
+                    <p>法人代表: <span>&nbsp;&nbsp;李云飞</span></p>
+
+                    <p>注册资本：<span>&nbsp;22,000,000,00 （¥）</span></p>
+
+                    <p>联系电话：<span>&nbsp;15618667892</span></p>
+
+                    <p>公司官网：<span>&nbsp;www.cisdaq.com</span></p>
+
+                    <p>公司地址：<span>&nbsp;北京市海淀区上地金域嘉华大厦A403</span></p>
+
+                    <div class="clearfix">
+                        <p>主营业务：</p>
+                        <p class="color_333">主营业务是指企业为完成其经营目标而从事的日常活动中的主要活动，可
+                            根据企业营业执照上规定的主要业务范围确定。</p>
+
+                    </div>
+                </div>
+            </div>
+            <!-- 核心团队-->
+            <div class="class_ifi_cation display pad59">
+                <div class="pad59_infi">
+                    <!-- 人物以前的结构，现在改的了些，虽然看起来一样，但不一样-->
+                    <ul class="centent_margin bs character clearfix">
+                        <li>
+
+                        </li>
+                        <li>
+                            <dl>
+                                <dt>肖邦<span>（CEO）</span></dt>
+                                <dd>肖邦是历史上最具影响力和最受欢迎的钢琴作曲家之一，是波兰音乐史上最重要的人物之一，欧洲19世纪浪漫主义音乐的代表人物。</dd>
+                            </dl>
+                        </li>
+                    </ul>
+
+                    <ul class="centent_margin bs character clearfix">
+                        <li >
+
+                        </li>
+                        <li>
+                            <dl>
+                                <dt>拉斐尔<span>（财务总监）</span></dt>
+                                <dd>肖邦是历史上最具影响力和最受欢迎的钢琴作曲家之一，是波兰音乐史上最重要的人物之一，欧洲19世纪浪漫主义音乐的代表人物。</dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--新闻动态-->
+            <div class="class_ifi_cation display pad62">
+                <div class="pad62_infi">
+                    <h2 class="_h2_remove_red">
+                        <span class="active">公司新闻</span>
+                        <span>行业新闻</span>
+                    </h2>
+                    <ul class="pad62_ul active">
+                        <li><span><a href="javascript:;">聚美私有化负面影响发酵：恶果或由中概股承担</a></span><span style="text-align:right">2016年1月11日</span></li>
+                        <li><span><a href="javascript:;">顺丰启动A股上市计划，‘’市值可能超1000亿元‘’</a></span><span style="text-align:right">2016年1月11日</span></li>
+                        <li><span><a href="javascript:;">聚美私有化负面影响发酵：恶果或由中概股承担</a></span><span style="text-align:right">2016年1月11日</span></li>
+                        <li><span><a href="javascript:;">顺丰启动A股上市计划，‘’市值可能超1000亿元‘’</a></span><span style="text-align:right">2016年1月11日</span></li>
+                        <li><span><a href="javascript:;">聚美私有化负面影响发酵：恶果或由中概股承担</a></span><span style="text-align:right">2016年1月11日</span></li>
+
+                    </ul>
+
+                    <ul class="pad62_ul">
+                        <li><span><a href="javascript:;">聚美私有化负面影响发酵：恶果或由中概股承担</a></span><span style="text-align:right">2016年1月11日</span></li>
+                        <li><span><a href="javascript:;">顺丰启动A股上市计划，‘’市值可能超1000亿元‘’</a></span><span style="text-align:right">2016年1月11日</span></li>
+                        <li><span><a href="javascript:;">聚美私有化负面影响发酵：恶果或由中概股承担</a></span><span style="text-align:right">2016年1月11日</span></li>
+                        <li><span><a href="javascript:;">顺丰启动A股上市计划，‘’市值可能超1000亿元‘’</a></span><span style="text-align:right">2016年1月11日</span></li>
+                        <li><span><a href="javascript:;">聚美私有化负面影响发酵：恶果或由中概股承担</a></span><span style="text-align:right">2016年1月11日</span></li>
+
+                    </ul>
+                </div>
+            </div>
+            <!--磁观点-->
+            <div class="class_ifi_cation display pad140">
+                <div class="capital_infi">
+                    <p>资本运作又称资本经营、消费投资、连锁销售、亮点经济、离岸经济等，是中国大陆企业界创造的概念。它指利用市场法则，
+                        通过资本本身的技巧性运作或资本的科学运动，实现价值增值、效益增长的一种经营方式。</p>
+                    <p>简言之就是利用资本市场，以小变大、以无生有的诀窍和手段，通过买卖企业和资产而赚钱的经营活动。</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<script src="../js/footer.js"></script>
+</body>
+</html>
+<script>
+    $(function(){
+
+        $('html,body').css('fontSize','20px');
+        $('tspan').css({'fontSize':'.7rem','fontWeight':'normal'});
+        $('#container').find('tspan').css({'WebkitTransform':'translateY(50px)','transform':'translateY(50px)','display':'block','textAlign':'left'});
+        $('g').css({'height':'300px','width':'200px'})
+        $('text').css({'fontSize':'.7rem','fontWeight':'normal'})
+    })
+
+</script>

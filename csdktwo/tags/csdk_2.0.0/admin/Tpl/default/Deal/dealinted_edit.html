@@ -1,0 +1,85 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">{%EDIT} <a href="{:u("Deal/intend_list")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank10"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data">
+<table class="form" cellpadding=0 cellspacing=0>
+
+
+		<tr>
+				<td class="item_title">投资人编号</td>
+				<td class="item_input">{$result.id}</td>
+				</td>
+			
+	</tr>
+	<tr>
+		<td class="item_title">投资人姓名</td>  
+		<td class="item_input">{$result.user_name}</td>
+	</tr>
+	<tr>
+		<td class="item_title">投资人手机号码:</td>
+		<td class="item_input">{$result.mobile}</td>
+	</tr>
+	<tr>
+		<td class="item_title">项目编号:</td>
+		<td class="item_input">{$result.deal_id}</td>
+	</tr>
+
+	<tr>
+		<td class="item_title">项目简称:</td>
+		<td class="item_input">{$result.deal_sname}</td>
+	</tr>
+    <tr>
+		<td class="item_title">项目名称:</td>
+		<td class="item_input">{$result.deal_name}</td>
+	</tr>
+	 <tr>
+
+		<td class="item_title">发送投资意向时间:</td>
+
+			
+		<td class="item_input">{$result.create_time}</td>
+	</tr>
+	<tr>
+		<td class="item_title">资讯意向状态</td>
+		<td class="item_input">
+			<select name="state" class="require" id="state">
+				<foreach name="deal_intend_list" item="item">
+					<option value="{$item.id}" <if condition="$item['id'] eq $result['state']">selected="selected"</if>>{$item.name}</option>
+				</foreach>
+			</select>
+		</td>
+	</tr>
+    <tr>
+		<td class="item_title">沟通意见:</td>
+		<td class="item_input"> <textarea type="text"  maxlength="200"  name="idea" id="idea" class="textarea require">{$result.idea}</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title"></td>
+		<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="dealinted_update" />
+			<input type="hidden" name="id" id="id"value="{$result.id}" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%EDIT}" />
+			<input type="reset" class="button" value="{%RESET}" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+</div>
+<include file="Public:footer" />

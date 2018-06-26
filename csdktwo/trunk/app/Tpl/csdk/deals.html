@@ -1,0 +1,127 @@
+  {include file="inc/header.html"}
+  <?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/Platform_introduction.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/focus.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/deal_list.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/region.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+ 
+  <div class="content_box2 bg_white">
+
+    <div class="personal_content clearfix">
+        <div class="Platform_introduction fl bs">
+            <ul>
+                <li>
+                    <h2>行业</h2>
+                    <div class="width100 clearfix" id="width100_v1">
+                        <label>
+                            <input type="radio" name="cate_list" value=""/>
+                            <span class="active tx_l">所有行业</span>
+                        </label>
+                        {foreach from=$cate_list item=list_cate}
+                        <label>
+                            <input type="radio" name="cate_list" value="{$list_cate.id}"/>
+                            <span class="tx_c">{$list_cate.name}</span>
+                        </label>
+                        {/foreach}
+                            <input type="hidden" id="cate_choose" value=""/>
+                        </div>
+ 
+                </li>
+                <li>
+                    <h2>地区</h2>
+                    <div class="width100 clearfix panduan">
+                        <label>
+                            <input type="radio" name="biggest_city" value="0"/>
+                            <span class="active tx_l">所有地区</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="biggest_city" value="101_"/>
+                            <span class="tx_c">北京</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="biggest_city" value="102_"/>
+                            <span class="tx_r">上海</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="biggest_city" value="123_101"/>
+                            <span class="tx_l">广州</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="biggest_city" value="123_103"/>
+                            <span class="tx_c">深圳</span>
+                        </label>
+ 						  <input type="hidden" id="district" value="0"/>
+                    </div>
+                    <div class="address">
+                        <div>
+                           <select name='province' id="province">
+                                <option value="" >请选择省份</option>
+			                   {foreach from=$region_lv2 item=region}
+			                   <option value="{$region.id}" rel="{$region.id}" id="province{$region.id}" {if $region.selected==1}selected{/if}>{$region.name}</option>
+			                   {/foreach}
+                            </select>
+                        </div>
+                        <div>
+                             <select name='city' id="city">
+                               {if $region_lv3}
+                                {foreach from = $region_lv3 item=region_city}
+                                    <option value="{$region_city.id}" rel="{$region_city.id}"  id="city{$region_city.id}" {if $region_city.selected==1}selected{/if}>{$region_city.name}</option>
+                                {/foreach}
+                            {else}
+                                <option value="" rel="0">请选择市</option>
+                            {/if}
+                            </select>
+ 
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2>轮次</h2>
+                    <div class="width100 clearfix">
+                        <label>
+                            <input type="radio" name="Round" value="0"/>
+                            <span class="active tx_l">所有轮次</span>
+                        </label>
+                          {foreach from=$period_list item=list_period}
+                        <label>
+                            <input type="radio" name="Round" value="{$list_period.id}"/>
+                            <span class="tx_c">{$list_period.mapname}</span>
+                        </label>
+                         {/foreach}
+                        <input type="hidden" id="period_id" value="0"/>
+                    </div>
+                </li>
+                <li>
+                    <h2>排序</h2>
+                    <div class="width100 clearfix">
+                        <label>
+                            <input type="radio" name="sort" value="2"/>
+                            <span class="active tx_l">最近更新</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="sort" value="3"/>
+                            <span class="tx_c">关注热度</span>
+                        </label>
+                        <input type="hidden" id="sort" value="1"/>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        <!-- 项目介绍-->
+        <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:724px;">
+            <div class="invest_box">
+                <div class="news_more_box invest_btn">
+                    <button class="news_more index_more" id="more_deal" type="button" >查看更多</button>
+                </div>
+            </div>
+  
+        </div>
+    </div>
+
+
+
+</div>
+  {include file="inc/footer.html"}

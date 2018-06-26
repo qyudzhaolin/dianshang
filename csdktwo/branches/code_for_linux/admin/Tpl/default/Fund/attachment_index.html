@@ -1,0 +1,45 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/fund_attachment.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/calendar.js' />
+<div class="main">
+<div class="main_title">基金管理 > 信息披露列表&nbsp;<a href="{:u("Fund/index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}" onclick="attach_add({$fid});" />
+</div>
+
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		信息标题：<input type="text" class="textbox" name="title" value="{:trim($_REQUEST['title'])}" />
+		披露时间：<input type="text" readonly="readonly" class="textbox" name="s_time" value="{:trim($_REQUEST['s_time'])}" onclick="return csdk_cal(this);"/>&nbsp;至&nbsp;<input type="text" readonly="readonly" class="textbox" name="e_time" value="{:trim($_REQUEST['e_time'])}" onclick="return csdk_cal(this);" />
+		<input type="hidden" value="Fund" name="m" />
+		<input type="hidden" value="attachment_index" name="a" />
+		<input type="hidden" value="{$fid}" name="fid" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+		<a href="{:u("Fund/attachment_index",array('fid'=>$fid))}"><input type="button" class="button" value="清空" /></a>
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fund" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,code:编码|50px
+		,title|msubstr:信息标题
+		,publish_time:披露日期|100px
+		,remark|msubstr:备注
+ 		" 
+	actionlist="button_list" /> 
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

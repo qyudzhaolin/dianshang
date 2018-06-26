@@ -1,0 +1,70 @@
+﻿*{
+	margin:0 auto;
+	padding:0;
+}
+li{
+	list-style: none;
+}
+img{
+	display: block;
+	width: 100%;
+	margin:auto;
+}
+html,body{
+	width: 100%;
+	height:100%;
+}
+body{
+	font-family:tahoma,arial,"Hiragino Sans GB",黑体,"Microsoft YaHei",sans-serif;
+	margin:auto;
+}
+.h10{
+	width: 100%;
+	height: 10px;
+}
+.m_50{
+	margin-bottom: 50px;
+}
+.content{
+	width: 100%;
+	max-width: 100%;
+	background: url(../images/bg_middle.jpg) repeat-y center top;
+	background-size:100%;
+	-webkit-background-size:100%;
+	-moz-background-size:100%;
+	-ms-background-size:100%;
+/*	height: 500px;
+	display: block;*/
+}
+.logo{
+	max-width: 110px;
+	margin:0px 0 0 28px;
+}
+.monkey{
+	width: 255px;
+}
+h1,h3{
+	text-align: center;
+	color:#fff;
+}
+h1{
+	font-size: 36px;
+}
+h3{
+	font-size: 19px;
+}
+p{
+	color:#fff;
+	padding:0 35px;
+	font-size: 15px;
+	line-height: 30px;
+}
+.flower{
+	width: 205px;
+	margin:80px 0 0 16px;
+}
+.wishes{
+	font-size: 21px;
+	text-align: center;
+	color: #fffccc;
+}

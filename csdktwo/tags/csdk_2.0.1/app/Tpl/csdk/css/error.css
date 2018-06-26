@@ -1,0 +1,7 @@
+/*error404*/
+.error_bg{width:100%;height:697px;background:url(../images/404bg.jpg) no-repeat center top;}
+.height40{width:100%;height:40px;}
+.error_bg_con{padding-top:442px;}
+.error_bg_con p{text-align:center;font-size:16px;color:#fff;}
+.error_bg_con button{width:128px;height:32px;overflow:hidden;border:0px;background:url(../images/react_index.png);display:block;margin:38px auto 0;color:#5674a2;line-height: 15px}
+.error_bg_con button:hover{background: #3293f9;color: #fff;}

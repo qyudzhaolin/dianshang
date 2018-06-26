@@ -1,0 +1,15 @@
+<div {if $user_info.is_review!=1} class="flow_list" {else}class="flow_list no_block"{/if}>
+	<div class="wrap">
+		<div class="left">投资人认证流程：</div>
+		<div class="right">
+			<ul>
+				<li {if $side_step eq 1}class="cur"{/if} {if $side_step gt 1}class="default"{/if}>填写个人信息</li>
+				<li {if $side_step eq 2}class="cur"{/if} {if $side_step gt 2}class="default"{/if}>填写所在机构</li>
+				<li {if $side_step eq 3}class="cur"{/if} {if $side_step gt 3}class="default"{/if}>填写投资相关</li>
+				<li {if $side_step eq 4}class="cur"{/if} {if $side_step gt 4}class="default"{/if}>开通会员帐户</li>
+				<li {if $side_step eq 5}class="cur"{/if} {if $side_step gt 5}class="default"{/if}>磁斯达克审核认证</li>
+				<li {if $side_step eq 6}class="cur"{/if} {if $side_step gt 6}class="default"{/if}>认证完成</li>
+			</ul>
+		</div>
+	</div>
+</div>

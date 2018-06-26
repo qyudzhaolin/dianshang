@@ -1,0 +1,45 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/fund.js' />
+<div class="main">
+<div class="main_title">基金回收站列表</div>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		基金简称：<input type="text" class="textbox" maxlength="6" name="short_name" value="{:trim($_REQUEST['short_name'])}" style="width:100px;" />
+		基金名称：<input type="text" class="textbox" maxlength="20" name="name" value="{:trim($_REQUEST['name'])}" style="width:150px;" />
+		基金管理人: <input type="text" class="textbox" maxlength="20" name="manager" value="{:trim($_REQUEST['manager'])}" style="width:150px;" />
+		发布状态:<select name="status" style="width:100px;" class="textbox">
+					<option value="0" <if condition="$_REQUEST['status'] eq 0">selected="selected"</if>>全部</option>
+					<foreach name="status_list" item="status_item">
+						<option value="{$status_item.id}" <if condition="$_REQUEST['status'] eq $status_item['id']">selected="selected"</if>>{$status_item.name}</option>
+					</foreach>
+				 </select>
+		<input type="hidden" value="Fund" name="m" />
+		<input type="hidden" value="delete_fund" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fund" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,short_name|msubstr:基金简称|150px
+		,name|msubstr:基金名称|180px
+		,managers_id_cn|msubstr:基金管理人|180px
+		,status_value|msubstr:基金状态|70px
+		,total_amount|msubstr:基金规模（万）|140px
+		,establish_date|msubstr:基金成立时间|100px
+ 		" 
+	actionlist="button_list" /> 
+	
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

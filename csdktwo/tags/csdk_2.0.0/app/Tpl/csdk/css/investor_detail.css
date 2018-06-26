@@ -1,0 +1,38 @@
+.investor_top{width: 100%;height: 600px;position:relative;background:url(../images/inv_bg.jpg) no-repeat center top;}
+.h160{width: 100%;height: 160px;}
+.inv_head{margin:auto;width: 162px;height: 162px;border:6px solid rgba(255,255,255,.1);box-sizing:border-box;border-radius: 100%;overflow: hidden;}
+.inv_head img{width: 150px;height: 150px;margin:0px auto 18px;display:block;text-align: center;}
+.inv_desc{color:#c7c9d5;text-align: center;font-size: 18px;margin-top: 10px;}
+.investor_text{width: 995px;height: 167px;margin:20px auto 0;color: #fff;}
+.investor_text h3{font-size: 38px;height:50px;margin-top:40px;width: 1000px;text-align: center;}
+.investor_text ul{overflow:hidden;margin:29px auto 0;font-size: 18px;width: 925px;text-align: center;padding: 0 35px}
+.investor_text ul li{float: left;width:308px;  }
+.investor_point{width: 100%;height: 270px;background: #fff;}
+.investor_point .wrap{position:relative;height:270px;}
+.investor_point .send_request_box{position:absolute;top:54px;right:0px;}
+.investor_point .eye_box{margin-top: 15px;}
+.investor_point .eye_box b{color:#8d8d8d;}
+.investor_grey{width: 100%;height: auto;background: #f6f7f9;}
+
+.investor_point .investor_item{text-align:left;padding-top:70px;}
+.personal_feel{width: 552px;font:14px/1.6em "微软雅黑";color:#888;}
+.investor_item h3{margin:100px auto 50px;}
+.investor_data{ width:656px;height: auto;margin:0 auto;overflow: hidden;padding-bottom:50px;}
+.investor_data li{padding-top:10px;margin-right:40px;margin-bottom:40px;float: left;background:url(../images/investor_bk.png) no-repeat center bottom;width:308px;height: 138px;}
+.investor_data li:nth-child(even){margin-right: 0px;}
+.investor_data li h4{font-size:18px;color:#000;text-align: center;margin-top:-10px;margin-bottom: 20px;}
+.investor_data li div p{text-align:center;font-size: 14px;color:#7f7f7f;margin-bottom: 10px;}
+
+/*relative_msg*/
+.relative_msg{}
+.relative_msg h2{margin:100px auto 50px;}
+.size_18{font-size: 18px;color:#000;text-align:center;}
+.color_888{width: 604px;margin:20px auto 64px;font:14px/1.6em "微软雅黑";color:#888;text-align:center;}
+.org_link a{display:block;color:#888;height:20px;line-height: 20px;}
+.ss{display:none;width: 100%;height:70px;background: #121924;position:fixed;z-index:1008;left:0px;top:0px;overflow: hidden;}
+.ss_bar{height:70px;}
+.ss_bar li{float:left;width: auto;height:70px;}
+.ss_bar li:last-child{margin-right:0px;}
+.ss_bar a{color:#6e7d8e;font-size:18px;float:left;height:70px;line-height: 70px;margin-right: 40px;}
+.ss_bar a:hover{color:#fff;}
+.ss_bar a.cur{color:#fff;}

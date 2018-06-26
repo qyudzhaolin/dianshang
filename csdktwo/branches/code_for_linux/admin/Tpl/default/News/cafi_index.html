@@ -1,0 +1,69 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/news.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">轮播广告</div>
+<div class="blank5"></div>
+<div class="button_row">
+  <input type="button" class="button" value="{%ADD}" onclick="cafi_add();" />
+  </div>
+<div class="blank5"></div>
+<div class="search_row">
+  <form name="search" action="__APP__" method="get">  
+    轮播标题：<input type="text" class="textbox" maxlength="20" name="b_title" value="{:trim($_REQUEST['b_title'])}" style="width:150px;" />
+       发布渠道：
+         <select name="b_channel"  id="b_channel"style="width:150px;">        
+           <option value="" <if condition="$_REQUEST['b_channel'] eq 0">selected="selected"</if>>请选择</option>>
+         <foreach name="channel_type" item="region">
+         <option value="{$region.id}" <if condition="$_REQUEST['b_channel'] eq $region['id']">selected="selected"</if>>{$region.name}</option>
+         </foreach>
+         </select>
+         轮播组：
+          <select name="b_bygroup"  id="b_bygroup"style="width:150px;">  
+              <option value="" <if condition="$_REQUEST['b_bygroup'] eq 0">selected="selected"</if>>请选择</option>>
+            <foreach name="bygroup_type" item="region">
+         <option value="{$region.id}" <if condition="$_REQUEST['b_bygroup'] eq $region['id']">selected="selected"</if>>{$region.name}</option>
+         </foreach>
+        </select>
+         发布状态：
+         <select  name="b_publish_state"  id="b_publish_state"style="width:150px;"> 
+          <option value="" <if condition="$_REQUEST['b_publish_state'] eq 0">selected="selected"</if>>请选择</option>>
+            <foreach name="state_type" item="region">
+         <option value="{$region.id}" <if condition="$_REQUEST['b_publish_state'] eq $region['id']">selected="selected"</if>>{$region.name}</option>
+         </foreach>
+         </select>
+    <input type="hidden" value="News" name="m" />
+    <input type="hidden" value="cafi_index" name="a" />
+    <input type="submit" class="button" value="{%SEARCH}" />
+ 
+      </td>
+  </form>
+</div>
+<div class="blank10"></div>
+<html:list 
+  id="dataTable" 
+  style="dataTable" 
+  name="News" 
+  checkbox="true" 
+  action="true" 
+  datasource="list" 
+  show="id:{%ID}|50px
+      ,b_channel:发布渠道|80px
+      ,b_bygroup:轮播组|80px
+      ,b_title:轮播标题|150px
+      ,b_url:链接网址|250px
+      ,b_sort:显示顺序|60px
+      ,b_publish_state:发布状态|80px
+      ,b_person:发布人|60px
+      ,create_time|to_date:发布时间" 
+      actionlist="cafi_button"
+     
+ /> 
+<div class="blank10"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

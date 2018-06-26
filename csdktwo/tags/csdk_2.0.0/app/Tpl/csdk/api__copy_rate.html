@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"> 
+<head>
+<meta charset='utf-8'> 
+
+  <meta name="viewport" content="width=640, user-scalable=no, initital-scale=1">
+<?php
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/css/h5/js/jquery-2.1.1.min.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/css/h5/js/highcharts.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/css/h5/js/exporting.js";
+?>
+</head> 
+<script type="text/javascript" src="{function name="parse_script" v="$pagejs"}"></script>
+<script type="text/javascript">
+var APP_ROOT = '{$APP_ROOT}';
+</script>
+<body> 
+    <div id="container" style="width:100%;height:26rem;"></div>
+</body> 
+</html>
+<script>
+$(function () {
+    $('#container').highcharts({
+        title: {
+            text: ' ',
+            x: -20 //center
+        },
+        subtitle: {
+            text: ' ',
+            x: -20
+        },
+        xAxis: {
+            categories: [{foreach from=$rate_list item=ratelist}
+							 '{$ratelist.period}',
+						 {/foreach}]
+        },
+        credits: {
+                   enabled: false
+        },
+        legend: {
+                enabled: false
+        },
+
+         yAxis: [{
+            lineWidth: 2
+            // showEmpty: true // by default
+        }, {
+            lineWidth: 2,
+            opposite: true,
+            showEmpty: true
+        }],
+
+        yAxis: {
+            title: {
+                text: ''
+            },
+            allowDecimals: true,
+            style: {fontSize:10},
+            labels: {
+                formatter: function() {
+                    return this.value+'%';
+                }
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ''
+        }, 
+       
+        series: [{
+            name:'估值增长率',
+            data: [{foreach from=$rate_list item=ratelist}
+					 {$ratelist.evalute_growth_rate},
+					{/foreach}]
+        }]
+    });
+});
+</script>
+<script>
+    $(function(){
+            $('html,body').css('fontSize','20px');
+            $('tspan').css({'fontSize':'1.4rem','fontWeight':'bold'});
+            $('.highcharts-data-labels.highcharts-series-0.highcharts-tracker').css({'WebkitTransform':'translate(-9rem, -2rem) scale(1.4)'});
+            $('.highcharts-series.highcharts-series-0.highcharts-tracker').css({'WebkitTransform':'translate(-8.6rem, -1rem) scale(1.4)'});
+            $('#container').find('tspan').css({'transform':'translateY(50px)','display':'block'});
+            $('g').css({'color':'red','height':'300px','width':'200px'});
+            $('text').css({'fontSize':'1.1rem','fontWeight':'normal','color':'#000'})
+    })
+</script>

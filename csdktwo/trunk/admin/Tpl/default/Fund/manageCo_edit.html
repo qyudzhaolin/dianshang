@@ -1,0 +1,98 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/fund_manageCo.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/check.js' />
+<div class="main">
+	<div class="main_title">{%EDIT}<a href="{:u("Fund/manageCo_index")}" class="back_list">{%BACK_LIST}</a></div>
+	<div class="blank5"></div>
+	<form name="edit" action="__APP__" method="post" onSubmit="return mc_check() ">
+		<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+			<tr>
+				<td colspan=2 class="topTd"></td>
+			</tr>
+			<tr>
+				<td class="item_title">*公司编码</td>
+				<td class="item_input">
+					<input disabled="disabled" type="text" class="textbox require" name="code" id="code" value="{$info.code}" />
+					<span id="code_msg"  name="error_msg"></span>
+				</td>
+			</tr><tr>
+				<td class="item_title">*公司全称(50个字)</td>
+				<td class="item_input">
+					<input type="text" maxlength="50" class="textbox2 require" name="name" id="name" value="{$info.name}" />
+					<span id="name_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*公司简称(6个字)</td>
+				<td class="item_input">
+					<input type="text" maxlength="6" class="textbox require" name="short_name" id="short_name" value="{$info.short_name}" />
+					<span id="short_name_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+		 	<tr>
+				<td class="item_title">*法定代表人<br />(20个字)</td>
+				<td class="item_input">
+					<input type="text" class="textbox2 require" maxlength="20"  name="legal_person" id="legal_person" value="{$info.legal_person}"  /> 
+					<span id="legal_person_msg" name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*注册资本(万元)</td>
+				<td class="item_input">
+					<input type="text" own_type="float" maxlength="10" class="textbox3 require" name="reg_found" id="reg_found" value="{$info.reg_found}" /> 万元
+					<span id="reg_found_msg" name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*成立日期</td>
+				<td class="item_input">
+					<input type="text" class="textbox require" name="com_time" id="com_time" value="{$info.com_time}" readonly="readonly" onclick="return csdk_cal(this);"/>
+					<span id="com_time_msg" name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*工商注册号</td>
+				<td class="item_input">
+					<input type="text" class="textbox3 require"  maxlength="20" name="registration_no" id="registration_no" value="{$info.registration_no}"  />
+					<span id="registration_no_msg" name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*办公地址(100个字)</td>
+				<td class="item_input">
+					<textarea type="text"  maxlength="100"  name="registration_address" id="registration_address" class="textarea require">{$info.registration_address}</textarea>
+					<span id="registration_address_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 class="bottomTd"></td>
+			</tr>
+		</table>
+		<div class="blank5"></div>
+		<table class="form" cellpadding=0 cellspacing=0>
+			<tr>
+				<td colspan=2 class="topTd"></td>
+			</tr>
+			<tr>
+				<td class="item_title"></td>
+				<td class="item_input">
+				<!--隐藏元素-->
+				<input type="hidden" name="{:conf("VAR_MODULE")}" value="Fund" />
+				<input type="hidden" name="{:conf("VAR_ACTION")}" value="do_manageCo_update" />
+				<input type="hidden" name="id" value="{$info.id}" />
+				<!--隐藏元素-->
+				<input type="submit" class="button" value="{%EDIT}" />
+				<input type="reset" class="button" value="{%RESET}" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 class="bottomTd"></td>
+			</tr>
+		</table> 		 
+	</form>
+</div>
+<include file="Public:footer" />

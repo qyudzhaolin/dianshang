@@ -1,0 +1,60 @@
+.fr.bs .My_investament{
+    height:76px;
+}
+.Maintain_and_update.My_investament .active{
+    color:#dca876;
+}
+.fund_lower{
+    margin:0 0 70px 0;
+}
+ul.fund_ul.bs li span:nth-of-type(1){width: 42px; }
+
+ul.fund_ul.bs li span:nth-of-type(2){width:98px;}
+ul.fund_ul.bs li span:nth-of-type(3){width:192px;height:100%;margin:0 0 0 21px;  }
+ul.fund_ul.bs li span:nth-of-type(4){width:110px;}
+ul.fund_ul.bs li span:nth-of-type(5){width:114px;}
+ul.fund_ul.bs li span:nth-of-type(6){width:110px;}
+/*没有数据box*/
+.no_deal {
+    width: 100%;
+    text-align: center;
+    padding: 150px 0;
+    font-size: 14px;
+    color: #8d8d8d;
+}
+.no_deal a {
+    color: #4282c5;
+    text-decoration: none;
+    padding: 0 10px;
+}
+ul.fund_ul.bs li:nth-last-of-type(1){
+    border-left:1px solid #F4F4F4;
+    border-right:1px solid #F4F4F4;
+    border-bottom:1px solid #F4F4F4;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

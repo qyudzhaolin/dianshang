@@ -1,0 +1,166 @@
+{include file="inc/header.html"} 
+<?php
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/main.css";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/region.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/check.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/upload.js";
+  	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/personal_home.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/home.js";
+    
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+ 
+<div class="content_box2 bg_white" id="personal_id">
+    <div class="personal_box">
+        <a href='{url r="home"}'>我的个人中心</a>
+            <img src="{function name="get_spec_image" v="right_corner.jpg" }" alt=""/>
+        <span>我的信息</span>
+    </div>
+    <div class="personal_content clearfix">
+        {include file="inc/sidebar_user.html"} 
+        <!-- 个人资料，保存更新-->
+        <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+            <div class="Maintain_and_update">
+                <a href="javascript:;" class="active">个人资料</a>
+                <a href="javascript:;">公司信息</a>
+                <a href="javascript:;">投资倾向</a>
+                <div class="bbr"></div>
+            </div>
+            <!-- 个人资料from表单-->
+             <form action="javascript:void(0);" method="post" enctype="multipart/form-data" class="form bs active" style="margin:0 0 108px 0">
+                 <div class="head img_img_01">
+                    <i>*</i>
+                    <b>更新头像</b>
+                    <label id="personal_logo" class="head_label {if $home_user_info.real_img}img_border{/if}" for="user_img" onclick="upd_file(this,'user_img','img_src','img_user_logo','img_user_logo_msg','img');">
+                        <input type="file" class="filebox file_active" name="user_img" id="user_img"/>
+                        <input type="hidden" value="{$home_user_info.img_user_logo}" name="img_user_logo" id="img_user_logo"/>
+                        <img src='{$home_user_info.real_img}' id="img_src" class="div_img" alt=""/>
+                        <s></s>
+                    </label>
+                     <span id="img_user_logo_msg" name="error_msg" class="gray">{if $home_user_info.img_user_logo}点击图片重新上传{else}请添加头像{/if}</span>
+                </div>
+                <div>
+                    <i>*</i>
+                    <b>真实姓名</b>
+                    <input type="text" id="user_name_01" name="user_name" autocomplete="off" readonly="readonly" value="{$home_user_info.user_name}" disabled="disabled"/>
+                </div>
+                <div>
+                    <i>*</i>
+                    <b>手机号码</b>
+                    <input type="text" id="mobile_01" name="mobile" autocomplete="off" readonly="readonly" value="{$home_user_info.mobile}" disabled="disabled"/>
+                </div>
+                <div>
+                    <i>*</i>
+                    <b>会员类别</b>
+                    
+                    <input type="text" id="user_type_01" name="user_type" autocomplete="off" readonly="readonly" value="{$home_user_info.user_type}" disabled="disabled"/>
+                    
+                </div>
+                <div class="address pos_re">
+                    <i>*</i>
+                    <b>所属地区</b>
+                   
+                    <td colspan="2" class="item_input">
+                    <select name='province' id="province" class="require">                
+                    <option value="" >请选择省份</option>
+                    {foreach from=$region_lv2 item=region}
+                    <option value="{$region.id}" rel="{$region.id}" id="province{$region.id}" {if $region.selected==1}selected{/if}>{$region.name}</option>
+                    {/foreach}
+                     </select>
+                        <select name='city' id="city" style="margin-left:6px;">
+                            <option value="" rel="0">请选择市</option>
+                            {if $region_lv3}
+                                {foreach from = $region_lv3 item=region_city}
+                                    <option value="{$region_city.id}" rel="{$region_city.id}"  id="city{$region_city.id}" {if $region_city.selected==1}selected{/if}>{$region_city.name}</option>
+                                {/foreach}
+                            {/if}
+                        </select> 
+                    <span id="region_msg" name="error_msg"></span>
+                </td>
+                </div>
+                <div class="schedu pos_re">
+                    <i>*</i>
+                    <b>最高学历</b>
+                <select name="degree" id="degree" class="require">              
+                <option value="">请选择</option>
+                {foreach from=$per_degree_list item=degree}
+                <option value="{$degree.id}" rel="{$degree.id}" {if $degree.id eq $home_user_info.per_degree}selected{/if}>{$degree.name}</option>
+                {/foreach}
+                </select>
+                 <span id="degree_msg" name="error_msg"></span>
+                </div>
+                <div class="pos_re">
+                    <i class="white">*</i>
+                    <b>电子邮箱</b>
+                    <input type="text" maxlength="30" name="email" id="email"  value="{$home_user_info.email}"/> 
+                    <span id="email_msg" name="error_msg"></span>
+                </div>
+                <button type="button"  class="save_btn" onclick="personal_msg_next()">保存更新</button>
+               <!-- <span id="error_msg" name="error_msg"></span> -->
+                </form>
+            <!-- 公司信息-->
+             <form action="" class="form bs a" style="margin:0 0 108px 0">
+                <div>
+                    <i>*</i>
+                    <b>公司名称</b>
+                   <input type="text" maxlength="20" name="org_name"  id="org_name" class="require" value="{if $investor_org.org_name}{$investor_org.org_name}{/if}" placeholder="不超过20个字" title="不超过20个字"/>
+                    <span id="org_name_msg" name="error_msg"></span>
+                </div>
+                <div>
+                    <i>*</i>
+                    <b>担任职务</b>
+                     <input type="text" maxlength="8" name="org_title"  id="org_title" class="require" value="{if $investor_org.org_title}{$investor_org.org_title}{/if}" placeholder="不超过8个字" title="不超过8个字"/>
+                    <span id="org_title_msg" name="error_msg"></span>
+                </div>
+                <div>
+                    <i class="white">*</i>
+                    <b>公司联系人</b>
+                     <input type="text"  maxlength="6" name="org_linkman" id="org_linkman" value="{$investor_org.org_linkman}"/>  
+                </div>
+                <div class="pos_re">
+                    <i class="white">*</i>
+                    <b>联系电话</b>
+                     <input type="text" maxlength="16" name="org_mobile" id="org_mobile" value="{$investor_org.org_mobile}"/> 
+                     <span id="org_mobile_msg" name="error_msg"></span>
+                </div>
+                <div>
+                    <i class="white">*</i>
+                    <b>公司官网</b>
+                     <input type="text" name="org_url" maxlength="50" id="org_url" value="{$investor_org.org_url}"/> 
+                      <span id="org_url_msg" name="error_msg"></span>
+                </div>
+                <div class="textarea">
+                    <i class="white">*</i>
+                    <b>公司简介</b>
+                     <textarea name="org_desc" id="org_desc" maxlength="200" class="textarea" > {$investor_org.org_desc}</textarea>
+                    <span id="org_desc_msg" name="error_msg"></span>
+                </div>
+                <button  type="button" class="save_btn"  onclick="investor_org_next()">保存更新</button>
+            </form>
+            <!-- 投资倾向-->
+            <form action="" class="form bs c minH350 m_b_0" >
+                <div>
+                        <div class="w_100xx set_paL10"><span class="c_000">项目行业</span><span class="c_999 set_paL30">选择倾向投资行业，最多5个</span></div>
+                       <div class="pos_re">
+                            <ul class="check_ul set_padL122 clearfix set_padR122 c_000">
+                               {foreach from=$dealcate item=list_cate key=myId}
+                               <li>
+                               <label>
+                               <input type="checkbox" name="deal_cate" id="deal_cate{$myId}"  value="{$list_cate.id}" tag="deal_cate"
+                               {if $list_cate.check==1}checked{/if}
+                               onClick="doCheck(this,5,'deal_cate')"/>
+                                   <span>{$list_cate.name}</span>
+                                </label>
+                                </li>
+                               {/foreach}
+                           </ul>
+                           <span id="deal_cate_msg" name="error_msg" class="a_span por_ab set-style-0"></span>
+                       </div>
+                     <button  type="button"   class="bth_submit"onclick="deal_cate_save()"/>保存更新</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+{include file="inc/footer.html"}

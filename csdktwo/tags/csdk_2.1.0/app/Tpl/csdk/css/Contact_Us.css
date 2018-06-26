@@ -1,0 +1,242 @@
+.bananr_map_bj{
+    width:1000px;
+    margin:0 auto 0;
+
+}
+.bananr_map_bj img{
+    display: block;
+    width:1000px;
+    position: relative;
+}
+
+.help_center_box{
+    margin:70px auto 0;
+}
+.wrap {
+    width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+}
+.slide {
+    width: 160px;
+    float: left;
+}
+.intro_help {
+    float: left;
+    padding-left: 143px;
+    color: rgb(152, 152, 152);
+    width: 565px;
+    padding-top: 43px;
+    padding-bottom: 400px;
+    font: 12px/25px 微软雅黑;
+    border-left: 1px solid #f4f4f4;
+}
+.slide_nav {
+    color: rgb(175, 177, 179);
+    font: bold 14px 微软雅黑;
+    margin: 27px 0px 90px;
+}
+
+.slide_nav li {
+
+    height: 36px;
+    line-height: 36px;
+    padding-left: 10px;
+    padding-bottom: 2px;
+    /* margin: 10px 0; */
+}
+li span.pitch {
+    background-position: 0 -50px;
+}
+li a.cur {
+    color: #4282c5;
+
+}
+.intro_help ul li a.cur{
+    background-image:url("../images/xia_jiao.png");
+}
+li:nth-of-type(2) .icon {
+    background-position: -36px 0px;
+}
+.slide_nav li a {
+    display: block;
+    height: 36px;
+    line-height: 36px;
+    color: #7c7c7c;
+}
+.slide_nav li a {
+    text-indent: 20px;
+}
+.slide_nav li>* {
+    float: left;
+}
+#slide_icon li span {
+    padding: 0;
+    display: block;
+    width: 36px;
+    height: 50px;
+    background: url(../images/sprite1.png) no-repeat 0px 0px;
+}
+
+#slide_icon li:nth-of-type(2) .icon {
+    background-position: -36px 0px;
+}
+#slide_icon li:nth-of-type(3) .icon {
+    background-position: -72px 0px;
+}
+
+.intro_help ul li a {
+    float: left;
+    width: 100%;
+    height: 41px;
+    line-height: 41px;
+    border-bottom: 1px solid #eaecf0;
+    border-top: 1px solid #eaecf0;
+    background: url(../images/help_right.png) no-repeat right center;
+    font-size: 12px;
+    color: #111;
+    text-align: left;
+}
+.vtitle .vcon{display:none;}
+#slide_icon li span.pitch {
+    background-position: 0 -50px;
+}
+.slide_nav li a.cur {
+    color: #fff;
+}
+.intro_help ul li a em {
+    background: url(../images/introl.png) no-repeat left center;
+    float: left;
+    width: 2.7%;
+}
+.vcon {
+    float: left;
+    width: 596px;
+    padding: 16px 24px;
+}
+
+
+.intro_text {
+    float: left;
+    padding-left: 143px;
+    color: rgb(152, 152, 152);
+    width: 565px;
+    padding-top: 43px;
+    padding-bottom: 400px;
+    font: 12px/25px 微软雅黑;
+
+}
+
+
+.intro_contact {
+    float: left;
+    padding-left: 143px;
+    color: rgb(152, 152, 152);
+    width: 565px;
+    padding-top: 43px;
+    padding-bottom: 400px;
+    font: 12px/25px 微软雅黑;
+    border-left: 1px solid #f4f4f4;
+}
+.intro_contact dl {
+    float: left;
+    width: 100%;
+    margin-bottom: 27px;
+}
+.intro_contact dl dt {
+    float: left;
+    width: 82px;
+    padding-left: 38px;
+}
+.intro_contact dl .telbj {
+    background: url("../images/dianhua.png") no-repeat left center;
+}
+.intro_contact dl dd {
+    float: left;
+    width: 430px;
+    color: #333;
+    padding-left: 15px;
+}
+.intro_contact dl .emailbj {
+    background: url(../images/emailbj.png) no-repeat left center;
+}
+.intro_contact dl .contactbj {
+    background: url(../images/contactbj.png) no-repeat left center;
+}
+.intro_contact dl .weibobj {
+    background: url(../images/attention2.png) no-repeat 2.5px center;
+}
+.intro_contact dl .weibo {
+    padding-left: 130px;
+}
+.weibo img{float:left;}
+.weibo img:nth-of-type(2){margin:2px 0 0 50px;}
+
+.slide_nav li.selected {
+    color: #fff;
+    background:#dba775;
+}
+.slide_nav li {
+    margin: 10px 0;
+}
+#slide_icon li:nth-of-type(3) .icon.pitch {
+    background-position: -72px -50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

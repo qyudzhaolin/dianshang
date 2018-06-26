@@ -1,0 +1,56 @@
+{// 引入标签库 }
+
+
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/calendar/calendar.js' />
+<load href='__TMPL__Common/js/import.js' />
+<div class="main">
+<div class="main_title">用户日活统计</div>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		  手机号码： <input type="text" class="textbox" maxlength="30" name="mobile" value="{:trim($_REQUEST['mobile'])}" style="width:170px;" />
+		   &nbsp; &nbsp;&nbsp; 登录方式：
+          <select name="login_type"  id="login_type" style="width:170px;"> 
+        <option value="" <if condition="$_REQUEST['login_type'] eq 0">selected="selected"</if>>全部</option>>
+         <foreach name="login_type" item="region">
+         <option value="{$region.id}" <if condition="$_REQUEST['login_type'] eq $region['id']">selected="selected"</if>>
+         {$region.name}
+         </option>
+         </foreach>
+      </select>
+   <div class="blank5"></div>
+		{%LOG_TIME}：
+		<input type="text" class="textbox" name="log_begin_time" id="log_begin_time" value="{:trim($_REQUEST['log_begin_time'])}" onfocus="return showCalendar('log_begin_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_log_begin_time');" />
+		<input type="button" class="button" id="btn_log_begin_time"   name="log_begin_time" value="{%SELECT_TIME}" onclick="return showCalendar('log_begin_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_log_begin_time');" />	
+		-
+		<input type="text" class="textbox" name="log_end_time" id="log_end_time" value="{:trim($_REQUEST['log_end_time'])}" onfocus="return showCalendar('log_end_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_log_end_time');" />
+		<input type="button" class="button" id="btn_log_end_time" value="{%SELECT_TIME}" onclick="return showCalendar('log_end_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_log_end_time');" />	
+		<input type="hidden" value="Log" name="m" />
+		<input type="hidden" value="user_index" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+         <input type="hidden" value="user_index" name="a" />
+		<input type="button" class="button user_data" value="导出"  />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="log" 
+	datasource="list" 
+	show="id:{%ID}|50px
+			,user_name:会员姓名|200px
+			,mobile:会员手机号|200px
+		    ,login_time|to_date:登录时间|200px
+			,login_type:登录方式|100px
+			,login_ip:操作地址|200px"
+			/> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

@@ -1,0 +1,233 @@
+.Sign_In_box{
+
+    width:903px;
+
+    height:540px;
+
+    position: relative;
+
+    left: 22px;
+
+    top: 18px;
+}
+#pwd,#pwd_confirm,#mobile,#username,#code,#sms{
+    line-height: 100%;
+    height: 3em;
+}
+.Register_label_01{position: relative;display: block;margin: 30px auto 0;width:242px;}
+.Register_label_01 i{
+    position:absolute;top:0;left:0;height:36px;width:36px;background: url("../images/End-call.png") no-repeat 12px center;z-index: 10
+}
+.Register_label_02{position: relative;display: block;margin: 18px auto 0;width:242px;}
+.Register_label_02 i{
+    position:absolute;top:0;left:0;height:36px;width:36px;background: url("../images/Lock-.png") no-repeat 12px center;z-index: 10
+}
+.Register_label_03 i{
+    background: url("../images/signup-user.png") no-repeat 12px center;
+}
+
+.Sign_In_bj_mask{
+    margin:120px auto 66px;
+    width:946px;
+    height:584px;
+    background: url("../images/Projection.png") no-repeat center;
+}
+.Sign_In_from{
+    background: #fff;
+}
+.Register_label{
+    margin:18px 0 0 0;
+    height:36px;
+    display: block;
+    position:relative;
+}
+.Register_label>input{
+    float:left;
+}
+.Register_label>div{
+    width:104px;
+    height:36px;
+    float:left;
+    margin:1px 0 0 4px;
+    border:1px solid #7697c7;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    cursor:pointer;
+    border-radius: 4px;
+
+}
+.Register_label>div img{
+    height:100%;
+    width:100%;
+}
+.Register_label>span{
+    color:#4d85f6;
+    font-size:12px;
+    line-height: 36px;
+    padding:0 0 0 10px;
+    cursor:pointer;
+}
+.Sign_In_box>div:nth-of-type(1){
+    height:100%;
+    width:523px;
+    background: url("../images/bj_001.png") no-repeat;
+
+}
+.Sign_In_box>div:nth-of-type(2){
+    height:100%;
+    width:380px;
+    background: #fff;
+}
+.Sign_In_box>div:nth-of-type(2) h2{
+    padding:30px 0;
+    font-size:18px;
+    color:#dba774;
+    text-align: center;
+
+    border-bottom:1px solid #f4f4f4
+}
+.Sign_In_box>div:nth-of-type(2) input{
+    display:block;
+    padding: 0 12px 0 36px;
+}
+
+.Sign_In_from .input1,.Sign_In_from .input2{
+    border:1px solid #e5e5e5;
+    height:36px;
+    width:187px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-size:12px;
+    line-height: 36px;
+
+}
+.Register>input:nth-of-type(1){
+    margin:30px auto 0;
+    background: url("../images/End-call.png") no-repeat 12px center;
+    padding:0 12px 0 36px;
+}
+.Register>input:nth-of-type(2){
+    margin:18px auto 0;
+    background: url("../images/Lock-.png") no-repeat 12px center;
+    padding:0 12px 0 36px;
+}
+.Register>input:nth-of-type(3){
+    margin:18px auto 0;
+    background: url("../images/Lock-.png") no-repeat 12px center;
+    padding:0 12px 0 36px;
+}
+.Register>input:nth-of-type(4){
+    margin:18px auto 0;
+    background: url("../images/Lock-.png") no-repeat 12px center;
+    padding:0 12px 0 36px;
+}
+.Register>input:nth-last-of-type(1){
+    height:36px;
+    width:238px;
+    background: #dba774;
+    color:#fff;
+    letter-spacing: 2px;
+    font-size: 16px;
+    font-family: '微软雅黑';
+    display:block;
+    margin:30px auto 0;
+    cursor:pointer;
+    border-radius: 4px;
+
+}
+.logo_bj_msk{
+    height:540px;
+    width:524px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 2;
+    background:rgba(0,0,0,.59);
+}
+.mask_img_position{
+    height:540px;
+    width:524px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 3;
+}
+.mask_img_position img{
+    display: block;
+}
+.mask_img_position img:nth-of-type(1){
+    margin:194px auto 0;
+}
+.mask_img_position img:nth-of-type(2){
+    margin:36px auto 0;
+}
+.Register_label input{
+    border:1px solid #e5e5e5;
+    height:36px;
+    width:106px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-size:12px;
+    line-height: 36px;
+    padding:0 12px;
+    margin:0 0 0 70px;
+
+}
+.Register .short_message div{
+    border:1px solid #dba774;
+    line-height: 36px;
+    text-align: center;
+    color:#dba774;
+    font-size:12px;
+}
+.footer_h2{
+    padding:18px 0 0 0;
+    font-size:12px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+.footer_h2 span {
+    color: #4d85f6;
+    cursor: pointer;
+}
+#impt .Register_label>input{
+    padding:0 12px;
+}
+#impt .btn{
+    padding:0 12px;
+}
+.Register .error_msg{
+    position:absolute;
+    bottom:-17px;
+    left:5px;
+    font-size:11px;
+    color:red;
+}
+.Register .error_msg_2{
+    bottom:-28px;
+    left:65px;
+}
+.Register .warning{border:1px solid #f00;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

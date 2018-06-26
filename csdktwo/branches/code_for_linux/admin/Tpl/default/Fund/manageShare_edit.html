@@ -1,0 +1,68 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/fund_manageCo.js' />
+<load href='__TMPL__Common/js/check.js' />
+<div class="main">
+	<div class="main_title">基金管理公司 > {%EDIT}公司股份构成&nbsp;<a href="{:u("Fund/manageShare_index",array('mid'=>$info['managers_id']))}" class="back_list">{%BACK_LIST}</a></div>
+	<div class="blank5"></div>
+	<form name="edit" action="__APP__" method="post" onSubmit="return ms_check() ">
+		<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+			<tr>
+				<td colspan=2 class="topTd"></td>
+			</tr>
+			<tr>
+				<td class="item_title">*编码</td>
+				<td class="item_input">
+					<input disabled="disabled" type="text" class="textbox require" name="code" id="code" value="{$info.code}" />
+					<span id="code_msg"  name="error_msg"></span>
+				</td>
+			</tr><tr>
+				<td class="item_title">*股东名称(20个字)</td>
+				<td class="item_input">
+					<input type="text" maxlength="20" class="textbox2 require" name="name" id="name" value="{$info.name}" />
+					<span id="name_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*股份占比（%）</td>
+				<td class="item_input">
+					<input type="text" own_type="float" maxlength="5"  class="textbox require" name="share" id="share" value="{$info.share}"/>
+					<span id="share_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*备注(50个字)</td>
+				<td class="item_input">
+					<textarea type="text"  maxlength="50"  name="remark" id="remark" class="textarea require">{$info.remark}</textarea>
+					<span id="remark_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 class="bottomTd"></td>
+			</tr>
+		</table>
+		<div class="blank5"></div>
+		<table class="form" cellpadding=0 cellspacing=0>
+			<tr>
+				<td colspan=2 class="topTd"></td>
+			</tr>
+			<tr>
+				<td class="item_title"></td>
+				<td class="item_input">
+					<!--隐藏元素-->
+					<input type="hidden" name="{:conf("VAR_MODULE")}" value="Fund" />
+					<input type="hidden" name="{:conf("VAR_ACTION")}" value="do_manageShare_update" />
+					<input type="hidden" name="id" value="{$info.id}" />
+					<!--隐藏元素-->
+					<input type="submit" class="button" value="{%EDIT}" />
+					<input type="reset" class="button" value="{%RESET}" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 class="bottomTd"></td>
+			</tr>
+		</table> 		 
+	</form>
+</div>
+<include file="Public:footer" />

@@ -1,0 +1,47 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/vip_account.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+{include file="inc/investor_flow.html"}
+<div class="wrap">
+	{include file="inc/sidebar_investor.html"}
+	<div class="investor content">
+		<div class="height38"></div>
+		<h3 class="vip_fee_tit">缴纳会员诚意金</h3>
+		<p class="account_desc">目前磁斯达克仅支持银行支付会员诚意金，您可以通过网银或者柜台打款至磁斯达克账户。</p>
+		<ul class="payment_list">
+			<li>
+				<div>
+					<h4>请将会员诚意金缴纳至下方账户</h4>
+					<div class="account_msg">
+						<p><strong>银行账号：</strong>1109 1723 3810 901</p>
+						<p><strong>开户名   ：</strong>北京磁信信息技术有限公司</p>
+						<p><strong>开户行   ：</strong>招商银行北京清华园支行</p>
+					</div>
+					<div class="height50"></div>
+					<h5 class="codkey">会员诚意金识别码</h5>
+					<div class="codkey_img">{$ident_code}</div>
+					<p class="codkey_desc">请将识别码输入银行转账的留言处。请务必填写准确，磁斯达克会通过留言处的识别码来确保款项来源和投资人相符，否则会影响开通会员资格。此识别码作为唯一的身份识别标准，请您千万注意保密。</p>
+					<h5 class="size_18 approve_tit">会员诚意金认证</h5>
+					<div class="height38"></div>
+					<p class="codkey_desc">会员诚意金缴纳后的一个工作日之内，我们的财务人员将核对到账会员诚意金并匹配会员诚意金识别码。匹配成功后，我们将为您完成会员诚意金审核，并通过电话或短信形式通知您。</p>
+				</div>
+			</li>
+			<li>
+				<div>
+					<p class="call_tit">若有疑问请联系磁斯达克</p>
+					<div class="height38"></div>
+					<p class="phone">400-862-8262</p>
+					<p class="work_time">工作时间：周一至周五9：00——18：00</p>
+					<a id="account_desc_btn" class="vip_money_button" href="{url r="account#vip_account_introduction" }">会员账户介绍</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+{include file="inc/footer.html"} 

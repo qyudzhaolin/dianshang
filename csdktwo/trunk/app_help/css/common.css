@@ -1,0 +1,40 @@
+*{
+	margin:0px;
+	padding:0px;
+	list-style: none;
+}
+html{
+	font-size: 10px;
+}
+body{
+	width: 100%;
+	font-size: 12px;
+	font-size: 1.2em;
+	color:#000;
+	letter-spacing: 2px;
+	overflow-x: hidden;
+
+}
+.about_box{
+	font-size: 1.6em;
+	padding:15% 6% 4%;
+	margin:auto;
+}
+.mar_40{margin-bottom: 40px;}
+
+
+
+
+
+@media only screen and (max-width:720px){
+body{font-size:10px; }
+}
+@media only screen and (max-width:375px){
+body{font-size:10px; }
+}
+@media only screen and (max-width:360px){
+body{font-size:10px; }
+}
+@media only screen and (max-width:320px){
+body{font-size:10px; }
+}

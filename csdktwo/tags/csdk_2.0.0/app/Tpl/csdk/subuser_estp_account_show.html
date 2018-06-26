@@ -1,0 +1,57 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sub_account.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/subuser.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/check.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="wrap">
+<div class="height70"></div>
+	{include file="inc/sidebar.html"}
+	<div class="investor content">
+		<div class="friendly_reminder">
+			<h5 class="friendly_reminder_tit">授权须知</h5>
+			<p class="friendly_reminder_msg">您可以授权三个手机号使用您的账号登录，您可以授权您的CTO,CFO或者您的助理，他们可以帮您随时查看融资进度。</p>
+		</div>
+		<div class="subhline"></div>
+		<form action="javascript:void(0);">
+			<ul class="sub_account">
+				<li class="mobile_box">
+					<h4>授权第一步：输入被授权人手机号</h4>
+					<p>输入您要授权的手机号，请务必确保授权手机
+号码输入正确，输入错误将无法登录。</p>
+					<input type="text" own_type="number" maxlength="11" name="mobile1" id="mobile1"><span id="mobile1_msg"></span>
+					<input type="text" own_type="number" maxlength="11"  name="mobile2" id="mobile2"><span id="mobile2_msg"></span>
+					<input type="text" own_type="number" maxlength="11"   name="mobile3" id="mobile3"><span id="mobile3_msg"></span>
+					<br>
+					<span id="mobile_msg" name="error_msg"></span>
+				</li>
+				<div class="subsline"></div>
+				<li class="pwd_box">
+					<h4>授权第二步：设置被授权手机号登录密码</h4>
+					<p>只能设置一个登录密码，所有被授权手机只能
+使用该密码登录。</p>
+				<input type="text" maxlength="12" name="user_pwd" id="user_pwd">
+				<br><span id="user_pwd_msg" name="error_msg"></span>
+				</li>
+			</ul>
+			<div class="accredit_confirm_box">
+			<button class="accredit_confirm" type="button" onclick="show_notice({$user_info.mobile});">确定授权</button><span id="error_msg" name="error_msg"></span></div>
+		</form>
+	</div>
+	 
+</div>
+<div class="point_out">
+	<h2>提示</h2>
+	<p>您确认将手机号</p>
+	<ul class="mobile_list_box">
+		<li id="show_mobile"></li>
+		<!-- <li id="show2">11111111111</li>
+		<li id="show3">22222222222</li> -->
+	</ul>
+	<p>授权为您的子帐号吗？</p>
+	<div id="button_box"><button class="no" onclick="sub_account_reset('point_out');">取消</button><button class="yes" onclick="sub_account_next('0')">确认</button></div>
+</div>
+{include file="inc/footer.html"} 

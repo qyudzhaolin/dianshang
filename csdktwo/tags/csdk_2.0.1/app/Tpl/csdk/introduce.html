@@ -1,0 +1,123 @@
+
+{include file="inc/header.html"} 
+<?php
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/base.css";
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/introduce.css";
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/swiper.min.css";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jQuery_v1.8.3.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/base.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/upload.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/Introduce.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/swiper.min.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_content clearfix">
+
+        <!--轮换图-->
+        <div class="swiper-container swiper-container3" style="margin:0px auto 0">
+            <div class="swiper-wrapper">
+                {foreach from=$carousel item=vo}
+                	<div class="swiper-slide">
+			            {if $vo.b_url}
+						<a href="{$vo.b_url}" target="_blank">
+							<img src='{$vo.b_pc_img}' alt="{$vo.b_title}" width="1000" height="360" />
+						</a>
+						{else}
+						<img src='{$vo.b_pc_img}' alt="{$vo.b_title}" width="1000" height="360" />
+						{/if}
+	                </div>
+                {/foreach}
+            </div>
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev button-prev3"></div>
+            <div class="swiper-button-next button-next3"></div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination" id="swiper-pagination3"></div>
+        </div>
+
+
+        <div class="About_us_centent">
+            <h2>
+                <span>我们是谁</span>
+            </h2>
+            <ul class="character_boxli clearfix">
+                <li>
+                    <div>
+                        <div class="border_1px">
+                         <img src="{function name="get_spec_image" v="liuyu(1).jpg" }" alt=""/>
+                            <dl>
+                                <dt>刘宇</dt>
+                                <dd>磁系资本创始人</dd>
+                                <dd>正和磁系CEO，创始合伙人</dd>
+                                <dd>原窝窝团销售副总裁</dd>
+                                <dd>发起了中国第一支O2O创新消费基金</dd>
+                                <dd>在资本运作和投资领域有极强判断力和丰富经验</dd>
+                            </dl>
+                        </div>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div class="border_1px">
+                         <img src="{function name="get_spec_image" v="liuyi.jpg" }" alt=""/>
+                            <dl>
+                                <dt>刘毅</dt>
+                                <dd>正和磁系总裁</dd>
+                                <dd>创始合伙人</dd>
+                                <dd>原现代联合网络首席运营官，原窝窝团运营副总裁</dd>
+                                <dd>在互联网模式的产品架构设计和系统搭建等方面有丰富实践经验</dd>
+
+                            </dl>
+                        </div>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <div class="border_1px">
+                         <img src="{function name="get_spec_image" v="xufei.jpg" }" alt=""/>
+                            <dl>
+                                <dt>徐飞</dt>
+                                <dd>投资总裁 合伙人</dd>
+                                <dd>正和磁系投资总裁，合伙人</dd>
+                                <dd>曾任职于窝窝团、软银中国、普华永道等知名企业</dd>
+                                <dd>参与投资和并购的企业交易额达数十亿元人民币</dd>
+                            </dl>
+                        </div>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="border_1px">
+                     <img src="{function name="get_spec_image" v="tiezheng.jpg" }" alt=""/>
+                        <dl>
+                            <dt>刘铁铮</dt>
+                            <dd>合伙人</dd>
+                            <dd>正和磁系合伙人</dd>
+                            <dd>拥有十余年法律、投资等方面管理经验</dd>
+                            <dd>做为核心团队成员直接参与汉王科技A股、窝窝团美股的发行</dd>
+                        </dl>
+                    </div>
+                </li>
+            </ul>
+            <h2 class="Selection_bar">
+               <span>我们的服务</span>
+            </h2>
+            <ul>
+             <img src="{function name="get_spec_image" v="wo_m.png" }" />
+
+            </ul>
+            <h2 class="value_bar">
+                <span>我们的价值</span>
+            </h2>
+            <div class="padding_100">
+                 <img src="{function name="get_spec_image" v="wo_01.png" }" />
+                <img src="{function name="get_spec_image" v="wo_02.png" }"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="inc/footer.html"} 

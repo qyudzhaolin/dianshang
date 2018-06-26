@@ -1,0 +1,166 @@
+{include file="inc/header.html"}
+<?php
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/Project_Details2.css";
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/popup.css";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/popup.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/TweenMax.min.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/CSSPlugin.min.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/Project_Details.js";
+	
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="main">
+	<div id="float01" class="cur">
+    	<img class="img_data" src='{function name="getQiniuPath" v="$deal.img_deal_cover" p="img"}?imageView2/1/w/1920/h/700' alt="" class="img_center"/>
+		<div class="project_desc" id="item">
+			<div class="wrap clearfix width_1000px">
+				<div class="send_request_box">
+					{if $in_intend eq 99}
+                		<!--  隐藏按钮 -->
+                	{else}
+	                	{if $in_intend}
+							<button class="send_request_msg end" style="display: block;">已发送投资意向</button>
+						{else}
+							<button class="btn send_request" {$preview_end} data-id="{$deal.id}" style="display: block;">我要投资</button>
+							<button class="send_request_msg end">已发送投资意向</button>
+						{/if}                	
+                	{/if}
+					<p class="touzi_dir">
+                        关键词： {foreach from=$deal_cate item=cate}<b>{$cate.name}</b>&nbsp;{/foreach}
+					</p>
+					<a class="csdq_link" href="{$deal.deal_url_http}" target="_blank">{$deal.deal_url}</a>
+					<div class="eye_box" id="eye_box">
+						{if $deal_period}<b class="call">{$deal_period}</b>{/if}
+                    	<b class="loca_city">{$deal.province}</b>
+					</div>
+				</div>
+				<div class="w_660 left_001 good_project">
+					<h2>
+						<span>项目简介</span>
+					</h2>
+					<p class="size_14">{function name="app_nl2br" v=$deal.deal_brief}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="float02">
+		<div class="w_660 good_project">
+			<h2>
+				<span>项目亮点</span>
+			</h2>
+			<p class="size_14">{function name="app_nl2br" v=$deal.entry_info}</p>
+		</div>
+	</div>
+	<div id="float03" class="good_project">
+		<h2>
+			<span>行业背景</span>
+		</h2>
+		<div class="compent_data">
+			<span>{function name="app_nl2br" v=$deal.profession_info}</span>
+		</div>
+	</div>
+	<div id="float04" class="good_project">
+		<h2>
+			<span>商业模式</span>
+		</h2>
+		<div class="compent_data">
+			<span>{function name="app_nl2br" v=$deal.operation_info}</span>
+		</div>
+		<ul class="pattern_box clearfix">
+			{foreach from=$dealoperationsteps item=vo}
+	        	<li>
+	                <img src='{function name="getQiniuPath" v="$vo.img_deal_opera_steps" p="img"}?imageView2/1/w/660/h/1100' alt="" width="230" height="390" />
+	                <h4>{$vo.opera_steps_name}</h4>
+					<p>{function name="app_nl2br" v=$vo.opera_steps_brief}</p>
+	            </li>
+			{/foreach }
+		</ul>
+	</div>
+	
+	<div id="float05" class="good_project">
+		<h2>
+			<span>发展现状</span>
+		</h2>
+		<div class="compent_data SETimg clearfix">
+			{if $in_access}
+	        	{foreach from=$deal_data_img item=vo}
+					<img src='{function name="getQiniuPath" v="$vo.img_data_url" p="img"}?imageView2/1/w/240/h/240' alt="" width="240" height="240" />
+				{/foreach}
+			{else}
+                <span>认证后登录可查看更多内容</span>
+            {/if}
+		</div>
+	</div>
+	<div id="float06" class="good_project">
+		<h2>
+			<span>发展规划</span>
+		</h2>
+		<div class="compent_data">
+			{if $in_access}
+				<span>{function name="app_nl2br" v=$deal.vision_info}</span>
+			{else}
+				<span>认证后登录可查看更多内容</span>
+			{/if}
+		</div>
+	</div>	
+	<div id="float07" class="good_project">
+		<h2>
+			<span>团队介绍</span>
+		</h2>
+		<div class="compent_data divFloat_Left clearfix">
+			{foreach from=$dealteam item=vo key=keys}
+	        	<div {if $keys%2 eq 0}style="clear:both"{/if}>
+	                <h2>{$vo.name}</h2>
+	                <h3>{$vo.title}</h3>
+	                <p>{function name="app_nl2br" v=$vo.brief}</p>
+	            </div>
+			{/foreach}
+		</div>
+	</div>
+	{if $deal['is_effect'] neq 3}
+	<div id="float08">
+		<div class="financing_detail white_bg" id="business">
+			<div class="wrap good_project sizeWrap">
+				<h2 class="size_22">融资计划</h2>
+				{if $in_access}
+					<div class="progress_box">
+						<div class="progress_bar">
+							<div class="progress_bar_jindu" style="width: {$progress_bar}%;"></div>
+						</div>
+						<p class="trading">
+						    <a href="javascript:void(0);" class="money_l">已融资：<i>{function name=number_format v=$deal.financing_amount} 万</i></a>
+						    <a href="javascript:void(0);" class="money_r">融资目标：<i>{function name=number_format v=$deal.pe_amount_plan}万</i></a>
+						</p>
+		         	</div>
+					<div class="expect">
+					    <div class="left">
+					        <a href="javascript:viod(0);"><b>预期融资</b><i>{function name=number_format v=$deal.pe_amount_plan}万</i></a>
+					        <a href="javascript:viod(0);"><b>出让股份</b><i>{function name=floatval v=$deal.pe_sell_scale}%</i></a>
+					        <a href="javascript:viod(0);"><b>融资后估值</b><i>{$pe_evaluate}万</i></a>
+					    </div>
+					    <div class="right">
+					        <a href="javascript:viod(0);"><b>融资阶段</b><i>{$deal_period}</i></a>
+					        <a href="javascript:viod(0);"><b>起投金额</b><i>{function name=number_format v=$deal.pe_least_amount}万</i></a>
+					        <a href="javascript:viod(0);"><b>融资币种</b><i>人民币</i></a>
+					    </div>
+					</div>
+                {else}
+                	<span>认证后登录可查看更多内容</span>
+                {/if}
+			</div>
+		</div>
+	</div>
+	{/if}
+	<div class="floatCtro">
+		<p>项目简介</p>
+		<p>项目亮点</p>
+		<p>行业背景</p>
+		<p>商业模式</p>
+		<p>发展现状</p>
+		<p>发展规划</p>
+		<p>团队介绍</p>
+		{if $deal['is_effect'] neq 3}<p>融资计划</p>{/if}
+		<a><span></span></a>
+	</div>
+</div>
+{include file="inc/footer.html"}

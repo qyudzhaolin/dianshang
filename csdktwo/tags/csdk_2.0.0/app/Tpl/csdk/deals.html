@@ -1,0 +1,62 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/paging.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/deals.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/region.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/filter_highlight.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="wrap">
+<div class="height100"></div>
+	<div class="filtrate">
+	</div>
+	<ul class="case_list investor_msg_list notop" id="three_row">
+		 {foreach from=$project_info item=list_item}
+		 <a href="{url r="dealdetail" p="id=$list_item.id"}" target="_blank">
+			<li class="no_margin margin">
+				<div class="top">
+					<h3 class="top_hd">{$list_item.name}</h3>
+					<div class="brief_list">
+ 						{foreach from=$list_item.brief_info_array item=point_item}
+  						<p><img src="{function name="get_spec_image" v="txt_bg.png" }" alt="">{$point_item.point_info}</p>
+						{/foreach}
+  					</div>
+  					<div class="t_box">
+  						<b class="cty">{$list_item.deal_province}</b>
+  						<div class="inv_direction">
+  						{foreach from=$list_item.deal_cate_array item=deal_cate_array}
+  							<b>{$deal_cate_array.name}</b>
+  						{/foreach}
+  						</div>
+  						<div class="lun">
+  							<b>{$list_item.deal_period}</b>
+  						</div>
+  					</div>
+				</div>
+				<div class="bottom">
+					<div class="case_hd">
+						<h3 class="title">{$list_item.name}</h3>
+						<img src="{$list_item.img_deal_logo}" alt="{$list_item.name}">
+					</div>
+					<div class="case_con">
+						<h3 class="case_con_hd">{$list_item.deal_sign}</h3>
+						<div class="case_con_bd">
+							{foreach from=$list_item.point_info_array item=brief_point_item}
+ 							<div>
+								<p class="case_con_bd_desc_item">{$brief_point_item.point_info}</p>
+ 							</div>
+							 {/foreach}
+						</div>
+					</div>
+				</div>
+			</li>
+			</a>
+ 			{/foreach}
+		</ul>
+	<input type="hidden" id="source" value="deal">
+	<div class="deal_page">
+	{$pages}
+	</div>
+</div>
+ {include file="inc/footer.html"}

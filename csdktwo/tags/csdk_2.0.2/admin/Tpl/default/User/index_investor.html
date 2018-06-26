@@ -1,0 +1,65 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/user.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">会员列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}会员" onclick="add();" />
+	<!--<input type="button" class="button" value="{%DEL}会员" onclick="del();" />
+--></div>
+
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		真实姓名：<input type="text" class="textbox" maxlength="6" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
+		会员手机：<input type="text" class="textbox" maxlength="11" name="mobile" value="{:trim($_REQUEST['mobile'])}" style="width:100px;" />
+		会员状态: <select name="is_review" id="is_review">
+					<option value="0" <if condition="$_REQUEST['is_review'] eq 0">selected="selected"</if>>请选择</option>
+					<volist name="is_review_list" id="vo">
+						<option value="{$vo['id']+1}" <if condition="$_REQUEST['is_review'] eq $vo['id']+1">selected="selected"</if>>{$vo.name}</option>
+					</volist>
+				</select>
+		邮箱：<input type="text" class="textbox" maxlength="30"  name="email" value="{:trim($_REQUEST['email'])}" style="width:100px;" />
+		<input type="hidden" value="User" name="m" />
+		<input type="hidden" value="index_investor" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="user" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+			,user_name:姓名
+			,mobile:手机号码|120px:edit
+			,email:电子邮箱|150px
+			,user_type_zh:会员类别
+			,is_review_zh:会员状态
+	        ,create_time|to_date:创建时间
+	        ,update_time|to_date:最新修改时间
+	" 
+	actionlist="edit:{%EDIT}, user_del:{%DEL}, edit_user_pwd:重置密码, user_detail:用户详情"  /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />
+<!-- add bu sunerju 从回收站恢复用户，修改密码跳转过来需要重置menu的状态 -->
+<eq name="refresh" value="1">
+	<script>
+		$(function(){
+			// parent.menu.location.reload();
+			var area = $(parent.frames["menu"].document).find(".menu a");
+			area.removeClass("current").first().addClass("current");
+		})
+	</script>
+</eq>

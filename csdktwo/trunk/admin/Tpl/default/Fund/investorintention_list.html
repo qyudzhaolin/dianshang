@@ -1,0 +1,68 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/fund.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<style>
+	.actual_invest_amount_span,.actual_invest_remark_span{width:100%;display:inline-block}
+</style>
+<div class="main">
+<div class="main_title">
+    基金投资人列表->意向投资人 <a class="back_list" href="{:u("Fund/index")}">返回列表</a>
+    <div class="inner_main_title" >
+       <a href="{:u("Fund/investorintention_list",array('fund_id'=>$fund_id))}" style="color:#ff9600;">意向投资人</a>
+       <a href="{:u("Fund/investor_list",array('fund_id'=>$fund_id))}">投资人</a>
+    </div>
+</div>
+<div class="blank5"></div>
+<div class="button_row">
+</div> 
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">
+		意向投资人姓名：<input type="text" maxlength="6"  class="textbox" name="name" value="{:trim($_REQUEST['name'])}" />
+		投资人手机：<input type="text" maxlength="11" class="textbox" name="mobile" value="{:trim($_REQUEST['mobile'])}" />
+		审核状态：
+		 <select name="status"  id="status"style="width:100px;" > 
+          <option value=""
+           <if condition="$_REQUEST['status'] eq 0">selected="selected"</if>>请选择
+          </option>>
+         <foreach name="status_type" item="region">
+         <option value="{$region.id}" <if condition="$_REQUEST['status'] eq $region['id']">selected="selected"</if>>{$region.name}
+         </option>
+         </foreach>
+         </select>
+		<input type="hidden" value="{:trim($_REQUEST['fund_id'])}" name="fund_id" />
+		<input type="hidden" value="Fund" name="m" />
+		<input type="hidden" value="investorintention_list" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fund" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,user_name:投资人姓名|80px
+		,mobile:手机号码|100px
+        ,expect_invest_amount:意向申购金额(万元)|120px
+        ,expect_invest_remark:申购说明|100px
+        ,actual_invest_amount:实际认购金额(万元)|120px
+        ,actual_invest_remark:备注|180px
+        ,status:审核状态|70px
+        ,actual_invest_confirm:份额确认状态|80px"
+		actionlist="fund_button"   
+/> 
+<div class="blank5"></div>
+<div class="blank5"></div>
+<div class="page">
+    {$page}
+</div>
+<div class="main_title">意向申购金额合计：{$listcount.sumexpect}万元 &nbsp;&nbsp;实际认购金额合计：{$listcount.sumactual}万元</div>
+</div>
+<include file="Public:footer" />

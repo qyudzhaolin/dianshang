@@ -1,0 +1,96 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/fund_attachment.js' />
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/upload.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/calendar.js' />
+<div class="main">
+	<div class="main_title">基金管理 > {%ADD}信息披露&nbsp;<a href="{:u("Fund/attachment_index",array('fid'=>$fid))}" class="back_list">{%BACK_LIST}</a></div>
+	<div class="blank5"></div>
+	<form name="edit" action="__APP__" method="post" onSubmit="return attach_check() ">
+		<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+			<tr>
+				<td colspan=2 class="topTd"></td>
+			</tr>
+			<tr>
+				<td class="item_title">*编码</td>
+				<td class="item_input">
+					<input readonly="readonly" type="text" class="textbox require readonly" name="code" id="code" value="{$code}" />
+					<span id="code_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*信息标题(30个字)</td>
+				<td class="item_input">
+					<input type="text" maxlength="30" class="textbox2 require" name="title" id="title" />
+					<span id="title_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">附件<br />（只支持上传图片和pdf）</td>
+				<td class="item_input">
+					<label class="fileupload" onclick="upd_file(this,'',660,1170,5);">
+						<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none"/>
+						<input type="hidden" class="require" name="attachment"  id="attachment"/>
+						<img _src="__TMPL__Common/images/bp.png" id="img_src" />
+						<input type="hidden" class="fileupload_type" name="type" id="type" value="" />
+					</label>
+					<label class="fileuploading" style="display:none">正在上传</label>
+					<span id="attachment_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*披露日期</td>
+				<td class="item_input">
+					<input type="text" class="textbox require" name="publish_time" id="publish_time" onclick="return csdk_cal(this);" />
+					<span id="publish_time_msg"  name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="item_title">*备注(200个字)</td>
+				<td class="item_input">
+					<textarea type="text" maxlength="200"  name="remark" id="remark" class="textarea require"></textarea>
+					<span id="remark_msg" name="error_msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 class="bottomTd"></td>
+			</tr>
+		</table>
+		<div class="blank5"></div>
+		<table class="form" cellpadding=0 cellspacing=0>
+			<tr>
+				<td colspan=2 class="topTd"></td>
+			</tr>
+			<tr>
+				<td class="item_title"></td>
+				<td class="item_input">
+				<!--隐藏元素-->
+				<input type="hidden" name="{:conf("VAR_MODULE")}" value="Fund" />
+				<input type="hidden" name="{:conf("VAR_ACTION")}" value="do_attachment_add" />
+				<input type="hidden" name="fund_id" value="{$fid}" />
+				<!--隐藏元素-->
+				<input type="submit" class="button" value="{%ADD}" />
+				<input type="reset" class="button" value="{%RESET}" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 class="bottomTd"></td>
+			</tr>
+		</table> 		 
+	</form>
+</div>
+<include file="Public:footer" />
+<div class="main" id="mt_main" style="display:none">
+	<div class="search_row">
+		姓名：<input type="text" class="textbox" maxlength="6" name="user_name" />
+		职务名称：<input type="text" class="textbox" maxlength="6" name="org_title" />
+		<input id="mt_user_button" type="button" class="button" value="{%SEARCH}" />
+		<input id="mt_user_reset" type="button" class="button" value="清空" />
+	</div>
+	<div class="mt_user_list">loading...</div>
+</div>

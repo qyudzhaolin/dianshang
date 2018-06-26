@@ -1,0 +1,184 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/upload.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/home.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/region.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/check.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+{include file="inc/investor_flow.html"}
+<div class="wrap">
+	{include file="inc/sidebar_investor.html"}
+	{if $user_info.is_review!=1 && $user_info.is_review!=2}
+	<div class="investor content">
+		<form action="javascript:void(0);" method="post" enctype="multipart/form-data">
+			<dl class="img_user_logo" id="img_user_log">
+				<dt class="p_name"><i class="radius"></i>真实头像</dt>
+				<dd>
+					<label class="fileupload" onclick="upd_file(this,'user_img','img_src','img_user_logo','img_user_logo_msg','img',500,500,2);">
+					<input type="file" class="filebox" name="user_img" id="user_img" />
+					<input type="hidden" value="{$home_user_info.img_user_logo}" name="img_user_logo" id="img_user_logo" />
+					<img src='{$home_user_info.real_img}' id="img_src" {if $home_user_info.real_img}{else}style="display:none;"{/if}/>
+					</label>
+					<span id="img_user_logo_msg" class="gray">请上传您的真实头像（图片规格：500*500，2M以内）</span>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="p_name"><i class="radius"></i>真实姓名</dt>
+				<dd>
+					<input type="text" maxlength="14" value="{if $home_user_info.user_name}{$home_user_info.user_name}{else}请填写您的真实姓名(14个字以内){/if}" title="请填写您的真实姓名(14个字以内)" name="user_name"  id="user_name">
+					<span id="ex_user_msg" name="error_msg"></span>
+				</dd>
+			</dl>
+			<dl class="long">
+				<dt class="p_name"><i class="radius"></i>个性签名</dt>
+				<dd>
+					<input type="text" maxlength="34" value="{if $home_user_info.per_sign}{$home_user_info.per_sign}{else}请填写您的签名(34个字以内){/if}" title="请填写您的签名(34个字以内)" name="per_sign" id="per_sign">
+					<span id="per_desc_msg" name="error_msg"></span>
+				</dd>
+			</dl>
+			<dl class="long">
+				<dt class="p_name"><i class="radius"></i>个人简介</dt>
+				<dd>
+					<input type="text" maxlength="28" value="{if $home_user_info.per_brief}{$home_user_info.per_brief}{else}请用一句话简单介绍一下自己(28个字以内){/if}"   title="请用一句话简单介绍一下自己(28个字以内)" name="per_brief" id="per_brief">
+					<span id="per_brief_msg" name="error_msg"></span>
+				</dd>
+			</dl>
+			<dl class="location_city">
+				<dt class="p_name"><i class="radius"></i>所在地区</dt>
+				<dd>
+					<a class="btn_select_province">
+						{if $region_pname_province}
+						<b class="cur_select_province" class="province" id="b_province" value="">{$region_pname_province}</b>
+						{else}
+						<b class="cur_select_province"  class="province" id="b_province" value="">请选择省</b>
+						{/if}
+						<select  name='province' id="province">
+							<option value="" rel="" id="">请选择省</option>
+							{foreach from = $region_lv2 item = region}
+								<option value="{$region.id}" rel="{$region.id}" id="province{$region.id}" {if $region.selected==1}selected{/if}>{$region.name}</option>
+							{/foreach}
+						</select>
+					</a>
+					<!--<a class="btn_select_city">
+						{if $region_pname_city}
+						<b class="cur_select_province" class="city"  value="" id="b_city">{$region_pname_city}</b>
+						{else}
+						<b class="cur_select_province" class="city" value=""  id="b_city">请选择市</b>
+						{/if}
+						<select name='city' id="city">
+							{if $region_lv3}
+								{foreach from = $region_lv3 item=region}
+									<option value="{$region.id}" rel="{$region.id}"  id="city{$region.id}" {if $region.selected==1}selected{/if}>{$region.name}</option>
+								{/foreach}
+							{else}
+								<option value="" rel="0">请选择市</option>
+							{/if}
+						</select>						
+					</a>-->
+					<span id="region_msg"></span>
+				</dd>
+			</dl>
+			<dl>
+				<dt class="p_name">手机号码</dt>
+				<dd>{$home_user_info.mobile}</dd>
+			</dl>			
+			<dl class="education long">
+				<dt class="p_name">教育经历</dt>
+				<dd class="txtarea">
+					<textarea type="text"  maxlength="100" title="请简单介绍一下自己的教育经历{$br}例如您曾经在哪里接受过什么教育(100个字以内)" name="edu_history" id="edu_history">{if $home_user_info.edu_history}{$home_user_info.edu_history}{else}请简单介绍一下自己的教育经历{$br}例如您曾经在哪里接受过什么教育(100个字以内){/if}</textarea>
+					<span id="edu_history_msg" name="error_msg"></span>
+				</dd>
+			</dl>
+			<dl class="education long">
+				<dt class="p_name">个人履历</dt>
+				<dd class="txtarea">
+					<textarea  maxlength="100" cols="30" rows="10"  name="per_history" id="per_history" title="请简单介绍一下自己的过往经历(100个字以内)">{if $home_user_info.per_history}{$home_user_info.per_history}{else}请简单介绍一下自己的过往经历(100个字以内){/if}</textarea>
+					<span id="per_history_msg" name="error_msg"></span>
+				</dd>
+			</dl>
+			<input type="hidden" id="source" value="user_personal">
+			<dl class="message"><dt>备注</dt><dd class="p_name"><i class="radius"></i>为必填项目</dd></dl>
+			<span  id="investor_personal_msg" class="loginregister" name="error_msg"></span>
+			<dl class="next_btn_box education"><dt></dt><dd class="p_name"><button class="next" type="button" onclick="personal_msg_next('1')">下一步</button></dd><span id="error_msg" name="error_msg"></span></dl>
+		</form>
+	</div>
+	{else}
+	<div class="investor content invest_show about_show">
+			<dl class="img_user_logo" id="img_user_log">
+				<dt class="p_name"><!-- <i class="radius"></i> -->真实头像</dt>
+				<dd>
+					<label class="fileupload" >
+					<img src='{$home_user_info.real_img}' id="img_src" {if $home_user_info.real_img}{else}style="display:none;"{/if} />
+					</label>
+<!-- 					<span id="img_user_logo_msg"></span> -->
+				</dd>
+			</dl>
+			<dl>
+				<dt class="p_name"><!-- <i class="radius"></i> -->真实姓名</dt>
+				<dd>
+					<p>{$home_user_info.user_name}</p>
+					<!-- <span id="user_name_msg"></span> -->
+				</dd>
+			</dl>
+			<dl>
+				<dt class="p_name"><!-- <i class="radius"></i> -->个性签名</dt>
+				<dd>
+					<p>{$home_user_info.per_sign}</p>
+					<!-- <span id="per_desc_msg"></span> -->
+				</dd>
+			</dl>
+			<dl>
+				<dt class="p_name"><!-- <i class="radius"></i> -->个人简介</dt>
+				<dd>
+					<p>{$home_user_info.per_brief}</p>
+					<!-- <span id="intro_msg"></span> -->
+
+				</dd>
+			</dl>
+			<dl>
+				<dt class="p_name"><!-- <i class="radius"></i> -->所在地区</dt>
+				<dd>
+					{foreach from = $region_lv2 item = region}
+					{if $region.selected == 1}
+						<big>{$region.name}</big>
+					{/if}
+					{/foreach}
+					<!--&nbsp;&nbsp;-&nbsp;&nbsp;
+					{foreach from = $region_lv3 item = region}
+					{if $region.selected == 1}
+						<big>{$region.name}</big>
+					{/if}
+					{/foreach}-->
+				</dd>
+			</dl>
+			<dl>
+				<dt class="p_name">手机号码</dt>
+				<dd>{$home_user_info.mobile}</dd>
+			</dl>			
+			<dl class="txtarea2">
+				<dt class="p_name">教育经历</dt>
+				<dd>
+					<p>{$home_user_info.edu_history}</p>
+					<!-- <span id="edu_history_msg"></span> -->
+				</dd>
+			</dl>
+			<dl class="txtarea2">
+				<dt class="p_name">个人履历</dt>
+				<dd>
+					<p>{$home_user_info.per_history}</p>
+					<!-- <span id="per_history_msg"></span> -->
+				</dd>
+			</dl>
+<!-- 			<dl class="message"><dt>备注</dt><dd class="p_name"><i class="radius"></i>为必填项目</dd></dl>
+			<dl><dt></dt><dd class="p_name"><button class="next" type="button" onclick="personal_msg_next_scan()">下一步</button></dd></dl> -->
+			<span id="investor_personal_msg" class="loginregister"></span>
+	</div>
+	{/if}
+</div>
+
+{include file="inc/footer.html"} 

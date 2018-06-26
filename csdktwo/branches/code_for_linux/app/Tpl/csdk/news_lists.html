@@ -1,0 +1,55 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/news_list.css";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/newslist.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box bg_white">
+	<div class="news_wrap bs">
+		<div class="news_top">
+			<div class="news_top_l">
+				<span {if $id eq $class.0.id}class="content_box all_options new_span_active" {else}class="all_options" {/if} rel="{$class.0.id}">
+					<a {if $id eq $class.0.id} class="new_span_active"{/if} href="{url r=" news#lists"  p="id=$class.0.id"}">新闻资讯</a>
+				</span>
+				<!--<span>/</span>-->
+				<span {if $id eq $class.1.id}class="content_box all_options new_span_active" {else}class="all_options" {/if} rel="{$class.1.id}">
+					<a {if $id eq $class.1.id} class=" new_span_active"{/if} href="{url r=" news#lists"  p="id=$class.1.id"}">磁斯达克动态</a>
+				</span>
+			</div>
+			<div class="news_top_r">
+				<input type="text" placeholder="资讯标题关键字" title="资讯标题关键字" name="keyword" id="keyword" class="bdr bs">
+				<div class="search search_index1"></div>
+			</div>
+		</div>
+		<div class="news_content new_active1">
+			{if $list}
+				{foreach from=$list item=vo}
+					<dl class="news_content_list">
+						<dt class="bs">
+							<a href="{url r="news"  p="id=$vo.id" }" target="_blank" class="investors_img fr">
+								<img src="{function name="getQiniuPath" v="$vo.n_list_img" p="img"}?imageView2/1/w/200/h/200" alt="{$vo.n_title}" width="136" height="136" />
+							</a>
+						</dt>
+						<dd>
+							<h2>
+								<a href="{url r="news"  p="id=$vo.id" }"target="_blank">{$vo.n_title}</a>
+							</h2>
+							<p class="p1">{$vo.n_brief}</p>
+							<p class="p2">
+								<span>来源：{$vo.n_source}</span> <span>{function name="to_date" v="$vo.create_time" p="Y年m月d日" }</span>
+							</p>
+						</dd>
+					</dl>
+				{/foreach}
+			{else}
+				<dl class="news_content_list">
+					<dd><span class="font14-none">暂无相关资讯</span></dd>
+				</dl>
+			{/if}
+		</div>
+	</div>
+</div>
+<div class="news_more_box">
+	<button type="button" class="news_more list_more" {if $list_more eq 0} style="display: none;"{/if} >显示更多</button>
+</div>
+{include file="inc/footer.html"}

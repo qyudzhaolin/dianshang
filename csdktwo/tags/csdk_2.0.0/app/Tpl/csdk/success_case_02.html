@@ -1,0 +1,48 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/login_box.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/success_case.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="case_banner_bg">
+	<div class="height70"></div>
+	<div class="wrap">
+		<img src="{function name="get_spec_image" v="case2_logo.png" }" alt="">
+		<img src="{function name="get_spec_image" v="case2_title.png" }" alt="">
+		<img src="{function name="get_spec_image" v="case2_aim.png" }" alt="">
+	</div>
+</div>
+<div class="finacing_box">
+	<div class="wrap">
+		<img src="{function name="get_spec_image" v="finacing_title.png" }" alt="">
+		<img src="{function name="get_spec_image" v="finacing_stage2.png" }" alt="">
+	</div>
+</div>
+<div class="inv_box">
+	<div class="wrap">
+		<img src="{function name="get_spec_image" v="inv_title.png" }" alt="" class="inv_title">
+		<ul>
+			<li><img src="{function name="get_spec_image" v="investor_04.png" }" alt=""></li>
+			<li><img src="{function name="get_spec_image" v="investor_05.png" }" alt=""></li>
+			<li><img src="{function name="get_spec_image" v="investor_06.png" }" alt=""></li>
+		</ul>
+	</div>
+</div>
+<div class="pro_box">
+	<div class="wrap">
+		<img src="{function name="get_spec_image" v="pro_title.png" }" alt="">
+		<img src="{function name="get_spec_image" v="lightspot_02.png" }" alt="">
+
+	</div>
+	<div class="east">
+		<ul>
+			<li><img src="{function name="get_spec_image" v="east01.png" }" alt=""></li>
+			<li><img src="{function name="get_spec_image" v="east02.png" }" alt=""></li>
+			<li><img src="{function name="get_spec_image" v="east03.png" }" alt=""></li>
+		</ul>
+	</div>
+	
+</div>
+ 
+{include file="inc/login_box.html"} 
+{include file="inc/footer.html"} 

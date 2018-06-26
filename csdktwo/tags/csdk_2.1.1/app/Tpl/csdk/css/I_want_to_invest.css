@@ -1,0 +1,99 @@
+
+
+
+/*????????????*/
+.invest_box_I_want_to{
+    padding: 15px 98px 0 104px;
+}
+.invest_I_want_to{
+    padding:21px 0px 18px 0;
+    border-bottom:1px solid #f4f4f4;
+}
+.invest_I_want_to img{
+    float:left;
+    height:100px;
+    width:100px;
+
+}
+.invest_I_want_to>div{
+    float:left;
+    width: 468px;
+    padding:0 0 0 18px;
+}
+.invest_I_want_to>div dt{
+    font-size:16px;
+    color:#000;
+}
+.invest_I_want_to>div dd{
+    font-size:14px;
+    color:#333;
+    line-height: 22px;
+    padding: 8px 0 0 0;
+    min-height: 44px;
+}
+.invest_I_want_to>div p{
+    font-size:12px;
+    color:#b1b1b1;
+    margin: 10px 0 0 0;
+    position: relative;
+}
+
+.invest_I_want_to>div p span:nth-of-type(1){
+    padding:0 26px 0 15px;
+    background: url("../images/position2.png") no-repeat 0 center
+}
+
+.invest_I_want_to>div p span:nth-of-type(2){
+    padding:0 0 0 20px;
+    background:url("../images/friend2.png") no-repeat 0 center;
+}
+.invest_I_want_to>div p span:nth-of-type(3){
+    height:26px;
+    padding:0 22px 0 32px;
+    position: absolute;
+    border:1px solid #f4f4f4;
+    top:-6px;
+    right:0;
+    border-radius:4px;
+    cursor:pointer;
+    background: url("../images/white_heard.png") no-repeat 13px center;
+    text-align: center;
+    line-height: 26px;
+    font-size:12px;
+    color:#000;
+}
+.invest_I_want_to>div p span:nth-of-type(3).active{
+    background: url("../images/red_heard.png") no-repeat 13px center;
+}
+.invest_I_want_to>div p span:nth-of-type(3) i{
+    /*margin:0 0 0 6px;*/
+}
+.Investor_invest_btn{
+    margin:0 0 88px 0;
+}
+.Investor_page_invest_box>div:nth-last-of-type(1){
+    margin:0 0 136px 0;
+}
+.InvestorWidth806{
+    border-left:1px solid #f4f4f4;width:806px;
+}
+/*没有数据box*/
+.no_deal {
+    width: 100%;
+    text-align: center;
+    padding: 150px 0;
+    font-size: 14px;
+    color: #8d8d8d;
+}
+.no_deal a {
+    color: #4282c5;
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+
+
+
+
+
+

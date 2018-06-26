@@ -1,0 +1,79 @@
+.fr.bs .My_investament{
+    height:76px;
+}
+.Maintain_and_update.My_investament .active{
+    color:#dca876;
+}
+.fund_lower{
+    margin:0 0 20px 0;
+}
+.padd_l20{
+    padding-left: 20px;
+}
+.por_r{
+    position: relative;
+}
+.por_ab{
+    position: absolute;
+    top:30px;
+    left:70px;
+}
+ul.fund_ul.bs li span:nth-of-type(1){width:124px;}
+ul.fund_ul.bs li span:nth-of-type(1):hover{color:#86a7de;}
+ul.fund_ul.bs li span:nth-of-type(2){width:110px;}
+ul.fund_ul.bs li span:nth-of-type(2):hover{color:#86a7de;cursor: pointer}
+ul.fund_ul.bs li span:nth-of-type(3){width:148px;}
+ul.fund_ul.bs li span:nth-of-type(4){width:134px;}
+ul.fund_ul.bs li span:nth-of-type(5){width:112px;}
+ul.fund_ul.bs li span:nth-of-type(6){width:110px;}
+form:nth-last-of-type(1){
+    margin:0 auto 200px;
+}
+.set_box_slid_bj{height:16px;width:6px;background: #dba774;display: block}
+/*没有数据box*/
+.no_deal {
+    width: 100%;
+    text-align: center;
+    padding: 150px 0;
+    font-size: 14px;
+    color: #8d8d8d;
+}
+.news_top_r input{
+    line-height: 2.5em;
+}
+.no_deal a {
+    color: #4282c5;
+    text-decoration: none;
+    padding: 0 10px;
+}
+ul.fund_ul.bs li:nth-last-of-type(1){
+    border-left:1px solid #F4F4F4;
+    border-right:1px solid #F4F4F4;
+    border-bottom:1px solid #F4F4F4;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+<div class="slide">
+	<ul class="slide_nav" id="estp_slide_nav">
+		<li {if $user eq user} class="selected" {/if}><span class="icon {if $user eq user}pitch{else}finish{/if}"></span><a href="{url r="home"}"{if $user eq user} class="cur"{else}class="finish"{/if}>个人信息</a></li>
+		{if $side_step gt 2 || $side_step eq 2}
+			<li {if $deal_show eq deal_show} class="selected"{/if}><span class="icon {if $deal_show eq deal_show}pitch{else}finish{/if}"></span><a href="{url r="deal#deal_show"}"{if $deal_show eq deal_show} class="cur"{else}class="finish"{/if}>项目信息</a></li>
+		{else}
+			<li class="nolink"><span class="icon"></span>项目信息</li>
+		{/if}
+		{if $side_step gt 3 || $side_step eq 3}
+			<li {if $estp_finacing eq estp_finacing} class="selected"{/if}><span class="icon {if $estp_finacing eq estp_finacing}pitch{else}finish{/if}"></span><a href="{url r="deal#estp_finacing"}"{if $estp_finacing eq estp_finacing} class="cur"{else}class="finish"{/if}>融资信息</a></li>
+		{else}
+			<li class="nolink"><span class="icon"></span>融资信息</li>
+		{/if}
+		{if $side_step gt 4 || $side_step eq 4}
+			<li {if $company_org eq company_org}  class="selected"{/if}><span class="icon {if $company_org eq company_org}pitch{else}finish{/if}"></span><a href="{url r="deal#company_org"}"{if $company_org eq company_org}  class="cur"{else}class="finish"{/if}>公司信息</a></li>
+		{else}
+			<li class="nolink"><span class="icon"></span>公司信息</li>
+		{/if}
+		{if $side_step gt 5 || $side_step eq 5 || $user_info.is_review==2}
+			<li {if $auth_estp eq auth_estp} class="selected"{/if}><span class="icon {if $auth_estp eq auth_estp}pitch{else}finish{/if}"></span><a href="{url r="auth#estp_show"}"{if $auth_estp eq auth_estp} class="cur"{else}class="finish"{/if}>认证消息</a></li>	
+		{else}
+			<li class="nolink"><span class="icon"></span>认证消息</li>
+		{/if}
+		<li {if $message eq message} class="selected"{/if}><span class="icon {if $message eq message}pitch{else}finish{/if}"></span><a href="{url r="message"}" {if $message eq message} class="cur"{else}class="finish"{/if}>消息中心</a></li>
+		 {if $user_info.is_sub_user eq 0}
+			 {if $user_info.is_review neq 1}
+			 	<li class="nolink"><span class="icon"></span>我的子账号</li>
+			 {else}
+		    	{if $is_exist_sub_user eq 0}
+					<li {if $estp_sub_account eq estp_sub_account}class="selected"{/if}><span class="icon {if $estp_sub_account eq estp_sub_account}pitch{else}finish{/if}"></span><a href="{url r="subuser#estp_account" }"{if $estp_sub_account eq estp_sub_account}class="cur"{else}class="finish"{/if}>我的子账号</a></li>
+				{else}
+						{if $add_account_show eq add_account_show}
+						<li class="selected"><span class="icon pitch"></span><a href="{url r="subuser#add_account_show" }"class="cur">我的子账号</a></li>
+						{else}
+						<li {if $manage_account eq manage_account} class="selected"{/if}><span class="icon {if $manage_account eq manage_account}pitch{else}finish{/if}"></span><a href="{url r="subuser#manage_account" }"{if $manage_account eq manage_account} class="cur"{else}class="finish"{/if}>我的子账号</a></li>
+						{/if}
+				{/if}
+			{/if}
+		{/if}
+	</ul>
+</div>

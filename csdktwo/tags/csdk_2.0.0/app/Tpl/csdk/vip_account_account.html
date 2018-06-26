@@ -1,0 +1,46 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/vip_account.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+{include file="inc/investor_flow.html"}
+<div class="wrap">
+	{include file="inc/sidebar_investor.html"}
+	<div class="investor content">
+		<div class="height38"></div>
+		<ol class="vip_account_attestion">
+			<li>
+				<div class="height38"></div>
+				<h2 class="my_account_tit">我的会员账户</h2>
+				<div class="account_sum"><p>{$vip_account.vip_money}</p><font>万元</font></div>
+				<h3 class="end_time">会员资格起止时间</h3>
+				<div class="end_time_list"><p>{$vip_account.vip_begin_time}&nbsp;&nbsp;</p><font>至</font><p>&nbsp;&nbsp;{$vip_account.vip_end_time}</p></div>
+				{if $user_info.is_review neq 1}
+				<div class="earnest_money"><a href="{url r="account#vip_account_introduction" p="source=1"}">会员账户介绍</a></div>
+				{/if}
+			</li>
+			<li>
+				<div class="height38"></div>
+				<div class="work_list">
+					<p>若有疑问请联系磁斯达克</p>
+					<p>400-862-8262</p>
+					<p>工作时间：周一至周五9：00——18：00</p>
+				</div>
+			</li>
+		</ol>
+			<div class="auditor_list">
+			{if $is_exist_vip_account eq 1 && $user_info.is_review eq 1}
+				<a class="vip_money_button" href="{url r="account#vip_account_introduction" p="source=1"}">会员账户介绍</a> 
+			{else}
+				<a class="vip_money_button" href="{url r="auth#investor_show" p="side_step=5"}">进入磁斯达克审核认证</a> 
+				<p>您已经成功缴纳会员诚意金，请点击进入磁斯达克审核认证继续完成投资人认证。</p>	
+			{/if}	
+			</div>
+		
+	</div>
+</div>
+
+{include file="inc/footer.html"} 

@@ -1,0 +1,107 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/fund_edit.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/inputcomom.js' />
+<load href='__TMPL__Common/js/fundinput.js' />
+<load href='__TMPL__Common/style/input.css' />
+<div class="main">
+<div class="main_title">{%ADD} <a href="{:u("Fund/investor_list",array('fund_id'=>$_REQUEST['fund_id']))}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data" onsubmit="return add_fund_investor_check('add')">
+<table class="form" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<!--<tr>
+		<td class="item_title">选择投资人:</td>
+		<td class="item_input">
+			<select name="user_id" class="require" id="user_id">				
+			<foreach name="investor_list" item="investorlist">
+				<option value="{$investorlist.id}" rel="{$investorlist.id}" <if condition="$investorlist['selected']">selected="selected"</if>>{$investorlist.user_name}</option>
+			</foreach>
+			</select>
+			<span id="user_id_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	-->
+		<tr>
+		<td class="item_title">*投资人姓名:</td>
+		<td class="item_input" id="user_id_input">
+		<div class="input_box_all" id="user_name" style="margin:0">
+			<input type="text" name="user_name" class="textbox3 require" id="investorinputid" value=""  autocomplete="off" />
+		</div>
+		<input type="hidden" name="fund_id" id="fund_id" value="{$fund_id}" />
+		<div id="popup" style="position: absolute;">
+            <table width="100%" bgcolor="#fffafa">
+                <tbody id="popupBody"></tbody>
+            </table>
+        </div>
+		<span id="user_name_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">所属渠道合伙人：</td>
+		<td class="item_input">
+			<select name="partner_user_id" id="partner_user_id" class="textbox require">	
+				<option value="0">请选择</option>
+				<foreach name="partners" item="vo">
+					<option value="{$key}" rel="{$key}">{$vo}</option>
+				</foreach>
+			</select>
+			<label><input type="checkbox" onclick="partner_user_check(this)"/>无渠道合伙人</label>
+			<span id="partner_user_id_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*投资人编号:</td>
+		<td class="item_input"><input type="text" class="textbox require readonly" readonly="readonly" name="user_id" id="user_id" /><span id="user_id_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*投资人手机号:</td>
+		<td class="item_input"><input type="text" class="textbox require readonly" readonly="readonly" name="user_mobile" id="user_mobile" /><span id="user_mobile_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*购买金额(¥):</td>
+		<td class="item_input"><input type="text" class="textbox require" maxlength="7" name="investor_amount" id="investor_amount" data-amount="{$total_amount}" /> 万元<span id="investor_amount_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*购买占比(%):</td>
+		<td class="item_input"><input type="text" readonly="readonly" class="textbox readonly require" maxlength="5"  name="investor_rate" id="investor_rate"/> %<span id="investor_rate_msg" name="error_msg"></span></td>  
+	</tr>
+	<tr>
+		<td class="item_title">*购买日期</td>
+		<td class="item_input">
+			<input type="text" class="textbox require" name="create_time" id="create_time" value="" style="width:100px" readonly="true" />
+			<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_trade_event' onclick="return csdk_cal(this);" />
+			<span id="create_time_msg" name="error_msg"></span>
+		</td>
+	</tr>
+   	<tr>
+		<td class="item_title">备注(200个字)</td>
+		<td class="item_input">
+			 <textarea type="text"  maxlength="200"  name="remark" id="remark" class="textarea"></textarea><span id="remark_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title"></td>
+		<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Fund" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="investor_insert" />
+			<input type="hidden" name="fund_id" value="{:trim($_REQUEST['fund_id'])}" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%ADD}" />
+			<input type="reset" class="button" value="{%RESET}" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+</div>
+<include file="Public:footer" />

@@ -1,0 +1,56 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/user.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">会员列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}会员" onclick="add();" />
+	<!--<input type="button" class="button" value="{%DEL}会员" onclick="del();" />
+--></div>
+
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		真实姓名：<input type="text" class="textbox" maxlength="6" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
+		会员手机：<input type="text" class="textbox" maxlength="11" name="mobile" value="{:trim($_REQUEST['mobile'])}" style="width:100px;" />
+		会员状态: <select name="is_review" id="is_review">
+				<option value="0" <if condition="$_REQUEST['is_review'] eq 0">selected="selected"</if>>请选择</option>
+				<option value="1" <if condition="$_REQUEST['is_review'] eq 1">selected="selected"</if>>未认证</option>
+				<option value="2" <if condition="$_REQUEST['is_review'] eq 2">selected="selected"</if>>已认证</option>
+				<option value="3" <if condition="$_REQUEST['is_review'] eq 3">selected="selected"</if>>认证中</option>
+			</select>
+		邮箱：<input type="text" class="textbox" maxlength="30"  name="email" value="{:trim($_REQUEST['email'])}" style="width:100px;" />
+		<input type="hidden" value="User" name="m" />
+		<input type="hidden" value="index_investor" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="user" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+			,user_name|msubstr:姓名
+			,mobile|msubstr:手机号码|220px:edit
+			,email|msubstr:电子邮箱
+			,user_type_zh|msubstr:会员类别
+			,is_review_zh|msubstr:会员状态
+			,is_effect_zh|msubstr:是否禁用
+	        ,create_time|to_date:创建时间
+	        ,update_time|to_date:最新修改时间
+	" 
+	actionlist="edit:{%EDIT}, del:{%DEL}, edit_user_pwd:重置密码 ,user_detail:用户详情"  /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

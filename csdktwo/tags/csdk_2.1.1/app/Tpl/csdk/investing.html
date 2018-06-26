@@ -1,0 +1,57 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/I_want_to_invest.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/investing.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/focus.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_box">
+        <a href='{url r="home"}'>我的个人中心</a>
+        <img src='{function name="get_spec_image" v="right_corner.jpg"}' alt="right_corner"/>
+        <span>意向项目</span>
+    </div>
+    <div class="personal_content clearfix">
+        {include file="inc/sidebar_user.html"}
+        <!-- “我要投资”项目-->
+        <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+            <div class="invest_box_I_want_to">
+            	{if $invest}
+	            	{foreach from=$invest item=vo}
+		                <div class="invest_I_want_to clearfix">
+		                    <a href='{url r="dealdetails#index" v="&id=$vo.deal_id"}' target="_blank"><img src='{function name="getQiniuPath" v="$vo.img_deal_logo" p="img"}?imageView2/1/w/200/h/200' alt="" width="100" height="100" /></a>
+		                    <div>
+		                        <dl>
+		                            <dt><a href='{url r="dealdetails#index" v="&id=$vo.deal_id"}' target="_blank">{$vo.name}</a></dt>
+		                            <dd>{$vo.deal_sign}</dd>
+		                        </dl>
+		                        <p>
+		                            <span>{$vo.province}</span>
+		                            <span>{$vo.period_id}</span>
+		                            <span {if $vo.focus} class="active" {else} id="focus_{$vo.deal_id}" data-count="{$vo.comment_count}" onclick="do_focus({$vo.deal_id},'focus_{$vo.deal_id}')" {/if}>关注&nbsp;{$vo.comment_count}</span>
+		                        </p>
+		                    </div>
+		                </div>
+	            	{/foreach}
+	                <div class="news_more_box invest_btn">
+	                	{if $invest_more}
+		                    <button class="news_more index_more" >查看更多</button>
+	                	{/if}
+	                </div>
+            	{else}
+            		<div class="no_deal">
+							{if $home_is_review==1}
+	                   		您在磁斯达克还没有任何投资，马上去<a href='{url r="deals"}'>《项目介绍》</a>看看有什么感兴趣的项目
+                   			 
+                   			{elseif $home_is_review==0}
+					    	您的会员身份还未认证， <a href='{url r="account"}'>请先认证！</a>
+						    {else}
+						    您的会员身份认证中！
+						    {/if}
+					</div>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
+{include file="inc/footer.html"} 

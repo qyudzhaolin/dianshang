@@ -1,0 +1,9 @@
+<div style="padding:3px;" data="add_trade_event" name="add_trade_event">时间</td>
+		<td class="item_input">
+			<input type="text" class="textbox require" name="create_time_trade_event[]" id="create_time_trade_event{$len}" value="" onfocus="this.blur(); return showCalendar('create_time_trade_event{$len}', '%Y-%m-%d', false, false, this.id);" />
+			<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_trade_event' onclick="return showCalendar(create_time_trade_event{$len}, '%Y-%m-%d', false, false, 'btn_create_time_trade_event');" />
+			<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#create_time_trade_event{$len}').val('');" />	
+			机构名称(14个字)<input type="text" maxlength="14" class="textbox require" name="brief_trade_event[]" value="" />
+			金额<input type="text" class="textbox require" name="price_trade_event[]" value="" />万元
+			<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+		</div>

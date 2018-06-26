@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+ 
+    <link rel="stylesheet" type="text/css" media="screen" href="/app/Tpl/csdk/css/base.css">
+	 
+    <script src="/app/Tpl/csdk/js/jQuery_v1.8.3.js"></script>
+
+</head>
+<style>
+    *{font-family:'微软雅黑';}
+    .box,.box2{height:30px;width:400px;position: relative;margin:100px auto;}
+    .s_btn,.s_btn2{border:1px solid #000; width:200px;height:30px;text-indent: 5px;font-size:13px;}
+    .ul{max-height:300px;overflow-x:auto;background:#fff;width:200px;position: absolute;top:30px;left:0; border:1px solid #000;display:none; }
+    .ul li{line-height: 30px;text-align: left;text-indent: 5px;font-size:14px;color:#867B7B;}
+    .ul li:hover{background: #ccc;cursor: pointer;color:#000;}
+    .infi{height:300px;width:400px;background:#fff;position: absolute;top:31px;left:0;border:1px solid #000;text-align: center;line-height: 100px;}
+</style>
+<script>
+$(function(){
+        function aaa(parent,input,url,Deal,investor,bbb){
+            $(parent).append($('<i></i>'));
+            $(input).bind('keyup',function(){
+                $(parent).find('.infi').remove();
+                $(parent).find('.ul').html("");
+                if($(this).val() == ''){
+                    $(parent).find('.ul').css({'display':'none'});
+                    $(parent).find('i').html('')
+                    return;
+                }
+                $.ajax({
+                    url:url,
+                    type:'GET',
+                    dataType:'json',
+                    data:{
+                        m:Deal,
+                        a:investor,
+                        linkValue:$(this).val()
+                    },
+                    success:function(data){
+
+                        var $Li = '';
+                        for(var i=0;i<data.data.length;i++){
+                            $Li += '<li id="'+data.data[i].id+'" number="'+data.data[i].third_data+'">'+data.data[i].name+'</li>';
+                        }
+                        $(parent).find('.ul').html($Li);
+
+                            click_open(bbb);
+
+
+                    },
+                    beforeSend:function(){
+                        $(parent).find('i').html('发送请求');
+                        $(parent).find('.ul').css({'display':'none'})
+                    },
+                    complete:function(data){
+                        $(parent).find('i').html('数据成功返回');
+                        $(parent).find('.ul').css({'display':'block'});
+                    },
+                    error:function(){
+                        console.log('失败')
+                    }
+                })
+            });
+            //点击下边的每个人
+            function click_open(bbb){
+                $(parent).find('.ul').on('click',' li',function(ev){
+                    ev.stopImmediatePropagation();
+                    //$(this).html()
+                    $(parent).append(
+                            '<div class="infi">' +
+                            '<p class="infi_id">xx的id是</p>' +
+                            '<p class="infi_number">手机号码是xx</p>' +
+                            '</div>'
+                    );
+
+
+                    bbb ={'id':$(this).attr('id'),'mobile':$(this).attr('number')}
+
+                    $(input).val($(this).html());
+                    $(parent).find('i').html('');
+                    $(this).parent().find('li').remove('');
+                    $(parent).find('.infi_id').html($(this).html()+': 的id是: '+$(this).attr('id'));
+                    $(parent).find('.infi_number').html('手机号码是:'+$(this).attr('number')+'');
+                    $(parent).find('.ul').find('li').remove();
+                    $(parent).find('.ul').css({'display':'none'});
+                    alert(bbb.id)
+                });
+            }
+        }
+    aaa('.box','.s_btn','/m.php','Deal','find_investor',0);
+    aaa('.box2','.s_btn2','/m.php','Deal','find_investor',0)
+})
+
+
+</script>
+<body>
+<div class="box">
+    <input type="text" class="s_btn"/>
+    <ul class="ul">
+        <!--<li>dasd</li>-->
+        <!--<li>ssss</li>-->
+        <!--<li>2222</li>-->
+    </ul>
+</div>
+
+<div class="box2">
+    <input type="text" class="s_btn2"/>
+    <ul class="ul">
+        <!--<li>dasd</li>-->
+        <!--<li>ssss</li>-->
+        <!--<li>2222</li>-->
+    </ul>
+</div>
+</body>
+</html>

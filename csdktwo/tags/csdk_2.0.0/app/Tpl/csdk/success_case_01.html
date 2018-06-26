@@ -1,0 +1,44 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/login_box.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/success_case.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="case_banner_bg">
+	<div class="height70"></div>
+	<div class="wrap">
+		<img src="{function name="get_spec_image" v="case1_logo.png" }" alt="">
+		<img src="{function name="get_spec_image" v="case1_title.png" }" alt="">
+		<img src="{function name="get_spec_image" v="case1_aim.png" }" alt="">
+	</div>
+</div>
+<div class="finacing_box">
+	<div class="wrap">
+		<img src="{function name="get_spec_image" v="finacing_title.png" }" alt="">
+		<img src="{function name="get_spec_image" v="finacing_stage1.png" }" alt="">
+	</div>
+</div>
+<div class="inv_box">
+	<div class="wrap">
+		<img src="{function name="get_spec_image" v="inv_title.png" }" alt="" class="inv_title">
+		<ul class="one_col">
+			<li><img src="{function name="get_spec_image" v="investor_01.png" }" alt=""></li>
+		</ul>
+	</div>
+</div>
+<div class="pro_box">
+	<div class="wrap">
+		<img src="{function name="get_spec_image" v="pro_title.png" }" alt="">
+		<img src="{function name="get_spec_image" v="lightspot_01.png" }" alt="">
+	</div>
+</div>
+<div class="team_box">
+	<div class="wrap">
+		<img src="{function name="get_spec_image" v="team_title.png" }" alt="" class="team_title">
+		<ul class="one_col">
+			<li><img src="{function name="get_spec_image" v="team_01.png" }" alt=""></li>
+		</ul>
+	</div>
+</div>
+{include file="inc/login_box.html"} 
+{include file="inc/footer.html"} 

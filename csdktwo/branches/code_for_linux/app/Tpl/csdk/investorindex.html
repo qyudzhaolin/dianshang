@@ -1,0 +1,87 @@
+{include file="inc/header.html"} 
+<?php
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/Investor_page.css";
+    $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/swiper.min.css";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jQuery_v1.8.3.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/upload.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/focus.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/Investor_page.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/swiper.min.js";
+?>
+
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_content clearfix">
+
+        <!--轮换图-->
+        <div class="swiper-container swiper-container4" style="margin:0px auto 0">
+            <div class="swiper-wrapper">
+                {foreach from=$carousel item=vo}
+	                <div class="swiper-slide">
+			            {if $vo.b_url}
+						<a href="{$vo.b_url}" target="_blank">
+							<img src='{$vo.b_pc_img}' alt="{$vo.b_title}" width="1000" height="360" />
+						</a>
+						{else}
+						<img src='{$vo.b_pc_img}' alt="{$vo.b_title}" width="1000" height="360" />
+						{/if}
+	                </div>
+                {/foreach}
+            </div>
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev button-prev4"></div>
+            <div class="swiper-button-next button-next4"></div>
+            <!-- Add Pagination -->
+            <div class="pagination">
+                <span class="swiper-pagination-switch"></span>
+                <span class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></span>
+                <span class="swiper-pagination-switch"></span>
+            </div>
+        </div>
+        <div class="About_us_centent">
+            <h2>
+                <span>经典案例</span>
+            </h2> 
+            <ul class="character_boxli clearfix">
+               {foreach from=$dealcase item=vo}
+                  <li>
+                    <div>
+                        <div class="character_img" style="width:200px;height:200px">
+                          <a href=" {url r="case"  p="id=$vo.id"}" target="_blank" > <img src='{function name="getQiniuPath" v="$vo.img_deal_logo" p="img"}?imageView2/1/w/200/h/200' alt="" width="200" height="200" />
+                          </a>
+                        </div>
+                        <dl>
+                             <a href=" {url r="case"  p="id=$vo.id"}" target="_blank" ><dt>{$vo.s_name}</dt>
+                             </a>
+                            <dd>{$vo.deal_sign}</dd>
+                        </dl>
+                    </div>
+                </li>
+                  {/foreach} 
+            </ul>
+            <h2 class="value_bar">
+                <span>精品项目推荐</span>
+            </h2>
+            <div class="fr bs size InvestorWidth806">
+                <div class="Investor_page_invest_box">
+                 {foreach from=$dealbest item=best}
+                    <div class="Investor_invest clearfix active_0">
+                        <a href="{url r="dealdetails"  p="id=$best.id"}"target="_blank" class="left_position"> <img src='{function name="getQiniuPath" v="$best.img_deal_logo" p="img"}?imageView2/1/w/200/h/200' alt="" width="100" height="100" />
+                        </a>
+                        <div>
+                            <dl>
+                               <dt><a href='{url r="dealdetails"  p="id=$best.id"}'target="_blank" >  {$best.name}</a></dt>
+                                <dd>{$best.deal_sign}</dd>
+                                 <p><span>{$best.province} </span><span>{$best.period_id}</span>
+                                 <span {if $best.state eq 1 } class="active" {else} id="foucs_{$best.id}" data-count="{$best.comment_count}" onclick="do_focus({$best.id},'foucs_{$best.id}')"{/if} >关注&nbsp;<i>{$best.comment_count}</i></span></p>
+                            </dl>
+                        </div>
+                    </div>
+                     {/foreach} 
+                </div>
+            </div>
+        </div>
+   </div>
+</div>
+{include file="inc/footer.html"} 
+

@@ -1,0 +1,103 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+<load href='__TMPL__Common/js/event_edit.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/dcom_array.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/js/doCheck.js' />
+<load href='__TMPL__Common/js/check.js' />
+<div class="main">
+<div class="main_title">{%EDIT} <a href="{:u("Deal/event_list",array('deal_id'=>$vo['deal_id']))}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data" onSubmit="return add_event_check('edit')">
+<table class="form" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+		<td class="item_title">*融资轮次:</td>
+		<td class="item_input">
+			<select name="period" class="require" id="period">				
+			 <option value="">请选择</option>
+         	  <foreach name="deal_period" item="item">
+						<option value="{$item['name']}"    <if condition="$item['name'] eq $vo['period']">selected="selected"</if>  >{$item['name']}</option>
+					</foreach>
+
+ 			</select>
+  			<span id="period_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*融资金额(万元):</td>
+		<td class="item_input"><input type="text"  maxlength="7" class="textbox require" name="investor_amount" id="investor_amount" value="{$vo.investor_amount}"/><span id="investor_amount_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*融资占比(%):</td>
+		<td class="item_input"><input type="text"  maxlength="5" class="textbox require" name="investor_rate" id="investor_rate" value="{$vo.investor_rate}"/><span id="investor_rate_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*融资前估值(万元):</td>
+		<td class="item_input"><input type="text"  maxlength="7" class="textbox require" name="investor_before_evalute" id="investor_before_evalute" value="{$vo.investor_before_evalute}"/><span id="investor_before_evalute_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*融资后估值(万元):</td>
+		<td class="item_input"><input type="text"  maxlength="7" class="textbox require" name="investor_after_evalute" id="investor_after_evalute" value="{$vo.investor_after_evalute}"/><span id="investor_after_evalute_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*估值增长率:</td>
+		<td class="item_input"><input type="text"  maxlength="6" class="textbox require" name="evalute_growth_rate" id="evalute_growth_rate" value="{$vo.evalute_growth_rate}"/><span id="evalute_growth_rate_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*投资回报:</td>
+		<td class="item_input"><input type="text"  maxlength="6" class="textbox require" name="investor_payback" id="investor_payback" value="{$vo.investor_payback}"/><span id="investor_payback_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*融资日期:</td>
+		<td class="item_input"><input type="text" class="textbox require" name="investor_time" id="investor_time" value="{$vo.investor_time}"/>
+		<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_trade_event' onclick="return csdk_cal(this);" /><span id="investor_time_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*磁斯达克参与否:</td>
+		<td class="item_input">
+			<label><input type="radio" name="is_csdk_partake" value="0" <if condition="$vo['is_csdk_partake'] eq 0">checked="checked"</if>  onClick="display_select_fund()" />否</label>
+			<label><input type="radio" name="is_csdk_partake" value="1" <if condition="$vo['is_csdk_partake'] eq 1">checked="checked"</if>  onClick="display_select_fund()" />是</label>
+			<span id="is_csdk_partake_msg" name="error_msg"></span></td>
+	</tr>
+
+	<tr id="is_display_fund">
+		<td class="item_title">如参与请选择基金:</td>
+		<td class="item_input" >
+			<select name="partake_fund" class="require" id="partake_fund">				
+			 <option value="">请选择</option>
+         	  		<foreach name="fund_list" item="fund_list">
+						<option value="{$fund_list.id}" <if condition="$fund_list['id'] eq $vo['partake_fund']">selected="selected"</if>>{$fund_list.name}</option>
+					</foreach>
+ 			</select>
+  			<span id="partake_fund_msg" name="error_msg"></span>
+		</td>
+	</tr>
+  
+	<tr>
+		<td class="item_title"></td>
+		<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="event_update" />
+			<input type="hidden" name="deal_id" value="{$vo.deal_id}" />
+			<input type="hidden" name="id" value="{$vo.id}" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%EDIT}" />
+			<input type="reset" class="button" value="{%RESET}" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+</div>
+<include file="Public:footer" />

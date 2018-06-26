@@ -1,0 +1,229 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/login_box.css";
+?>
+
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<style>
+
+ul.marquee {z-index:40000;display: block;line-height: 1;position: fixed;overflow: hidden;width: 600px; 
+height: 36px; color:red;top:70px;font-size:20px;left:calc(50% - 300px);text-align: right} 
+ul.marquee li {position: absolute; top: -999em;left: 0;display: block; 
+white-space: nowrap; padding: 3px 5px; text-indent:0.8em;} 
+.marquee-showing{color:#fff;font-size:30px;color:red;}
+
+</style>
+
+<div class="container con_bg">
+	<div class="banner">
+		<ul>
+			<li style="background:url({function name="get_spec_image" v="banner_bg.jpg" }) no-repeat center top;">
+				<div class="wrap">
+					<div class="title">
+						<img src="{function name="get_spec_image" v="cisdaq.png" }" alt="">
+					</div>
+					<span class="link login_tiptwo">
+			        {if $user_info && $user_info.is_effect eq 1 }
+							{if $user_info.user_type eq 1}
+								{if $user_info.is_review eq 1}
+									<a href="{url r="deals#index"}" class="no_margin">我要投资</a>
+			            			<a href="javascript:void(0);" class="no_margin_hover" >我要融资</a>
+								{else}
+									<a href="javascript:void(0);" class="no_margin" onclick="pop_notice();">我要投资</a>
+			            			<a href="javascript:void(0);" class="no_margin_hover">我要融资</a>
+								{/if}
+							{else}
+								{if $user_info.is_review eq 1}
+									<a href="javascript:void(0);" class="no_margin no_margin_hover">我要投资</a>
+			            			<a href="{url r="investors#index"}"   >我要融资</a>
+								{else}
+									<a href="javascript:void(0);" class="no_margin no_margin_hover">我要投资</a>
+			            			<a href="javascript:void(0);"  onclick="pop_notice();">我要融资</a>
+								{/if}
+							{/if}
+					{else}
+						<a href="javascript:void(0);" class="no_margin click" onclick="pop_login();">我要投资</a>
+			        	<a href="javascript:void(0);" class="click"  onclick="pop_login();">我要融资</a>
+					{/if}
+			        </span>
+			        <div class="fee_state"><img src="{function name="get_spec_image" v="fee_state.png" }" alt=""></div>
+				</div>				
+			</li>
+			 
+			<li id="deal_show_pic">
+			{if $user_info}
+			<a href="/dealdetail/31/" target="_blank"></a>
+			{else}
+			<a href="javascript:void(0);" class="click" onclick="pop_login();"></a>
+			{/if}
+			</li>
+
+		</ul>
+		<ol id="corner_mark">
+			<li class="cur"></li>
+			<li></li>
+		</ol>
+		<div class="button_box">
+			<span class="btn_pre default"></span>
+			<span class="btn_next"></span>
+		</div>
+	</div>
+<!-- 下面全部干掉，是文字滚动效果 -->
+<ul id="marquee" class="marquee"> 
+      <li><div target="_blank">系统升级中,敬请期待... </div> </li>
+      
+
+   </ul> 
+</div>
+<!-- 提醒 -->
+<div class="position-flxe"></div>
+
+<!--  -->
+<div class="case">
+	<div class="wrap">
+		<h3 class="case_title_cn"><img src="{function name="get_spec_image" v="case_title_cn.png" }" alt=""></h3>
+		<h3 class="case_title_en"><img src="{function name="get_spec_image" v="case_title_en.png" }" alt=""></h3>
+		<ul class="case_list" id="case_list">
+			<a href="{url r="case#car"}" target="_blank">		
+			<li class="no_margin">
+				<div class="top">
+					<h3 class="top_hd"><img src="{function name="get_spec_image" v="c_t1.png" }" alt=""></h3>
+					<div class="top_con">
+						<div>
+							<p>国内首家创建了厂商认证，线上特卖抢购模式的二手车在线服务平台。</p>
+							<p>独特的线上数据分析+线下上门服务模式。</p>
+						</div>
+					</div>
+				</div>
+				<div class="bottom">
+					<div class="case_hd">
+						<h3 class="title"><img src="{function name="get_spec_image" v="case_tit03.png" }" alt=""></h3>
+						<img src="{function name="get_spec_image" v="case_bg03.jpg" }" alt="">
+					</div>
+					<div class="case_con">
+						<h3 class="case_con_hd"><img src="{function name="get_spec_image" v="case03_tit.png" }" alt=""></h3>
+						<div class="case_con_bd">
+							<div>
+								<p class="case_con_bd_desc"><img src="{function name="get_spec_image" v="case03_c01.png" }" alt=""></p>
+								<p class="case_con_bd_dt"><img src="{function name="get_spec_image" v="case03_t01.png" }" alt=""></p>
+							</div>
+							<div>
+								<p class="case_con_bd_desc"><img src="{function name="get_spec_image" v="case03_c02.png" }" alt=""></p>
+								<p class="case_con_bd_dt"><img src="{function name="get_spec_image" v="case03_t02.png" }" alt=""></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			</a>
+			<a href="{url r="case#east"}" target="_blank">
+			<li>
+				<div class="top">
+					<h3 class="top_hd"><img src="{function name="get_spec_image" v="c_t2.png" }" alt=""></h3>
+					<div class="top_con">
+						<div>
+							<p>2015年预计成交量100亿以上，年底达3万个，数据库企业200万个，对接金融结构超过2800家；</p>
+							<p>2015年第一季度新签用户数量2052人，营业收入1634万元；</p>
+							<p>2015年比2014年同年营业收入增长124%。</p>
+						</div>
+					</div>
+				</div>
+				<div class="bottom">
+					<div class="case_hd">
+						<h3 class="title"><img src="{function name="get_spec_image" v="case_tit02.png" }" alt=""></h3>
+						<img src="{function name="get_spec_image" v="case_bg02.jpg" }" alt="">
+					</div>
+					<div class="case_con">
+						<h3 class="case_con_hd"><img src="{function name="get_spec_image" v="case02_tit.png" }" alt=""></h3>
+						<div class="case_con_bd">
+							<div>
+								<p class="case_con_bd_desc"><img src="{function name="get_spec_image" v="case02_c01.png" }" alt=""></p>
+								<p class="case_con_bd_dt"><img src="{function name="get_spec_image" v="case02_t01.png" }" alt=""></p>
+							</div>
+							<div>
+								<p class="case_con_bd_desc"><img src="{function name="get_spec_image" v="case02_c02.png" }" alt=""></p>
+								<p class="case_con_bd_dt"><img src="{function name="get_spec_image" v="case02_t02.png" }" alt=""></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>	
+			</a>
+			
+
+			<a href="{url r="case"}" target="_blank">
+			<li>
+ 				<div class="top">
+					<h3 class="top_hd"><img src="{function name="get_spec_image" v="c_t3.png" }" alt=""></h3>
+					<div class="top_con">
+						<div>
+							<p>针对多点执医下医患关系的用户痛点，首创全新的服务模式，最高效的解决了医生，患者，POC之间的连接关系，极大的解决了老百姓看病难这个痛点。</p>
+							<p>以5大移动终端APP完成D2D(医生—医生)、D2C(医生—患者)、C2C(患者—患者)的线上大联通，实现线上、线下高效互动。</p>
+						</div>
+					</div>
+				</div>
+				<div class="bottom">
+					<div class="case_hd">
+						<h3 class="title"><img src="{function name="get_spec_image" v="case_tit01.png" }" alt=""></h3>
+						<img src="{function name="get_spec_image" v="case_bg01.jpg" }" alt="">
+					</div>
+					<div class="case_con">
+						<h3 class="case_con_hd"><img src="{function name="get_spec_image" v="case01_tit.png" }" alt=""></h3>
+						<div class="case_con_bd">
+							<div>
+								<p class="case_con_bd_desc"><img src="{function name="get_spec_image" v="case01_c01.png" }" alt=""></p>
+								<p class="case_con_bd_dt"><img src="{function name="get_spec_image" v="case01_t01.png" }" alt=""></p>
+							</div>
+							<div>
+								<p class="case_con_bd_desc"><img src="{function name="get_spec_image" v="case01_c02.png" }" alt=""></p>
+								<p class="case_con_bd_dt"><img src="{function name="get_spec_image" v="case01_t02.png" }" alt=""></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				 
+			</li></a>
+		</ul>
+	</div>
+</div>
+
+{include file="inc/download.html"} 
+{include file="inc/login_box.html"} 
+{include file="inc/footer.html"} 
+<!-- 下面全部干掉，是文字滚动效果 -->
+<script>
+	(function(A){A.marquee={version:"1.0.01"};A.fn.marquee=function(E){var F=typeof arguments[0]=="string"&&arguments[0];var D=F&&Array.prototype.slice.call(arguments,1)||arguments;var C=(this.length==0)?null:A.data(this[0],"marquee");if(C&&F&&this.length){if(F.toLowerCase()=="object"){return C}else{if(C[F]){var B;this.each(function(G){var H=A.data(this,"marquee")[F].apply(C,D);if(G==0&&H){if(!!H.jquery){B=A([]).add(H)}else{B=H;return false}}else{if(!!H&&!!H.jquery){B=B.add(H)}}});return B||this}else{return this}}}else{return this.each(function(){new A.Marquee(this,E)})}};A.Marquee=function(E,Q){Q=A.extend({},A.Marquee.defaults,Q);var O=this,M=A(E),F=M.find("> li"),H=-1,G=false,L=false,N=0;A.data(M[0],"marquee",O);this.pause=function(){G=true;P()};this.resume=function(){G=false;D()};this.update=function(){var R=F.length;F=M.find("> li");if(R<=1){D()}};function K(R){if(F.filter("."+Q.cssShowing).length>0){return false}var T=F.eq(R);if(A.isFunction(Q.beforeshow)){Q.beforeshow.apply(O,[M,T])}var S={top:(Q.yScroll=="top"?"-":"+")+T.outerHeight()+"px",left:0};M.data("marquee.showing",true);T.addClass(Q.cssShowing);T.css(S).animate({top:"0px"},Q.showSpeed,Q.fxEasingShow,function(){if(A.isFunction(Q.show)){Q.show.apply(O,[M,T])}M.data("marquee.showing",false);J(T)})}function J(S,R){if(L==true){return false}R=R||Q.pauseSpeed;if(C(S)){setTimeout(function(){if(L==true){return false}var V=S.outerWidth(),T=V*-1,U=parseInt(S.css("left"),10);S.animate({left:T+"px"},((V+U)*Q.scrollSpeed),Q.fxEasingScroll,function(){I(S)})},R)}else{if(F.length>1){setTimeout(function(){if(L==true){return false}S.animate({top:(Q.yScroll=="top"?"+":"-")+M.innerHeight()+"px"},Q.showSpeed,Q.fxEasingScroll);I(S)},R)}}}function I(R){if(A.isFunction(Q.aftershow)){Q.aftershow.apply(O,[M,R])}R.removeClass(Q.cssShowing);B()}function P(){L=true;if(M.data("marquee.showing")!=true){F.filter("."+Q.cssShowing).dequeue().stop()}}function D(){L=false;if(M.data("marquee.showing")!=true){J(F.filter("."+Q.cssShowing),1)}}if(Q.pauseOnHover){M.hover(function(){if(G){return false}P()},function(){if(G){return false}D()})}function C(R){return(R.outerWidth()>M.innerWidth())}function B(){H++;if(H>=F.length){if(!isNaN(Q.loop)&&Q.loop>0&&(++N>=Q.loop)){return false}H=0}K(H)}if(A.isFunction(Q.init)){Q.init.apply(O,[M,Q])}B()};A.Marquee.defaults={yScroll:"top",showSpeed:850,scrollSpeed:12,pauseSpeed:5000,pauseOnHover:true,loop:-1,fxEasingShow:"swing",fxEasingScroll:"linear",cssShowing:"marquee-showing",init:null,beforeshow:null,show:null,aftershow:null}})(jQuery);
+</script>
+
+<script>
+	
+$(function(){ 
+	$('.marquee div').css('width','600px')
+    $("#marquee").marquee({
+    	  yScroll: "top"                          // the position of the marquee initially scroll (can be either "top" or "bottom")
+		, showSpeed: 850                          // the speed of to animate the initial dropdown of the messages
+		, scrollSpeed: 6                         // the speed of the scrolling (keep number low)
+		, pauseSpeed: 0                        // the time to wait before showing the next message or scrolling current message
+		, pauseOnHover: true                      // determine if we should pause on mouse hover
+		, loop: -1                                // determine how many times to loop through the marquees (#'s < 0 = infinite)
+		, fxEasingShow: "swing"                   // the animition easing to use when showing a new marquee
+		, fxEasingScroll: "linear"                // 在显示下一个消息之前等待的时间
+
+		// define the class statements
+		, cssShowing: "marquee-showing"
+
+		// event handlers
+		, init: null                              // callback that occurs when a marquee is initialized
+		, beforeshow: null                        // callback that occurs before message starts scrolling on screen
+		, show: null                              // callback that occurs when a new marquee message is displayed
+		, aftershow: null                         // callback that occurs after the message has scrolled
+	
+    }); 
+});
+	
+		
+	 
+
+
+	
+</script>''

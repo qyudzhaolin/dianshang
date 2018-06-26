@@ -1,0 +1,54 @@
+<div class="slide">
+	<ul class="slide_nav">
+		<li {if $user eq user} class="selected"{/if}><span class="icon {if $user eq user}pitch{else}finish{/if}"></span><a href="{url r="home" }" {if $user eq user} class="cur"{else}class="finish"{/if}>个人信息</a></li>
+		{if $side_step gt 2 || $side_step eq 2}
+			<li {if $investor_org eq investor_org} class="selected"{/if}><span class="icon  {if $investor_org eq investor_org}pitch{else}finish{/if}"></span><a href="{url r="home#investor_org" }" {if $investor_org eq investor_org} class="cur"{else}class="finish"{/if}>所在机构</a></li>
+		{else}
+			<li class="nolink"><span class="icon"></span>所在机构</li>
+		{/if}
+		{if $side_step gt 3 || $side_step eq 3}
+			<li {if $invest_about eq invest_about} class="selected"{/if}><span class="icon {if $invest_about eq invest_about}pitch{else}finish{/if}"></span><a href="{url r="home#invest_about" }" {if $invest_about eq invest_about} class="cur"{else}class="finish"{/if}>投资相关</a></li>
+		{else}
+			<li class="nolink"><span class="icon"></span>投资相关</li>
+		{/if}
+		{if $side_step gt 4 || $side_step eq 4}
+			{if $is_exist_vip_account eq 0}
+				{if $vip_account_fee eq vip_account_fee}
+					<li {if $vip_account_fee eq vip_account_fee} class="selected"{/if}><span class="icon {if $vip_account_fee eq vip_account_fee}pitch{else}finish{/if}"></span><a href="{url r="account#vip_account_fee" }" {if $vip_account_fee eq vip_account_fee} class="cur"{else}class="finish"{/if}>会员账户</a></li>
+				{else}
+					<li {if $vip_account_introduction eq vip_account_introduction} class="selected"{/if}><span class="icon {if $vip_account_introduction eq vip_account_introduction}pitch{else}finish{/if}"></span><a href="{url r="account#vip_account_introduction" }" {if $vip_account_introduction eq vip_account_introduction} class="cur"{else}class="finish"{/if}>会员账户</a></li>
+				{/if}
+			{else}
+				<li {if $vip_account_account eq vip_account_account || $vip_account_introduction eq vip_account_introduction || $vip_account_fee eq vip_account_fee} class="selected"{/if}><span class="icon {if $vip_account_account eq vip_account_account || $vip_account_introduction eq vip_account_introduction || $vip_account_fee eq vip_account_fee}pitch{else}finish{/if}"></span><a href="{url r="account#vip_account_account" }" {if $vip_account_account eq vip_account_account || $vip_account_introduction eq vip_account_introduction || $vip_account_fee eq vip_account_fee} class="cur"{else}class="finish"{/if}>会员账户</a></li>
+			{/if}
+		{else}
+			<li class="nolink"><span class="icon"></span>会员账户</li>
+		{/if}
+		{if $side_step gt 5 || $side_step eq 5 || $user_info.is_review==2 || $is_review==2}
+			<li {if $auth_investor eq auth_investor} class="selected"{/if}><span class="icon {if $auth_investor eq auth_investor}pitch{else}finish{/if}"></span><a href="{url r="auth#investor_show"}" {if $auth_investor eq auth_investor} class="cur"{else}class="finish"{/if}>认证信息</a></li>
+		{else}
+			<li class="nolink"><span class="icon"></span>认证信息</li>
+		{/if}
+		<li {if $message eq message} class="selected"{/if}><span class="icon {if $message eq message}pitch{else}finish{/if}"></span><a href="{url r="message"}" {if $message eq message} class="cur"{else}class="finish"{/if}>消息中心</a></li>
+		{if $user_info.is_review neq 1}
+		<li class="nolink"><span class="icon"></span>我的投资意向</li>
+		{else}
+		<li {if $project.intend eq 1} class="selected"{/if}><span class="icon {if $project.intend eq 1}pitch{else}{if $side_step eq 6}finish{/if}{/if}"></span><a href="{url r="deals#index" p="intend=1&p=1"}" {if $project.intend eq 1} class="cur"{else}class="finish"{/if}>我的投资意向</a></li>
+		{/if}		
+		{if $user_info.is_sub_user eq 0}			
+			{if $user_info.is_review neq 1}
+				<li class="nolink"><span class="icon"></span>我的子账号</li>
+ 			{else}	
+				{if $is_exist_sub_user eq false}			
+					<li {if $investor_sub_account eq investor_sub_account} class="selected"{/if}><span class="icon {if $investor_sub_account eq investor_sub_account}pitch{else}finish{/if}"></span><a href="{url r="subuser#investor_account" }" {if $investor_sub_account eq investor_sub_account} class="cur"{else}class="finish"{/if}>我的子账号</a></li>
+				{else}
+					{if $add_account_show eq add_account_show}
+					    <li class="selected"><span class="icon pitch"></span><a href="{url r="subuser#add_account_show"}"class="cur">我的子账号</a></li>
+					{else}						
+						<li {if $investor_manage_sub_account eq investor_manage_sub_account} class="selected"{/if}><span class="icon {if $investor_manage_sub_account eq investor_manage_sub_account}pitch{else}finish{/if}"></span><a href="{url r="subuser#manage_account" }" {if $investor_manage_sub_account eq investor_manage_sub_account} class="cur"{else}class="finish"{/if}>我的子账号</a></li>
+					{/if}
+				{/if}
+ 			{/if}
+		{/if}
+	</ul>
+</div>

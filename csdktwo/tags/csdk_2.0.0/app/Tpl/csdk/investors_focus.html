@@ -1,0 +1,60 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor_attention_item.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/deals.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/upload.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="wrap">
+	{include file="inc/sidebar.html"}
+	<div class="investor content">
+	<ul class="investor_msg_list attention_item" id="my_attention_item">
+		<div class="focus_num">您已经关注了{$totals_select}个投资人</div>
+		{foreach from=$project_info item=list_item}
+		<li><a href="{url r="investor#detail" p="id=$list_item.id"}" class="item_link" target="_blank">
+			<div class="inv_pro_main">
+				<p class="big_head">
+				<img src="{$list_item.img_user_logo}" alt="">
+				</p>
+				<p class="pro_main">
+					<div class="pro_tit">{$list_item.user_name}</div>
+					<p class="pro_desc">{$list_item.per_sign}</p>
+				</p>
+				<p class="item_icon">
+				<b href="{url r="investor#detail" p="id=$list_item.id"}" title="发送{$list_item.intend_count}次投资意向" class="touzifrom">{$list_item.intend_count}</b>
+				<b href="{url r="investor#detail" p="id=$list_item.id"}" title="关注{$list_item.focus_count}次" class="fav">{$list_item.focus_count}</b></p>
+			</div>			
+			<dl class="inv_pro_label">
+			{foreach from=$list_item.mark_info_array item=mark_item}
+				<p>{$mark_item.mark_info}</p>
+			{/foreach}
+			</dl>
+			<div class="inv_pro_tag">
+				<p class="inv_dir">
+				{foreach from=$list_item.invest_cate_array item=cate_invest}
+				<b>{$cate_invest.name}</b>
+				{/foreach}
+			 
+				</p>
+				<span class="inv_stage">
+				{foreach from=$list_item.invest_period_array item=period_invest}
+				<b>{$period_invest.name}</b>
+				{/foreach}
+				</span>
+				<span class="inv_location">{$list_item.deal_province}</span>
+			</div>
+		</a></li>
+		{/foreach}
+ 	</ul>
+	{if $page_num}
+	<a href="{url r="investors#index" p="page=$page_num&focus=$project.focus"}" class="next_btn">下一页</a>
+	{else}
+	<a href="javascript:void(0);" class="gray_size" id="my_focus_btn">下一页</a>
+	{/if}
+	</div>
+ 
+</div>
+{include file="inc/footer.html"} 

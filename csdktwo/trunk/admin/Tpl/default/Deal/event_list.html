@@ -1,0 +1,57 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">融资记录列表</div>
+<div class="blank5"></div>
+<eq name="effect" value="1">
+	<div class="button_row">
+		<input type="button" class="button" value="添加融资记录" onclick="deal_event_add({$_REQUEST['deal_id']});" />
+	</div>
+</eq>
+<div class="blank5"></div>
+<table id="dataTable" class="dataTable" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr><td colspan="11" class="topTd">&nbsp; </td></tr>
+		<tr class="row">
+			<th width="8"><input type="checkbox" id="check" onclick="CheckAll('dataTable')"></th>
+			<th width="50px"><a href="javascript:sortBy('id','1','Deal','event_list')" title="按照编号升序排列 ">编号<img src="/admin/Tpl/default/Common/images/desc.gif" width="12" height="17" border="0" align="absmiddle"></a></th>
+			<th><a href="javascript:sortBy('name','1','Deal','event_list')" title="按照轮次升序排列 ">轮次</a></th>
+			<th><a href="javascript:sortBy('s_name','1','Deal','event_list')" title="按照预期融资金额升序排列 ">预期融资金额（万元） </a></th>
+			<th><a href="javascript:sortBy('company_name','1','Deal','event_list')" title="按照出让股权升序排列">出让股权</a></th>
+			<th><a href="javascript:sortBy('event_name','1','Deal','event_list')" title="按照融资前估值升序排列 ">融资前估值（万元）</a></th>
+			<th><a href="javascript:sortBy('userinfo','1','Deal','event_list')" title="按照融资后估值升序排列 ">融资后估值（万元）</a></th>
+			<th><a href="javascript:sortBy('is_effect_zh','1','Deal','event_list')" title="按照已融资金额升序排列 ">已融资金额（万元）</a></th>
+			<th><a href="javascript:sortBy('is_publish_zh','1','Deal','event_list')" title="按照是否当前轮次升序排列 ">是否当前轮次</a></th>
+			<th><a href="javascript:sortBy('create_time','1','Deal','event_list')" title="按照融资完成日期升序排列 ">融资完成日期</a></th>
+			<th><a>操作</a></th>
+		</tr>
+		<volist name="list" id="vo">
+			<tr <eq name="vo.investor_record_type" value="1">class="row light"<else />class="row"</eq>>
+				<td><input type="checkbox" name="key" class="key" value="{$vo.id}"></td>
+				<td>&nbsp;{$vo.id}</td>
+				<td>&nbsp;{$vo.period}</td>
+				<td>&nbsp;{$vo.pe_amount_plan}</td>
+				<td>&nbsp;{$vo.pe_sell_scale}%</td>
+				<td>&nbsp;{$vo.investor_before_evalute}</td>
+				<td>&nbsp;{$vo.investor_after_evalute}</td>
+				<td>&nbsp;{$vo.investor_amount}</td>
+				<td>&nbsp;{$vo.investor_record_type_cn}</td>
+				<td>&nbsp;{$vo.investor_time}</td>
+				<td> 
+		            <eq name="vo.can_edit_fund" value="1"><a href="javascript:deal_trade_fund_edit({$vo.id})">管理投资基金</a></eq>
+					<eq name="vo.can_edit" value="1"><a href="javascript:deal_trade_event_edit({$vo.id})">编辑</a></eq>
+		            <a href="javascript:deal_event_see({$vo.id},{$vo.can_edit})">查看</a>
+		            <eq name="vo.investor_record_type" value="1"><a href="javascript:deal_event_delete({$vo.id})">删除</a></eq>
+	            </td>
+	        </tr>
+        </volist>
+	</tbody>
+</table>
+</div>
+<include file="Public:footer" />

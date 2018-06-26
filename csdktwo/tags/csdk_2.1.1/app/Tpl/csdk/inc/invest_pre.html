@@ -1,0 +1,73 @@
+			<dl class="long">
+				<dt class="p_name"><i class="radius"></i>投资偏好</dt>
+				<dd>
+					<ul class="inv_dir_box">
+						<li class="cates" id="cates">
+							<div class="tit">选择方向<p>(只能选三项)</p></div>
+							<!-- <a href="javascript:void(0)" class="blue" id="cates_all" checked>全部</a> -->
+							<p class="show_content">
+						 		{foreach from = $deal_cate item = cate_item}
+								<a href="javascript:void(0)" name="cates_names" value ="{$cate_item.id}"{if $cate_item.is_check == 1}class="blue" checked{/if}>{$cate_item.name}</a>
+								{/foreach} 
+								<!--<a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a>
+								<a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a>
+								<a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a>
+								<a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a>
+								<a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a>-->
+							</p>
+							<span id="cate_msg"></span>
+						</li>
+						<li class="periods" id="periods">
+							<div class="tit">选择阶段<p>(只能选三项)</p></div>
+							<!-- <a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a> -->
+							<p class="show_content">
+							<!--<a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a>
+							<a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a>
+							<a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a>
+							<a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a>
+							<a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a>-->
+							{foreach from = $deal_period item = period_item}
+							<a href="javascript:void(0)" value ="{$period_item.id}" name="periods_names" {if $period_item.is_check == 1}class="blue" checked{/if}>{$period_item.name}</a>
+							{/foreach}
+							</p>
+							<span id="period_msg"></span>
+						</li>
+						<!--<li class="location_city loca">
+							<div class="tit">选择地区</div>
+							<!-- <a href="javascript:void(0)" class="blue" id="periods_all" checked>全部</a> 
+							<p class="show_content">
+								<a class="btn_select_province">
+									{if $region_pname_province}
+									<b class="cur_select_province" class="province" id="b_province" value="">{$region_pname_province}</b>
+									{else}
+									<b class="cur_select_province"  class="province" id="b_province" value="">请选择省市</b>
+									{/if}
+									<select  name='province' id="province">
+										<option value="" rel="" id="">请选择省市</option>
+										{foreach from = $region_lv2 item = region}
+											<option value="{$region.id}" rel="{$region.id}" id="province{$region.id}" {if $region.selected==1}selected{/if}>{$region.name}</option>
+										{/foreach}
+									</select>
+								</a>
+								<a class="btn_select_city">
+									{if $region_pname_city}
+									<b class="cur_select_province" class="city"  value="" id="b_city">{$region_pname_city}</b>
+									{else}
+									<b class="cur_select_province" class="city" value=""  id="b_city">请选择地区</b>
+									{/if}
+									<select name='city' id="city" >
+										{if $region_lv3}
+											{foreach from = $region_lv3 item=region}
+												<option value="{$region.id}" rel="{$region.id}"  id="city{$region.id}" {if $region.selected==1}selected{/if}>{$region.name}</option>
+											{/foreach}
+										{else}
+											<option value="" rel="0">请选择</option>
+										{/if}
+									</select>						
+								</a>
+							</p>
+							<span id="period_msg"></span>
+						</li>-->
+					</ul>
+				</dd>
+			</dl>

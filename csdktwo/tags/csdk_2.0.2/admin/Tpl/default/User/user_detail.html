@@ -1,0 +1,199 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__ROOT__/system/region.js"></script>	
+<load href='__TMPL__Common/js/user_edit.js' />
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/dcom_array.js' />
+<load href='__TMPL__Common/js/upload.js' />
+<load href='__TMPL__Common/js/doCheck.js' />
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<div class="main">
+<div class="main_title">{%EDIT} <a href="javascript:window.history.back();" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data" onsubmit="return edit_user_check()">
+<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+		<td class="item_title">*会员姓名</td>
+		<td class="item_input"><input type="text" maxlength="14" disabled="disabled" class="textbox3 require" name="user_name" value="{$vo.user_name}" id="user_name"/><span id="user_name_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">{%USER_MOBILE}</td>
+		<td class="item_input"><input type="text" maxlength="11" disabled="disabled" value="{$vo.mobile}" class="textbox" name="mobile" /><span id="mobile_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">会员角色</td>
+		<td class="item_input">
+			<select name="user_type" class="require" disabled="disabled">				
+				<option value="" rel="0">请选择</option>
+				<foreach name="user_type_list" item="type_item" >
+					<option value="{$type_item.id}" rel="{$type_item.id}" <if condition="$type_item['id'] eq $vo['user_type']">selected="selected"</if>>{$type_item.name}</option>
+				</foreach>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">所在地区</td>
+		<td class="item_input">
+			<select name="province" class="require" disabled="disabled">
+				<option value="">请选择</option>
+				<foreach name="region_lv2" item="region">
+					<option value="{$region.id}" rel="{$region.id}" <if condition="$region['id'] eq $vo['province'] ">selected="selected"</if>>{$region.name}</option>
+				</foreach>
+			</select>
+			<select name="city" class="require" disabled="disabled">
+				<option value="">请选择</option>				
+				<foreach name="region_lv3" item="region">
+					<option value="{$region.id}" rel="{$region.id}" <if condition="$region['id'] eq $vo['city']  ">selected="selected"</if>>{$region.name}</option>
+				</foreach>
+			</select> 
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">最高学历</td>
+		<td class="item_input">
+			<select name="per_degree" class="require" disabled="disabled">				
+				<option value="" rel="0">请选择</option>
+				<foreach name="per_degree_list" item="per_degree_item">
+					<option value="{$per_degree_item.id}" rel="{$per_degree_item.id}" <if condition="$per_degree_item['id'] eq $vo['per_degree']">selected="selected"</if>>{$per_degree_item.name}</option>
+				</foreach>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">电子邮箱</td>
+		<td class="item_input">
+			<input type="text" disabled="disabled" maxlength="30" class="textbox3 require" name="email" value="{$vo.email}" id="email"/><span id="email_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">头像</td>
+		<td class="item_input">
+			<label class="fileupload">
+				<img src='{$vo.header_real_url}' id="img_src" />
+			</label>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+<table class="form conf_tab" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+		<td class="item_title">所在机构(14个字)</td>
+		<td class="item_input">
+			 <input type="text" maxlength="14" class="textbox3 require" disabled="disabled" name="org_name"value="{$vo_extend.org_name}" id="org_name" /><span id="org_name_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	 <tr>
+		<td class="item_title">职称</td>
+		<td class="item_input">
+			<input type="text" class="textbox3" maxlength="14" name="org_title" disabled="disabled" value="{$vo_extend.org_title}" id="org_title" /><span id="org_title_msg" name="error_msg"></span>
+		</td>
+	</tr> 
+	<tr>
+		<td class="item_title">机构联系人(14个字)</td>
+		<td class="item_input"><input type="text" maxlength="14" class="textbox3 require" disabled="disabled" name="org_linkman" id="org_linkman" value="{$vo_extend.org_linkman}" /><span id="org_linkman_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">机构联系电话</td>
+		<td class="item_input"><input type="text" maxlength="30" class="textbox3 require" name="org_mobile" disabled="disabled" id="org_mobile" value="{$vo_extend.org_mobile}"><span id="org_mobile_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">机构官网</td>
+		<td class="item_input"><input type="text" class="textbox3" name="org_url" disabled="disabled" id="org_url" value="{$vo_extend.org_url}"><span id="org_url_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">机构简介(100个字)</td>
+		<td class="item_input">
+			<textarea type="text" maxlength="100"  name="org_desc" id="org_desc" class="textarea require" disabled="disabled">{$vo_extend.org_desc}</textarea><span id="org_desc_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+<table  class="form conf_tab" cellpadding=0 cellspacing=0>	
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+		<td class="item_title">身份证正面 </td>
+		<td class="item_input">
+			<label class="fileupload">
+				<img src='{$vo.id_cardz_real_url}' id="img_src" />
+			</label>
+		</td>
+	</tr>	
+	<tr>
+		<td class="item_title">身份证反面 </td>
+		<td class="item_input">
+			<label class="fileupload">
+				<img src='{$vo.id_cardf_real_url}' id="img_src" />
+			</label>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">名片 </td>
+		<td class="item_input">
+			<label class="fileupload">
+				<img src='{$vo.card_real_url}' id="img_src" />
+			</label>
+		</td>
+	</tr>		
+	<tr>
+		<td class="item_title">会员状态</td>
+		<td class="item_input">
+			<label><input disabled="disabled" type="radio" name="is_review" value="0" <if condition="$vo['is_review'] eq 0">checked="checked"</if>/>未认证</label>
+			<label><input disabled="disabled" type="radio" name="is_review" value="2" <if condition="$vo['is_review'] eq 2">checked="checked"</if>/>认证中</label>
+			<label><input disabled="disabled" type="radio" name="is_review" value="1" <if condition="$vo['is_review'] eq 1">checked="checked"</if> />已认证</label>
+		</td>
+	</tr>
+	<if condition="$vo['is_effect'] eq 0">
+	<tr>
+		<td class="item_title">删除理由</td>
+		<td class="item_input">
+			 <textarea axlength="100" disabled="disabled" class="textarea">{$vo.delete_reason}</textarea></span>
+		</td>
+	</tr>
+	</if>>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+
+<input type="hidden" name="old_is_review" value="{$vo.is_review}" />
+<div class="blank5"></div>
+<div class="blank5"></div>
+	<table class="form" cellpadding=0 cellspacing=0>
+		<tr>
+			<td colspan=2 class="topTd"></td>
+		</tr>
+		<tr>
+			<td class="item_title"></td>
+			<td class="item_input">
+				<if condition="$vo['is_effect'] eq 0">
+					<a href="{:u("User/delete_investor")}" class="button">{%BACK_LIST}</a>
+				<else />
+					<a href="{:u("User/index_investor")}" class="button">{%BACK_LIST}</a>
+				</if>
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 class="bottomTd"></td>
+		</tr>
+	</table> 		 
+</form>
+</div>
+<include file="Public:footer" />

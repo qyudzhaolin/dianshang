@@ -1,0 +1,27 @@
+{include file="inc/header.html"} 
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/APP.css";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+ 
+
+<div class="container">
+    <div class="wrap">
+        <div class="cisdaq_tit">
+            <img src="{function name="get_spec_image" v="csdk2.png"}" alt="">
+        </div>
+        <div class="two-dimension">
+            <div class="left">
+                <p class="weixin_bg"><img src="{function name="get_spec_image" v="android_img.png"}" alt=""width="153" height="136"></p>
+                <img src="{function name="get_spec_image" v="ios_text_01.png"}" alt="" class="top_36">
+                <img src="{function name="get_spec_image" v="ios_text_02.png"}" alt="" class="top_20">
+            </div>
+            <div class="right">
+                <p class="weixin_bg"><img src="{function name="get_spec_image" v="android_img.png"}" alt=""width="153" height="136"></p>
+                <img src="{function name="get_spec_image" v="and_app_text_01.png"}" alt="" class="top_36">
+                <img src="{function name="get_spec_image" v="and_app_text_02.png"}" alt="" class="top_20">
+            </div>
+        </div>
+    </div>
+</div>
+{include file="inc/footer.html"} 

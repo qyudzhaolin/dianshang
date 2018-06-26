@@ -1,0 +1,143 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<!--<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>-->
+<script type="text/javascript" src="__ROOT__/system/region.js"></script>	
+<load href='__TMPL__Common/js/fund_edit.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/dcom_array.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/upload.js' />
+<load href='__TMPL__Common/js/doCheck.js' />
+<load href='__TMPL__Common/js/check.js' />
+<div class="main">
+<div class="main_title">{%ADD}<a href="{:u("Fund/index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data" onSubmit="return add_fund_check('add') ">
+<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<!--<tr>
+		<td class="item_title">*基金编码</td>
+		<td class="item_input"><input type="text" class="textbox require" name="code" id="code" /><span id="code_msg"  name="error_msg"></span></td>
+	</tr>
+	--><tr>
+		<td class="item_title">*基金名称(30个字)</td>
+		<td class="item_input"><input type="text" maxlength="30" class="textbox2 require" name="name" id="name" /><span id="name_msg"  name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">*基金简称(6个字)</td>
+		<td class="item_input"><input type="text" maxlength="6" class="textbox require" name="short_name" id="short_name"/><span id="short_name_msg"  name="error_msg"></span></td>
+	</tr>
+ 	<tr>
+		<td class="item_title">*基金管理人(20个字)</td>
+		<td class="item_input">
+			<input type="text" class="textbox2 require" maxlength="20"  name="manager" id="manager"  /> 
+			<span id="manager_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*基金规模(¥)</td>
+		<td class="item_input">
+		<input type="text" own_type="number"  maxlength="8"  class="textbox3 require" name="total_amount" id="total_amount" /> 万元
+		<span id="total_amount_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*成立日期</td>
+		<td class="item_input">
+		<input type="text" class="textbox require" name="establish_date" id="establish_date" value="" style="width:100px" readonly="true" />
+		<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_trade_event' onclick="return csdk_cal(this);" />
+		<span id="establish_date_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*基金期限</td>
+		<td class="item_input">
+		<input type="text" class="textbox3 require"  maxlength="6" name="deadline" id="deadline"  /> 年
+		<span id="deadline_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	 <tr>
+		<td class="item_title">*基金简介(200个字)</td>
+		<td class="item_input">
+			<textarea type="text"  maxlength="200"  name="summary" id="summary" class="textarea require"></textarea>
+			<span id="summary_msg"  name="error_msg"></span>
+		</td>
+	</tr>
+	 <tr>
+		<td class="item_title">*已投资项目单个最高回报</td>
+		<td class="item_input">
+		<input type="text" class="textbox3 require" name="max_payback" maxlength="6" id="max_payback"  /> 倍
+		<span id="max_payback_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*已投资项目总体平均回报</td>
+		<td class="item_input">
+		<input type="text"  class="textbox3 require" name="average_payback" maxlength="6" id="average_payback"  /> 倍
+		<span id="average_payback_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*基金整体回报</td>
+		<td class="item_input">
+		<!--own_type="number" 参数表示只能输入正整数-->
+		<input type="text"   class="textbox3 require" name="total_payback" maxlength="6" id="total_payback"  /> 倍
+		<span id="total_payback_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">*基金管理团队[<a href="javascript:void(0);" onclick="add_dcom('add_team',5);">增加</a>]</td>
+		<td class="item_input" id="faq">
+			<div style="padding:3px;" data="add_team" name="add_team">
+				头像<label class="fileupload" id="fileupload" onclick="upd_file(this,'img');">
+								<input type="file" class="filebox" name="image_logo{$len}" id="image_logo{$len}" />
+								<input type="hidden" value=" " name="image_key[]" id="image_key{$len}"/>
+								<img src="" id="img_src{$len}" class="float_no <if condition="'' neq ''" >img_src<else/>no_img_src</if>" /> 
+							</label>
+				姓名(6个字)<input type="text" maxlength="6" class="textbox require" name="team_name[]" />
+				职位(8个字)<input type="text" maxlength="8" class="textbox require" name="title[]" /><br>
+				个人简介(200个字) <textarea type="text"  maxlength="200"  name="brief[]" class="textarea require"></textarea>
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+			</div>
+			<span id="team_msg" name="error_msg"></span>
+		</td> 
+	</tr> 
+	<tr>
+		<td class="item_title">发布状态</td>
+		<td class="item_input">
+			<label><input type="radio" name="status" value="1" checked="checked" />{%F_PUBLISH_0}</label>
+			<label><input type="radio" name="status" value="2" />{%F_PUBLISH_1}</label>
+ 		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+
+<div class="blank5"></div>
+	<table class="form" cellpadding=0 cellspacing=0>
+		<tr>
+			<td colspan=2 class="topTd"></td>
+		</tr>
+		<tr>
+			<td class="item_title"></td>
+			<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Fund" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="insert" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%ADD}" />
+			<input type="reset" class="button" value="{%RESET}" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 class="bottomTd"></td>
+		</tr>
+	</table> 		 
+</form>
+</div>
+<include file="Public:footer" />

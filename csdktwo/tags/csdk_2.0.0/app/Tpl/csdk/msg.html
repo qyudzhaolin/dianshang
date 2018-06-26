@@ -1,0 +1,37 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/message.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/upload.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/investor_personal.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+{if $user_info.user_type eq 0}
+	{include file="inc/estp_flow.html"}
+	{else}
+	{include file="inc/investor_flow.html"}
+	{/if}
+<div class="wrap">
+	{if $user_info.user_type eq 1}
+	{include file="inc/sidebar_investor.html"}
+	{else}
+	{include file="inc/sidebar.html"}
+	{/if}
+	<div class="investor content">
+		<ul class="message_center_box">
+				{foreach from = $msg_list item = msg_item}
+				<li class="message_center_msg">
+					<span></span>
+					<h5 class="titt">系统通知</h5>
+					<p>{$msg_item.log_info}</p>
+					<b>{$msg_item.log_time}</b>
+				</li>
+				{/foreach}
+ 		</ul>
+	</div>
+
+</div>
+{include file="inc/footer.html"} 

@@ -1,0 +1,45 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+ 
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/fund.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">基金投资项目列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+ 	<input type="button" class="button" value="添加基金投资项目" onclick="relation_add({$_REQUEST['fund_id']});" />
+</div> 
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">
+		项目简称：<input type="text" maxlength="6" class="textbox" name="short_name" value="{:trim($_REQUEST['short_name'])}" style="width:100px;" />
+		项目全称：<input type="text" maxlength="14" class="textbox" name="name" value="{:trim($_REQUEST['name'])}" style="width:100px;" />
+		<input type="hidden" value="{:trim($_REQUEST['fund_id'])}" name="fund_id" />
+		<input type="hidden" value="Fund" name="m" />
+		<input type="hidden" value="relation_list" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fund_deal_relation" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,short_name|msubstr:项目简称
+		,name|msubstr:项目名称
+		,investor_amount|msubstr:投资金额（万）
+		,investor_date|msubstr:投资日期
+		,remark|msubstr:备注|220px"
+	actionlist="relation_edit:编辑,relation_del:删除" 
+ /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

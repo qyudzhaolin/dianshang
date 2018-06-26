@@ -1,0 +1,131 @@
+
+.fund_next_cneter span{
+    padding:0 0 36px 0;
+    display:inline-block;
+    color:#3b3b3b;
+    font-size:14px;
+    line-height: 24px;
+}
+.centent_margin.bs.character.clearfix li:nth-of-type(1){width:86px}
+.Pie_chart{
+    border:1px solid #eee;
+    background: #fdfdfd;
+    margin:0 140px 44px 68px;
+}
+/*饼图左右布局*/
+/*.Pie_chart li:nth-of-type(1){*/
+/*width:212px;*/
+/*}*/
+/*.Pie_chart li:nth-of-type(2){*/
+/*width:366px;*/
+/*}*/
+/*.div_data{*/
+/*padding:62px 0 0 38px;*/
+/*}*/
+/*饼图上下布局*/
+.Up_down li:nth-of-type(1){
+    width:100%;
+    height:130px;
+}
+.Up_down li:nth-of-type(2){
+    width:100%;
+    padding:0 0 38px 0;
+
+}
+.li_time p{
+    padding:0 0 0 212px;
+    line-height: 32px;
+    color:#666666;
+    font-size:14px;
+}
+.project{margin:6px auto;}
+
+.fund.bs.head.number span:nth-of-type(1){margin:0 0 0 12px;}
+.fund.bs.head.number span:nth-of-type(2){margin:0 0 0 28px;}
+.fund.bs.head.number span:nth-of-type(3){margin: 0 0 0 92px;}
+.fund.bs.head.number span:nth-of-type(4){margin: 0 0 0 68px;}
+.fund.bs.head.number span:nth-of-type(5){margin: 0px 0 0 28px;}
+.fund.bs.head.number span:nth-of-type(6){margin: 0 0 0 24px;}
+
+.Serial_sdk ul.fund_ul.bs li span:nth-of-type(1){width: 51px;}
+.Serial_sdk ul.fund_ul.bs li span:nth-of-type(2){width: 100px}
+.Serial_sdk ul.fund_ul.bs li span:nth-of-type(3){width: 182px;height:100%;margin:0 0 0 21px;  }
+.Serial_sdk ul.fund_ul.bs li span:nth-of-type(4){width:110px;}
+.Serial_sdk ul.fund_ul.bs li span:nth-of-type(5){width:114px;}
+.Serial_sdk ul.fund_ul.bs li span:nth-of-type(6){width: 108px}
+
+/*.Up_down li:nth-of-type(1){*/
+    /*position: relative;*/
+/*}*/
+/*.zIndex11{*/
+    /*width:579px;*/
+    /*height:144px;*/
+    /*position: absolute;*/
+    /*border-left:1px solid #eeeeee;*/
+    /*z-index: 11;*/
+/*}*/
+
+#container_01{
+    width:310px;
+    height:144px;
+    float:left;
+    margin:14px 0 0 0;
+    overflow: hidden;
+}
+.zIndex11 .width260{
+    width:260px;
+    height:128px;
+    float:left;
+}
+.width260 div:nth-of-type(1){
+    position: relative;
+    top:66px;
+    left:0px;
+    font-size:14px;
+}
+.width260 div:nth-of-type(2){
+    position: relative;
+    top:74px;
+    left:0px;
+    font-size:14px;
+}
+.width260 div:nth-of-type(1) i{
+    height:14px;
+    width:14px;
+    background: #7cb5ec;
+    display: inline-block;
+    border-radius:4px;
+}
+.width260 div:nth-of-type(2) i{
+    height:14px;
+    width:14px;
+    background: #434348;
+    display: inline-block;
+    border-radius:4px;
+}
+
+.li_time .p-left{    margin: -8px 0 0 15px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

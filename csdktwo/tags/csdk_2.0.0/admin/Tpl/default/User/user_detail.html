@@ -1,0 +1,376 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__ROOT__/system/region.js"></script>	
+<load href='__TMPL__Common/js/user_edit.js' />
+<load href='__TMPL__Common/js/ajaxupload.js' />
+<load href='__TMPL__Common/js/dcom_array.js' />
+<load href='__TMPL__Common/js/upload.js' />
+<load href='__TMPL__Common/js/doCheck.js' />
+<load href='__TMPL__Common/js/check.js' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<div class="main">
+<div class="main_title">{%EDIT} <a href="{:u("User/index_investor")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data" onsubmit="return edit_user_check()">
+<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<!--
+	<tr>
+		<td class="item_title">会员编号</td>
+		<td class="item_input">{$vo.id}</td>
+	</tr>-->
+	<tr>
+		<td class="item_title">*会员姓名</td>
+		<td class="item_input"><input type="text" maxlength="14" readonly="readonly" class="textbox3 require" name="user_name" value="{$vo.user_name}" id="user_name"/><span id="user_name_msg" name="error_msg"></span></td>
+	</tr>
+	<!--<tr>
+		<td class="item_title">*登录密码(6-12位数字字母)</td>
+		<td class="item_input"><input type="password" maxlength="12" readonly="readonly" class="textbox3" name="user_pwd" id="user_pwd"/><span>(请勿填写!)</span><span id="user_pwd_msg" name="error_msg"></span></td>
+	</tr>
+	-->
+	<tr>
+		<td class="item_title">{%USER_MOBILE}</td>
+		<td class="item_input"><input type="text" maxlength="11" readonly="readonly" value="{$vo.mobile}" class="textbox" name="mobile" /><span id="mobile_msg" name="error_msg"></span></td>
+	</tr>
+	<tr>
+		<td class="item_title">会员角色</td>
+		<td class="item_input">
+			<select name="user_type" class="require" disabled="disabled">				
+				<option value="" rel="0">请选择</option>
+				<foreach name="user_type_list" item="type_item" >
+					<option value="{$type_item.id}" rel="{$type_item.id}" <if condition="$type_item['id'] eq $vo['user_type']">selected="selected"</if>>{$type_item.name}</option>
+				</foreach>
+				<span id="user_type_msg" name="error_msg"></span>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">所在地区</td>
+		<td class="item_input">
+			<select name="province" class="require" disabled="disabled">	
+				<foreach name="region_lv2" item="region">
+					<option value="{$region.id}" rel="{$region.id}" <if condition="$region['id'] eq $vo['province'] ">selected="selected"</if>>{$region.name}</option>
+				</foreach>
+			</select>
+			<select name="city" class="require">				
+				<foreach name="region_lv3" item="region">
+					<option value="{$region.id}" rel="{$region.id}" <if condition="$region['id'] eq $vo['city']  ">selected="selected"</if>>{$region.name}</option>
+				</foreach>
+			</select> 
+			<span id="province_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">最高学历</td>
+		<td class="item_input">
+			<select name="per_degree" class="require" disabled="disabled">				
+				<option value="" rel="0">请选择</option>
+				<foreach name="per_degree_list" item="per_degree_item">
+					<option value="{$per_degree_item.id}" rel="{$per_degree_item.id}" <if condition="$per_degree_item['id'] eq $vo['per_degree']">selected="selected"</if>>{$per_degree_item.name}</option>
+				</foreach>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">电子邮箱</td>
+		<td class="item_input">
+			<input type="text" maxlength="30" class="textbox3 require" name="email" value="{$vo.email}" id="email"/><span id="email_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">头像</td>
+		<td class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'avatar_file');">
+			<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none"/>
+			<input type="hidden" class="require" value="{$vo.img_user_logo}" name="img_user_logo" id="img_user_logo"/>
+			<img src='{$vo.header_real_url}' id="img_src" />
+			</label>
+			<label class="fileuploading hide" ></label>
+			<span id="img_user_logo_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+<table class="form conf_tab" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+		<td class="item_title">所在机构(14个字)</td>
+		<td class="item_input">
+			 <input type="text" maxlength="14" class="textbox3 require" readonly="readonly" name="org_name"value="{$vo_extend.org_name}" id="org_name" /><span id="org_name_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	 <tr>
+		<td class="item_title">职称</td>
+		<td class="item_input">
+			<input type="text" class="textbox3" maxlength="14" name="org_title" readonly="readonly" value="{$vo_extend.org_title}" id="org_title" /><span id="org_title_msg" name="error_msg"></span>
+		</td>
+	</tr> 
+	<tr>
+		<td class="item_title">机构联系人(14个字)</td>
+		<td class="item_input"><input type="text" maxlength="14" class="textbox3 require" readonly="readonly" name="org_linkman" id="org_linkman" value="{$vo_extend.org_linkman}" /><span id="org_linkman_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">机构联系电话</td>
+		<td class="item_input"><input type="text" maxlength="30" class="textbox3 require" name="org_mobile" readonly="readonly" id="org_mobile" value="{$vo_extend.org_mobile}"><span id="org_mobile_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">机构官网</td>
+		<td class="item_input"><input type="text" class="textbox3" name="org_url" readonly="readonly" id="org_url" value="{$vo_extend.org_url}"><span id="org_url_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">机构简介(100个字)</td>
+		<td class="item_input">
+			<textarea type="text"  maxlength="100"  name="org_desc" id="org_desc" class="textarea require" readonly="readonly">{$vo_extend.org_desc}</textarea><span id="org_desc_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<!--<tr>
+		<td class="item_title">已选择投资阶段</td>
+		    <td class="item_input">
+						<foreach name="deal_period" item="item" key="myId">
+						<label><input name="period_choose[]" type="checkbox" value="{$item.id}" id="period_choose{$myId}" onClick="doCheck(this,3,'period_choose')"tag="period_choose" <if condition="$item['check'] ">checked="checked"</if>/>{$item.name}</label> 
+						 <option value="{$item.id}"  <if condition="$item['id'] eq $vo_extend['cate_choose']">selected="selected"</if>>{$item.name}</option>
+					    </foreach>
+					    <span id="period_choose_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">已选择的项目分类</td>
+		    <td class="item_input">
+						<foreach name="deal_cate" item="item" key="myId">
+						<label><input name="cate_choose[]" type="checkbox" value="{$item.id}" id="cate_choose{$myId}" onClick="doCheck(this,3,'cate_choose')"tag="cate_choose" <if condition="$item['check'] ">checked="checked"</if>/>{$item.name}</label> 
+						 <option value="{$item.id}"  <if condition="$item['id'] eq $vo_extend['cate_choose']">selected="selected"</if>>{$item.name}</option>
+					    </foreach>
+					    <span id="cate_choose_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	</tr>		
+		<td class="item_title">投资成绩(14个字) [<a href="javascript:void(0);" onclick="add_dcom('mark_info_style',3);">增加</a>]</td>
+		<td class="item_input" id="mark_info">
+		<if condition="$mark_info_list neq 0">
+			<foreach name="mark_info_list" item="mark_info_item">
+				<div style="padding:3px;" data="mark_info_style" name="mark_info_style">
+				 <input type="text" maxlength="14" class="textbox3 require" name="mark_info[]" value="{$mark_info_item.mark_info}" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="mark_info_style_msg" name="error_msg"></span>
+				</div>
+			</foreach>
+		<else/>
+			<div style="padding:3px;" data="mark_info_style" name="mark_info_style">
+				 <input type="text" maxlength="14" class="textbox3 require" name="mark_info[]" value="" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="mark_info_style_msg" name="error_msg"></span>
+			</div>
+		</if>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">投资风格(14个字) [<a href="javascript:void(0);" onclick="add_dcom('add_invest_style',3);">增加</a>]</td>
+		<td class="item_input" id="invest_style">
+		<if condition="$invest_style_list neq 0">
+			<foreach name="invest_style_list" item="invest_style_item" key="myS">
+				<div style="padding:3px;" data="add_invest_style" name="add_invest_style">
+				 <input type="text" maxlength="14" class="textbox3 require" name="invest_style[]" value="{$invest_style_item.style_info}" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="invest_style_list_msg" name="error_msg"></span>
+				</div>
+			</foreach>
+		<else/>
+			<div style="padding:3px;" data="add_invest_style" name="add_invest_style">
+				 <input type="text" maxlength="14" class="textbox3 require" name="invest_style[]" value="" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="invest_style_list_msg" name="error_msg"></span>
+			</div>
+		</if>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">投资亮点(16个字) [<a href="javascript:void(0);" onclick="add_dcom('add_invest_point',3);">增加</a>]</td>
+		<td class="item_input" id="invest_point">
+		<if condition="$investor_point_list neq 0">
+			<foreach name="investor_point_list" item="invest_point_item" key="myS">
+				<div style="padding:3px;" data="add_invest_point" name="add_invest_point">
+				 <input type="text" maxlength="16" class="textbox3 require" name="invest_point[]" value="{$invest_point_item.point_info}" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="investor_point_list_msg" name="error_msg"></span>
+				</div>
+			</foreach>
+		<else/>
+			<div style="padding:3px;" data="add_invest_point" name="add_invest_point">
+				 <input type="text" maxlength="16" class="textbox3 require" name="invest_point[]" value="" />
+				<a href="javascript:void(0);" onclick="del_event(this);">删除</a><span id="investor_point_list_msg" name="error_msg"></span>
+			</div>
+		</if>
+		</td>
+	</tr>
+	-->
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+<table  class="form conf_tab" cellpadding=0 cellspacing=0>	
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<!--<tr>
+		<td class="item_title">会员会费</td>
+		<td class="item_input">
+			 <input type="text" maxlength="9" class="textbox3 require" name="vip_money" readonly="readonly" value="{$vo_extend.vip_money}" id="vip_money" /> 万元<span id="vip_money_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">生效日期</td>
+		<td class="item_input">
+			<input type="text" class="textbox require" style="width:100px" name="vip_begin_time" value="{$vo_extend.vip_begin_time}" id="vip_begin_time" readonly="true" />
+			<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_event' onclick="return csdk_cal(this);" />
+			<span id="vip_begin_time_msg"  name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">失效日期</td>
+		<td class="item_input">
+		<input type="text" class="textbox require" style="width:100px" name="vip_end_time" value="{$vo_extend.vip_end_time}" id="vip_end_time" readonly="true" />
+		<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_event' onclick="return csdk_cal(this);" />
+		<span id="vip_end_time_msg"  name="error_msg"></span></td>
+	</tr>
+	-->
+	<tr>
+		<td class="item_title">身份证正面 </td>
+		<td class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'avatar_file');">
+			<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none"/>
+			<input type="hidden" class="require" value="{$vo.id_cardz_logo}" name="id_cardz_logo" id="id_cardz_logo"/>
+			<img src='{$vo.id_cardz_real_url}' id="img_src" />
+			</label>
+			<label class="fileuploading hide" ></label>
+			<span id="id_cardz_logo_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+		</td>
+	</tr>	
+	<tr>
+		<td class="item_title">身份证反面 </td>
+		<td class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'avatar_file');">
+			<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none"/>
+			<input type="hidden" class="require" value="{$vo.id_cardf_logo}" name="id_cardf_logo" id="id_cardf_logo"/>
+			<img src='{$vo.id_cardf_real_url}' id="img_src" />
+			</label>
+			<label class="fileuploading hide" ></label>
+			<span id="id_cardf_logo_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">名片 </td>
+		<td class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'avatar_file');">
+			<input type="file" class="filebox" name="avatar_file" id="avatar_file" style="display:none"/>
+			<input type="hidden" class="require" value="{$vo.img_card_logo}" name="img_card_logo" id="img_card_logo"/>
+			<img src='{$vo.card_real_url}' id="img_src" />
+			</label>
+			<label class="fileuploading hide" ></label>
+			<span id="img_card_logo_msg" name="error_msg" style="position:relative;top:15px; left:5px;"></span>
+		</td>
+	</tr>		
+	<tr>
+		<td class="item_title">会员状态</td>
+		<td class="item_input">
+			<label><input type="radio" name="is_review" value="0" <if condition="$vo['is_review'] eq 0">checked="checked"</if>/>未认证</label>
+			<label><input type="radio" name="is_review" value="2" <if condition="$vo['is_review'] eq 2">checked="checked"</if>/>认证中</label>
+			<label><input type="radio" name="is_review" value="1" <if condition="$vo['is_review'] eq 1">checked="checked"</if> />已认证</label>
+			<!--<input type="hidden" name="side_step" value="{$vo.side_step}" >-->
+		</td>
+	</tr>
+	<!--<tr>
+		<td class="item_title">是否有效</td>
+		<td class="item_input">
+			<label>有效<input type="radio" name="is_effect" value="1" <if condition="$vo['is_effect'] eq 1">checked="checked"</if>/></label>
+			<label>无效<input type="radio" name="is_effect" value="0" <if condition="$vo['is_effect'] eq 0">checked="checked"</if>/></label>
+		</td>
+	</tr>
+	
+	<if condition="$vo['user_type'] eq 1">
+	<tr>
+		<td class="item_title">投资人封面(1920*700)</td>
+		<td class="item_input">
+			<label class="fileupload" onclick="upd_file(this,'img',1920,700,2);">
+			<input type="file" class="filebox" name="img_user_cover_file" id="img_user_cover_file" />
+			<input type="hidden" class="require" value="{$user_investor_cover.img_user_cover}" name="img_user_cover" id="img_user_cover"/>
+			<img src='{$user_investor_cover.real_url}' class="img_src" id="img_user_cover_file_src" />
+			</label>
+			<span id="img_user_cover_msg"></span>
+		</td>
+	</tr>
+	</if>
+	<tr>
+	<if condition="$vo['user_type'] eq 1">			
+		<td class="item_title">会员账户</td>
+		<td class="item_input">
+
+				<select name="vip_money" id="vip_money" class="require">				
+ 				<option value="0" <if condition="$vo_extend['vip_money'] eq 0">selected="selected"</if>>0</option>
+ 				<option value="5" <if condition="$vo_extend['vip_money'] eq 5">selected="selected"</if>>5</option>
+				<option value="10" <if condition="$vo_extend['vip_money'] eq 10">selected="selected"</if>>10</option>
+		</select>万元
+		 <input type="text" class="textbox require" own_type="number" style="width:50px" name="vip_money" id="vip_money" value="{$vo_extend.vip_money}"/>万元 
+		&nbsp;&nbsp;&nbsp;&nbsp;会员生效日期 <input type="text" class="textbox require" style="width:100px" name="vip_begin_time" value="{$vo_extend.vip_begin_time}" id="vip_begin_time[]" readonly="true" />
+		<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_event' onclick="return csdk_cal(this);" />
+		&nbsp;&nbsp;&nbsp;&nbsp;会员失效日期 <input type="text" class="textbox require" style="width:100px" name="vip_end_time" value="{$vo_extend.vip_end_time}" id="vip_end_time[]" readonly="true" />
+		<input type="button" class="button"  value="{%SELECT_TIME}" id='btn_create_time_event' onclick="return csdk_cal(this);" /><span id="vip_money_msg" name="error_msg"></span>
+		</td>
+	</if>
+	
+	</tr>
+	<tr>
+	<if condition="$vo['user_type'] eq 1">			
+		<td class="item_title">个人签名(34个字)</td>
+		<td class="item_input"><input type="text" maxlength="34" class="textbox2 require" name="per_sign" id="per_sign" value="{$vo.per_sign}"/><span id="per_sign_msg" name="error_msg"></span></td>
+	</if>
+	</tr>
+	<tr>
+		<td class="item_title">个人简介(28个字)</td>
+		<td class="item_input">
+			 <input type="text" class="textbox2 require" maxlength="28" name="per_brief"  id="per_brief" value="{$vo.per_brief}"/><span id="per_brief_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="item_title">教育经历(100个字)</td>
+		<td class="item_input">
+			 <textarea type="text"  maxlength="100"  name="edu_history" id="edu_history" class="textarea">{$vo.edu_history}</textarea><span id="edu_history_msg" name="error_msg"></span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">个人履历(100个字)</td>
+		<td class="item_input">
+			 <textarea type="text"  maxlength="100"  name="per_history" id="per_history" class="textarea">{$vo.per_history}</textarea><span id="per_history_msg" name="error_msg"></span>
+		</td>
+-->
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+
+<input type="hidden" name="old_is_review" value="{$vo.is_review}" />
+<div class="blank5"></div>
+<div class="blank5"></div>
+	<table class="form" cellpadding=0 cellspacing=0>
+		<tr>
+			<td colspan=2 class="topTd"></td>
+		</tr>
+		<tr>
+			<td class="item_title"></td>
+			<td class="item_input">
+			<a href="{:u("User/index_investor")}" class="button">{%BACK_LIST}</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 class="bottomTd"></td>
+		</tr>
+	</table> 		 
+</form>
+</div>
+<include file="Public:footer" />

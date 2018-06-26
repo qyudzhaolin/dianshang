@@ -1,0 +1,78 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/event_edit.js' />
+<load href='__TMPL__Common/js/check.js' />
+<div class="main">
+<div class="main_title">{%ADD} <a href="{:u("Deal/event_list",array('deal_id'=>$event['deal_id']))}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" onSubmit="return add_event_check()">
+<table class="form" cellpadding=0 cellspacing=0>
+	<tbody>
+		<tr>
+			<td colspan=6 class="topTd"></td>
+		</tr>
+		<tr>
+			<th rowspan=4 class="item_title">预期融资信息</th>
+		</tr>
+		<tr>
+			<td style="width:180px">* 轮次信息：</td>
+			<td class="item_input" style="width:280px">
+				<select disabled="disabled" name="investor_record_type" class="require" id="investor_record_type" data-type="{$is_record_type}">				
+				 	<option value="">请选择</option>
+				 	<option value="1" <eq name="event.investor_record_type" value="1">selected</eq>>最新轮次</option>
+				 	<option value="2" <eq name="event.investor_record_type" value="2">selected</eq>>历史轮次</option>
+	 			</select>
+	  			<span id="investor_record_type_msg" name="error_msg"></span>
+			</td>
+			<td style="width:180px">* 融资轮次：</td>
+			<td class="item_input">
+				<select name="period" class="require" id="period">
+				 	<option value="">请选择</option>
+	         	  	<foreach name="deal_period" item="item">
+						<option value="{$item.id}" <eq name="item.id" value="$event['period']">selected</eq>>{$item.name}</option>
+					</foreach>
+	 			</select>
+	  			<span id="period_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>* 预期融资金额（万元）：</td>
+			<td class="item_input">
+				<input type="text" maxlength="7" own_type="number" class="textbox3 require" name="pe_amount_plan" id="pe_amount_plan" value="{$event.pe_amount_plan}" /> 
+				<span id="pe_amount_plan_msg" name="error_msg"></span>
+			</td>
+			<td>* 出让股权（%）：</td>
+			<td class="item_input">
+				<input type="text" maxlength="4" own_type="float" class="textbox3 require" name="pe_sell_scale" id="pe_sell_scale" value="{$event.pe_sell_scale}" /> 
+				<span id="pe_sell_scale_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>* 融资后预估值（万元）：</td>
+			<td colspan="3" class="item_input">
+				<input disabled="disabled" type="text" class="textbox3" id="pe_evalute" value="{$event.pe_evalute}" /> 
+			</td>
+		</tr>
+	</tbody>
+	<tr>
+		<td class="item_title"></td>
+		<td colspan="4" class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="deal_trade_event_update" />
+			<input type="hidden" name="id" value="{$event.id}" />
+			<input type="hidden" name="investor_record_type" value="{$event.investor_record_type}" />
+			<input type="hidden" name="deal_id" value="{$event.deal_id}" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%EDIT}" />
+			<input type="reset" class="button" value="{%RESET}" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan=6 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+</div>
+<include file="Public:footer" />

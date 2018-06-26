@@ -1,0 +1,113 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/user.js' />
+<script type="text/javascript" src="__ROOT__/system/region.js"></script>
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">会员列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}会员" onclick="add();" />
+	<!--<input type="button" class="button" value="{%DEL}会员" onclick="del();" />
+--></div>
+
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">
+		<table>
+			<tr>
+				<td>会员姓名：</td>
+				<td><input type="text" class="textbox3" maxlength="6" name="user_name" value="{:trim($_REQUEST['user_name'])}" /></td>
+				<td>手机号码：</td>
+				<td><input type="text" class="textbox3" maxlength="11" name="mobile" value="{:trim($_REQUEST['mobile'])}" /></td>
+				<td>电子邮箱：</td>
+				<td width="220px"><input type="text" class="textbox3" maxlength="30" name="email" value="{:trim($_REQUEST['email'])}" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>所在城市：</td>
+				<td>
+					<select name="province" class="textbox5">
+						<option value="">请选择</option>	
+						<foreach name="region_lv2" item="region">
+							<option value="{$region.id}" rel="{$region.id}" <if condition="$_REQUEST['province'] eq $region['id']">selected="selected"</if>>{$region.name}</option>
+						</foreach>
+					</select>
+					<select name="city" class="textbox5" id="city">
+						<option value="">请选择</option>			
+					</select>
+				</td>
+				<if condition="$_REQUEST['province'] gt 0">
+					<script>
+						$(function(){
+							load_city();
+							var city_tmp = "<?php echo $_REQUEST['city']; ?>";
+							if(city_tmp > 0){
+								$("#city").val(city_tmp);
+							}
+						})
+					</script>
+				</if>
+				<td>是否渠道合伙人：</td>
+				<td>
+					<select class="textbox4" name="role" id="role">
+						<option value="0" <if condition="$_REQUEST['role'] eq 0">selected="selected"</if>>请选择</option>
+						<option value="2" <if condition="$_REQUEST['role'] eq 2">selected="selected"</if>>是</option>
+						<option value="1" <if condition="$_REQUEST['role'] eq 1">selected="selected"</if>>否</option>
+					</select>
+				</td>
+				<td>会员状态：</td>
+				<td>
+					<select class="textbox4" name="is_review" id="is_review">
+						<option value="0" <if condition="$_REQUEST['is_review'] eq 0">selected="selected"</if>>请选择</option>
+						<volist name="is_review_list" id="vo">
+							<option value="{$vo['id']+1}" <if condition="$_REQUEST['is_review'] eq $vo['id']+1">selected="selected"</if>>{$vo.name}</option>
+						</volist>
+					</select>
+				</td>
+				<td>
+					<input type="hidden" value="User" name="m" />
+					<input type="hidden" value="index_investor" name="a" />
+					<input type="submit" class="button" value="{%SEARCH}" />
+					<a href="{:U('User/index_investor')}"><input type="button" class="button" value="清空" /></a>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="user" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+			,user_name:姓名
+			,mobile:手机号码|100px:edit
+			,email:电子邮箱|150px
+			,role_zh:是否渠道合伙人|110px
+			,is_review_zh:会员状态
+	        ,create_time|to_date:创建时间
+	        ,update_time|to_date:最新修改时间
+	" 
+	actionlist="edit:{%EDIT}, user_del:{%DEL}, edit_user_pwd:重置密码, user_detail:用户详情"  /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />
+<!-- add bu sunerju 从回收站恢复用户，修改密码跳转过来需要重置menu的状态 -->
+<eq name="refresh" value="1">
+	<script>
+		$(function(){
+			// parent.menu.location.reload();
+			var area = $(parent.frames["menu"].document).find(".menu a");
+			area.removeClass("current").first().addClass("current");
+		})
+	</script>
+</eq>

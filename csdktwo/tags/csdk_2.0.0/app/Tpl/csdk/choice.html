@@ -1,0 +1,40 @@
+{include file="inc/header.html"} 
+<?php
+ 
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/choice.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/choice.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+ 
+ <div class="choice">
+<div class="confirm_success">
+	<img src="{function name="get_spec_image" v="confirm_success_pic.png" }" alt="" class="confirm_success_pic">
+	<p class="confirm_success_txt">注册成功</p>
+</div>
+ <div class="choicetext">
+ 	
+ 	您已注册成功，但尚未完成投资人认证，暂不可体验磁斯达克提供的服务。<br/>
+
+ 	您可以选择如下两种认证方式完成认证：
+ 	
+ </div>
+ <div class="choiceselect">
+ 	<dl>
+ 		<dt>自行填写个人信息并认证</dt>
+ 		<dd><a href="/home/">填写信息</a></dd>
+ 	 
+  		<dt class="two">由磁斯达克工作人员协助您填写信息并认证</dt>
+ 		<dd><a href="javascript:void(0);" onclick="apply_help_update();">申请磁斯达克协助</a></dd>
+ 	 </dl>
+ </div>
+ </div>
+
+ <div class="choice_success">
+	 
+	<p class="choice_success_txt">提示</p>
+	<div class="choice_success_div">
+		您已经申请成功，磁斯达克工作人员会在两个工作日内通过您注册时的手机号联系到您，协助您完成认证。
+		<button type="button" onclick="choice_notice_close();">确定</button>
+	</div>
+</div>
+{include file="inc/footer.html"} 

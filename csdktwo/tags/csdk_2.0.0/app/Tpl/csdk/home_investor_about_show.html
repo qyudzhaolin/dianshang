@@ -1,0 +1,121 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/sidebar.css";
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investor.css";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/home.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/filter_highlight.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/dcom_array.js";
+	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/check.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="height70"></div>
+{include file="inc/investor_flow.html"}
+<div class="wrap">
+	{include file="inc/sidebar_investor.html"}
+	{if $user_info.is_review!=1 && $user_info.is_review!=2}
+	<div class="investor content about_show">
+		<form action="javascript:void(0);" method="post" enctype="multipart/form-data">
+			<dl class="goal middle">
+				<dt class="p_name"><i class="radius"></i>投资成绩</dt>				
+					<dd id="mark">
+					<div>
+ 					{if $investor_mark}
+					{foreach from = $investor_mark item = investor_mark_item}
+					<div data="mark_info_tag" name="mark_info_tag">
+					<input type="text" maxlength="14"  class="textbox" name="mark_info" title="请描述您的投资成绩(14个字以内)"  value="{$investor_mark_item.mark_info}" /><a href="javascript:void(0);" onclick="del_event(this);">&nbsp;&nbsp;&nbsp;&nbsp;删除</a>
+					</div>
+					{/foreach}
+					{else}
+					<div data="mark_info_tag" name="mark_info_tag">
+					 <input type="text" maxlength="14" class="textbox" name="mark_info" title="请描述您的投资成绩(14个字以内)"  value="请描述您的投资成绩(14个字以内)" /><a href="javascript:void(0);" onclick="del_event(this);">&nbsp;&nbsp;&nbsp;&nbsp;删除</a>
+					</div>
+					 {/if}
+					 <span id="mark_msg" name="error_msg"></span>
+					</dd>				
+				<p class="add_prompt_tag">
+					<button class="add"  onclick="add_dcom('mark_info_tag',3);">继续添加</button>
+					<b>(最多三条)</b>
+				</p>
+				
+			</dl>
+			<dl class="middle">
+				<dt class="p_name"><i class="radius"></i>投资风格</dt>
+				<dd id="style">
+					<div>
+					 
+					{if $investor_style}
+					{foreach from = $investor_style item = investor_style_item}
+					<div data="style_info_tag" name="style_info_tag">
+					<input type="text" maxlength="14" class="textbox" name="style_info" title="请描述您的投资风格(14个字以内)"   value="{$investor_style_item.style_info}" /><a href="javascript:void(0);" onclick="del_event(this);">&nbsp;&nbsp;&nbsp;&nbsp;删除</a>
+
+					</div>
+					{/foreach}
+					{else}
+					<div data="style_info_tag" name="style_info_tag">
+					 <input type="text" maxlength="14" class="textbox" name="style_info"  title="请描述您的投资风格(14个字以内)"  value="请描述您的投资风格(14个字以内)" /><a href="javascript:void(0);" onclick="del_event(this);">&nbsp;&nbsp;&nbsp;&nbsp;删除</a>
+					</div>
+					 {/if}
+					 <span id="style_msg" name="error_msg"></span>
+				</dd>
+				<p class="add_prompt_tag">
+					<button class="add" onclick="add_dcom('style_info_tag',3);">继续添加</button>
+					<b>(最多三条)</b>
+				</p>
+				<div class="prompt_case">
+					<p class="prompt_case_tit">示例：</span></br>
+					<p class="prompt_case_con">专注90后创业者、二次创业者</p>
+					<p class="prompt_case_con">提供渠道、市场方向帮助</p>
+					<p class="prompt_case_con">提供企业战略、招聘、融资帮助</p>
+				</div>
+			</dl>
+			{include file="inc/invest_pre.html"}
+			<dl class="message"><dt>备注</dt><dd class="p_name remark"><i class="radius"></i>为必填项目</dd></dl>
+			<span  id="investor_about_msg" class="loginregister" name="error_msg"></span>
+			<dl class="next_btn_box education"><dt></dt><dd class="p_name"><button class="next" type="button"onclick="invest_about_next()">下一步</button>
+			</dd><span id="error_msg" name="error_msg"></span></dl>
+		</form>
+	</div>
+	{else}
+	<div class="investor content invest_show about_show">
+		<form action="javascript:void(0);" method="post" enctype="multipart/form-data">
+			<dl class="goal">
+				<dt class="p_name">投资成绩</dt>
+				<dd class=" touzi">
+					{foreach from = $investor_mark item = investor_mark_item}
+					<li>{$investor_mark_item.mark_info}</li>
+					{/foreach}
+				</dd>
+			</dl>
+			<dl>
+				<dt class="p_name">投资风格</dt>
+				<dd class=" touzi">
+						{foreach from = $investor_style item = investor_style_item}
+						<li>{$investor_style_item.style_info}</li>
+						{/foreach}
+				</dd>
+			</dl>
+			<dl class="investor_fav">
+				<dt class="p_name">投资偏好</dt>
+				<dd>
+					<p><b>项目方向</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					{foreach from = $deal_period item = period_item}
+					{if $period_item.is_check == 1}
+					{$period_item.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					{/if}
+					{/foreach}
+					</p>
+					<p><b>项目阶段</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					{foreach from = $deal_cate item = cate_item}
+					{if $cate_item.is_check == 1}
+					{$cate_item.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					{/if}
+					{/foreach} 
+					</p>
+				</dd>
+			</dl>
+			</dd></dl>
+		</form>
+	</div>
+{/if}
+</div>
+{include file="inc/footer.html"}

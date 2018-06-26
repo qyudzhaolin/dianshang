@@ -1,0 +1,102 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/news.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">资讯列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+<input type="button" class="button" value="{%ADD}" onclick="news_add(0);" /></div>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		  资讯标题：<input type="text" class="textbox" maxlength="30" name="n_title" value="{:trim($_REQUEST['n_title'])}" style="width:100px;" />
+       资讯类别：
+          <select name="n_class"style="width:100px;"> 
+        <option value="" <if condition="$_REQUEST['n_class'] eq 0">selected="selected"</if>>请选择</option>
+         <foreach name="news_type" item="region">
+         <option value="{$region.id}"id="n_class" <if condition="$_REQUEST['n_class'] eq $region['id']">selected="selected"</if>>
+         {$region.name}
+         </option>
+         </foreach>
+      </select>
+      <td class="item_title">关联行业:</td>
+      <td class="item_input">
+      <select name="n_cate" id="n_cate" style="width:100px;">        
+        <option value="" <if condition="$_REQUEST['n_cate'] eq 0">selected="selected"</if>>请选择</option>>
+       <foreach name="region_lv1" item="region">
+      <option value="{$region.id}" <if condition="$_REQUEST['n_cate'] eq $region['id']">selected="selected"</if>>{$region.name}</option>
+         </foreach>
+      </select>
+  </tr>
+    <td class="item_title">关联项目:</td>
+   <td class="item_input">
+       <select name="n_deal"  id="n_deal"style="width:100px;">        
+       <option value="" <if condition="$_REQUEST['n_deal'] eq 0">selected="selected"</if>>请选择</option>>
+       <foreach name="region_lv2" item="region">
+         <option value="{$region.id}" <if condition="$_REQUEST['n_deal'] eq $region['id']">selected="selected"</if>>{$region.name}</option>
+         </foreach>
+         </select>
+        <div class="">
+             资讯角标：
+         <select name="n_corner"id="n_corner"style="width:100px;" >
+            <option value="" <if condition="$_REQUEST['n_corner'] eq 0">selected="selected"</if>>请选择</option>>
+          <foreach name="corner_type" item="region">
+         <option value="{$region.id}"<if condition="$_REQUEST['n_corner'] eq $region['id']">selected="selected"</if>>{$region.name}</option>
+         </foreach>
+        </select>
+            发布渠道：
+      <select name="n_chanel" id="n_chanel"style="width:100px;" >
+           <option value="" <if condition="$_REQUEST['n_chanel'] eq 0">selected="selected"</if>>请选择</option>>
+         <foreach name="chanel_type" item="region">
+         <option value="{$region.id}" <if condition="$_REQUEST['n_chanel'] eq $region['id']">selected="selected"</if>>{$region.name}</option>
+         </foreach>
+    </select>
+           发布状态：
+      <select name="n_publish_state"  id="n_publish_state"style="width:100px;" > 
+            <option value="" <if condition="$_REQUEST['n_publish_state'] eq 0">selected="selected"</if>>请选择</option>>
+            <foreach name="state_type" item="region">
+         <option value="{$region.id}" <if condition="$_REQUEST['n_publish_state'] eq $region['id']">selected="selected"</if>>{$region.name}</option>
+         </foreach>
+    </select>
+      推送状态：
+      <select name="push_status"  id="push_status"style="width:100px;" > 
+            <option value="" <if condition="$_REQUEST['push_status'] eq 0">selected="selected"</if>>请选择</option>>
+            <foreach name="send_type" item="region">
+         <option value="{$region.id}" <if condition="$_REQUEST['push_status'] eq $region['id']">selected="selected"</if>>{$region.name}</option>
+         </foreach>
+    </select>
+    <input type="hidden" value="News" name="m" />
+    <input type="hidden" value="index" name="a" />
+    <input type="submit" class="button2" value="{%SEARCH}"style="" />
+    </div>
+	</form>
+</div>
+<div class="blank10"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="News" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+			,n_title:资讯标题|200px
+			,n_class:资讯类别|80px
+			,n_cate_name:关联行业|80px
+			,n_deal:关联项目|100px
+			,n_corner:资讯角标|60px
+			,n_source:资讯来源|80px
+			,n_person:发布人|60px
+      	,n_publish_state:发布状态|60px
+          ,push_status:推送状态|60px
+			,create_time|to_date:发布时间|100px"
+		  	actionlist="deal_button" 
+ /> 
+<div class="blank10"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

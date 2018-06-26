@@ -1,0 +1,11 @@
+<div style="padding:3px;" data="add_team" name="add_team">
+姓名 <input type="text" maxlength="14" class="textbox require" name="team_name[]" />
+角色 <input type="text" maxlength="14" class="textbox require" name="title[]" />
+个人介绍(28个字) <input type="text" maxlength="28" class="textbox require" name="brief[]" />
+头像<label class="fileupload" id="fileupload" onclick="upd_file(this,'image_logo{$len}','img_src{$len}','image_key{$len}');">
+			<input type="file" class="filebox" name="image_logo{$len}" id="image_logo{$len}" />
+			<input type="hidden" value=" " name="image_key[]" id="image_key{$len}"/>
+			<img src="" id="img_src{$len}" class="float_no <if condition="'' neq ''" >img_src<else/>no_img_src</if>" /> 
+			</label>
+<a href="javascript:void(0);" onclick="del_event(this);">删除</a>
+</div>

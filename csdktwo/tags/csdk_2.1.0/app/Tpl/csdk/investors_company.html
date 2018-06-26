@@ -1,0 +1,104 @@
+{include file="inc/header.html"}
+<?php
+	$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/investors_company.css";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/investors_company.js";
+?>
+<link rel="stylesheet" type="text/css" href='{function name="parse_css" v="$dpagecss"}' />
+<div class="content_box2 bg_white">
+    <div class="personal_box" style="height:82px;">
+        <a href='{url r="home"}'>我的个人中心</a>
+        <img src='{function name="get_spec_image" v="right_corner.jpg"}' alt="right_corner"/>
+         <a href='{url r="invested"}'><span>我的基金</span></a>
+        <img src='{function name="get_spec_image" v="right_corner.jpg"}' alt="right_corner"/>
+        <a href="#">基金管理人</a>
+    </div>
+    <div class="personal_content clearfix">
+        {include file="inc/sidebar_user.html"}
+
+        <div class="fr bs size" style="border-left:1px solid #f4f4f4;width:790px;">
+            <!-- 工商注册信息-->
+            <div class="Maintain_and_update My_investament pos_re">
+                <div class="set_box_slid_bj por_ab"></div>
+                <i class="active padd_l20 color262626">工商注册信息</i>
+            </div>
+            <div>
+                <ul class="clearfix control_text_color">
+                    <li class="fl">
+                    	 <p><span>公司简称:</span>{$managers.short_name}</p>
+                        <p><span>成立日期:</span>{$managers.com_time}</p>
+                        
+                    </li>
+                    <li class="fl">
+                    
+                        <p><span>法定代表:</span>{$managers.legal_person}</p>
+                        <p><span>注册资本:</span>{$managers.reg_found}万</p>
+                           
+                    </li>
+					<li class="fl" style="width:100%;">
+                       
+                        <p><span>办公地址:</span>{$managers.registration_address}</p>
+                    </li>
+                </ul>
+            
+            </div>
+            <!-- 旗下管理基金-->
+            <div class="Maintain_and_update My_investament pos_re m_top20">
+                <div class="set_box_slid_bj por_ab"></div>
+                <i class="active padd_l20 color262626">旗下管理基金</i>
+            </div>
+            <form action="" class="form2 bs active">
+                <div class="bs fund_lower">
+                    <div class="fund bs head clearfix" style="height:62px;line-height: 62px">
+                        <span>基金</span><span>基金名称</span><span>基金规模</span><span>成立时间</span>
+                    </div>
+                    <ul class="fund_ul bs">
+                        
+                        {foreach from=$fundinfo item=vo name=keys}
+						<li class="clearfix">
+							  {if $vo.fund_url==1}
+							<span><a href="{url r="invested#invested_fund" p="id=$vo.id"}">{$vo.short_name}</a></span>
+							{else}
+							<span> {$vo.short_name} </span>
+							{/if}
+							<span>{$vo.name}</span>
+							<span>{function name="number_format" v="$vo.total_amount"}万</span>
+							<span>{function name="to_date" v="$vo.establish_date" p="Y.m.d"}</span>
+						</li>
+						{/foreach}
+                    </ul>
+                    <!--<div class="news_more_box">-->
+                    <!---->
+                    <!--</div>-->
+                </div>
+            </form>
+            <!-- 管理团队-->
+            <div class="Maintain_and_update My_investament pos_re">
+                <div class="set_box_slid_bj por_ab"></div>
+                <i class="active padd_l20 color262626">管理团队</i>
+            </div>
+            <div class="control">
+                <ul class="character_boxli clearfix w_616 mar_auto">
+                {foreach from=$list item=vo}
+                    <li>
+                        <div>
+                            <div class="border_1px">
+                                <img src="{function name="getQiniuPath" v="$vo.user_logo" p="img"}?imageView2/1/w/120/h/120" alt="" width="120" height="120" />
+                                <dl style="position: relative;">
+                                    <dt>{$vo.name}</dt>
+                                    <dd>{$vo.title}</dd>
+                                    <dd class="aaa dd_active">速度快速点击付款时间的空间看就看到手机发送卡</dd>
+                                </dl>
+
+                            </div>
+
+                        </div>
+                    </li>
+
+
+                    {/foreach}
+                </ul>           
+                 </div>
+        </div>
+    </div>
+</div>
+{include file="inc/footer.html"} 

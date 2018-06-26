@@ -1,0 +1,118 @@
+<tagLib name="html" />
+<include file="Public:header" />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/style/input.css' />
+<load href='__TMPL__Common/js/calendar.js' />
+<load href='__TMPL__Common/js/check.js' />
+<div class="main">
+<div class="main_title">融资完成 <a href="{:u("Deal/all_index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__?m=Deal&a=do_deal_completion" method="post" id="smsForm" onSubmit="return deal_completion_check()">
+	<table class="form" cellpadding=0 cellspacing=0>
+		<tr>
+			<td colspan=6 class="topTd"></td>
+		</tr>
+		<tr>
+			<th rowspan=4 class="item_title">预期融资信息</th>
+		</tr>
+		<tr>
+			<td style="width:180px">* 轮次信息：</td>
+			<td class="item_input" style="width:280px">
+				<select disabled="disabled"><option>最新轮次</option></select>
+			</td>
+			<td style="width:180px">* 融资轮次：</td>
+			<td class="item_input" style="width:350px">
+				<select disabled="disabled"><option>{$event.period}</option></select>
+			</td>
+		</tr>
+		<tr>
+			<td>* 预期融资金额（万元）：</td>
+			<td class="item_input">
+				<input disabled="disabled" maxlength="7" type="text" class="textbox3" value="{$event.pe_amount_plan}" /> 
+			</td>
+			<td>* 出让股权（%）：</td>
+			<td class="item_input">
+				<input disabled="disabled" maxlength="4" type="text" class="textbox3" value="{$event.pe_sell_scale}" /> 
+			</td>
+		</tr>
+		<tr>
+			<td>* 融资后预估值（万元）：</td>
+			<td colspan="3" class="item_input">
+				<input  disabled="disabled" type="text" class="textbox3" value="{$event.pe_evalute}" /> 
+			</td>
+		</tr>
+		<tr>
+			<td colspan=6 class="topTd"></td>
+		</tr>
+		<tr>
+			<th rowspan=4 class="item_title">实际融资信息</th>
+		</tr>
+		<tr>
+			<td>* 融资前估值（万元）：</td>
+			<td class="item_input">
+				<input type="text" maxlength="7" class="textbox3 require" name="investor_before_evalute" value="" /> 
+				<span id="investor_before_evalute_msg" name="error_msg"></span>
+			</td>
+			<td>* 融资后估值（万元）：</td>
+			<td class="item_input">
+				<input type="text" maxlength="7" class="textbox3 require" name="investor_after_evalute" value="" /> 
+				<span id="investor_after_evalute_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>* 估值增长率：</td>
+			<td class="item_input">
+				<input type="text" maxlength="6" class="textbox3 require" name="evalute_growth_rate" value="" /> 
+			<span id="evalute_growth_rate_msg" name="error_msg"></span>
+			</td>
+			<td>* 投资回报：</td>
+			<td class="item_input">
+				<input type="text" maxlength="5" class="textbox3 require" name="investor_payback" value="" /> 
+			<span id="investor_payback_msg" name="error_msg"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>* 融资完成日期：</td>
+			<td colspan="3" class="item_input">
+				<input type="text" readonly class="textbox require" name="investor_time" value="" id="investor_time" style="width:200px" onclick="return csdk_cal(this);" />
+				<span id="investor_time_msg" name="error_msg"></span>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="item_title"></td>
+			<td colspan=5 class="item_input">
+				<input type="hidden" name="id" value="{$event.id}" />
+				<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+				<input type="hidden" name="{:conf("VAR_ACTION")}" value="do_deal_completion" />
+				<input type="submit" class="button" value="融资完成" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan=5 class="bottomTd"></td>
+		</tr>
+	</table>
+</form>
+<include file="Public:footer" />
+<script>
+function deal_completion_check() {
+	
+	var check_json = '[\
+		{"name":"investor_before_evalute","required":true,"number":true,"error_id":"investor_before_evalute_msg","error_msg":"必填且为数字"},\
+		{"name":"investor_after_evalute","required":true,"number":true,"error_id":"investor_after_evalute_msg","error_msg":"必填且为数字"},\
+		{"name":"evalute_growth_rate","required":true,"number":true,"error_id":"evalute_growth_rate_msg","error_msg":"必填且为数字"},\
+		{"name":"investor_payback","required":true,"number":true,"error_id":"investor_payback_msg","error_msg":"必填且为数字"},\
+		{"name":"investor_time","required":true,"error_id":"investor_time_msg","error_msg":"必填"},\
+		]';
+	if (!csdk_check(check_json)) {
+		return false;
+	}
+	
+	if(confirm('确认信息无误后点击 "是" 按钮，融资完成后会给所有投资人发送通知短信！')){
+		return true;
+	}
+	
+	return false;
+}
+</script>
